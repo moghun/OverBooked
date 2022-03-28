@@ -1,0 +1,162 @@
+
+  @import url('https://fonts.googleapis.com/css?family=Open+Sans');
+  :root {
+  --theme-bg-color: #e6b619;
+  --theme-color: white;
+  
+  
+  }
+  * { 
+    margin: 0;
+    padding: 0;
+    font-family: 'Open Sans', sans-serif;
+    box-sizing: border-box;
+  }
+  .navbar {
+    display: flex;
+    box-shadow: 0 0 2px 0 grey;
+    align-items: center;
+    font-size: 1em;
+    
+    background-color:#3761af;
+    background-color: var(--theme-bg-color);
+    
+    color: white;
+    color: var(--theme-color);
+    
+    position: sticky;
+    top: 0;
+  }
+  
+  .item{
+    padding: 10px;
+    text-decoration: none;
+    color: white;
+    color: var(--theme-color);
+  
+  }
+
+  .logo .text{
+    margin-left: 75px;
+  }
+  .item.right {
+    margin: 0 0 0 auto;
+  }
+  
+  .navbar .logo {
+    font-size: 1.2em;
+    align-items: center;
+    display: flex;
+  }
+  
+  .logo img {
+    max-width: 40px;
+  }
+  .item.search {
+    transition: 0.2s linear;
+    display:flex;
+    justify-content: center;
+    flex-grow:1;
+    
+  }
+  .item.search .search-icon {
+    border-left: 1px solid grey;
+    margin: 2px;
+    padding-left: 10px;
+    cursor:pointer;
+    color: grey;
+  }
+  .item.search .search-icon:hover {
+    
+    color: black;
+  }
+  
+  .item.search input {
+    width: 100%;
+    padding: 6px ;
+    outline: none;
+    border: 2px solid grey; 
+    max-width: 100%;
+    border: 0;
+  }
+  
+  .item .search-group {
+    display:flex;
+    width: 100%;
+    max-width: 700px;
+    border-radius: 20px;
+    border: 2px solid grey;
+    overflow: hidden;
+    background: white;
+    
+    border-color: white;
+    color: var(--theme-color);
+  
+  }
+  .item .search-group select{
+  
+    border: 0;
+    margin: 2px;
+    border-right: 1px solid grey;
+    max-width: 5em;
+    outline: none;
+    color: grey;
+    
+  }
+
+  .item .search-group img{
+    max-width: 25px;
+    pointer-events: none;
+  }
+  
+  .item .group {
+    display:flex;
+    align-items: center;
+    font-size: 0.9em;
+  }
+  
+  
+  .item .group .sub{
+    font-size: 0.8em;
+    
+  
+  }
+  
+  .item .group img{
+    max-width: 25px;
+    pointer-events: none;
+    margin-right: 5px;
+  }
+
+  .item .group .cart{
+    max-width: 40px;
+    pointer-events: none;
+    margin-right: 5px;
+  }
+
+  .material-icons {
+    font-size:1.8rem;
+  }
+  
+  
+  .menu-icon{
+    display:none;
+  }
+  
+  @media (max-width: 700px) {
+    .item.search input {
+      display: none;
+    }
+    .menu-icon {
+      display:block;
+    }
+    .detail,.logo .text {
+      display:none;
+  
+    }
+  
+  
+  }
+  
+  
+  
