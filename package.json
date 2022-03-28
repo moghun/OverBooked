@@ -1,0 +1,20 @@
+{
+  "name": "overbooked",
+  "version": "1.0.0",
+  "description": "This README would normally document whatever steps are necessary to get your application up and running.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://morhun0@bitbucket.org/overbooked-team20/overbooked.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://bitbucket.org/overbooked-team20/overbooked/issues"
+  },
+  "homepage": "https://bitbucket.org/overbooked-team20/overbooked#readme"
+}
