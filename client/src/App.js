@@ -3,6 +3,7 @@ import { useState } from "react"
 import './App.css';
 import ProductPage from './pages/product-view/ProductPage';
 import NavigationBar from './components/Navigation_Bar/NavigationBar';
+import Footer from './components/Footer/Footer';
 const App = () => {
 
 
@@ -24,6 +25,7 @@ const App = () => {
     <div>
       <NavigationBar/>
       <ProductPage products = {products[0]}/>
+      <Footer/>
     </div>
   )
 }
