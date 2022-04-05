@@ -16,6 +16,8 @@ function App() {
       </div>
       <Routes>
         <Route path = "/" element = {<HomePage/>} />
+        <Route path = "/productpage" element = {<ProductPage/>} />
+
       </Routes>
       <div>
       <Footer/>
@@ -23,9 +25,7 @@ function App() {
     
     
     </BrowserRouter>
-
-
-  );
-}
+  )
+};
 
 export default App;
