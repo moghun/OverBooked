@@ -1,4 +1,5 @@
-import "../Navigation_Bar/NavigationBar.css"
+import "./NavigationBar.css"
+import {Link} from "react-router-dom";
 const NavigationBar= () =>{
     return (
 
@@ -6,7 +7,8 @@ const NavigationBar= () =>{
             <i class="material-icons menu-icon">menu</i>
 
             <div class="logo">               
-                <a class="text" style ={{fontWeight: "bold" , color:"white", textDecoration:"none"}} href="">OverBooked</a>    
+                <a class="text" style ={{fontWeight: "bold" , color:"white", textDecoration:"none"}} href="">OverBooked</a>   
+                <Link to="/"></Link> 
             </div>
 
             <div class="item search right" tabindex="0">
