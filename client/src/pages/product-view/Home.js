@@ -2,9 +2,10 @@ import { useState, useEffect } from "react";
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
 import { sliderData } from "./data";
 import "../../components/Navigation_Bar/NavigationBar.css";
-import {Link} from "react-router-dom";
+// import {Link} from "react-router-dom";
 
-const Slider = () => {
+import axios from "axios";
+const HomePage = () => {
   const [currentSlide, setCurrentSlide] = useState(1);
   const slideLength = sliderData.length;
 
@@ -26,13 +27,37 @@ const Slider = () => {
     setCurrentSlide(index)
 }
 
-  function auto() {
-    slideInterval = setInterval(nextSlide, intervalTime);
-  }
+function auto() {
+  slideInterval = setInterval(nextSlide, intervalTime);
+}
 
-  useEffect(() => {
-    setCurrentSlide(0);
-  }, []);
+useEffect(() => {
+  setCurrentSlide(0);
+}, []);
+
+
+const getBooks = async () => {
+  
+  await axios.get("http://localhost:5001/api/users")
+    .then(res => {
+      console.log("aa");
+      console.log(res.data);
+      const data = res.data;
+      let bookList = [];
+/*         data.forEach(uni => {
+        courseList = courseList.concat(...uni.courses)
+      }); */
+
+      console.log(bookList);
+
+    }).catch(err => console.log(err))
+}
+
+
+useEffect(() => {
+  getBooks();
+})
+
 
   useEffect(() => {
     if (autoScroll) {
@@ -58,7 +83,9 @@ const Slider = () => {
                   <h2>{slide.heading}</h2>
                   <p>{slide.desc}</p>
                   <hr />
+                  <form action="\productpage" method="get"> 
                   <button className="--btn --btn-primary">Go To This Product </button>
+                  </form>
                 </div>
               </div>
             )}
@@ -77,4 +104,4 @@ const Slider = () => {
   );
 };
 
-export default Slider;
+export default HomePage;
