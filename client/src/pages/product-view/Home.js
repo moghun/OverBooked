@@ -104,11 +104,11 @@ const HomePage = () => {
         </div>
       </div>
       <Grid container direction="row" justifyContent="space-around">
-        <BookCard name="deneme1" author="zaa" imgurl="/animalfarm.jpg" publisher="yayınevi" price="87.99 TL" score="3.7/5.0"></BookCard>
-        <BookCard name="deneme2" author="zaa" imgurl="/animalfarm.jpg" publisher="yayınevi" price="87.99 TL" score="3.7/5.0"></BookCard>
-        <BookCard name="deneme3" author="zaa" imgurl="/animalfarm.jpg" publisher="yayınevi" price="87.99 TL" score="3.7/5.0"></BookCard>
-        <BookCard name="deneme4" author="zaa" imgurl="/animalfarm.jpg" publisher="yayınevi" price="87.99 TL" score="3.7/5.0"></BookCard>
-        <BookCard name="deneme5" author="zaa" imgurl="/animalfarm.jpg" publisher="yayınevi" price="87.99 TL" score="3.7/5.0"></BookCard>
+        <BookCard name="deneme1" author="author1" imgurl="/animalfarm.jpg" publisher="yayınevi" price="87.99 TL" score="3.7/5.0"></BookCard>
+        <BookCard name="deneme2" author="author2" imgurl="/animalfarm.jpg" publisher="yayınevi" price="87.99 TL" score="3.7/5.0"></BookCard>
+        <BookCard name="deneme3" author="author3" imgurl="/animalfarm.jpg" publisher="yayınevi" price="87.99 TL" score="3.7/5.0"></BookCard>
+        <BookCard name="deneme4" author="author4" imgurl="/animalfarm.jpg" publisher="yayınevi" price="87.99 TL" score="3.7/5.0"></BookCard>
+        <BookCard name="deneme5" author="author5" imgurl="/animalfarm.jpg" publisher="yayınevi" price="87.99 TL" score="3.7/5.0"></BookCard>
       </Grid>
     </div>
   );
