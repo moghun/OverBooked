@@ -1,8 +1,13 @@
+import { Grid } from '@mui/material'
 import React from 'react'
 
 const SearchPage = () => {
   return (
-    <div>SearchPage</div>
+    <div>
+        <GridList>
+            {/* mapping function to GridListTile of BookCards*/}
+        </GridList>
+    </div>
   )
 }
 
