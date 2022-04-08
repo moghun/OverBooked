@@ -4,9 +4,9 @@ import React from 'react'
 const SearchPage = () => {
   return (
     <div>
-        <GridList>
-            {/* mapping function to GridListTile of BookCards*/}
-        </GridList>
+      <Grid container>
+        {/* map function to Grid items */}
+      </Grid>
     </div>
   )
 }
