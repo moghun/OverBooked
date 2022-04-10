@@ -1,6 +1,6 @@
 import { Box, Button, Card, Grid } from "@mui/material";
 import React from "react";
-import BookCard from "../components/BookCard";
+import BookCard from "../../components/BookCard";
 
 const SearchPage = () => {
   return (

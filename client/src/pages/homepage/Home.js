@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
-import { sliderData } from "./data";
+import { sliderData } from "../product-view/data";
 import "../../components/Navigation_Bar/NavigationBar.css";
 // import {Link} from "react-router-dom";
 
