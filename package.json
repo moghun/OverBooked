@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://bitbucket.org/overbooked-team20/overbooked/issues"
   },
-  "homepage": "https://bitbucket.org/overbooked-team20/overbooked#readme"
+  "homepage": "https://bitbucket.org/overbooked-team20/overbooked#readme",
+  "dependencies": {
+    "mongoose": "^6.2.10"
+  }
 }

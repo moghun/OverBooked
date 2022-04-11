@@ -1,33 +1,28 @@
 const express = require("express");
 const app = express();
+const mongoose = require("mongoose");
+const dotenv = require("dotenv");
+app.use(express.json());
+const authRoute = require("./routes/auth");
+const userRoute = require("./routes/user");
+const productRoute = require("./routes/product");
 const cors = require("cors");
-require("dotenv").config({ path: "./config.env" });
-const port = process.env.PORT || 5000;
+
+dotenv.config();
+
+mongoose
+  .connect(process.env.MONGO_URL)
+  .then(() => console.log("DB Connection Successfull!"))
+  .catch((err) => {
+    console.log(err);
+  });
+
 app.use(cors());
 app.use(express.json());
-app.use(require("./routes/users"))
+app.use("/api/auth", authRoute);
+app.use("/api/users", userRoute);
+app.use("/api/products", productRoute);
 
-const dbo = require("./connect_db");
-
-
-if (process.env.NODE_ENV === 'production') {
-    // Exprees will serve up production assets
-    app.use(express.static('../client/build'));
-  
-    // Express serve up index.html file if it doesn't recognize route
-    const path = require('path');
-    app.get('*', (req, res) => {
-      res.sendFile(path.resolve(__dirname, '..','client', 'build', 'index.html'));
-    });
-  }
-   
-
-
-
-app.listen(port, () => {
-  // perform a database connection when server starts
-  dbo.connectToServer(function (err) {
-    if (err) console.error(err);
-  });
-  console.log(`Server is running on port: ${port}`);
+app.listen(process.env.PORT || 5001, () => {
+  console.log("Backend server is running!");
 });
