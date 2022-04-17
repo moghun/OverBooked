@@ -1,5 +1,6 @@
+import { padding } from '@mui/system';
 import React, { useState, useEffect } from 'react';
-
+import StarRating from '../../components/StarRating';
 
 const DetailsThumb = () => {
 
@@ -45,7 +46,11 @@ const DetailsThumb = () => {
 
                     {products.amount !== 0 ? <><input type = "number" className='addcount' min="1" max = {products.amount}></input> <button className="cart">Add to cart</button></> : <p style={{fontWeight: "bold"}}>SOLD OUT</p>}           
                      
-                    
+                    <div style={{marginTop: 10}}>
+                        <StarRating/>
+                        <textarea placeholder=" Write your comment here..." rows="4" cols="50" style={{resize:'none', borderWidth:'bold'}}></textarea>
+                        <div><button style={{cursor:'pointer', backgroundColor:"#333", color:'white', width:60}}>Submit</button></div>
+                    </div>
                 </div>
     </div> 
         </div> 
