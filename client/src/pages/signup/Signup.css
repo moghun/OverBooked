@@ -2,8 +2,8 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans');
 
 .signupcontainerholder{
-    background-image: url(background.jpg);
-    background-size: auto;
+    background-image: url(bookshelf.jpg);
+    background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
 

@@ -49,19 +49,19 @@ class Signin extends Component{
   constructor(){
     super()
     this.state = {
-        user:'',
+        mail:'',
         password:'',
     }
 
-    this.changeUser = this.changeUser.bind(this);
+    this.changeMail = this.changeMail.bind(this);
     this.changePassword = this.changePassword.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
 
   }
 
-  changeUser(event){
+  changeMail(event){
     this.setState({
-        user:event.target.value
+        mail:event.target.value
     })
   }
 
@@ -75,12 +75,12 @@ class Signin extends Component{
   onSubmit(event){
     event.preventDefault();
     const registered ={
-        user: this.state.user,
+        mail: this.state.mail,
         password: this.state.password,
     }
     axios.post('http://localhost:5001/Signin', registered).then(response => console.log(response.data))
     this.setState({
-      user: '',
+      mail: '',
       password: '',
   })
   }
@@ -93,13 +93,13 @@ class Signin extends Component{
         <h1 style={{fontFamily:'Open Sans', marginLeft:50}}>LOGIN</h1>
 
         <div className="username">
-          <h>Username</h>
+          <h>Mail</h>
           <form onSubmit={this.onSubmit}>
             <input 
             className="text" 
-            placeholder="Type your username"
-            onChange={this.changeUser}
-            value={this.state.user}
+            placeholder="Type your mail"
+            onChange={this.changeMail}
+            value={this.state.mail}
             />
           </form>
           <hr style={{width:200}}></hr>

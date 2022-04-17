@@ -10,6 +10,8 @@ class SignUp extends Component{
             username:'',
             email:'',
             password:'',
+            name:'',
+            surname:''
         }
 
         this.changeEmail = this.changeEmail.bind(this);
@@ -43,7 +45,8 @@ class SignUp extends Component{
             username: this.state.username,
             email: this.state.email,
             password: this.state.password,
-
+            surname: "admin",
+            name: "admin"
         }
 
         axios.post('http://localhost:3000/Signup', registered).then(response => console.log(response.data))
@@ -51,6 +54,7 @@ class SignUp extends Component{
             username: '',
             email: '',
             password: '',
+            
         })
     }
     
