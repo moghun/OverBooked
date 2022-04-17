@@ -49,7 +49,7 @@ class Signin extends Component{
   constructor(){
     super()
     this.state = {
-        mail:'',
+        email:'',
         password:'',
     }
 
@@ -61,7 +61,7 @@ class Signin extends Component{
 
   changeMail(event){
     this.setState({
-        mail:event.target.value
+        email:event.target.value
     })
   }
 
@@ -75,12 +75,12 @@ class Signin extends Component{
   onSubmit(event){
     event.preventDefault();
     const registered ={
-        mail: this.state.mail,
+        email: this.state.email,
         password: this.state.password,
     }
     axios.post('http://localhost:5001/Signin', registered).then(response => console.log(response.data))
     this.setState({
-      mail: '',
+      email: '',
       password: '',
   })
   }
@@ -99,7 +99,7 @@ class Signin extends Component{
             className="text" 
             placeholder="Type your mail"
             onChange={this.changeMail}
-            value={this.state.mail}
+            value={this.state.email}
             />
           </form>
           <hr style={{width:200}}></hr>
