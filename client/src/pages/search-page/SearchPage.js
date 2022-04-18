@@ -19,6 +19,9 @@ import BookCard from "../../components/BookCard";
 
 function SearchPage() {
   const [filter, setFilter] = useState(0);
+  const [includeBook, setIncludeBook] = useState(false);
+  const [includeComic, setincludeComic] = useState(false);
+  const [includeMagazine, setIncludeMagazine] = useState(false);
 
   const onFilterChange = (event) => {
     setFilter(event.target.value);
@@ -39,7 +42,7 @@ function SearchPage() {
           <Button>Remove filters</Button>
           <List
             sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
-            subheader={<ListSubheader>Categories</ListSubheader>}
+            subheader={<ListSubheader>Categories</ListSubheader>} dense={true}
           >
             <ListItem>
               <ListItemIcon>
@@ -51,31 +54,6 @@ function SearchPage() {
               </ListItemIcon>
               <ListItemText primary="Book" />
             </ListItem>
-            <ListItemButton>
-              <ListItemIcon>
-                <Checkbox
-                  edge="start"
-                  tabIndex={-1}
-                  disableRipple
-                />
-              </ListItemIcon>
-              <ListItemText primary="Comic" />
-            </ListItemButton>
-            <ListItemButton>
-              <ListItemIcon>
-                <Checkbox
-                  edge="start"
-                  tabIndex={-1}
-                  disableRipple
-                />
-              </ListItemIcon>
-              <ListItemText primary="Magazine" />
-            </ListItemButton>
-          </List>
-          <List
-            sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
-            subheader={<ListSubheader>Sub-Categories</ListSubheader>}
-          >
             <ListItem>
               <ListItemIcon>
                 <Checkbox
@@ -84,9 +62,35 @@ function SearchPage() {
                   disableRipple
                 />
               </ListItemIcon>
+              <ListItemText primary="Comic" />
+            </ListItem>
+            <ListItem>
+              <ListItemIcon>
+                <Checkbox
+                  edge="start"
+                  tabIndex={-1}
+                  disableRipple
+                />
+              </ListItemIcon>
+              <ListItemText primary="Magazine" />
+            </ListItem>
+          </List>
+          <List
+            sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
+            subheader={<ListSubheader>Sub-Categories</ListSubheader>} dense={true}
+          >
+            <ListItem>
+              <ListItemIcon>
+                <Checkbox
+                  edge="start"
+                  checked={true}
+                  tabIndex={-1}
+                  disableRipple
+                />
+              </ListItemIcon>
               <ListItemText primary="Novel" />
             </ListItem>
-            <ListItemButton>
+            <ListItem>
               <ListItemIcon>
                 <Checkbox
                   edge="start"
@@ -95,8 +99,8 @@ function SearchPage() {
                 />
               </ListItemIcon>
               <ListItemText primary="Poem" />
-            </ListItemButton>
-            <ListItemButton>
+            </ListItem>
+            <ListItem>
               <ListItemIcon>
                 <Checkbox
                   edge="start"
@@ -105,7 +109,7 @@ function SearchPage() {
                 />
               </ListItemIcon>
               <ListItemText primary="Science" />
-            </ListItemButton>
+            </ListItem>
           </List>
         </Grid>
         <Grid
