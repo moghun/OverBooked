@@ -23,6 +23,6 @@ app.use("/api/auth", authRoute);
 app.use("/api/users", userRoute);
 app.use("/api/products", productRoute);
 
-app.listen(process.env.PORT || 5001, () => {
+app.listen(process.env.PORT || 8080, () => {
   console.log("Server is running!");
 });
