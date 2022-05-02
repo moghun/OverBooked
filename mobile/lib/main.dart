@@ -1,115 +1,109 @@
 import 'package:flutter/material.dart';
+import 'package:mobile/routes/notifications.dart';
+import 'package:mobile/routes/profile/account_settings/account_delete.dart';
+import 'package:mobile/routes/profile/buy_sell_history.dart';
+import 'package:mobile/routes/search_results.dart';
+import 'package:mobile/models/user_obj.dart';
+import 'package:mobile/routes/profile/account_settings/account_change_avatar.dart';
+import 'package:mobile/routes/profile/account_settings/account_change_name.dart';
+import 'package:mobile/routes/profile/account_settings/account_change_password.dart';
+import 'package:mobile/routes/profile/edit_account.dart';
+import 'package:mobile/routes/sell_product.dart';
+import 'package:mobile/routes/signup.dart';
+import 'package:mobile/routes/welcome.dart';
+import 'package:mobile/routes/login.dart';
+import 'package:provider/provider.dart';
+import 'package:mobile/services/auth.dart';
+import 'package:mobile/views/sell_product/add_product.dart';
+import 'index.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final Future<FirebaseApp> init = Firebase.initializeApp();
+  //await Firebase.initializeApp();
+  runApp(MyFirebaseApp(init: init));
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+class MyFirebaseApp extends StatefulWidget {
+  const MyFirebaseApp({Key? key, this.init}) : super(key: key);
 
-  // This widget is the root of your application.
+  final Future<FirebaseApp>? init;
+
+  @override
+  _MyFirebaseAppState createState() => _MyFirebaseAppState();
+}
+
+class _MyFirebaseAppState extends State<MyFirebaseApp> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.blue,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+    return FutureBuilder(
+      future: widget.init,
+      builder: (context, snapshot) {
+        if (snapshot.hasError) {
+          return MaterialApp(
+            home: Scaffold(
+              body: Center(
+                child: Text(
+                    'No Firebase Connection: ${snapshot.error.toString()}'),
+              ),
+            ),
+          );
+        }
+        if (snapshot.connectionState == ConnectionState.done) {
+          FlutterError.onError =
+              FirebaseCrashlytics.instance.recordFlutterError;
+          return AppBase();
+        }
+        return const MaterialApp(
+          home: Center(
+            child: Text('Connecting to Firebase'),
+          ),
+        );
+      },
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
+class AppBase extends StatelessWidget {
+  const AppBase({
+    Key? key,
+  }) : super(key: key);
 
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
+  static FirebaseAnalytics analytics = FirebaseAnalytics();
+  static FirebaseAnalyticsObserver observer =
+      FirebaseAnalyticsObserver(analytics: analytics);
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
-    return Scaffold(
-      appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
-    );
+    return StreamProvider<UserObj?>.value(
+        initialData: null,
+        value: AuthService().getCurrentUser,
+        child: MaterialApp(
+          debugShowCheckedModeBanner: false,
+          navigatorObservers: <NavigatorObserver>[observer],
+          routes: {
+            '/': (context) => Index(),
+            '/welcome': (context) =>
+                Welcome(),
+            '/login': (context) =>
+                Login(),
+            '/signup': (context) =>
+                SignUp(),
+            '/edit_account': (context) =>
+                EditAccount(),
+            '/notifications': (context) =>
+                Notifications(),
+
+            '/search_result': (context) => SearchResult(searchQuery: ""),
+            '/profile/change_password': (context) => AccountSettingsPassword(),
+            '/profile/change_name': (context) =>
+                AccountSettingsName(), // TO DO: add analytics
+            '/profile/change_avatar': (context) => AccountSettingsPP(),
+             '/profile/account_delete': (context) => AccountDeletePP(),
+            '/sell_product': (context) => SellProduct(),
+            '/sell_product/add_product': (context) => AddProduct(),
+            '/profile/buy_sell_history': (context) => BuySellHistory()
+          },
+        ));
   }
 }
