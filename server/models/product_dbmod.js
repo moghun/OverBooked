@@ -7,16 +7,16 @@ const productsSchema = new mongoose.Schema(
     cost: { type: Number, required: true },
     amount: { type: Number, required: true },
     publisher: { type: String, required: true },
-    img: { type: String, required: false },
-    description: { type: String, required: false },
-    warranty: { type: Number, required: false },
+    img: { type: String, required: false , default: ""},
+    description: { type: String, required: true},
+    warranty: { type: Number, required: false, default: -1},
 
     category: { type: String, required: true },
     subcategories: { type: Array, required: false },
 
     sale: { type: Boolean, required: false,  default: false},
-    after_sale_price: { type: Number, required: false },
-    rating: { type: Number, required: false },
+    after_sale_price: { type: Number, required: false, default: -1},
+    rating: { type: Number, required: false, default: -1},
     comments: { type: Array, required: false },
   },
   { timestamps: true }
