@@ -114,7 +114,6 @@ router.get("/find", async (req, res) => {
 });
 
 
-
 //GET ALL PRODUCTS
 //DEFINE FILTER W/ SPECIFIC QUERY TYPE
 router.get("/", async (req, res) => {
