@@ -130,7 +130,7 @@ class Signin extends Component{
         </div>
 
         <div className="manuelsignup">
-          <p style={{fontSize: 14, margin:0}}>Or Sign Up Using</p>
+          <p style={{fontSize: 14, margin:0}}>Or</p>
           <a href="/Signup" style={{fontSize: 16, color:'black', textDecoration:'none', marginLeft:30}}>Sign Up</a>
         </div>
 
