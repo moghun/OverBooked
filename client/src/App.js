@@ -12,6 +12,8 @@ import CreateStore from './pages/product-view/CreateStore';
 import EditProfile from './pages/product-view/EditProfile';
 
 
+import SignUp from './pages/signup/Signup';
+import Signin from './pages/signin/Signin';
 function App() {
     return (
   
@@ -33,6 +35,8 @@ function App() {
           <Route path = "/editprofile" element = {<EditProfile/>} />
           <Route path = "/createstore" element = {<CreateStore/>} />
           <Route path = "/searchpage" element = {<SearchPage/>} />
+          <Route path = "/signup" element = {<SignUp/>} />
+          <Route path = "/signin" element = {<Signin/>} />
           
         </Routes>
         <div>

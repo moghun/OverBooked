@@ -1,7 +1,7 @@
 
 @import url('https://fonts.googleapis.com/css?family=Open+Sans');
 
-body{
+.signupcontainerholder{
     background-image: url(background.jpg);
     background-size: auto;
     background-repeat: no-repeat;
@@ -21,7 +21,7 @@ body{
     outline: none;
     outline-width: 2px;
     outline-offset: 25%;
-    width: 240px;
+    width: 300px;
     height: 580px;
     border-radius: 10px;
 }
@@ -166,7 +166,7 @@ body{
 }
 
 /* Sign Up Button Div */
-.signupbutton button{
+.signupbutton input{
     width: 240px;
     border-radius: 25px;
     height: 30px;
@@ -178,13 +178,14 @@ body{
     border: hidden;
 }
 
-.signupbutton button:hover{
+.signupbutton input:hover{
     background-color: rgba(255, 255, 255, 0.438);
     color: black;
 }
 
 /* Privacy Policy */
 .privacypolicy{
+    position: center;
     outline: none;
     outline-width: 2px;
     width: 100%;

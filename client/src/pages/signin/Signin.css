@@ -1,7 +1,7 @@
 
 @import url('https://fonts.googleapis.com/css?family=Open+Sans');
 
-body{
+.signincontainerholder{
     background-image: url(background.jpg);
     background-size: auto;
     background-repeat: no-repeat;
@@ -21,7 +21,7 @@ body{
     outline: none;
     outline-width: 2px;
     outline-offset: 25%;
-    width: 240px;
+    width: 300px;
     height: 500px;
     border-radius: 10px;
 }
@@ -82,7 +82,7 @@ body{
 }
 
 /* Login Button Div */
-.loginbutton button{
+.loginbutton input{
     width: 240px;
     border-radius: 25px;
     height: 30px;
@@ -94,7 +94,7 @@ body{
     border: hidden;
 }
 
-.loginbutton button:hover{
+.loginbutton input:hover{
     background-color: rgba(255, 255, 255, 0.438);
     color: black;
 }
@@ -114,45 +114,12 @@ body{
     margin-left: 10px;
 }
 
-/* Sign Up via Social Media Div */
-.socialmediasignup{
-    outline: none;
-    outline-width: 2px;
-    width: 100%;
-    height: 60px;
-    border-radius: 10px;
-    font-family: 'Open Sans';
-    font-size: 15px;
-}
-
-.socialmediasignup .row{
-    display: inline-block;
-}
-.socialmediasignup button{
-    margin: 5px;
-    border-radius: 50%;
-    width: 30px;
-    height: 30px;
-    border: hidden;
-}
-
-.socialmediasignup .gmail{
-    background-image: url(gmailicon.png);
-    background-size: cover;
-    background-position: center;
-}
-
-.socialmediasignup .facebook{
-    background-image: url(facebookicon.png);
-    background-size: cover;
-    background-position: center;
-}
-
 /* Manuel Sign Up Div */
 .manuelsignup{
     font-family: 'Open Sans';
     outline: none;
     outline-width: 2px;
+    margin-left: 50px;
     width: 100%;
     height: 40px;
     border-radius: 10px;
