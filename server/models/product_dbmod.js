@@ -10,6 +10,7 @@ const productsSchema = new mongoose.Schema(
     img: { type: String, required: false , default: ""},
     description: { type: String, required: true},
     warranty: { type: Number, required: false, default: -1},
+    author: { type: String, required: true },
 
     category: { type: String, required: true },
     subcategories: { type: Array, required: false },

@@ -62,11 +62,12 @@ router.get("/find", async (req, res) => {
   const q = req.query.q;
   try {
     let products;
+    let products_name;
     let products_author;
     let products_cat;
 //  let products_subcat;
 
-    products = await Product.find(
+    products_name = await Product.find(
       {
         name: {
           $regex: new RegExp(q, 'i')
@@ -90,6 +91,7 @@ router.get("/find", async (req, res) => {
       }
     );
 
+
     //Subcategory search -- needs sophisticated query since it requires to search with regex
    /*
     products_subcat = await Product.aggregate(
@@ -103,10 +105,10 @@ router.get("/find", async (req, res) => {
       }
     );*/
     
-    products = products.concat(products_author);
-    products = products.concat(products_cat);
+    var dummy;
+    dummy = products_name.concat(products_author);
+    products = dummy.concat(products_cat);
 //  products = products.concat(products_subcat);
-
     res.status(200).json(products);
   } catch (err) {
     res.status(500).json(err);
