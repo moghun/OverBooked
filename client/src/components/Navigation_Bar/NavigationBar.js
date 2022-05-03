@@ -6,11 +6,7 @@ const NavigationBar= () =>{
             <i class="material-icons menu-icon">menu</i>
 
             <div class="logo">               
-<<<<<<< HEAD
-                <a class="text" style ={{fontWeight: "bold" , color:"white", textDecoration:"none"}} href="\">OverBooked</a>
-=======
                 <a href="/" class="text" style ={{fontWeight: "bold" , color:"white", textDecoration:"none"}} >OverBooked</a>   
->>>>>>> 35bd8d2 (signin-up functionality added)
             </div>
 
             <div class="item search right" tabindex="0">

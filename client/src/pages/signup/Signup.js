@@ -8,7 +8,7 @@ class SignUp extends Component{
         super()
         this.state = {
             username:'',
-            mail:'',
+            email:'',
             password:'',
         }
 
@@ -26,7 +26,7 @@ class SignUp extends Component{
 
     changeEmail(event){
         this.setState({
-            mail:event.target.value
+            email:event.target.value
         })
     }
 
@@ -45,10 +45,10 @@ class SignUp extends Component{
             password: this.state.password,
         }
 
-        axios.post('http://localhost:5001/register', registered).then(response => console.log(response.data))
+        axios.post('http://localhost:5001/api/auth/register', registered).then(response => console.log(response.data))
         this.setState({
             username: '',
-            mail: '',
+            email: '',
             password: '',
             
         })
