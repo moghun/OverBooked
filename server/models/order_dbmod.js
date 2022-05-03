@@ -2,8 +2,6 @@ const mongoose = require("mongoose");
 
 const orderSchema = new mongoose.Schema(
   {
-    _id: { type: String, required: true, unique: true },
-
     order_id: { type: Number, required: true },
     buyer_email: { type: String, required: true },
     status: { type: String, required: true },
