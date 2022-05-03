@@ -6,7 +6,8 @@ const NavigationBar= () =>{
         <nav class="navbar">
             <i class="material-icons menu-icon">menu</i>
 
-            <div class="logo">               
+            <div class="logo">       
+            <form action="\homepage" method="get"></form>        
                 <a class="text" style ={{fontWeight: "bold" , color:"white", textDecoration:"none"}} href="">OverBooked</a>   
                 <Link to="/"></Link> 
             </div>
@@ -20,7 +21,11 @@ const NavigationBar= () =>{
                         <option value="all">Magazines</option>
                     </select>
                     <input type="text"/>
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Search_Icon.svg/2048px-Search_Icon.svg.png" alt="search"/>
+                    <form action="\searchpage" method="get">
+                      <button className="--btn --btn-primary">
+                      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Search_Icon.svg/2048px-Search_Icon.svg.png" alt="search"/>
+                      </button>
+                    </form>
 
                 </div>
             </div>

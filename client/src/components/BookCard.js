@@ -10,10 +10,10 @@ import StarIcon from "@mui/icons-material/Star";
 
 export default function BookCard(props) {
   return (
-    <Card sx={{ maxWidth: "350px", minWidth: "250px", padding: "15px", margin: "20px" }}>
+    <Card sx={{ maxWidth: "340px", minWidth: "200px", padding: "15px", paddingX: "0", margin: "20px" }}>
       <CardMedia
         component="img"
-        height="240"
+        height="200"
         image={props.imgurl}
         alt="book picture"
         style={{ objectFit: "contain" }}
@@ -22,7 +22,7 @@ export default function BookCard(props) {
         <Grid
           container
           spacing={0}
-          margin="-15px"
+          margin="-25px"
           direction="column"
           justifyContent="space-around"
           alignItems="center"
@@ -30,10 +30,11 @@ export default function BookCard(props) {
           <Grid item>
             <Typography
               gutterBottom
-              variant="h5"
+              variant="h6"
               component="div"
               paddingTop="10px"
               marginBottom="0px"
+              textAlign="center"
             >
               {props.name}
             </Typography>
