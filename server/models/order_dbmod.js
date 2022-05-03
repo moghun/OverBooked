@@ -14,6 +14,7 @@ const orderSchema = new mongoose.Schema(
     store_name: { type: String, required: true },
     rating: { type: Number, required: false },
     bought_products: { type: Array, required: true},
+    amounts: { type: Array, required: true},
     
   },
   { timestamps: true }

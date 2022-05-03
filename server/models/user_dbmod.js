@@ -12,6 +12,7 @@ const UserSchema = new mongoose.Schema(
     cart: {type: Array, required: false},
     orders: {type: Array, required: false},
     
+    
 
     hasStore: {
       type: Boolean,
