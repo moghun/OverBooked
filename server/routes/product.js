@@ -61,7 +61,7 @@ router.get("/find/:id", async (req, res) => {
 router.get("/find", async (req, res) => {
   const q = req.query.q;
   try {
-    let products = {}
+    let products;
     let products_name;
     let products_author;
     let products_cat;
@@ -91,7 +91,6 @@ router.get("/find", async (req, res) => {
       }
     );
 
-    
 
     //Subcategory search -- needs sophisticated query since it requires to search with regex
    /*
@@ -105,13 +104,11 @@ router.get("/find", async (req, res) => {
         }
       }
     );*/
-
-    Object.keys(products_name).forEach(key => result[key] = products_name[key]);
-
-    Object.keys(products_cat).forEach(key => result[key] = products_cat[key]);
-
-    Object.keys(products_author).forEach(key => result[key] = products_author[key]);
-
+    
+    var dummy;
+    dummy = products_name.concat(products_author);
+    products = dummy.concat(products_cat);
+//  products = products.concat(products_subcat);
     res.status(200).json(products);
   } catch (err) {
     res.status(500).json(err);
