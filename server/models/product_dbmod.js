@@ -9,16 +9,14 @@ const productsSchema = new mongoose.Schema(
     cost: { type: Number, required: true },
     amount: { type: Number, required: true },
     publisher: { type: String, required: true },
-    photo: { type: String, required: false },
+    img: { type: String, required: false },
     description: { type: String, required: false },
-    warrant: { type: String, required: false },
+    warranty: { type: String, required: false },
 
     category: { type: String, required: true },
     subcategories: { type: Array, required: false },
 
     sale: { type: Boolean, required: false,  default: false},
-    seller_email: { type: String, required: true },
-    store_name: { type: String, required: true },
     rating: { type: Number, required: false },
     comments: { type: Array, required: false },
   },

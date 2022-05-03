@@ -8,21 +8,10 @@ const UserSchema = new mongoose.Schema(
     name: { type: String, required: false },
     surname: { type: String, required: false },
    
-    fav_products: {type: Array, required: false},
     cart: {type: Array, required: false},
     orders: {type: Array, required: false},
     
-    
-
-    hasStore: {
-      type: Boolean,
-      default: false,
-    },
-    
-    store_name: { type: String, required: false },
-    rating: {type: Number, required: false},
-    current_products: {type: Array, required: false},
-    sold_products: {type: Array, required: false},
+    user_role: { type: String, required: true, default: "customer" },
   },
   { timestamps: true }
 );
