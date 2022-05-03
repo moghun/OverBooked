@@ -6,10 +6,8 @@ const NavigationBar= () =>{
         <nav class="navbar">
             <i class="material-icons menu-icon">menu</i>
 
-            <div class="logo">       
-            <form action="\homepage" method="get"></form>        
-                <a class="text" style ={{fontWeight: "bold" , color:"white", textDecoration:"none"}} href="">OverBooked</a>   
-                <Link to="/"></Link> 
+            <div class="logo">               
+                <a class="text" style ={{fontWeight: "bold" , color:"white", textDecoration:"none"}} href="\">OverBooked</a>
             </div>
 
             <div class="item search right" tabindex="0">
