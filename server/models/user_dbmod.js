@@ -17,6 +17,7 @@ const UserSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    
     store_name: { type: String, required: false },
     rating: {type: Number, required: false},
     current_products: {type: Array, required: false},
