@@ -1,11 +1,6 @@
 import { useState, useEffect } from "react";
-<<<<<<< HEAD:client/src/pages/homepage/Home.js
-import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
-import { sliderData } from "../product-view/data";
-=======
 import { AiOutlineArrowLeft, AiOutlineArrowRight, AiFillForward, AiFillBackward } from "react-icons/ai";
 import { sliderData } from "./data";
->>>>>>> 363c139 (home profile etc.):client/src/pages/product-view/Home.js
 import "../../components/Navigation_Bar/NavigationBar.css";
 
 // import {Link} from "react-router-dom";

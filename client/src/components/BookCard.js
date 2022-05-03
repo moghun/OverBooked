@@ -10,11 +10,7 @@ import StarIcon from "@mui/icons-material/Star";
 
 export default function BookCard(props) {
   return (
-<<<<<<< HEAD
-    <Card sx={{ maxWidth: "340px", minWidth: "200px", padding: "15px", paddingX: "0", margin: "20px" }}>
-=======
     <Card sx={{ maxWidth: "350px", minWidth: "250px", padding: "15px", margin: "20px",  transition: ".3s ease", ':hover': {boxShadow: 20,}}}>
->>>>>>> 10bf394 (changes to add homepage branch)
       <CardMedia
         component="img"
         height="200"
