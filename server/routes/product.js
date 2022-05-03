@@ -68,12 +68,20 @@ router.get("/find", async (req, res) => {
 
     products = await Product.find(
       {
-        name: {
-          $regex: new RegExp(q, 'i')
+        $or:{
+          name: {
+            $regex: new RegExp(q, 'i')
+          },
+          author: {
+            $regex: new RegExp(q, 'i')
+          },
+          category: {
+            $regex: new RegExp(q, 'i')
+          }
         }
       }
     );
-
+/*
     products_author = await Product.find(
       {
         author: {
@@ -101,10 +109,11 @@ router.get("/find", async (req, res) => {
           }
         }
       }
-    );*/
+    );
     
     products = products.concat(products_author);
     products = products.concat(products_cat);
+    */
 //  products = products.concat(products_subcat);
 
     res.status(200).json(products);
