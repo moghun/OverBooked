@@ -64,8 +64,10 @@ router.get("/find", async (req, res) => {
     let products;
     let products_name;
     let products_author;
+    let products_pub;
     let products_cat;
-//  let products_subcat;
+    let products_subcat;
+    let products_description;
 
     products_name = await Product.find(
       {
@@ -83,6 +85,14 @@ router.get("/find", async (req, res) => {
       }
     );
 
+    products_pub = await Product.find(
+      {
+        publisher: {
+          $regex: new RegExp(q, 'i')
+        }
+      }
+    );
+
     products_cat = await Product.find(
       {
         category: {
@@ -91,24 +101,49 @@ router.get("/find", async (req, res) => {
       }
     );
 
-
-    //Subcategory search -- needs sophisticated query since it requires to search with regex
-   /*
-    products_subcat = await Product.aggregate(
+    products_subcat = await Product.find(
       {
-        $match: {
-          "subcategories": 
-          { 
-            $regex: new RegExp(q, 'i')
-          }
+        subcategories: {
+          $regex: new RegExp(q, 'i')
         }
       }
-    );*/
+    );
+
+    products_description = await Product.find(
+      {
+        description: {
+          $regex: new RegExp(q, 'i')
+        }
+      }
+    );
+
+    function removeDuplicates(arrayIn) {
     
-    var dummy;
-    dummy = products_name.concat(products_author);
-    products = dummy.concat(products_cat);
-//  products = products.concat(products_subcat);
+      var dict = {};
+
+      for (var a=0; a < arrayIn.length; a++) {
+        var pid = arrayIn[a]._id;
+        dict[pid] = 0;
+      }
+
+      var arrayOut = [];
+      for (var a=0; a < arrayIn.length; a++) {
+          if (dict[arrayIn[a]._id] == 0) {
+              arrayOut.push(arrayIn[a]);
+              dict[arrayIn[a]._id] = 1;
+          }
+      }
+      return arrayOut;
+    }
+
+    products = products_name.concat(products_author);
+    products = products.concat(products_pub);
+    products = products.concat(products_cat);
+    products = products.concat(products_subcat);
+    products = products.concat(products_description);
+
+    products = removeDuplicates(products);
+
     res.status(200).json(products);
   } catch (err) {
     res.status(500).json(err);
