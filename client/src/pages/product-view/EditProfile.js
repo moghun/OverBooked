@@ -25,6 +25,7 @@ const EditProfile = () => {
           password: values.password || undefined,
           seller: values.seller || undefined
         }
+        /*
         update({
           userId: match.params.userId
         }, {
@@ -38,6 +39,7 @@ const EditProfile = () => {
             })
           }
         })
+        */
       }
 
 

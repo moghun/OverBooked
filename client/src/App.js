@@ -10,6 +10,8 @@ import NavigationBar2 from './components/Navigation_Bar/NavigationBar2';
 import Profile from './pages/product-view/Profile';
 import CreateStore from './pages/product-view/CreateStore';
 import EditProfile from './pages/product-view/EditProfile';
+import Checkout from './pages/Checkout';
+import ShoppingCart from './pages/ShoppingCart';
 
 
 import SignUp from './pages/signup/Signup';
@@ -37,6 +39,8 @@ function App() {
           <Route path = "/searchpage" element = {<SearchPage/>} />
           <Route path = "/signup" element = {<SignUp/>} />
           <Route path = "/signin" element = {<Signin/>} />
+          <Route path = "/checkout" element = {<Checkout/>} />
+          <Route path = "/shoppingcart" element = {<ShoppingCart/>} />
           
         </Routes>
         <div>

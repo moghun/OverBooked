@@ -1,0 +1,387 @@
+
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
+
+
+.checkout-container{
+    border: 1px solid black;
+    margin: 0.5rem;
+    padding: 2rem 2rem;
+    text-align: center;
+}
+
+
+/* Personal Information Div */
+.personalinfo-container{
+    background-color: white;
+    padding-top: 10px;
+    align-items: center;
+    margin: auto;
+    margin-top: 20px;
+    padding-left: 40px;
+    padding-right: 40px;
+    outline: solid;
+    outline-width: 2px;
+    outline-offset: 25%;
+    width: 300px;
+    height: 1000px;
+    border-radius: 10px;
+    
+}
+
+/*Name Entry Div */
+.name{
+    outline: none;
+    outline-width: 2px;
+    width: 100%;
+    margin-bottom: 40px;
+    margin-top: 10px;
+    border-radius: 10px;
+}
+
+.name h{
+    padding-right: 110px;
+    font-family: 'Open Sans';
+}
+
+.name .text{
+    width: 200px;
+    height: 24px;
+    text-size-adjust: auto;
+    margin-left: 5px;
+    margin-top: 5px;
+    margin-right: 5px;
+    text-align: center;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+}
+
+
+/* Surname Entry Div */
+.surname{
+    outline: none;
+    outline-width: 2px;
+    width: 100%;
+    margin-bottom: 40px;
+    margin-top: 10px;
+    border-radius: 10px;
+}
+
+.surname h{
+    padding-right: 110px;
+    font-family: 'Open Sans';
+}
+
+.surname .text{
+    width: 200px;
+    height: 24px;
+    text-size-adjust: auto;
+    margin-left: 5px;
+    margin-top: 5px;
+    margin-right: 5px;
+    text-align: center;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+}
+
+/* Username Entry Div */
+.email{
+    outline: none;
+    outline-width: 2px;
+    width: 100%;
+    margin-bottom: 40px;
+    margin-top: 10px;
+    border-radius: 10px;
+}
+
+.email h{
+    padding-right: 110px;
+    font-family: 'Open Sans';
+}
+
+.email .text{
+    width: 200px;
+    height: 24px;
+    text-size-adjust: auto;
+    margin-left: 5px;
+    margin-top: 5px;
+    margin-right: 5px;
+    text-align: center;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+}
+
+
+/* Phone Number Entry Div */
+.phonenumber{
+    outline: none;
+    outline-width: 2px;
+    width: 100%;
+    margin-bottom: 40px;
+    margin-top: 10px;
+    border-radius: 10px;
+}
+
+.phonenumber h{
+    padding-right: 110px;
+    font-family: 'Open Sans';
+}
+
+.phonenumber .number{
+    width: 200px;
+    height: 24px;
+    text-size-adjust: auto;
+    margin-left: 5px;
+    margin-top: 5px;
+    margin-right: 5px;
+    text-align: center;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+}
+
+/*Country Entry Div */
+.country{
+    outline: none;
+    outline-width: 2px;
+    width: 100%;
+    margin-bottom: 40px;
+    margin-top: 10px;
+    border-radius: 10px;
+}
+
+.country h{
+    padding-right: 110px;
+    font-family: 'Open Sans';
+}
+
+.country .text{
+    width: 200px;
+    height: 24px;
+    text-size-adjust: auto;
+    margin-left: 5px;
+    margin-top: 5px;
+    margin-right: 5px;
+    text-align: center;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+}
+
+/*Province Entry Div */
+.province{
+    outline: none;
+    outline-width: 2px;
+    width: 100%;
+    margin-bottom: 40px;
+    margin-top: 10px;
+    border-radius: 10px;
+}
+
+.province h{
+    padding-right: 110px;
+    font-family: 'Open Sans';
+}
+
+.province .text{
+    width: 200px;
+    height: 24px;
+    text-size-adjust: auto;
+    margin-left: 5px;
+    margin-top: 5px;
+    margin-right: 5px;
+    text-align: center;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+}
+
+/*City Entry Div */
+.city{
+    outline: none;
+    outline-width: 2px;
+    width: 100%;
+    margin-bottom: 40px;
+    margin-top: 10px;
+    border-radius: 10px;
+}
+
+.city h{
+    padding-right: 110px;
+    font-family: 'Open Sans';
+}
+
+.city .text{
+    width: 200px;
+    height: 24px;
+    text-size-adjust: auto;
+    margin-left: 5px;
+    margin-top: 5px;
+    margin-right: 5px;
+    text-align: center;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+}
+
+/*Address Entry Div */
+.addressline{
+    outline: none;
+    outline-width: 2px;
+    width: 100%;
+    margin-bottom: 40px;
+    margin-top: 10px;
+    border-radius: 10px;
+}
+
+.addressline h{
+    padding-right: 110px;
+    font-family: 'Open Sans';
+}
+
+.addressline .text{
+    width: 200px;
+    height: 24px;
+    text-size-adjust: auto;
+    margin-left: 5px;
+    margin-top: 5px;
+    margin-right: 5px;
+    text-align: center;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+}
+
+
+
+
+
+/* Card Information Div */
+.cardinfo-container{
+    background-color: white;
+    padding-top: 10px;
+    align-items: center;
+    margin: auto;
+    margin-top: 20px;
+    padding-left: 40px;
+    padding-right: 40px;
+    outline: solid;
+    outline-width: 2px;
+    outline-offset: 25%;
+    width: 300px;
+    height: 500px;
+    border-radius: 10px;
+}
+
+
+/*Card Number Entry Div */
+.cardnumber{
+    outline: none;
+    outline-width: 2px;
+    width: 100%;
+    margin-bottom: 40px;
+    margin-top: 10px;
+    border-radius: 10px;
+}
+
+.cardnumber h{
+    padding-right: 110px;
+    font-family: 'Open Sans';
+}
+
+.cardnumber .text{
+    width: 200px;
+    height: 24px;
+    text-size-adjust: auto;
+    margin-left: 5px;
+    margin-top: 5px;
+    margin-right: 5px;
+    text-align: center;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+}
+
+
+/*Expiration Date Entry Div */
+.expirationdate{
+    outline: none;
+    outline-width: 2px;
+    width: 100%;
+    margin-bottom: 40px;
+    margin-top: 10px;
+    border-radius: 10px;
+}
+
+.expirationdate h{
+    padding-right: 110px;
+    font-family: 'Open Sans';
+}
+
+.expirationdate .text{
+    width: 200px;
+    height: 24px;
+    text-size-adjust: auto;
+    margin-left: 5px;
+    margin-top: 5px;
+    margin-right: 5px;
+    text-align: center;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+}
+
+/*Expiration Date Entry Div */
+.securitynumber{
+    outline: none;
+    outline-width: 2px;
+    width: 100%;
+    margin-bottom: 40px;
+    margin-top: 10px;
+    border-radius: 10px;
+}
+
+.securitynumber h{
+    padding-right: 110px;
+    font-family: 'Open Sans';
+}
+
+.securitynumber .number{
+    width: 200px;
+    height: 24px;
+    text-size-adjust: auto;
+    margin-left: 5px;
+    margin-top: 5px;
+    margin-right: 5px;
+    text-align: center;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+}
+
+
+
+/* Checkout Button Div */
+.checkout-button input{
+    width: 240px;
+    border-radius: 25px;
+    height: 30px;
+    text-align: center;
+    margin-top: 10px;
+    transition-duration: 0.3s;
+    background-color: rgb(80, 200, 247);
+    color: white;
+    font-weight: bold;
+    border: hidden;
+    outline: solid;
+}
+
+.checkout-button input:hover{
+    background-color: rgba(255, 255, 255, 0.438);
+    color: black;
+}
+
+
