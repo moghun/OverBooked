@@ -31,9 +31,9 @@ function App() {
 
         </div>
         <Routes>
-          <Route path = "/" element = {<HomePage/>} />
+          <Route exact path = "/" element = {<HomePage/>} />
           <Route path = "/profile" element = {<Profile/>} />
-          <Route path = "/productpage" element = {<ProductPage/>} />
+          <Route path = "/productpage/:id" element = {<ProductPage/>} />
           <Route path = "/editprofile" element = {<EditProfile/>} />
           <Route path = "/createstore" element = {<CreateStore/>} />
           <Route path = "/searchpage" element = {<SearchPage/>} />

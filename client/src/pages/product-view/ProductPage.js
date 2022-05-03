@@ -1,9 +1,12 @@
 import { padding } from '@mui/system';
 import React, { useState, useEffect } from 'react';
 import {FaStar} from 'react-icons/fa';
+import { publicRequest } from "../requestMethods";
+import { useLocation } from "react-router-dom";
 
 const DetailsThumb = () => {
-
+    const location = useLocation();
+    const id = location.pathname.split("/")[2];
     const [products, setProduct] = useState({});
     const [amount, setAmount] = useState(null);
     const [comment, setComment] = useState(null);
@@ -34,18 +37,14 @@ const DetailsThumb = () => {
     }
 
     useEffect(() => {
-        setProduct({
-            "_id": "1",
-            "title": "Ay Zalim Bir Sevgilidir",
-            "src": "http://www.ithaki.com.tr/wp-content/uploads/2017/06/Ay-Zalim-Bir-Sevgilidir.jpg",
-            "price": "23.99 TL",
-            "content": "Ay’ı Dünya’dan kontrol eden Otorite’ye karşı, yalnızca mahkûm ve sürgünlerin gönderildiği ceza kolonisine dönüşmüş Ay’daki isyanın ve devrimin öyküsü bu.",
-            "count": 1,
-            "author": "Robert A. Heinlein",
-            "publisher": "İthaki Yayınları",
-            "amount": 10
-          });
-    }, [products]);
+        const getProduct = async () => {
+          try {
+            const res = await publicRequest.get("/products/find/" + id);
+            setProduct(res.data);
+          } catch {}
+        };
+        getProduct();
+      }, [id]);
    
     function getAmount(val){ 
         
@@ -65,7 +64,7 @@ const DetailsThumb = () => {
 
                 
                 <div className="big-img">
-                    <img src={products.src} alt = {products.title}/>
+                    <img src={products.img} alt = {products.name}/>
                 </div>
 
                 <div className="box">
@@ -76,9 +75,10 @@ const DetailsThumb = () => {
 
 
                     <h5>Yazar: {products.author} Yayınevi: {products.publisher}</h5>                 
-                    <p>{products.price}</p>
+                    <p>Amount: {products.amount}</p>
+                    <p>Cost: {products.cost} TL</p>
                     <p>{products.description}</p>
-                    <p>{products.content}</p>
+                    <p>{products.category}</p>
 
                     {products.amount !== 0 ? <><input type = "number" onChange={getAmount} className='addcount' min="1" max = {products.amount}></input> <button className="cart" onClick={printAmount}>Add to cart</button></> : <p style={{fontWeight: "bold"}}>SOLD OUT</p>}           
                      
