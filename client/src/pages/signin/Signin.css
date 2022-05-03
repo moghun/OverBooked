@@ -1,0 +1,129 @@
+
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
+.signincontainerholder{
+    background-image: url(bookshelf.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+
+}
+
+/* The Main Div Holding Smaller Divs */
+.signincontainer{
+    background-color: white;
+    padding-top: 10px;
+    align-items: center;
+    margin: auto;
+    margin-top: 40px;
+    padding-left: 40px;
+    padding-right: 40px;
+    outline: none;
+    outline-width: 2px;
+    outline-offset: 25%;
+    width: 300px;
+    height: 500px;
+    border-radius: 10px;
+}
+
+/* Username Entry Div */
+.username{
+    outline: none;
+    outline-width: 2px;
+    width: 100%;
+    margin-bottom: 40px;
+    margin-top: 10px;
+    border-radius: 10px;
+}
+
+.username h{
+    padding-right: 120px;
+    font-family: 'Open Sans';
+}
+
+.username .text{
+    width: 200px;
+    height: 24px;
+    text-size-adjust: auto;
+    margin-left: 5px;
+    margin-top: 5px;
+    margin-right: 5px;
+    text-align: center;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+}
+
+/* Password Entry Div */
+.passworddiv{
+    outline: none;
+    outline-width: 2px;
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.passworddiv h{
+    padding-right: 120px;
+    font-family: 'Open Sans';
+}
+
+.passworddiv .password{
+    width: 200px;
+    height: 24px;
+    text-size-adjust: auto;
+    margin-left: 5px;
+    margin-top: 5px;
+    margin-right: 5px;
+    text-align: center;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+}
+
+/* Login Button Div */
+.loginbutton input{
+    width: 240px;
+    border-radius: 25px;
+    height: 30px;
+    text-align: center;
+    transition-duration: 0.3s;
+    background-color: rgb(80, 200, 247);
+    color: white;
+    font-weight: bold;
+    border: hidden;
+}
+
+.loginbutton input:hover{
+    background-color: rgba(255, 255, 255, 0.438);
+    color: black;
+}
+
+
+/* Forgot Password Div */
+.forgetmypassword{
+    font-family: 'Open Sans';
+    outline: none;
+    outline-width: 2px;
+    width: 100%;
+    border-radius: 10px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    text-align: end;
+    font-size: small;
+    margin-left: 10px;
+}
+
+/* Manuel Sign Up Div */
+.manuelsignup{
+    font-family: 'Open Sans';
+    outline: none;
+    outline-width: 2px;
+    margin-left: 50px;
+    width: 100%;
+    height: 40px;
+    border-radius: 10px;
+    margin-top: 30px;
+    align-items: center;
+}
+

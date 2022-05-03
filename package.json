@@ -18,6 +18,7 @@
   },
   "homepage": "https://bitbucket.org/overbooked-team20/overbooked#readme",
   "dependencies": {
-    "mongoose": "^6.2.10"
+    "mongoose": "^6.2.10",
+    "mongoose-double": "^0.0.1"
   }
 }

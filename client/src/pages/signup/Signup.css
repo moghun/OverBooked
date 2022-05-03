@@ -1,0 +1,194 @@
+
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
+.signupcontainerholder{
+    background-image: url(bookshelf.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+
+}
+
+/* The Main Div Holding Smaller Divs */
+.signupcontainer{
+    background-color: white;
+    padding-top: 10px;
+    align-items: center;
+    margin: auto;
+    margin-top: 20px;
+    padding-left: 40px;
+    padding-right: 40px;
+    outline: none;
+    outline-width: 2px;
+    outline-offset: 25%;
+    width: 300px;
+    height: 580px;
+    border-radius: 10px;
+}
+
+/* Username Entry Div */
+.username{
+    outline: none;
+    outline-width: 2px;
+    width: 100%;
+    margin-bottom: 40px;
+    margin-top: 10px;
+    border-radius: 10px;
+}
+
+.username h{
+    padding-right: 110px;
+    font-family: 'Open Sans';
+}
+
+.username .text{
+    width: 200px;
+    height: 24px;
+    text-size-adjust: auto;
+    margin-left: 5px;
+    margin-top: 5px;
+    margin-right: 5px;
+    text-align: center;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+}
+
+
+/* Surname Entry Div */
+.usersurname{
+    outline: none;
+    outline-width: 2px;
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.usersurname h{
+    padding-right: 120px;
+    font-family: 'Open Sans';
+}
+
+.usersurname .text{
+    width: 200px;
+    height: 24px;
+    text-size-adjust: auto;
+    margin-left: 5px;
+    margin-top: 5px;
+    margin-right: 5px;
+    text-align: center;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+}
+
+/* Email Entry Div */
+.useremail{
+    outline: none;
+    outline-width: 2px;
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.useremail h{
+    padding-right: 150px;
+    font-family: 'Open Sans';
+}
+
+.useremail .text{
+    width: 200px;
+    height: 24px;
+    text-size-adjust: auto;
+    margin-left: 5px;
+    margin-top: 5px;
+    margin-right: 5px;
+    text-align: center;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+}
+
+/* User Password Div */
+.userpassword{
+    outline: none;
+    outline-width: 2px;
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.userpassword h{
+    padding-right: 120px;
+    font-family: 'Open Sans';
+}
+
+.userpassword .password{
+    width: 200px;
+    height: 24px;
+    text-size-adjust: auto;
+    margin-left: 5px;
+    margin-top: 5px;
+    margin-right: 5px;
+    text-align: center;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+}
+
+/* Password Confirm Div */
+.userpasswordconfirm{
+    outline: none;
+    outline-width: 2px;
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.userpasswordconfirm h{
+    padding-left: 20px;
+    padding-right: 80px;
+    font-family: 'Open Sans';
+    white-space: nowrap;
+}
+
+.userpasswordconfirm .password{
+    width: 200px;
+    height: 24px;
+    text-size-adjust: auto;
+    margin-left: 5px;
+    margin-top: 5px;
+    margin-right: 5px;
+    text-align: center;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+}
+
+/* Sign Up Button Div */
+.signupbutton input{
+    width: 240px;
+    border-radius: 25px;
+    height: 30px;
+    text-align: center;
+    transition-duration: 0.3s;
+    background-color: rgb(80, 200, 247);
+    color: white;
+    font-weight: bold;
+    border: hidden;
+}
+
+.signupbutton input:hover{
+    background-color: rgba(255, 255, 255, 0.438);
+    color: black;
+}
+
+/* Privacy Policy */
+.privacypolicy{
+    position: center;
+    outline: none;
+    outline-width: 2px;
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
