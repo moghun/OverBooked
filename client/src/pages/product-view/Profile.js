@@ -1,48 +1,75 @@
-import {Fragment} from "react";
-import "../../components/Navigation_Bar/NavigationBar.css";
+import { Button } from "@material-ui/core";
+import { Card } from "@material-ui/core";
+import Avatar from '@material-ui/core/Avatar'
+import { createContext, useState } from "react";
+import ListItemText from '@material-ui/core/ListItemText'
 
 const Profile = () => {
+
+
+
+  /*Store = createContext();
+  const { state} = useContext(Store);
+  const { userInfo } = state;
+  const [name] = useState(userInfo.name);
+  const [email] = useState(userInfo.email);
+  const [surname] = useState(userInfo.surname);
+  const [password] = useState(userInfo.password);
+
+  */
+
+  /* useEffect(() => {
+    read({
+      userId: match.params.userId
+    }, {t: jwt.token}, signal).then((data) => {
+      if (data && data.error) {
+        setRedirectToSignin(true)
+      } else {
+        setUser(data)
+      }
+    })
+
+    return function cleanup(){
+      abortController.abort()
+    }
+
+  }, [match.params.userId]) */
+
+
     return (
-        <Fragment>
-            <div className="user-profile-page">
-                <div className="main-div">
-                    <div className="user-profile">
-                        <div className="col-12 content-box">
-                            <div className="profile-wrap">
-                                <div className="profile">
-                                    <div className="user-info">
-                                        <div>
-                                            <div>
-                                                <p>firstname + lastname:</p>
-                                                <p>email:</p>
-                                            </div>
-                                            <p>password:</p>
-                                        </div>
-                                        <div>
-                                            <form action="\editprofile" method="get">
-                                                <button className="profile-edit-btn">
-                                                    Edit
-                                                </button>
-                                            </form>
-                                        </div>
+        <Card>
+          <div class="upper-container">
+            <p style = {{ display: 'flex', justifyContent: 'center', fontWeight: 'bold', fontSize: 40}}>
+              YOUR PROFILE
+            </p>
+          </div>
+          <div class="lower-container">
 
-                                        <div>
-                                            <form action="\editprofile" method="get">
-                                                <button className="profile-edit-btn2">
-                                                    My Orders
-                                                </button>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </Fragment >
+              <div>
+                <Avatar style={{width: 200, height: 200}}/>
+              </div>
+
+              <div>
+                <h2>Name: Name</h2>
+
+                <h3> Surname: Surname </h3>
+                <br/>
+                <h4>Customer</h4>
+                <br/>
+                <h5>E-MAIL: E-MAIL</h5>
+                <h6>Password: Password </h6>
+              </div>
+
+
+              <div>
+                <Button href = "/editprofile" className="btn">Edit Profile</Button>
+                <Button href = "/createstore" className="btn2">Become Seller</Button>
+                <Button className="btn3">My Orders</Button>
+              </div>
+          </div>
+        </Card>
+
     );
-
 };
 
 export default Profile;

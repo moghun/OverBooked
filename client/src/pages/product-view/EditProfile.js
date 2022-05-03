@@ -1,97 +1,74 @@
-import "../../components/Navigation_Bar/NavigationBar.css";
-import { Form, Button, Row, Col } from "react-bootstrap";
-import axios from 'axios'
+import React, {useState} from 'react'
+import Card from '@material-ui/core/Card'
+import CardActions from '@material-ui/core/CardActions'
+import CardContent from '@material-ui/core/CardContent'
+import Button from '@material-ui/core/Button'
+import TextField from '@material-ui/core/TextField'
+import Typography from '@material-ui/core/Typography'
 
-class EditProfile extends Component{
+const EditProfile = () => {
 
 
-    constructor(){
-        super()
-        this.state = {
-            username:'',
-            email:'',
-            password:'',
+    const [values, setValues] = useState({
+        name: '',
+        email: '',
+        password: '',
+        seller: false,
+        error: ''
+    })
+
+
+    const clickSubmit = () => {
+        const user = {
+          name: values.name || undefined,
+          email: values.email || undefined,
+          password: values.password || undefined,
+          seller: values.seller || undefined
         }
-
-        this.changeEmail = this.changeEmail.bind(this);
-        this.changePassword = this.changePassword.bind(this);
-        this.changeUserName = this.changeUserName.bind(this);
-        this.onSubmit = this.onSubmit.bind(this);
-    }
-
-
-    changeUserName(event){
-        this.setState({
-            username:event.target.value
+        update({
+          userId: match.params.userId
+        }, {
+          t: jwt.token
+        }, user).then((data) => {
+          if (data && data.error) {
+            setValues({...values, error: data.error})
+          } else {
+            auth.updateUser(data, ()=>{
+              setValues({...values, userId: data._id})
+            })
+          }
         })
-    }
-
-    changeEmail(event){
-        this.setState({
-            email:event.target.value
-        })
-    }
-
-    changePassword(event){
-        this.setState({
-            password:event.target.value
-        })
-    }
+      }
 
 
-    onSubmit(event){
-        event.preventDefault();
-        const registered ={
-            username: this.state.username,
-            email: this.state.email,
-            password: this.state.password,
+    const handleChange = name => event => {
+        setValues({...values, [name]: event.target.value})
+      }
 
-        }
+    return (
 
-        axios.post('http://localhost:3000/', registered).then(response => console.log(response.data))
-        this.setState({
-            username: '',
-            email: '',
-            password: '',
-        })
-
-    }
-
-
-
-    render(){
-        return(
-            <label title="EDIT PROFILE">
-                <Row className="profileContainer">
-                    <Form method="post" onSubmit={this.onSubmit}>
-                        <label>Name</label>
-                        <input
-                            type="text"
-                            placeholder="Enter UserName"
-                            value={this.state.username}
-                            onChange={this.changeUserName}
-                        ></input>
-                        <label>Email Address</label>
-                        <input
-                            type="email"
-                            placeholder="Enter Email"
-                            value={this.state.email}
-                        ></input>
-                        <label>Password</label>
-                        <input
-                            type="password"
-                            placeholder="Enter Password"
-                            value={this.state.password}
-                            onChange={this.changePassword}
-                        ></input>
-                        <Button type="submit">
-                        Update
-                        </Button>
-                    </Form>
-                </Row>
-            </label>
-        );
-    };
-};
-  
+      <div className='main-container'>
+        <div style={{ display: 'flex', justifyContent: 'center'}}>
+            <Card>
+                <CardContent>
+                <Typography variant="h6">
+                    Edit Profile
+                </Typography>
+                <TextField id="name" label="Name" onChange={handleChange('name')} margin="normal"/><br/>
+                <TextField id="name" type="Name" label="Surname" onChange={handleChange('surname')} margin="normal"/><br/>
+                <TextField id="password" type="password" label="Password" onChange={handleChange('password')} margin="normal"/>
+                <Typography variant="subtitle1">
+                    Seller Account
+                </Typography>
+                <br/>
+                </CardContent>
+                <CardActions>
+                <Button color="primary" variant="contained" onClick={clickSubmit} >Submit</Button>
+                <Button color="secondary" href = "/profile" variant="contained" >Cancel</Button>
+                </CardActions>
+            </Card>
+        </div>
+      </div>
+    );
+}
 export default EditProfile;

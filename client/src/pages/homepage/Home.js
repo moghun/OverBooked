@@ -1,7 +1,13 @@
 import { useState, useEffect } from "react";
+<<<<<<< HEAD:client/src/pages/homepage/Home.js
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
 import { sliderData } from "../product-view/data";
+=======
+import { AiOutlineArrowLeft, AiOutlineArrowRight, AiFillForward, AiFillBackward } from "react-icons/ai";
+import { sliderData } from "./data";
+>>>>>>> 363c139 (home profile etc.):client/src/pages/product-view/Home.js
 import "../../components/Navigation_Bar/NavigationBar.css";
+
 // import {Link} from "react-router-dom";
 
 import axios from "axios";
@@ -9,10 +15,12 @@ import BookCard from "../../components/BookCard";
 import { Grid } from "@mui/material";
 const HomePage = () => {
   const [currentSlide, setCurrentSlide] = useState(1);
+  const [currentSlide2, setCurrentSlide2] = useState(1);
   const slideLength = sliderData.length;
 
   const autoScroll = true;
   let slideInterval;
+  let slideInterval2;
   let intervalTime = 5000;
 
   const nextSlide = () => {
@@ -25,6 +33,16 @@ const HomePage = () => {
     console.log("prev");
   };
 
+  const nextSlide2 = () => {
+    setCurrentSlide2(currentSlide2 === slideLength - 1 ? 0 : currentSlide2 + 1);
+    console.log("next");
+  };
+
+  const prevSlide2 = () => {
+    setCurrentSlide2(currentSlide2 === 0 ? slideLength - 1 : currentSlide2 - 1);
+    console.log("prev");
+  };
+
   const moveDot = (index) => {
     setCurrentSlide(index);
   };
@@ -33,8 +51,16 @@ const HomePage = () => {
     slideInterval = setInterval(nextSlide, intervalTime);
   }
 
+  function auto2() {
+    slideInterval2 = setInterval(nextSlide2, intervalTime);
+  }
+
   useEffect(() => {
     setCurrentSlide(0);
+  }, []);
+
+  useEffect(() => {
+    setCurrentSlide2(0);
   }, []);
 
   const getBooks = async () => {
@@ -65,8 +91,16 @@ const HomePage = () => {
     return () => clearInterval(slideInterval);
   }, [currentSlide]);
 
+
+  useEffect(() => {
+    if (autoScroll) {
+      auto2();
+    }
+    return () => clearInterval(slideInterval2);
+  }, [currentSlide2]);
+
   return (
-    <div>
+    <div className="total">
       <div className="slider">
         <AiOutlineArrowLeft className="arrow prev" onClick={prevSlide} />
         <AiOutlineArrowRight className="arrow next" onClick={nextSlide} />
@@ -103,6 +137,41 @@ const HomePage = () => {
           ))}
         </div>
       </div>
+
+      <br/>
+      <br/>
+
+      <div className="slider2">
+
+        <AiFillBackward className="arrow prev" onClick={prevSlide2} />
+        <AiFillForward className="arrow next" onClick={nextSlide2} />
+        {sliderData.map((slide, index) => {
+          return (
+            <div
+              className={index === currentSlide2 ? "slide current" : "slide2"}
+              key={index}
+            >
+              {index === currentSlide2 && (
+                <div>
+                  <img src={slide.image} alt="slide" className="image" />
+                  <div className="content">
+                    <p>CAMPAIGN PRODUCTS</p>
+                    <hr />
+                    <form action="\productpage" method="get">
+                      <button className="--btn --btn-primary">
+                        Go To This Product{" "}
+                      </button>
+                    </form>
+                  </div>
+                </div>
+              )}
+            </div>
+          );
+        })}
+      </div>
+
+      <br/>
+      <br/>
       <Grid container direction="row" justifyContent="space-around">
         <BookCard name="deneme1" author="author1" imgurl="/images/animalfarm.jpg" publisher="yayınevi" price="87.99 TL" score="3.7/5.0"></BookCard>
         <BookCard name="deneme2" author="author2" imgurl="/images/animalfarm.jpg" publisher="yayınevi" price="87.99 TL" score="3.7/5.0"></BookCard>
