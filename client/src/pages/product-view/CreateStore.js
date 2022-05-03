@@ -26,10 +26,14 @@ const CreateStore = () => {
 
 
   const clickSubmit = () => {
+
+    /*
     let shopData = new FormData()
+    
     values.name && shopData.append('name', values.name)
     values.description && shopData.append('description', values.description)
     values.image && shopData.append('image', values.image)
+    
     create({
       userId: jwt.user._id
     }, {
@@ -41,6 +45,7 @@ const CreateStore = () => {
         setValues({...values, error: '', redirect: true})
       }
     })
+    */
   }
   
   return (
