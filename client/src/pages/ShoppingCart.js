@@ -2,6 +2,7 @@ import React from 'react'
 import './ShoppingCart.css'
 import { useSelector } from "react-redux";
 import { removeProduct } from "../redux/cartRedux";
+import { clearCart } from "../redux/cartRedux";
 import { useDispatch } from "react-redux";
 
 const ShoppingCart = () => {
@@ -15,6 +16,12 @@ const ShoppingCart = () => {
   const removeItem = (item) => {
     dispatch(
       removeProduct(item)
+    );
+  };
+
+  const clear = () => {
+    dispatch(
+      clearCart()
     );
   };
 
@@ -32,7 +39,7 @@ const ShoppingCart = () => {
       <div className='Row'>
 
         <div className='products-container'>
-          
+          <button className="clear" onClick={clear}>Clear Cart</button>
           <div className='product-row'>
 
             {cart.products.map((item)=>{
