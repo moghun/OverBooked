@@ -1,8 +1,11 @@
 const Order = require("../models/order_dbmod");
 const {
   verifyToken,
-  verifyTokenAndAuthorization,
-  verifyTokenAndAdmin,
+  verifyTokenAndUser,
+  verifyTokenOrManager,
+  verifyTokenAndManager,
+  verifyTokenAndProductManager,
+  verifyTokenAndSalesManager
 } = require("./verifyToken");
 
 const router = require("express").Router();
@@ -21,7 +24,7 @@ router.post("/", verifyToken, async (req, res) => {
 });
 
 //UPDATE
-router.put("/:id", verifyTokenAndAdmin, async (req, res) => {
+router.put("/:id", verifyTokenAndManager, async (req, res) => {
   try {
     const updatedOrder = await Order.findByIdAndUpdate(
       req.params.id,
@@ -37,7 +40,7 @@ router.put("/:id", verifyTokenAndAdmin, async (req, res) => {
 });
 
 //DELETE
-router.delete("/:id", verifyTokenAndAdmin, async (req, res) => {
+router.delete("/:id", verifyTokenAndManager, async (req, res) => {
   try {
     await Order.findByIdAndDelete(req.params.id);
     res.status(200).json("Order has been deleted...");
@@ -47,7 +50,7 @@ router.delete("/:id", verifyTokenAndAdmin, async (req, res) => {
 });
 
 //GET USER ORDERS
-router.get("/find/:userId", verifyTokenAndAuthorization, async (req, res) => {
+router.get("/find/:userId", verifyTokenOrManager, async (req, res) => {
   try {
     const orders = await Order.find({ userId: req.params.userId });
     res.status(200).json(orders);
@@ -58,7 +61,7 @@ router.get("/find/:userId", verifyTokenAndAuthorization, async (req, res) => {
 
 //GET ALL
 
-router.get("/", verifyTokenAndAdmin, async (req, res) => {
+router.get("/", verifyTokenAndManager, async (req, res) => {
   try {
     const orders = await Order.find();
     res.status(200).json(orders);
