@@ -1,19 +1,29 @@
 import React from 'react'
 import './ShoppingCart.css'
+import { useSelector } from "react-redux";
+import { removeProduct } from "../redux/cartRedux";
+import { clearCart } from "../redux/cartRedux";
+import { useDispatch } from "react-redux";
 
 const ShoppingCart = () => {
+  const cart = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
+  
 
   var signedIn = true
   var total = 0;
-  const cartlist = [
-    {productId: 1, cartamount: 1, price: 13.99, name: "Ay Zalim Bir Sevgilidir", image: 'http://www.ithaki.com.tr/wp-content/uploads/2017/06/Ay-Zalim-Bir-Sevgilidir.jpg'},
-    {productId: 2, cartamount: 2, price: 18.99, name: "Yenilmez", image: 'http://www.ithaki.com.tr/wp-content/uploads/2017/11/yenilmez-ithaki.jpg'},
-    {productId: 3, cartamount: 3, price: 9.99, name: "Ben, Robot", image: 'http://www.ithaki.com.tr/wp-content/uploads/2017/06/ben-robot.jpg'}
-  ]
 
-  function removeItem(){
+  const removeItem = (item) => {
+    dispatch(
+      removeProduct(item)
+    );
+  };
 
-  }
+  const clear = () => {
+    dispatch(
+      clearCart()
+    );
+  };
 
   function addItem(){
 
@@ -29,24 +39,24 @@ const ShoppingCart = () => {
       <div className='Row'>
 
         <div className='products-container'>
-          
+          <button className="clear" onClick={clear}>Clear Cart</button>
           <div className='product-row'>
 
-            {cartlist.map((item)=>{
+            {cart.products.map((item)=>{
                   return (
                     <div style={{padding: '10px', margin:'20px'}}>
-                      <img src = {item.image} style={{marginLeft: '25px'}} className="itemimage"></img>
+                      <img src = {item.img} style={{marginLeft: '25px'}} className="itemimage"></img>
                       <h style={{marginLeft: '25px'}}>{item.name}</h>
                       <button style={{marginLeft: '25px', width: "50px"}}>-</button>
-                      <input type = "number" min={0} value={item.cartamount} style={{marginLeft: '10px'}}></input>
+                      <input type = "number" min={0} value={item.amount} style={{marginLeft: '10px'}}></input>
                       <button style={{ marginLeft: '10px', width: "50px"}}>+</button>
-                      <h style={{marginLeft: '25px'}}>{item.cartamount * item.price} TL</h>
-                      <input type = "submit" value = "delete item" style={{marginLeft: '25px'}}/>
+                      <h style={{marginLeft: '25px'}}>{item.amount * item.cost} TL</h>
+                      <input type = "submit" value = "delete item" onClick={() => removeItem(item)}  style={{marginLeft: '25px'}}/>
                     </div>
                 );})}
 
             <hr style={{width: '100%', borderColor:'black',  borderWidth: "2px"}}></hr>
-            <div><h style={{marginLeft:"50px"}}>Total: {total}</h></div>
+            <div><h style={{marginLeft:"50px"}}>Total: {cart.total}</h></div>
             {signedIn 
               ? <form style={{marginLeft:"50px"}} action='/checkout'><input type='submit' value="Checkout"/></form> 
               : <a style={{marginLeft:"50px"}} href='/'>Sign in to checkout</a>

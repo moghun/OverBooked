@@ -3,14 +3,17 @@ import React, { useState, useEffect } from 'react';
 import {FaStar} from 'react-icons/fa';
 import { publicRequest } from "../requestMethods";
 import { useLocation } from "react-router-dom";
+import { addProduct } from "../../redux/cartRedux";
+import { useDispatch } from "react-redux";
 
 const DetailsThumb = () => {
     const location = useLocation();
     const id = location.pathname.split("/")[2];
-    const [products, setProduct] = useState({});
-    const [amount, setAmount] = useState(null);
+    const [product, setProduct] = useState({});
+    const [amount, setAmount] = useState(1);
     const [comment, setComment] = useState(null);
     const [rating, setRating] = useState(null);
+    const dispatch = useDispatch();
 
 
     function getComment(val){
@@ -27,14 +30,6 @@ const DetailsThumb = () => {
         }
     }
     
-    function printAmount(){
-        if(amount === null){
-            console.log("Amount cannot be left empty!")
-        }
-        else{
-            console.log(amount)
-        }
-    }
 
     useEffect(() => {
         const getProduct = async () => {
@@ -48,39 +43,43 @@ const DetailsThumb = () => {
    
     function getAmount(val){ 
         
-        if(products.amount >= val.target.value && val.target.value > 0){
+        if(product.amount >= val.target.value && val.target.value > 0){
             console.log(val.target.value)
             setAmount(val.target.value)
 
         }
-        else if(products.amount < val.target.value || val.target.value < 0){
+        else if(product.amount < val.target.value || val.target.value < 0){
             console.log("Out of boundry")
         }     
     }
-
+    const addCart = () => {
+        dispatch(
+          addProduct({ ...product, amount})
+        );
+      };
     return (
         <div className = "app">
-             <div className="details" key={products.id}>
+             <div className="details" key={product.id}>
 
                 
                 <div className="big-img">
-                    <img src={products.img} alt = {products.name}/>
+                    <img src={product.img} alt = {product.name}/>
                 </div>
 
                 <div className="box">
 
                     <div className="row">
-                        <h2>{products.title}</h2>   
+                        <h2>{product.title}</h2>   
                     </div>
 
 
-                    <h5>Yazar: {products.author} Yayınevi: {products.publisher}</h5>                 
-                    <p>Amount: {products.amount}</p>
-                    <p>Cost: {products.cost} TL</p>
-                    <p>{products.description}</p>
-                    <p>{products.category}</p>
+                    <h5>Yazar: {product.author} Yayınevi: {product.publisher}</h5>                 
+                    <p>Amount: {product.amount}</p>
+                    <p>Cost: {product.cost} TL</p>
+                    <p>{product.description}</p>
+                    <p>{product.category}</p>
 
-                    {products.amount !== 0 ? <><input type = "number" onChange={getAmount} className='addcount' min="1" max = {products.amount}></input> <button className="cart" onClick={printAmount}>Add to cart</button></> : <p style={{fontWeight: "bold"}}>SOLD OUT</p>}           
+                    {product.amount !== 0 ? <><input type = "number" onChange={getAmount} className='addcount' min="1" max = {product.amount}></input> <button className="cart" onClick={addCart}>Add to cart</button></> : <p style={{fontWeight: "bold"}}>SOLD OUT</p>}           
                      
                     <div style={{marginTop: 10}}>
                         <div>
