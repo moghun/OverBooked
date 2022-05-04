@@ -1,9 +1,13 @@
 import React from 'react'
 import './ShoppingCart.css'
 import { useSelector } from "react-redux";
+import { removeProduct } from "../redux/cartRedux";
+import { useDispatch } from "react-redux";
 
 const ShoppingCart = () => {
   const cart = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
+  
 
   var signedIn = true
   var total = 0;
@@ -13,9 +17,11 @@ const ShoppingCart = () => {
     {productId: 3, cartamount: 3, price: 9.99, name: "Ben, Robot", image: 'http://www.ithaki.com.tr/wp-content/uploads/2017/06/ben-robot.jpg'}
   ]
 
-  function removeItem(){
-    
-  }
+  const removeItem = (item) => {
+    dispatch(
+      removeProduct(item)
+    );
+  };
 
   function addItem(){
 
@@ -43,7 +49,7 @@ const ShoppingCart = () => {
                       <input type = "number" min={0} value={item.amount} style={{marginLeft: '10px'}}></input>
                       <button style={{ marginLeft: '10px', width: "50px"}}>+</button>
                       <h style={{marginLeft: '25px'}}>{item.amount * item.cost} TL</h>
-                      <input type = "submit" value = "delete item" onClick={removeItem}  style={{marginLeft: '25px'}}/>
+                      <input type = "submit" value = "delete item" onClick={() => removeItem(item)}  style={{marginLeft: '25px'}}/>
                     </div>
                 );})}
 
