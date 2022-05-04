@@ -1,7 +1,9 @@
 import React from 'react'
 import './ShoppingCart.css'
+import { useSelector } from "react-redux";
 
 const ShoppingCart = () => {
+  const cart = useSelector((state) => state.cart);
 
   var signedIn = true
   var total = 0;
@@ -12,7 +14,7 @@ const ShoppingCart = () => {
   ]
 
   function removeItem(){
-
+    
   }
 
   function addItem(){
@@ -32,21 +34,21 @@ const ShoppingCart = () => {
           
           <div className='product-row'>
 
-            {cartlist.map((item)=>{
+            {cart.products.map((item)=>{
                   return (
                     <div style={{padding: '10px', margin:'20px'}}>
-                      <img src = {item.image} style={{marginLeft: '25px'}} className="itemimage"></img>
+                      <img src = {item.img} style={{marginLeft: '25px'}} className="itemimage"></img>
                       <h style={{marginLeft: '25px'}}>{item.name}</h>
                       <button style={{marginLeft: '25px', width: "50px"}}>-</button>
-                      <input type = "number" min={0} value={item.cartamount} style={{marginLeft: '10px'}}></input>
+                      <input type = "number" min={0} value={item.amount} style={{marginLeft: '10px'}}></input>
                       <button style={{ marginLeft: '10px', width: "50px"}}>+</button>
-                      <h style={{marginLeft: '25px'}}>{item.cartamount * item.price} TL</h>
-                      <input type = "submit" value = "delete item" style={{marginLeft: '25px'}}/>
+                      <h style={{marginLeft: '25px'}}>{item.amount * item.cost} TL</h>
+                      <input type = "submit" value = "delete item" onClick={removeItem}  style={{marginLeft: '25px'}}/>
                     </div>
                 );})}
 
             <hr style={{width: '100%', borderColor:'black',  borderWidth: "2px"}}></hr>
-            <div><h style={{marginLeft:"50px"}}>Total: {total}</h></div>
+            <div><h style={{marginLeft:"50px"}}>Total: {cart.total}</h></div>
             {signedIn 
               ? <form style={{marginLeft:"50px"}} action='/checkout'><input type='submit' value="Checkout"/></form> 
               : <a style={{marginLeft:"50px"}} href='/'>Sign in to checkout</a>
