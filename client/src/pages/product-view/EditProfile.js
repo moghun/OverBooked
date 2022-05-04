@@ -5,41 +5,38 @@ import CardContent from '@material-ui/core/CardContent'
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
+import axios from 'axios'
 
 const EditProfile = () => {
 
 
     const [values, setValues] = useState({
         name: '',
-        email: '',
+        surname: '',
+        adress: '',
         password: '',
-        seller: false,
-        error: ''
+        username: '',
     })
 
 
     const clickSubmit = () => {
-        const user = {
-          name: values.name || undefined,
-          email: values.email || undefined,
-          password: values.password || undefined,
-          seller: values.seller || undefined
-        }
-        /*
-        update({
-          userId: match.params.userId
-        }, {
-          t: jwt.token
-        }, user).then((data) => {
-          if (data && data.error) {
-            setValues({...values, error: data.error})
-          } else {
-            auth.updateUser(data, ()=>{
-              setValues({...values, userId: data._id})
-            })
-          }
-        })
-        */
+      const registered ={
+          name: this.values.name,
+          adress: this.values.adress,
+          password: this.values.password,
+          surname: this.values.surname,
+          username: this.values.username,      
+      }
+
+      axios.post('http://localhost:5001/api/auth/register', registered).then(response => console.log(response.data))
+      this.setState({
+        name: '',
+        surname: '',
+        adress: '',
+        password: '',
+        username: '',
+          
+      })
       }
 
 
@@ -58,10 +55,9 @@ const EditProfile = () => {
                 </Typography>
                 <TextField id="name" label="Name" onChange={handleChange('name')} margin="normal"/><br/>
                 <TextField id="name" type="Name" label="Surname" onChange={handleChange('surname')} margin="normal"/><br/>
-                <TextField id="password" type="password" label="Password" onChange={handleChange('password')} margin="normal"/>
-                <Typography variant="subtitle1">
-                    Seller Account
-                </Typography>
+                <TextField id="password" type="password" label="Password" onChange={handleChange('password')} margin="normal"/><br/>
+                <TextField id="name" type="Name" label="Address" onChange={handleChange('address')} margin="normal"/><br/>
+                <TextField id="name" type="Name" label="Username" onChange={handleChange('username')} margin="normal"/><br/>
                 <br/>
                 </CardContent>
                 <CardActions>
