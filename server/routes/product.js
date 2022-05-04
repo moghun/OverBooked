@@ -1,15 +1,18 @@
 const Product = require("../models/product_dbmod");
 const {
   verifyToken,
-  verifyTokenAndAuthorization,
-  verifyTokenAndAdmin,
+  verifyTokenAndUser,
+  verifyTokenOrManager,
+  verifyTokenAndManager,
+  verifyTokenAndProductManager,
+  verifyTokenAndSalesManager
 } = require("./verifyToken");
 
 const router = require("express").Router();
 
 //CREATE
 
-router.post("/", verifyTokenAndAdmin, async (req, res) => {
+router.post("/", verifyTokenAndProductManager, async (req, res) => {
   const newProduct = new Product(req.body);
 
   try {
@@ -21,7 +24,7 @@ router.post("/", verifyTokenAndAdmin, async (req, res) => {
 });
 
 //UPDATE
-router.put("/:id", verifyTokenAndAdmin, async (req, res) => {
+router.put("/:id", verifyTokenAndProductManager, async (req, res) => {
   try {
     const updatedProduct = await Product.findByIdAndUpdate(
       req.params.id,
@@ -36,8 +39,25 @@ router.put("/:id", verifyTokenAndAdmin, async (req, res) => {
   }
 });
 
+//SET SALE
+router.put("/:id/setSale",verifyTokenAndSalesManager,async (req, res) => {
+  try {
+    const updatedProduct = await Product.findByIdAndUpdate(
+      req.params.id,
+      {
+        $set: {sale: req.body.sale, after_sale_price: req.body.after_sale_price},
+      },
+      { new: true }
+    );
+    res.status(200).json(updatedProduct);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+
 //DELETE
-router.delete("/:id", verifyTokenAndAdmin, async (req, res) => {
+router.delete("/:id", verifyTokenAndProductManager, async (req, res) => {
   try {
     await Product.findByIdAndDelete(req.params.id);
     res.status(200).json("Product has been deleted...");
