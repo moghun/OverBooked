@@ -20,7 +20,7 @@ const EditProfile = () => {
 
 
     const clickSubmit = () => {
-      const registered ={
+      const update ={
           name: this.values.name,
           adress: this.values.adress,
           password: this.values.password,
@@ -28,7 +28,7 @@ const EditProfile = () => {
           username: this.values.username,      
       }
 
-      axios.post('http://localhost:5001/api/auth/register', registered).then(response => console.log(response.data))
+      axios.post('http://localhost:5001/api/users/'+"id", update).then(response => console.log(response.data))
       this.setState({
         name: '',
         surname: '',
@@ -53,11 +53,11 @@ const EditProfile = () => {
                 <Typography variant="h6">
                     Edit Profile
                 </Typography>
-                <TextField id="name" label="Name" onChange={handleChange('name')} margin="normal"/><br/>
-                <TextField id="name" type="Name" label="Surname" onChange={handleChange('surname')} margin="normal"/><br/>
+                <TextField id="username" type="username" label="Username" onChange={handleChange('username')} margin="normal"/><br/>
                 <TextField id="password" type="password" label="Password" onChange={handleChange('password')} margin="normal"/><br/>
-                <TextField id="name" type="Name" label="Address" onChange={handleChange('address')} margin="normal"/><br/>
-                <TextField id="name" type="Name" label="Username" onChange={handleChange('username')} margin="normal"/><br/>
+                <TextField id="name" label="name" onChange={handleChange('name')} margin="normal"/><br/>
+                <TextField id="surname" type="surname" label="Surname" onChange={handleChange('surname')} margin="normal"/><br/>
+                <TextField id="adress" type="adress" label="Address" onChange={handleChange('address')} margin="normal"/><br/>
                 <br/>
                 </CardContent>
                 <CardActions>
