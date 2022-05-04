@@ -11,11 +11,6 @@ const ShoppingCart = () => {
 
   var signedIn = true
   var total = 0;
-  const cartlist = [
-    {productId: 1, cartamount: 1, price: 13.99, name: "Ay Zalim Bir Sevgilidir", image: 'http://www.ithaki.com.tr/wp-content/uploads/2017/06/Ay-Zalim-Bir-Sevgilidir.jpg'},
-    {productId: 2, cartamount: 2, price: 18.99, name: "Yenilmez", image: 'http://www.ithaki.com.tr/wp-content/uploads/2017/11/yenilmez-ithaki.jpg'},
-    {productId: 3, cartamount: 3, price: 9.99, name: "Ben, Robot", image: 'http://www.ithaki.com.tr/wp-content/uploads/2017/06/ben-robot.jpg'}
-  ]
 
   const removeItem = (item) => {
     dispatch(
