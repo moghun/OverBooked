@@ -77,7 +77,7 @@ router.put("/rate/:id", verifyToken, async (req, res) => {
     const updatedProduct = await Product.findByIdAndUpdate(
       req.params.id,
       {
-        $push: {rating: req.body.rating},
+        $push: {rating: req.body},
       },
       { new: true }
     );
