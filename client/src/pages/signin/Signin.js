@@ -1,31 +1,33 @@
 import React , {useState} from "react";
 import '../signin/Signin.css';
 import 'bootstrap';
-import axios from "axios";
 import { login } from "../../redux/apiCalls";
 import { useDispatch,useSelector } from "react-redux";
 
 
+
+
+
 const Signin = () => {
 
-  const[username,setUsername] = useState("");
+  const[email,setEmail] = useState("");
   const[password,setPassword] = useState("");
   const dispatch = useDispatch();
-  const {isFetching,error} = useSelector((state)=>state.user)
+  const {isFetching,error} = useSelector((state)=>state.user);
 
   const handleClick = (e) => {
-    e.preventDefault()
-    login(dispatch,{username,password})
-  }
+    e.preventDefault();
+    login(dispatch,{email,password});
+  };
 
   return (
     <div className="signincontainerholder">
       <div className="signincontainer">
 
         <h1 style={{fontFamily:'Open Sans', marginLeft:50}}>LOGIN</h1>
-        <div className="username">
-          <h>Username</h>
-          <input className="text" placeholder="Type your username" onChange={(e)=>setUsername(e.target.value)}></input>
+        <div className="email">
+          <h>Email</h>
+          <input className="text" placeholder="Type your email" onChange={(e)=>setEmail(e.target.value)}></input>
           <hr style={{width:200}}></hr>
         </div>
 
@@ -36,7 +38,8 @@ const Signin = () => {
         </div>
 
         <div className="loginbutton">
-            <button onClick={handleClick} disabled = {isFetching} type="button" style={{fontFamily:'Open Sans'}}>Login</button>
+            <button onClick={handleClick} disabled = {isFetching} type="button" style={{fontFamily:'Open Sans'}}>Login</button> 
+            
         </div>
 
         <div className="forgetmypassword">

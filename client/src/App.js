@@ -16,7 +16,10 @@ import ShoppingCart from './pages/ShoppingCart';
 
 import SignUp from './pages/signup/Signup';
 import Signin from './pages/signin/Signin';
+import { useSelector } from "react-redux";
+
 function App() {
+    const user = useSelector((state) => state.user.currentUser);
     return (
   
   
