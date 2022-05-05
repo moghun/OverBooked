@@ -1,14 +1,11 @@
-import 'package:mobile/views/action_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:http/http.dart' as http;
 import '../utils/api.dart';
 import '../utils/colors.dart';
-import '../utils/dimensions.dart';
 import '../utils/jsonParse/previewBooks.dart';
 import '../utils/styles.dart';
-import '../views/product_preview.dart';
 
 /*final products = <Product>[
   Product(
