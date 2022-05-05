@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobile/pages/homepage.dart';
-import 'package:mobile/pages/profile.dart';
-import 'package:mobile/pages/sign_in.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:mobile/pages/log_in.dart';
 import 'pages/basket.dart';
 
 class Home extends StatefulWidget {
@@ -16,7 +14,7 @@ class _HomeState extends State<Home> {
   var routes = [
     const HomePage(),
     const Basket(),
-    const SignIn()
+    const LogIn()
   ];
 
 
@@ -29,7 +27,7 @@ class _HomeState extends State<Home> {
   //BottomNavigation
   static int _selectedBottomTabIndex = 0;
 
-  void _onBottomTabPress(int index) {
+  void onBottomTabPress(int index) {
     setState(() {
       _selectedBottomTabIndex = index;
     });
@@ -44,19 +42,19 @@ class _HomeState extends State<Home> {
           BottomNavigationBarItem(
               icon: Icon(Icons.home),
               label: 'Home',
-              backgroundColor: const Color(0xFFe6b619)),
+              backgroundColor: Color(0xFFe6b619)),
           BottomNavigationBarItem(
               icon: Icon(Icons.shopping_basket),
               label: 'Basket',
-              backgroundColor: const Color(0xFFe6b619)),
+              backgroundColor: Color(0xFFe6b619)),
           BottomNavigationBarItem(
               icon: Icon(Icons.account_circle),
               label: 'Profile',
-              backgroundColor: const Color(0xFFe6b619))
+              backgroundColor: Color(0xFFe6b619))
         ],
         currentIndex: _selectedBottomTabIndex,
         selectedItemColor: Colors.amber[800],
-        onTap: _onBottomTabPress,
+        onTap: onBottomTabPress,
       ),
     );
   }
