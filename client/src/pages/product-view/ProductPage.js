@@ -73,7 +73,7 @@ const DetailsThumb = () => {
                     </div>
 
 
-                    <h5>Yazar: {product.author} Yayınevi: {product.publisher}</h5>                 
+                    <h5>Author: {product.author} Publisher: {product.publisher}</h5>                 
                     <p>Amount: {product.amount}</p>
                     <p>Cost: {product.cost} TL</p>
                     <p>{product.description}</p>

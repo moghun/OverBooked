@@ -9,9 +9,15 @@ const cartSlice = createSlice({
   },
   reducers: {
     addProduct: (state, action) => {
-      state.amount += 1;
-      state.products.push(action.payload);
-      state.total += action.payload.cost * action.payload.amount;
+      if(state.products.find(o => o._id === action.payload._id)){
+        state.total += action.payload.cost * action.payload.amount;
+        state.products[state.products.findIndex((x => x._id === action.payload._id))].amount += action.payload.amount;
+      }
+      else{
+        state.amount += 1;
+        state.products.push(action.payload);
+        state.total += action.payload.cost * action.payload.amount;
+      }
     },
     removeProduct: (state, action) => {
       state.amount -= 1;
