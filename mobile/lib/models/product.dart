@@ -31,10 +31,20 @@ class Product {
     this.costAfterSale,
     this.comments,
 });
-  factory Product.fromJson(Map<String, dynamic> json) => Product(
+  factory Product.fromJson(dynamic json) => Product(
     id: json["_id"],
-    cost: json["cost"],
     name: json["name"],
-    amount: json["amount_sold"],
+    cost: json["cost"],
+    amount: json["amount"],
+    publisher: json["publisher"],
+    img: json["img"],
+    author: json["author"],
+    warranty: json["warranty"],
+    category: json["category"],
+    //subCategory: json["subcategories"],
+    rating: json["rating"],
+    sale: json["sale"],
+    costAfterSale: json["after_sale_price"],
+    //comments: json["comments"],
   );
 }

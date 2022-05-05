@@ -1,12 +1,8 @@
-import 'package:mobile/utils/jsonParse/previewBooks.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:mobile/utils/colors.dart';
 import 'package:mobile/utils/dimensions.dart';
 import 'package:mobile/utils/styles.dart';
-
-import 'package:shared_preferences/shared_preferences.dart';
-
 import '../models/product.dart';
 import '../pages/product_page.dart';
 
@@ -69,6 +65,11 @@ class _ProductPreviewState extends State<ProductPreview> {
                       padding: Dimen.smallPadding,
                       child: Column(
                         children: [
+                          Image.network(
+                            widget.product.img ?? "",
+                            height: 150,
+                            width: 75,
+                          ),
                           Text(
                             widget.product.name,
                             style: kSmallTitle,
@@ -87,7 +88,7 @@ class _ProductPreviewState extends State<ProductPreview> {
                             height: 20,
                           ),
                           RatingBarIndicator(
-                            rating: 1, //it will be debugged
+                            rating: widget.product.rating?.toDouble() ?? 0, //it will be debugged
                             itemBuilder: (context, index) =>
                             const Icon(
                               Icons.star,
