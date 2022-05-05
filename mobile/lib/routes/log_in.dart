@@ -12,6 +12,8 @@ class LogIn extends StatefulWidget {
 
 class _LogInState extends State<LogIn> {
   final _formKey = GlobalKey<FormState>();
+  String email = "";
+  String password = "";
 
   @override
   Widget build(BuildContext context) {
@@ -52,10 +54,16 @@ class _LogInState extends State<LogIn> {
                               borderSide: BorderSide(
                                 color: AppColors.primary,
                               ),
-                              borderRadius: BorderRadius.all(Radius.circular(30)),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(30)),
                             ),
                           ),
                           keyboardType: TextInputType.emailAddress,
+                          onSaved: (value) {
+                            if (value != null) {
+                              email = value;
+                            }
+                          },
                         ),
                       ),
                     ],
@@ -76,12 +84,18 @@ class _LogInState extends State<LogIn> {
                               borderSide: BorderSide(
                                 color: AppColors.primary,
                               ),
-                              borderRadius: BorderRadius.all(Radius.circular(30)),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(30)),
                             ),
                           ),
                           keyboardType: TextInputType.text,
                           obscureText: true,
                           autocorrect: false,
+                          onSaved: (value) {
+                            if (value != null) {
+                              password = value;
+                            }
+                          },
                         ),
                       ),
                     ],
@@ -93,7 +107,11 @@ class _LogInState extends State<LogIn> {
                       Expanded(
                         flex: 1,
                         child: OutlinedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            if (_formKey.currentState!.validate()) {
+                              _formKey.currentState!.save();
+                            }
+                          },
                           child: Padding(
                             padding: Dimen.smallPadding,
                             child: Text(
@@ -123,7 +141,8 @@ class _LogInState extends State<LogIn> {
                             padding: Dimen.smallPadding,
                             child: const Text(
                               "Don't have an account?",
-                              style: TextStyle(color: Colors.blue, fontSize: 16),
+                              style:
+                                  TextStyle(color: Colors.blue, fontSize: 16),
                             ),
                           ),
                         ),

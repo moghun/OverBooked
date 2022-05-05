@@ -4,7 +4,7 @@ import 'package:mobile/utils/colors.dart';
 import 'package:mobile/utils/dimensions.dart';
 import 'package:mobile/utils/styles.dart';
 import '../models/product.dart';
-import '../pages/product_page.dart';
+import '../routes/product_page.dart';
 
 class ProductPreview extends StatefulWidget {
   const ProductPreview({

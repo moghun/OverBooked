@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mobile/pages/homepage.dart';
-import 'package:mobile/pages/log_in.dart';
-import 'pages/basket.dart';
+import 'package:mobile/routes/homepage.dart';
+import 'package:mobile/routes/log_in.dart';
+import 'package:mobile/routes/basket.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);

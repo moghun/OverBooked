@@ -14,6 +14,7 @@ class SignUp extends StatefulWidget {
 class _SignUpState extends State<SignUp> {
   final _formKey = GlobalKey<FormState>();
   String email = "";
+  String emailConfirmation = "";
   String pass = "";
 
   @override
@@ -40,7 +41,6 @@ class _SignUpState extends State<SignUp> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Expanded(
                         flex: 1,
@@ -82,7 +82,47 @@ class _SignUpState extends State<SignUp> {
                     ],
                   ),
                   const SizedBox(
-                    height: 25,
+                    height: 15,
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                        flex: 1,
+                        child: TextFormField(
+                            decoration: InputDecoration(
+                              fillColor: AppColors.DarkTextColor,
+                              filled: true,
+                              hintText: "Confirm your email",
+                              hintStyle: kButtonLightTextStyle,
+                              border: const OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: AppColors.primary,
+                                ),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(30)),
+                              ),
+                            ),
+                            keyboardType: TextInputType.emailAddress,
+                            validator: (value) {
+                              if (value == null) {
+                                return "Email can not be empty";
+                              }
+                              String trimmedValue = value.trim();
+                              if(trimmedValue != email){
+                                return "Emails do not match";
+                              }
+                              return null;
+                            },
+                            onSaved: (value) {
+                              if (value != null) {
+                                emailConfirmation = value;
+                              }
+                            }),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 15,
                   ),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -99,7 +139,8 @@ class _SignUpState extends State<SignUp> {
                               borderSide: BorderSide(
                                 color: AppColors.primary,
                               ),
-                              borderRadius: BorderRadius.all(Radius.circular(30)),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(30)),
                             ),
                           ),
                           keyboardType: TextInputType.text,
@@ -132,7 +173,7 @@ class _SignUpState extends State<SignUp> {
                     ],
                   ),
                   const SizedBox(
-                    height: 25,
+                    height: 15,
                   ),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -148,7 +189,7 @@ class _SignUpState extends State<SignUp> {
                           child: Padding(
                             padding: Dimen.smallPadding,
                             child: Text(
-                              'Sign Up ',
+                              'Sign Up',
                               style: kButtonDarkTextStyle,
                             ),
                           ),
@@ -173,7 +214,9 @@ class _SignUpState extends State<SignUp> {
                                           color: Colors.blue, fontSize: 16)))))
                     ],
                   ),
-                  const SizedBox(height: 55,),
+                  const SizedBox(
+                    height: 14,
+                  ),
                 ],
               ),
             ),
