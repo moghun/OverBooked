@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:http/http.dart' as http;
-import '../utils/api.dart';
 import '../utils/colors.dart';
 import '../utils/jsonParse/previewBooks.dart';
 import '../utils/styles.dart';
@@ -53,28 +51,12 @@ class _ProductPageState extends State<ProductPage> {
       getProduct();
     } ();
 
-    // obtain shared preferences
   }
 
   dynamic items;
 
   Future allBooks() async {
-    final url = Uri.parse(API.allBooks);
-    try {
-      final response = await http.get(url);
-      if (response.statusCode >= 200 && response.statusCode < 400) {
-        final result = previewBooksFromJson(response.body);
-        items =  await result;
-        print(items[0].id);
-        return result;
-      }
-      else {
-        print(response.statusCode);
-      }
 
-    } catch (e) {
-      print(e.toString());
-    }
   }
   PreviewBooks? _product;
   Future<void> getProduct() async{

@@ -1,3 +1,8 @@
+import 'dart:convert';
+
+import 'package:mobile/models/user.dart';
+import 'package:mobile/services/auth_service.dart';
+import 'package:mobile/services/user_service.dart';
 import 'package:mobile/utils/colors.dart';
 import 'package:mobile/utils/dimensions.dart';
 import 'package:mobile/utils/styles.dart';
@@ -11,9 +16,31 @@ class LogIn extends StatefulWidget {
 }
 
 class _LogInState extends State<LogIn> {
+  final AuthService _authService = AuthService();
+
   final _formKey = GlobalKey<FormState>();
   String email = "";
   String password = "";
+
+  login() {
+    _authService.loginUser(email, password).then((resp) {
+      if (resp.statusCode >= 200 && resp.statusCode < 400) {
+        var loginInfo = jsonDecode(resp.body);
+        User newUser = User(
+          email: loginInfo["email"],
+          username: loginInfo["username"],
+          name: loginInfo["name"],
+          surname: loginInfo["surname"],
+        );
+        UserService.updateUser(newUser);
+        Navigator.pushReplacementNamed(context, "/");
+      } else {
+        print(resp.statusCode);
+        print(resp.body);
+        print(resp.headers);
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -110,6 +137,7 @@ class _LogInState extends State<LogIn> {
                           onPressed: () {
                             if (_formKey.currentState!.validate()) {
                               _formKey.currentState!.save();
+                              login();
                             }
                           },
                           child: Padding(
