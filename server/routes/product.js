@@ -40,12 +40,44 @@ router.put("/:id", verifyTokenAndProductManager, async (req, res) => {
 });
 
 //SET SALE
-router.put("/:id/setSale",verifyTokenAndSalesManager,async (req, res) => {
+router.put("/setSale/:id",verifyTokenAndSalesManager,async (req, res) => {
   try {
     const updatedProduct = await Product.findByIdAndUpdate(
       req.params.id,
       {
         $set: {sale: req.body.sale, after_sale_price: req.body.after_sale_price},
+      },
+      { new: true }
+    );
+    res.status(200).json(updatedProduct);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+//COMMENT ON PRODUCT
+router.put("/comment/:id",verifyToken, async (req, res) => {
+  try {
+    const updatedProduct = await Product.findByIdAndUpdate(
+      req.params.id,
+      {
+        $push: {comments: req.body},
+      },
+      { new: true }
+    );
+    res.status(200).json(updatedProduct);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+//RATE PRODUCT
+router.put("/rate/:id", verifyToken, async (req, res) => {
+  try {
+    const updatedProduct = await Product.findByIdAndUpdate(
+      req.params.id,
+      {
+        $push: {rating: req.body},
       },
       { new: true }
     );
