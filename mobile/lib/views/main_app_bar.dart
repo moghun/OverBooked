@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-
 import '../utils/colors.dart';
 import '../utils/styles.dart';
 
-class ActionBar extends StatelessWidget with PreferredSizeWidget {
-  ActionBar({Key? key, this.title = "Bookstore"}) : super(key: key);
+class MainAppBar extends StatelessWidget with PreferredSizeWidget {
+  MainAppBar({Key? key, this.title = "Overbooked"}) : super(key: key);
   String title;
 
   @override
@@ -19,7 +18,7 @@ class ActionBar extends StatelessWidget with PreferredSizeWidget {
             icon: const Icon(
               Icons.notifications,
               color: AppColors.primary,
-              size: 40,
+              size: 30,
             ))
       ],
       title: Text(

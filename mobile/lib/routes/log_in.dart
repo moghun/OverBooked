@@ -73,7 +73,7 @@ class _LogInState extends State<LogIn> {
                         flex: 1,
                         child: TextFormField(
                           decoration: InputDecoration(
-                            fillColor: AppColors.DarkTextColor,
+                            fillColor: AppColors.darkTextColor,
                             filled: true,
                             hintText: "Email",
                             hintStyle: kButtonLightTextStyle,
@@ -103,7 +103,7 @@ class _LogInState extends State<LogIn> {
                         flex: 1,
                         child: TextFormField(
                           decoration: InputDecoration(
-                            fillColor: AppColors.DarkTextColor,
+                            fillColor: AppColors.darkTextColor,
                             filled: true,
                             hintText: "Password",
                             hintStyle: kButtonLightTextStyle,

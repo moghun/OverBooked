@@ -46,7 +46,7 @@ class _SignUpState extends State<SignUp> {
                           flex: 1,
                           child: TextFormField(
                               decoration: InputDecoration(
-                                fillColor: AppColors.DarkTextColor,
+                                fillColor: AppColors.darkTextColor,
                                 filled: true,
                                 hintText: "Username",
                                 hintStyle: kButtonLightTextStyle,
@@ -86,7 +86,7 @@ class _SignUpState extends State<SignUp> {
                           flex: 1,
                           child: TextFormField(
                               decoration: InputDecoration(
-                                fillColor: AppColors.DarkTextColor,
+                                fillColor: AppColors.darkTextColor,
                                 filled: true,
                                 hintText: "Email",
                                 hintStyle: kButtonLightTextStyle,
@@ -130,7 +130,7 @@ class _SignUpState extends State<SignUp> {
                           flex: 1,
                           child: TextFormField(
                               decoration: InputDecoration(
-                                fillColor: AppColors.DarkTextColor,
+                                fillColor: AppColors.darkTextColor,
                                 filled: true,
                                 hintText: "Confirm your email",
                                 hintStyle: kButtonLightTextStyle,
@@ -171,7 +171,7 @@ class _SignUpState extends State<SignUp> {
                           flex: 1,
                           child: TextFormField(
                             decoration: InputDecoration(
-                              fillColor: AppColors.DarkTextColor,
+                              fillColor: AppColors.darkTextColor,
                               filled: true,
                               hintText: "Password",
                               hintStyle: kButtonLightTextStyle,

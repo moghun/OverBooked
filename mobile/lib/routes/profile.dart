@@ -8,7 +8,7 @@ class Profile extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text("Profile"),
+        title: const Text("Profile"),
       ),
       body: SingleChildScrollView(
         child: Column(

@@ -13,19 +13,19 @@ final kHeadingTextStyle = GoogleFonts.montserrat(
 );
 
 final kButtonLightTextStyle = GoogleFonts.montserrat(
-  color: AppColors.LightTextColor,
+  color: AppColors.lightTextColor,
   fontSize: 20.0,
   letterSpacing: -0.7,
 );
 
 final kButtonDarkTextStyle = GoogleFonts.montserrat(
-  color: AppColors.DarkTextColor,
+  color: AppColors.darkTextColor,
   fontSize: 20.0,
   letterSpacing: -0.7,
 );
 
 final kAppBarTitleTextStyle = GoogleFonts.montserrat(
-  color: AppColors.AppBarText,
+  color: AppColors.appBarText,
   fontSize: 24.0,
   fontWeight: FontWeight.w600,
   letterSpacing: -0.7,
@@ -39,7 +39,7 @@ final kSmallTitle = GoogleFonts.montserrat(
 
 final kSmallText = GoogleFonts.montserrat(
   fontStyle: FontStyle.italic,
-  color: AppColors.LightTextColor,
+  color: AppColors.lightTextColor,
   fontSize: 10.0,
   letterSpacing: -0.7,
 );

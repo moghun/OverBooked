@@ -14,7 +14,6 @@ class Product {
   num? costAfterSale;
   List<String>? comments;
 
-
   Product({
   required this.id,
   required this.name,
@@ -31,6 +30,7 @@ class Product {
     this.costAfterSale,
     this.comments,
 });
+
   factory Product.fromJson(dynamic json) => Product(
     id: json["_id"],
     name: json["name"],

@@ -1,18 +1,23 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class nav_draw extends StatelessWidget {
-  const nav_draw({Key? key}) : super(key: key);
+class SideDrawer extends StatelessWidget {
+  const SideDrawer({Key? key}) : super(key: key);
   static final _categories = [
-    "Reccomerndations",
-    "Best Seller",
-    "SELLL OF",
-    "something bla bla",
-        "something bla bla",
-    "something bla bla",
-    "something bla bla",
-    "something bla bla",
-
+    "Menu item",
+    "Menu item",
+    "Menu item",
+    "Menu item",
+    "Menu item",
+    "Menu item",
+    "Menu item",
+    "Menu item",
+    "Menu item",
+    "Menu item",
+    "Menu item",
+    "Menu item",
+    "Menu item",
+    "Menu item",
+    "Menu item",
   ];
 
   @override
@@ -43,7 +48,7 @@ class nav_draw extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(_categories[index],style: TextStyle(color: Colors.black),),
+                  Text(_categories[index],style: const TextStyle(color: Colors.black),),
                 ],
               ),
             ),

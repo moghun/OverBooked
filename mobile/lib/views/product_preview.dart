@@ -10,15 +10,9 @@ class ProductPreview extends StatefulWidget {
   const ProductPreview({
     Key? key,
     required this.product,
-    this.refreshFunc,
-    this.editable = false,
   }) : super(key: key);
 
   final Product product;
-  final Function? refreshFunc;
-  final bool editable;
-
-
 
   @override
   State<ProductPreview> createState() => _ProductPreviewState();
@@ -28,7 +22,6 @@ class _ProductPreviewState extends State<ProductPreview> {
   void childRefreshFunc() {
     setState(() {});
   }
-  var temp;
 
   @override
   Widget build(BuildContext context) {

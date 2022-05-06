@@ -1,11 +1,11 @@
 import 'package:mobile/services/product_service.dart';
 import 'package:mobile/utils/dimensions.dart';
 import 'package:mobile/utils/styles.dart';
-import 'package:mobile/views/action_bar.dart';
+import 'package:mobile/views/main_app_bar.dart';
 import 'package:mobile/views/product_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile/models/product.dart';
-import '../views/nav_draw.dart';
+import '../views/side_drawer.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -30,8 +30,8 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: const nav_draw(),
-      appBar: ActionBar(),
+      drawer: const SideDrawer(),
+      appBar: MainAppBar(),
       body: SingleChildScrollView(
         child: Column(
           children: [
