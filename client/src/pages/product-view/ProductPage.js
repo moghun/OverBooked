@@ -11,7 +11,7 @@ import { useSelector } from "react-redux";
 
 
 const DetailsThumb = () => {
-    const currUser = useSelector((state) => state.user);
+    const currUser = useSelector((state) => state.user.currentUser);
     const location = useLocation();
     const id = location.pathname.split("/")[2];
     const [product, setProduct] = useState({});
@@ -24,7 +24,6 @@ const DetailsThumb = () => {
 
     function getComment(val){
         setComment(val.target.value)
-        console.log(val.target.value)
     }
 
     function postCommentOrRating(){
