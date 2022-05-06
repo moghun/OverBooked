@@ -10,8 +10,13 @@ const cartSlice = createSlice({
   reducers: {
     addProduct: (state, action) => {
       if(state.products.find(o => o._id === action.payload._id)){
-        state.total += action.payload.cost * action.payload.amount;
-        state.products[state.products.findIndex((x => x._id === action.payload._id))].amount += action.payload.amount;
+        if((state.products[state.products.findIndex((x => x._id === action.payload._id))].amount + action.payload.amount)>action.payload.maxAmount){
+          alert("You can not buy products above its amount");
+        }
+        else{
+          state.total += action.payload.cost * action.payload.amount;
+          state.products[state.products.findIndex((x => x._id === action.payload._id))].amount += action.payload.amount;
+        }
       }
       else{
         state.amount += 1;
