@@ -56,12 +56,12 @@ router.put("/setSale/:id",verifyTokenAndSalesManager,async (req, res) => {
 });
 
 //COMMENT ON PRODUCT
-router.put("/comment/:id",verifyTokenAndUser,async (req, res) => {
+router.put("/comment/:id",verifyToken, async (req, res) => {
   try {
     const updatedProduct = await Product.findByIdAndUpdate(
       req.params.id,
       {
-        $push: {comments: req.body.comment},
+        $push: {comments: req.body},
       },
       { new: true }
     );
@@ -72,7 +72,7 @@ router.put("/comment/:id",verifyTokenAndUser,async (req, res) => {
 });
 
 //RATE PRODUCT
-router.put("/rate/:id", verifyTokenAndUser,async (req, res) => {
+router.put("/rate/:id", verifyToken, async (req, res) => {
   try {
     const updatedProduct = await Product.findByIdAndUpdate(
       req.params.id,

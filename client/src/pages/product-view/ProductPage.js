@@ -5,6 +5,8 @@ import { publicRequest } from "../requestMethods";
 import { useLocation } from "react-router-dom";
 import { addProduct } from "../../redux/cartRedux";
 import { useDispatch } from "react-redux";
+import axios from "axios";
+
 
 const DetailsThumb = () => {
     const location = useLocation();
@@ -19,15 +21,46 @@ const DetailsThumb = () => {
 
     function getComment(val){
         setComment(val.target.value)
+        console.log(val.target.value)
     }
 
-    function printCommentRating(){
-        if(comment === null || rating === null){
-            console.log("Rating or Comment cannot be left empty!")
+    function postCommentOrRating(){
+        if(comment === null && rating === null){
+            console.log("Rating and Comment cannot be left empty!")
         }
         else{
             console.log(comment)
             console.log(rating)
+
+            if(comment != "")
+            {
+                const sendComment = {
+                    //user_id must be taken from the redux storage
+                    user_id: "627435b9071009cf838a9845",
+                    comment: comment,
+                    isApproved: false,
+                }
+                try{ 
+                    //token needed to be sent from the redux storage
+                    axios.put("http://localhost:5001/api/products/comment/" + id, sendComment, {headers: {token: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNzQzNWI5MDcxMDA5Y2Y4MzhhOTg0NSIsInVzZXJfcm9sZSI6ImN1c3RvbWVyIiwiaWF0IjoxNjUxNzgzMzI4LCJleHAiOjE2NTIwNDI1Mjh9.s9JPumJtarIueassvQoRKonL3hpOYdrmfmApsZiMrMc"}}
+                    );
+                } catch (err){}
+            }
+
+            if(rating != null)
+            {
+                try{ 
+                    //user_id must be taken from the redux storage
+                    const sendRating = {
+                        user_id: "627435b9071009cf838a9845",
+                        rating: rating,
+                    }
+                    //token needed to be sent from the redux storage
+                    axios.put("http://localhost:5001/api/products/rate/" + id, sendRating, {headers: {token: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNzQzNWI5MDcxMDA5Y2Y4MzhhOTg0NSIsInVzZXJfcm9sZSI6ImN1c3RvbWVyIiwiaWF0IjoxNjUxNzgzMzI4LCJleHAiOjE2NTIwNDI1Mjh9.s9JPumJtarIueassvQoRKonL3hpOYdrmfmApsZiMrMc"}}
+                    );
+                } catch (err){}
+            }
+
         }
     }
     
@@ -105,7 +138,7 @@ const DetailsThumb = () => {
                         </div>    
 
                         <textarea onChange={getComment} placeholder=" Write your comment here..." rows="4" cols="50" style={{resize:'none', borderWidth:'bold'}}></textarea>
-                        <div><button onClick={printCommentRating} style={{cursor:'pointer', backgroundColor:"#333", color:'white', width:60}}>Submit</button></div>
+                        <div><button onClick={postCommentOrRating} style={{cursor:'pointer', backgroundColor:"#333", color:'white', width:60}}>Submit</button></div>
                     </div>
                 </div>
     </div> 
