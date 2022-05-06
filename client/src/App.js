@@ -16,8 +16,12 @@ import ShoppingCart from './pages/ShoppingCart';
 
 import SignUp from './pages/signup/Signup';
 import Signin from './pages/signin/Signin';
+<<<<<<< HEAD
 import { useSelector } from "react-redux";
 
+=======
+import MyOrders from './pages/MyOrders/MyOrders';
+>>>>>>> ef118a4 (order page created and sale price condition added to product page)
 function App() {
     const user = useSelector((state) => state.user.currentUser);
     return (
@@ -44,6 +48,8 @@ function App() {
           <Route path = "/signin" element = {<Signin/>} />
           <Route path = "/checkout" element = {<Checkout/>} />
           <Route path = "/shoppingcart" element = {<ShoppingCart/>} />
+          <Route path = "/myorders" element = {<MyOrders/>} />
+
           
         </Routes>
         <div>

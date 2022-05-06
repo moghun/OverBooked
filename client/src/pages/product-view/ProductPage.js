@@ -64,6 +64,8 @@ const DetailsThumb = () => {
             }
 
         }
+        window.location.reload();
+
     }
     
 
@@ -91,7 +93,34 @@ const DetailsThumb = () => {
         }     
     }
 
+<<<<<<< HEAD
     //using redux adds this product with selected amount to the reduxstore
+=======
+    function commentDiv(item){
+        if(item.comments.length === 0){
+            return(<h>This product has no comment yet</h>); 
+        }
+        else{
+            
+            return(
+                
+                item.comments.map(
+                    (cmt) =>{
+                        return(
+                            
+                            <div className='comment-row' style={{outline:'solid',  outlineWidth:'1px', borderRadius: '5px', margin:'20px', padding:'5px'}}>
+                                <h className='comment-text'>{cmt.comment}</h>
+                            </div>
+                            
+                        )
+                    }
+                )
+                
+            )
+
+        }
+    }
+>>>>>>> 2809b50 (on comment submit page refresh and comment section added)
     const addCart = () => {
         dispatch(
           addProduct({ ...product, amount, maxAmount})
@@ -100,7 +129,7 @@ const DetailsThumb = () => {
 
     return (
         <div className = "app">
-             <div className="details" key={product.id}>
+            <div className="details" key={product.id}>
 
                 
                 <div className="big-img">
@@ -110,13 +139,21 @@ const DetailsThumb = () => {
                 <div className="box">
 
                     <div className="row">
-                        <h2>{product.title}</h2>   
+                        <h2>{product.name}</h2>   
                     </div>
 
 
+<<<<<<< HEAD
                     <h5>Author: {product.author} Publisher: {product.publisher}</h5>                 
+=======
+                    <h5>Yazar: {product.author}</h5>
+                    <h5>Yayınevi: {product.publisher}</h5>                
+>>>>>>> 2809b50 (on comment submit page refresh and comment section added)
                     <p>Amount: {product.amount}</p>
-                    <p>Cost: {product.cost} TL</p>
+                    {product.sale 
+                    ? <p>Cost: {product.after_sale_price} TL</p>
+                    : <p>Cost: {product.cost} TL</p>
+                    }
                     <p>{product.description}</p>
                     <p>{product.category}</p>
 
@@ -143,7 +180,33 @@ const DetailsThumb = () => {
                         <div><button onClick={postCommentOrRating} style={{cursor:'pointer', backgroundColor:"#333", color:'white', width:60}}>Submit</button></div>
                     </div>
                 </div>
-    </div> 
+
+                
+            </div>
+            
+
+            <div className='comment-box' style={{textAlign:'center'}}>
+                <h3 style={{marginBottom: '10px'}}>Product Comments</h3>
+                {/*
+                    product.comments.length === 0
+                    ? <h>This product has no comment yet</h>
+                    : product.comments.map(
+                        (cmt) => {
+                            return(
+                                <div className='comment-row' style={{outline:'solid',  outlineWidth:'1px', borderRadius: '5px', margin:'20px', padding:'5px'}}>
+                                    <h className='comment-text'>{cmt.comment}</h>
+                                </div>
+                            );
+                        }
+                    )
+                    */
+                   //commentDiv(product)
+                }
+                
+            </div>
+
+
+
         </div> 
     )
 }
