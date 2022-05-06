@@ -10,7 +10,8 @@ const DetailsThumb = () => {
     const location = useLocation();
     const id = location.pathname.split("/")[2];
     const [product, setProduct] = useState({});
-    const [amount, setAmount] = useState(1);
+    const [amount, setAmount] = useState(null);
+    const [maxAmount, setMaxAmount] = useState(null);
     const [comment, setComment] = useState(null);
     const [rating, setRating] = useState(null);
     const dispatch = useDispatch();
@@ -41,22 +42,27 @@ const DetailsThumb = () => {
         getProduct();
       }, [id]);
    
+    
     function getAmount(val){ 
         
         if(product.amount >= val.target.value && val.target.value > 0){
-            console.log(val.target.value)
-            setAmount(val.target.value)
-
+            //val.target.value returns string so it has changed into int
+            var q = parseInt(val.target.value);
+            setAmount(q);
+            setMaxAmount(product.amount);
         }
         else if(product.amount < val.target.value || val.target.value < 0){
             console.log("Out of boundry")
         }     
     }
+
+    //using redux adds this product with selected amount to the reduxstore
     const addCart = () => {
         dispatch(
-          addProduct({ ...product, amount})
+          addProduct({ ...product, amount, maxAmount})
         );
       };
+
     return (
         <div className = "app">
              <div className="details" key={product.id}>
@@ -73,7 +79,7 @@ const DetailsThumb = () => {
                     </div>
 
 
-                    <h5>Yazar: {product.author} Yayınevi: {product.publisher}</h5>                 
+                    <h5>Author: {product.author} Publisher: {product.publisher}</h5>                 
                     <p>Amount: {product.amount}</p>
                     <p>Cost: {product.cost} TL</p>
                     <p>{product.description}</p>
