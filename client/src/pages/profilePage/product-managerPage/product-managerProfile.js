@@ -16,5 +16,48 @@ const getComments = async () => {
     } catch (err){}
 }
 
-//COMMENTS THAT DOES NOT APPROVED YET
+const getUnapprovedComments = (productsWithComments) => {
+    let returnArr = []
+    for (product in productsWithComments)
+    {
+        for (comment in product.comments)
+        {
+            if(comment.isApproved == false)
+            {
+                returnArr.push({product_id: product._id, initCommit: comment})
+            }
+        }
+    }
+    return returnArr;
+}
 
+const approveComment = async (product_id, comment_no) => {
+    try{
+        const res = await axios.put("http://localhost:5001/api/products/commentApproval/" + product_id + "/" + comment_no);
+    } catch (err){}   
+}
+
+const disapproveComment = async (product_id, comment_no) => {
+    try{
+        const res = await axios.put("http://localhost:5001/api/products/commentApproval/delete/" + product_id + "/" + comment_no);
+    } catch (err){}   
+}
+
+const comments = getComments();
+const unappCommennts = getUnapprovedComments(comments);
+
+
+//Assume that products cards are visualized here, product-manager now can select a comment to approve
+
+//EXAMPLE APPROVE - DISAPPROVE COMMENT - user clicked to a comment for approval
+const demoExecution = () =>{
+    //Assume that s/he clicked to the first unapproved comment for approving
+    const commentToApprove = unappCommennts[0];
+
+    approveComment(commentToApprove.product_id, commentToApprove.initCommit);
+
+
+    //Assume that s/he clicked to the second unapproved comment for disapproving
+    const commentToDisapprove = unappCommennts[1];
+    disapproveComment(commentToDisapprove.product_id, commentToDisapprove.initCommit)
+}
