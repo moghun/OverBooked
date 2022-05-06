@@ -87,6 +87,22 @@ router.put("/rate/:id", verifyToken, async (req, res) => {
   }
 });
 
+//GET COMMENTS OF ITEMS THAT HAVE ONE OR MORE COMMENTS
+router.get("/commentApproval", verifyTokenAndProductManager,async (req, res) => {
+  try {
+    const products = await Product.find(
+        {$nor: [
+          {comments: {$exists: false}},
+          {comments: {$size: 0}},
+      ]}
+    );
+
+    res.status(200).json(products);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 
 //DELETE
 router.delete("/:id", verifyTokenAndProductManager, async (req, res) => {

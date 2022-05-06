@@ -17,8 +17,8 @@ const productsSchema = new mongoose.Schema(
 
     sale: { type: Boolean, required: false,  default: false},
     after_sale_price: { type: Number, required: false, default: -1},
-    rating: { type: Array, required: false},
-    comments: { type: Array, required: false },
+    rating: { type: Array, required: false, default: []},
+    comments: { type: Array, required: false, default:[] },
   },
   { timestamps: true }
 );
