@@ -21,14 +21,16 @@ const EditProfile = () => {
 
     const clickSubmit = () => {
       const update ={
-          name: this.values.name,
-          adress: this.values.adress,
-          password: this.values.password,
-          surname: this.values.surname,
-          username: this.values.username,      
+          name: values.name,
+          adress: values.adress,
+          password: values.password,
+          surname: values.surname,
+          username: values.username,      
       }
 
-      axios.post('http://localhost:5001/api/users/'+"id", update).then(response => console.log(response.data))
+
+      console.log(update)
+//      axios.post('http://localhost:5001/api/users/', update).then(response => console.log(response.data))
       this.setState({
         name: '',
         surname: '',
