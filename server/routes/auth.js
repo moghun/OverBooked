@@ -40,13 +40,8 @@ router.post("/login", async (req, res) => {
 
     const accessToken = jwt.sign(
       {
-<<<<<<< HEAD
         id: user._id,
         user_role: user.user_role,
-=======
-          id: user._id,
-          user_role: user.user_role,
->>>>>>> 2d6c55a (Home page api calls added.)
       },
       process.env.JWT_SEC,
       {expiresIn:"3d"}
