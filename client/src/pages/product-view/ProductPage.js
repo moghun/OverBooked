@@ -116,7 +116,10 @@ const DetailsThumb = () => {
 
                     <h5>Author: {product.author} Publisher: {product.publisher}</h5>                 
                     <p>Amount: {product.amount}</p>
-                    <p>Cost: {product.cost} TL</p>
+                    {product.sale 
+                    ? <p>Cost: {product.after_sale_price} TL</p>
+                    : <p>Cost: {product.cost} TL</p>
+                    }
                     <p>{product.description}</p>
                     <p>{product.category}</p>
 
