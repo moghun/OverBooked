@@ -104,7 +104,7 @@ router.get("/commentApproval", verifyTokenAndProductManager,async (req, res) => 
 });
 
 //APPROVE COMMENT
-router.put("/commentApproval/:id/:cno", async (req, res) => {
+router.put("/commentApproval/:id/:cno", verifyTokenAndProductManager, async (req, res) => {
   try {
     let comment_update = {comment_id: req.params.cno}
     await Product.findByIdAndUpdate(
@@ -128,7 +128,7 @@ router.put("/commentApproval/:id/:cno", async (req, res) => {
 });
 
 //DISAPPROVE COMMENT
-router.put("/commentApproval/delete/:id/:cno", async (req, res) => {
+router.put("/commentApproval/delete/:id/:cno", verifyTokenAndProductManager, async (req, res) => {
   try {
     let comment_update = {comment_id: req.params.cno}
     await Product.findByIdAndUpdate(
