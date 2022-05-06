@@ -93,9 +93,6 @@ const DetailsThumb = () => {
         }     
     }
 
-<<<<<<< HEAD
-    //using redux adds this product with selected amount to the reduxstore
-=======
     function commentDiv(item){
         if(item.comments.length === 0){
             return(<h>This product has no comment yet</h>); 
@@ -120,7 +117,6 @@ const DetailsThumb = () => {
 
         }
     }
->>>>>>> 2809b50 (on comment submit page refresh and comment section added)
     const addCart = () => {
         dispatch(
           addProduct({ ...product, amount, maxAmount})
@@ -143,12 +139,8 @@ const DetailsThumb = () => {
                     </div>
 
 
-<<<<<<< HEAD
-                    <h5>Author: {product.author} Publisher: {product.publisher}</h5>                 
-=======
-                    <h5>Yazar: {product.author}</h5>
-                    <h5>Yayınevi: {product.publisher}</h5>                
->>>>>>> 2809b50 (on comment submit page refresh and comment section added)
+                    <h5>Author: {product.author}</h5>
+                    <h5>Publisher: {product.publisher}</h5>                
                     <p>Amount: {product.amount}</p>
                     {product.sale 
                     ? <p>Cost: {product.after_sale_price} TL</p>
