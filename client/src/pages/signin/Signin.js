@@ -1,31 +1,45 @@
-import React , {Component} from "react";
+import React , {useState} from "react";
 import '../signin/Signin.css';
 import 'bootstrap';
-import axios from "axios";
+import { login } from "../../redux/apiCalls";
+import { useDispatch,useSelector } from "react-redux";
 
-/*
+
+
+
+
 const Signin = () => {
 
+  const[email,setEmail] = useState("");
+  const[password,setPassword] = useState("");
+  const dispatch = useDispatch();
+  const {isFetching,error} = useSelector((state)=>state.user);
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    login(dispatch,{email,password});
+  };
 
   return (
     <div className="signincontainerholder">
       <div className="signincontainer">
 
         <h1 style={{fontFamily:'Open Sans', marginLeft:50}}>LOGIN</h1>
-        <div className="username">
-          <h>Username</h>
-          <input className="text" placeholder="Type your username"></input>
+        <div className="email">
+          <h>Email</h>
+          <input className="text" placeholder="Type your email" onChange={(e)=>setEmail(e.target.value)}></input>
           <hr style={{width:200}}></hr>
         </div>
 
         <div className="passworddiv">
           <h>Password</h>
-          <input type="password" className="password" placeholder="Type your password"></input>
+          <input type="password" className="password" placeholder="Type your password" onChange={(e)=>setPassword(e.target.value)}></input>
           <hr style={{width:200}}></hr>
         </div>
 
         <div className="loginbutton">
-            <button type="button" style={{fontFamily:'Open Sans'}}>Login</button>
+            <button onClick={handleClick} disabled = {isFetching} type="button" style={{fontFamily:'Open Sans'}}>Login</button> 
+            
         </div>
 
         <div className="forgetmypassword">
@@ -41,9 +55,10 @@ const Signin = () => {
     </div>
   )
 }
-*/
 
+export default Signin;
 
+/*
 class Signin extends Component{
 
   constructor(){
@@ -140,3 +155,4 @@ class Signin extends Component{
   }
 }
 export default Signin
+*/

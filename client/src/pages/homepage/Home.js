@@ -8,7 +8,37 @@ import "../../components/Navigation_Bar/NavigationBar.css";
 import axios from "axios";
 import BookCard from "../../components/BookCard";
 import { Grid } from "@mui/material";
+
+const getAllProducts = async () => {
+  try{
+      const res = await axios.get("http://localhost:5001/api/products");
+      console.log(res.data);
+      return res.data;
+  } catch (err){}
+};
+
+const getSaleProducts = async () => {
+  try{
+      const res = await axios.get("http://localhost:5001/api/products?sale=true");
+      console.log(res.data);
+      return res.data;
+  } catch (err){}
+}
+
+const getTopProducts = async () => {
+  try{
+      const res = await axios.get("http://localhost:5001/api/products?top=10");
+      console.log(res.data);
+      return res.data;
+  } catch (err){}
+}
+
+/*const allProducts = getAllProducts();*/
+const saleProducts = getSaleProducts();
+const topProducts = getTopProducts();
+
 const HomePage = () => {
+
   const [currentSlide, setCurrentSlide] = useState(1);
   const [currentSlide2, setCurrentSlide2] = useState(1);
   const slideLength = sliderData.length;
@@ -58,27 +88,9 @@ const HomePage = () => {
     setCurrentSlide2(0);
   }, []);
 
-  const getBooks = async () => {
-    await axios
-      .get("http://localhost:5001/api/users")
-      .then((res) => {
-        console.log("aa");
-        console.log(res.data);
-        const data = res.data;
-        let bookList = [];
-        /*         data.forEach(uni => {
-        courseList = courseList.concat(...uni.courses)
-      }); */
-
-        console.log(bookList);
-      })
-      .catch((err) => console.log(err));
-  };
-
-  useEffect(() => {
-    getBooks();
-  });
-
+ 
+ 
+  
   useEffect(() => {
     if (autoScroll) {
       auto();
