@@ -6,9 +6,12 @@ import { useLocation } from "react-router-dom";
 import { addProduct } from "../../redux/cartRedux";
 import { useDispatch } from "react-redux";
 import axios from "axios";
+import { useSelector } from "react-redux";
+
 
 
 const DetailsThumb = () => {
+    const currUser = useSelector((state) => state.user);
     const location = useLocation();
     const id = location.pathname.split("/")[2];
     const [product, setProduct] = useState({});
@@ -36,13 +39,13 @@ const DetailsThumb = () => {
             {
                 const sendComment = {
                     //user_id must be taken from the redux storage
-                    user_id: "627435b9071009cf838a9845",
+                    user_id: currUser._id,
                     comment: comment,
                     isApproved: false,
                 }
                 try{ 
                     //token needed to be sent from the redux storage
-                    axios.put("http://localhost:5001/api/products/comment/" + id, sendComment, {headers: {token: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNzQzNWI5MDcxMDA5Y2Y4MzhhOTg0NSIsInVzZXJfcm9sZSI6ImN1c3RvbWVyIiwiaWF0IjoxNjUxNzgzMzI4LCJleHAiOjE2NTIwNDI1Mjh9.s9JPumJtarIueassvQoRKonL3hpOYdrmfmApsZiMrMc"}}
+                    axios.put("http://localhost:5001/api/products/comment/" + id, sendComment, {headers: {token: ("Bearer "+ currUser.accessToken)}}
                     );
                 } catch (err){}
             }
@@ -52,11 +55,11 @@ const DetailsThumb = () => {
                 try{ 
                     //user_id must be taken from the redux storage
                     const sendRating = {
-                        user_id: "627435b9071009cf838a9845",
+                        user_id: currUser._id,
                         rating: rating,
                     }
                     //token needed to be sent from the redux storage
-                    axios.put("http://localhost:5001/api/products/rate/" + id, sendRating, {headers: {token: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNzQzNWI5MDcxMDA5Y2Y4MzhhOTg0NSIsInVzZXJfcm9sZSI6ImN1c3RvbWVyIiwiaWF0IjoxNjUxNzgzMzI4LCJleHAiOjE2NTIwNDI1Mjh9.s9JPumJtarIueassvQoRKonL3hpOYdrmfmApsZiMrMc"}}
+                    axios.put("http://localhost:5001/api/products/rate/" + id, sendRating, {headers: {token: ("Bearer "+ currUser.accessToken)}}
                     );
                 } catch (err){}
             }
