@@ -1,4 +1,6 @@
 const User = require("../models/user_dbmod");
+const CryptoJS = require("crypto-js");
+
 const {
   verifyToken,
   verifyTokenAndUser,
