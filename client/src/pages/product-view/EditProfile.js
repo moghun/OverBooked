@@ -5,10 +5,11 @@ import CardContent from '@material-ui/core/CardContent'
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
-import axios from 'axios'
+import axios from "axios";
+import { useSelector } from "react-redux";
 
 const EditProfile = () => {
-
+    const currUser = useSelector((state) => state.user.currentUser);
 
     const [values, setValues] = useState({
         name: '',
@@ -21,27 +22,28 @@ const EditProfile = () => {
 
     const clickSubmit = () => {
       const update ={
-          name: values.name,
-          adress: values.adress,
-          password: values.password,
-          surname: values.surname,
-          username: values.username,      
+          name: values.name || undefined,
+          adress: values.adress || undefined,
+          password: values.password || undefined,
+          surname: values.surname || undefined,
+          username: values.username || undefined,    
       }
 
+      try{ 
+        axios.put("http://localhost:5001/api/users/" + currUser._id, update, {headers: {token: ("Bearer "+ currUser.accessToken)}}
+          );
+        } catch (err){};
 
-      console.log(update)
-//      axios.post('http://localhost:5001/api/users/', update).then(response => console.log(response.data))
       this.setState({
         name: '',
         surname: '',
         adress: '',
         password: '',
         username: '',
-          
       })
-      }
+    }
 
-
+    
     const handleChange = name => event => {
         setValues({...values, [name]: event.target.value})
       }
@@ -57,9 +59,9 @@ const EditProfile = () => {
                 </Typography>
                 <TextField id="username" type="username" label="Username" onChange={handleChange('username')} margin="normal"/><br/>
                 <TextField id="password" type="password" label="Password" onChange={handleChange('password')} margin="normal"/><br/>
-                <TextField id="name" label="name" onChange={handleChange('name')} margin="normal"/><br/>
+                <TextField id="name" type="name" label="Name" onChange={handleChange('name')} margin="normal"/><br/>
                 <TextField id="surname" type="surname" label="Surname" onChange={handleChange('surname')} margin="normal"/><br/>
-                <TextField id="adress" type="adress" label="Address" onChange={handleChange('address')} margin="normal"/><br/>
+                <TextField id="adress" type="adress" label="Adress" onChange={handleChange('adress')} margin="normal"/><br/>
                 <br/>
                 </CardContent>
                 <CardActions>
