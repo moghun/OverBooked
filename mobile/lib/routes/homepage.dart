@@ -1,12 +1,10 @@
-import 'dart:convert';
+import 'package:mobile/services/product_service.dart';
 import 'package:mobile/utils/dimensions.dart';
 import 'package:mobile/utils/styles.dart';
 import 'package:mobile/views/action_bar.dart';
 import 'package:mobile/views/product_preview.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'package:mobile/models/product.dart';
-
 import '../views/nav_draw.dart';
 
 class HomePage extends StatefulWidget {
@@ -17,6 +15,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final ProductService _productService = ProductService();
 
   @override
   void initState() {
@@ -24,22 +23,8 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<List<Product>> getAllBooks() async {
-
-    try {
-      final response = await http.get(Uri.parse('http://10.0.2.2:5001/api/products/'));
-      if (response.statusCode >= 200 && response.statusCode < 400) {
-        var productsJson = jsonDecode(response.body) as List;
-        List<Product> products = productsJson.map((prod) => Product.fromJson(prod)).toList();
-        return products;
-      }
-      else {
-        print(response.statusCode);
-      }
-
-    } catch (e) {
-      print(e.toString());
-    }
-    return [];
+    var products = await _productService.getAllProducts();
+    return products ?? [];
   }
 
   @override
@@ -57,30 +42,16 @@ class _HomePageState extends State<HomePage> {
                 IconButton(onPressed: () {}, icon: const Icon(Icons.search))
               ]),
             ),
-            // SizedBox(
-            //   height: 60,
-            //   child: ListView(
-            //     scrollDirection: Axis.horizontal,
-            //     children: List.generate(_categories.length, (int index) {
-            //       return OutlinedButton(
-            //         onPressed: () {},
-            //         child: Container(
-            //           height: 50.0,
-            //           child: Text(_categories[index]),
-            //         ),
-            //       );
-            //     }),
-            //   ),
-            // ),
-
-            const SizedBox(height: 8,),
+            const SizedBox(
+              height: 8,
+            ),
             Text(
               "Featured Products",
               style: kHeadingTextStyle,
             ),
             FutureBuilder<List<Product>>(
               future: getAllBooks(),
-              builder: (context, snapshot){
+              builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const CircularProgressIndicator();
                 } else if (snapshot.connectionState == ConnectionState.done) {
@@ -94,12 +65,12 @@ class _HomePageState extends State<HomePage> {
                         child: Row(
                           children: List.generate(
                               snapshot.data!.length,
-                                  (index) => Row(children: [
-                                ProductPreview(
-                                  product: snapshot.data![index],
-                                ),
-                                const SizedBox(width: 8)
-                              ])),
+                              (index) => Row(children: [
+                                    ProductPreview(
+                                      product: snapshot.data![index],
+                                    ),
+                                    const SizedBox(width: 8)
+                                  ])),
                         ),
                       ),
                     );

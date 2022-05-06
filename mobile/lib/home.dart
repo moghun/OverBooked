@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobile/routes/homepage.dart';
 import 'package:mobile/routes/log_in.dart';
-import 'package:mobile/routes/basket.dart';
+import 'package:mobile/routes/cart.dart';
 import 'package:mobile/routes/profile.dart';
 import 'package:mobile/services/user_service.dart';
 
@@ -15,7 +15,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   var routes = [
     const HomePage(),
-    const Basket(),
+    const Cart(),
     const Profile(),
     const LogIn(),
   ];
@@ -56,7 +56,7 @@ class _HomeState extends State<Home> {
               backgroundColor: Color(0xFFe6b619)),
           BottomNavigationBarItem(
               icon: Icon(Icons.shopping_basket),
-              label: 'Basket',
+              label: 'Cart',
               backgroundColor: Color(0xFFe6b619)),
           BottomNavigationBarItem(
               icon: Icon(Icons.account_circle),

@@ -4,7 +4,7 @@ import 'package:mobile/utils/colors.dart';
 import 'package:mobile/utils/dimensions.dart';
 import 'package:mobile/utils/styles.dart';
 import '../models/product.dart';
-import '../routes/product_page.dart';
+import 'product_page.dart';
 
 class ProductPreview extends StatefulWidget {
   const ProductPreview({
@@ -42,13 +42,10 @@ class _ProductPreviewState extends State<ProductPreview> {
           padding: MaterialStateProperty.resolveWith(
                   (states) => EdgeInsets.zero)),
       onPressed: () {
-        Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => ProductPage(
-
-              productID: widget.product.id as int,
-              refreshFunc: childRefreshFunc,
-            )));
-
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => ProductPage(productID: widget.product.id,)));
       },
       child: Stack(
         alignment: Alignment.center,
