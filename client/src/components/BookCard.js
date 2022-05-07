@@ -7,10 +7,11 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { Box, Grid } from "@mui/material";
 import StarIcon from "@mui/icons-material/Star";
+import { CardActionArea } from "@material-ui/core";
 
 export default function BookCard(props) {
   return (
-    <Card sx={{ maxWidth: "350px", minWidth: "250px", padding: "15px", margin: "20px",  transition: ".3s ease", ':hover': {boxShadow: 20,}}}>
+    <Card onClick={() => {}} sx={{ maxWidth: "350px", minWidth: "250px", padding: "15px", margin: "20px",  transition: ".3s ease", ':hover': {boxShadow: 20,}}}>
       <CardMedia
         component="img"
         height="200"
@@ -53,7 +54,7 @@ export default function BookCard(props) {
             <Grid item>
               <Box>
                 <Typography variant="subtitle2" color="text.secondary">
-                  {props.score} 
+                  {props.score}
                 <StarIcon style={{ marginTop: "-4px", color: "gold"}} />
                 </Typography>
               </Box>
@@ -61,14 +62,11 @@ export default function BookCard(props) {
           </Grid>
           <Grid item>
             <Typography variant="h6" color="text.primary">
-              {props.price}
+              {props.price} TL
             </Typography>
           </Grid>
         </Grid>
       </CardContent>
-      <CardActions style={{ justifyContent: "center", display: "flex" }}>
-        <Button variant="contained" size="small" sx = {{':hover': {boxShadow: 20,}}}>Add To Cart</Button>
-      </CardActions>
     </Card>
   );
 }
