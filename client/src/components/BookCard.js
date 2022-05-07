@@ -7,6 +7,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { Box, Grid } from "@mui/material";
 import StarIcon from "@mui/icons-material/Star";
+import { CardActionArea } from "@material-ui/core";
 
 export default function BookCard(props) {
   return (
@@ -53,7 +54,7 @@ export default function BookCard(props) {
             <Grid item>
               <Box>
                 <Typography variant="subtitle2" color="text.secondary">
-                  {props.score} 
+                  {props.score}
                 <StarIcon style={{ marginTop: "-4px", color: "gold"}} />
                 </Typography>
               </Box>
@@ -61,7 +62,7 @@ export default function BookCard(props) {
           </Grid>
           <Grid item>
             <Typography variant="h6" color="text.primary">
-              {props.price}
+              {props.price} TL
             </Typography>
           </Grid>
         </Grid>
