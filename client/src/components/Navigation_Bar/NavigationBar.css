@@ -181,11 +181,23 @@
 .slider {
   top: 20px;
   bottom: 10px;
-  width: 80%;
-  height: 80vh;
+  width: 100%;
+  height: 100vh;
   position: relative;
   overflow: hidden;
   left: 120px;
+}
+
+
+.slider .content {
+  position: absolute;
+  top: 8rem;
+  left: 10rem;
+  opacity: .6;
+  width: 30%;
+  color: rgb(255, 0, 0);
+  padding: 3rem;
+  height: 5px;
 }
 
 
@@ -193,7 +205,7 @@
   top: 20px;
   bottom: 10px;
   width: 50%;
-  height: 50vh;
+  height: 80vh;
   position: relative;
   overflow: hidden;
   left: 300px;
@@ -205,10 +217,18 @@
   top: 8rem;
   left: 10rem;
   opacity: .6;
-  width: 30%;
+  width: 50%;
   color: rgb(255, 0, 0);
   padding: 3rem;
   height: 5px;
+}
+
+
+.slide2 img {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .slide {
@@ -223,15 +243,18 @@
 }
 
 @media screen and (min-width: 600px) {
-  .slide img {
-    width: 100%;
+  .slide2 img {
+    width: 50%;
     height: 100%;
+    
   }
 }
 
 .slide img {
-  width: 100%;
-  height: 100%;
+  width: 50%;
+  height: 50%;
+  display: flex;
+  justify-content: center;
 }
 
 .current {
@@ -350,6 +373,7 @@ hr {
   height: 60px;
   display: flex;
   justify-content: left;
+  left: 100;
 }
 
 
@@ -3223,8 +3247,16 @@ footer {
     background: #7F00FF;
     }
 
+    .upper-container2{
+      height: 100px;
+      background: #0d00ff;
+      border-radius: 50%;
+      padding: 8px;
+    }
+
+
     .lower-container{
-    height: 300px;
+    height: 500px;
     background: #FFF;
     padding: 20px;
     padding-top: 40px;
@@ -3234,6 +3266,76 @@ footer {
     flex-wrap: nowrap;
     justify-content: space-between;
     }
+
+
+    .some-container{
+      height: 80px;
+      padding: 20px;
+      padding-top: 40px;
+      text-align: center;
+    }
+
+
+    .some-container .btn{
+      padding: 12px 20px;
+      background: #d9ff00;
+      border: none;
+      color: white;
+      border-radius: 30px;
+      font-size: 12px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: all .3s ease-in;
+      }
+  
+  
+      .some-container .btn2{
+        padding: 12px 20px;
+        background: #00ff99;
+        border: none;
+        color: white;
+        border-radius: 30px;
+        font-size: 12px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: all .3s ease-in;
+      }
+  
+      .some-container .btn3{
+        padding: 12px 20px;
+        background: #0400ff;
+        border: none;
+        color: white;
+        border-radius: 30px;
+        font-size: 12px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: all .3s ease-in;
+      }
+      .some-container .btn3:hover{
+        background: transparent;
+        color: #0400ff;
+        border: 2px solid #0400ff;
+      }
+  
+  
+      .some-container .btn2:hover{
+        background: transparent;
+        color: #00ffbb;
+        border: 2px solid #00ff8c;
+      }
+  
+          
+      .some-container .btn:hover{
+        background: transparent;
+        color: #b7ff00;
+        border: 2px solid #c8ff00;
+      }
+
+
+
+
+
     .lower-container h2, h3, h4, h5, h6{
       box-sizing: border-box;
       line-height: .6;
@@ -3260,6 +3362,7 @@ footer {
     font-weight: bold;
     transition: all .3s ease-in;
     }
+
 
     .lower-container .btn2{
       padding: 12px 20px;
@@ -3303,3 +3406,69 @@ footer {
       color: #7F00FF;
       border: 2px solid #7F00FF;
     }
+
+
+
+    .procontainer {
+
+
+
+      border-radius: 25px;
+      border: 4px solid #73AD21;
+      padding: 20px;
+
+    }
+
+    .procontainer2 {
+
+
+
+      border-radius: 25px;
+      border: 4px solid #ff0000;
+      padding: 20px;
+
+    }
+
+
+
+    .carousel .slick-arrow.slick-prev,
+.carousel .slick-arrow.slick-next {
+  background: #fcfcfc;
+  width: 47px;
+  height: 104px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  box-shadow: 1px 2px 10px -1px rgb(0 0 0 / 30%);
+}
+.carousel .slick-prev {
+  left: 0;
+  border-top-right-radius: 7px;
+  border-bottom-right-radius: 7px;
+}
+.carousel .slick-next {
+  right: 0;
+  border-bottom-left-radius: 7px;
+  border-top-left-radius: 7px;
+}
+.slick-prev::before,
+.slick-next::before {
+  display: none;
+}
+.custom-indicator {
+  bottom: -65px;
+}
+.custom-indicator li {
+  width: 50px;
+  height: 50px;
+  filter: grayscale(100%);
+}
+.custom-indicator li.slick-active {
+  filter: grayscale(0%);
+}
+.multi__image:hover {
+  transform: scale(1.1);
+  transition: 500ms;
+}
+

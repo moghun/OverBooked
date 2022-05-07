@@ -12,12 +12,13 @@ import CreateStore from './pages/product-view/CreateStore';
 import EditProfile from './pages/product-view/EditProfile';
 import Checkout from './pages/Checkout';
 import ShoppingCart from './pages/ShoppingCart';
-
+import Success from './pages/success';
 
 import SignUp from './pages/signup/Signup';
 import Signin from './pages/signin/Signin';
 import { useSelector } from "react-redux";
 
+import MyOrders from './pages/MyOrders/MyOrders';
 function App() {
     const user = useSelector((state) => state.user.currentUser);
     return (
@@ -44,6 +45,8 @@ function App() {
           <Route path = "/signin" element = {<Signin/>} />
           <Route path = "/checkout" element = {<Checkout/>} />
           <Route path = "/shoppingcart" element = {<ShoppingCart/>} />
+          <Route path = "/myorders" element = {<MyOrders/>} />
+          <Route path = "/success" element = {<Success/>} />
           
         </Routes>
         <div>
