@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:http/http.dart' as http;
 
 class AuthService {
@@ -8,7 +10,9 @@ class AuthService {
   }
 
   Future<http.Response> loginUser(String email, String password) async {
+    var body = jsonEncode({"email": email, "password": password});
     return http.post(Uri.parse(apiBaseURL + "/login"),
-        body: {"email": email, "password": password});
+        headers: {"Content-Type": "application/json"},
+        body: body);
   }
 }
