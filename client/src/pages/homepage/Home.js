@@ -1,7 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { AiOutlineArrowLeft, AiOutlineArrowRight, AiFillForward, AiFillBackward } from "react-icons/ai";
 import { sliderData } from "./data";
 import "../../components/Navigation_Bar/NavigationBar.css";
+import { Button } from "@material-ui/core";
+import ScrollToTop from "../../components/Scroll/ScrollToTop";
 
 // import {Link} from "react-router-dom";
 
@@ -39,6 +41,22 @@ const topProducts = getTopProducts();
 
 const HomePage = () => {
 
+<<<<<<< HEAD
+=======
+  const goallproducts = useRef(null);
+  const gomoststarts = useRef(null);
+  const gocampaign = useRef(null);
+
+  const scrollToSection = (elementRef) => {
+    window.scrollTo({
+      top: elementRef.current.offsetTop,
+      behavior: "smooth",
+    });
+  };
+
+
+
+>>>>>>> 52119ad (homepage and profile page final updates set up)
   const [currentSlide, setCurrentSlide] = useState(1);
   const [currentSlide2, setCurrentSlide2] = useState(1);
   const slideLength = sliderData.length;
@@ -108,6 +126,17 @@ const HomePage = () => {
 
   return (
     <div className="total">
+      <ScrollToTop />
+
+      <div className="some-container">
+
+
+      <Button onClick={() => scrollToSection(goallproducts)} className="btn">Go To All Products</Button>
+      <Button onClick={() => scrollToSection(gomoststarts)} className="btn2">Go To Most Stars</Button>
+      <Button onClick={() => scrollToSection(gocampaign)} className="btn3">Go To In Campaign</Button>
+
+      </div>
+
       <div className="slider">
         <AiOutlineArrowLeft className="arrow prev" onClick={prevSlide} />
         <AiOutlineArrowRight className="arrow next" onClick={nextSlide} />
@@ -179,6 +208,13 @@ const HomePage = () => {
 
       <br/>
       <br/>
+
+      <div class="upper-container2" ref={goallproducts}>
+        <p style = {{ display: 'flex', justifyContent: 'center', fontWeight: 'bold', fontSize: 40, color: "white"}}>
+          All Products
+        </p>
+      </div>
+
       <Grid container direction="row" justifyContent="space-around">
         <BookCard name="deneme1" author="author1" imgurl="/images/animalfarm.jpg" publisher="yayınevi" price="87.99 TL" score="3.7/5.0"></BookCard>
         <BookCard name="deneme2" author="author2" imgurl="/images/animalfarm.jpg" publisher="yayınevi" price="87.99 TL" score="3.7/5.0"></BookCard>
@@ -186,6 +222,35 @@ const HomePage = () => {
         <BookCard name="deneme4" author="author4" imgurl="/images/animalfarm.jpg" publisher="yayınevi" price="87.99 TL" score="3.7/5.0"></BookCard>
         <BookCard name="deneme5" author="author5" imgurl="/images/animalfarm.jpg" publisher="yayınevi" price="87.99 TL" score="3.7/5.0"></BookCard>
       </Grid>
+
+      <div class="upper-container2" ref={gomoststarts}>
+        <p style = {{ display: 'flex', justifyContent: 'center', fontWeight: 'bold', fontSize: 40, color: "white"}}>
+          MOST STARS
+        </p>
+      </div>
+
+      <Grid container direction="row" justifyContent="space-around">
+        <BookCard name="deneme1" author="author1" imgurl="/images/animalfarm.jpg" publisher="yayınevi" price="87.99 TL" score="3.7/5.0"></BookCard>
+        <BookCard name="deneme2" author="author2" imgurl="/images/animalfarm.jpg" publisher="yayınevi" price="87.99 TL" score="3.7/5.0"></BookCard>
+        <BookCard name="deneme3" author="author3" imgurl="/images/animalfarm.jpg" publisher="yayınevi" price="87.99 TL" score="3.7/5.0"></BookCard>
+        <BookCard name="deneme4" author="author4" imgurl="/images/animalfarm.jpg" publisher="yayınevi" price="87.99 TL" score="3.7/5.0"></BookCard>
+        <BookCard name="deneme5" author="author5" imgurl="/images/animalfarm.jpg" publisher="yayınevi" price="87.99 TL" score="3.7/5.0"></BookCard>
+      </Grid>
+
+      <div class="upper-container2" ref={gocampaign}>
+        <p style = {{ display: 'flex', justifyContent: 'center', fontWeight: 'bold', fontSize: 40, color: "white"}}>
+          IN CAMPAIGN
+        </p>
+      </div>
+
+      <Grid container direction="row" justifyContent="space-around">
+        <BookCard name="deneme1" author="author1" imgurl="/images/animalfarm.jpg" publisher="yayınevi" price="87.99 TL" score="3.7/5.0"></BookCard>
+        <BookCard name="deneme2" author="author2" imgurl="/images/animalfarm.jpg" publisher="yayınevi" price="87.99 TL" score="3.7/5.0"></BookCard>
+        <BookCard name="deneme3" author="author3" imgurl="/images/animalfarm.jpg" publisher="yayınevi" price="87.99 TL" score="3.7/5.0"></BookCard>
+        <BookCard name="deneme4" author="author4" imgurl="/images/animalfarm.jpg" publisher="yayınevi" price="87.99 TL" score="3.7/5.0"></BookCard>
+        <BookCard name="deneme5" author="author5" imgurl="/images/animalfarm.jpg" publisher="yayınevi" price="87.99 TL" score="3.7/5.0"></BookCard>
+      </Grid>
+
     </div>
   );
 };

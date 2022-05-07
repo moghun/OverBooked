@@ -59,4 +59,18 @@ router.post("/login", async (req, res) => {
   }
 });
 
+<<<<<<< HEAD
 module.exports = router;
+=======
+
+//LOGOUT
+
+
+router.get('/logout', function (req, res){
+  req.session.destroy(function (err) {
+    res.redirect('/signin');
+  });
+});
+
+module.exports = router;
+>>>>>>> 52119ad (homepage and profile page final updates set up)

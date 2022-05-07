@@ -3223,8 +3223,16 @@ footer {
     background: #7F00FF;
     }
 
+    .upper-container2{
+      height: 100px;
+      background: #0d00ff;
+      border-radius: 50%;
+      padding: 8px;
+    }
+
+
     .lower-container{
-    height: 300px;
+    height: 500px;
     background: #FFF;
     padding: 20px;
     padding-top: 40px;
@@ -3234,6 +3242,76 @@ footer {
     flex-wrap: nowrap;
     justify-content: space-between;
     }
+
+
+    .some-container{
+      height: 80px;
+      padding: 20px;
+      padding-top: 40px;
+      text-align: center;
+    }
+
+
+    .some-container .btn{
+      padding: 12px 20px;
+      background: #d9ff00;
+      border: none;
+      color: white;
+      border-radius: 30px;
+      font-size: 12px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: all .3s ease-in;
+      }
+  
+  
+      .some-container .btn2{
+        padding: 12px 20px;
+        background: #00ff99;
+        border: none;
+        color: white;
+        border-radius: 30px;
+        font-size: 12px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: all .3s ease-in;
+      }
+  
+      .some-container .btn3{
+        padding: 12px 20px;
+        background: #0400ff;
+        border: none;
+        color: white;
+        border-radius: 30px;
+        font-size: 12px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: all .3s ease-in;
+      }
+      .some-container .btn3:hover{
+        background: transparent;
+        color: #0400ff;
+        border: 2px solid #0400ff;
+      }
+  
+  
+      .some-container .btn2:hover{
+        background: transparent;
+        color: #00ffbb;
+        border: 2px solid #00ff8c;
+      }
+  
+          
+      .some-container .btn:hover{
+        background: transparent;
+        color: #b7ff00;
+        border: 2px solid #c8ff00;
+      }
+
+
+
+
+
     .lower-container h2, h3, h4, h5, h6{
       box-sizing: border-box;
       line-height: .6;
@@ -3260,6 +3338,7 @@ footer {
     font-weight: bold;
     transition: all .3s ease-in;
     }
+
 
     .lower-container .btn2{
       padding: 12px 20px;
