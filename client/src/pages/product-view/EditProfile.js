@@ -7,6 +7,7 @@ import TextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
 import axios from "axios";
 import { useSelector } from "react-redux";
+import {toast} from 'react-toastify';
 
 const EditProfile = () => {
     const currUser = useSelector((state) => state.user.currentUser);
@@ -21,6 +22,9 @@ const EditProfile = () => {
 
 
     const clickSubmit = () => {
+
+      toast.success('User Updated Successfully');
+
       const update ={
           name: values.name || undefined,
           adress: values.adress || undefined,
@@ -32,7 +36,7 @@ const EditProfile = () => {
       try{ 
         axios.put("http://localhost:5001/api/users/" + currUser._id, update, {headers: {token: ("Bearer "+ currUser.accessToken)}}
           );
-        } catch (err){};
+        } catch (err){toast.error(getError(err));};
 
       this.setState({
         name: '',
