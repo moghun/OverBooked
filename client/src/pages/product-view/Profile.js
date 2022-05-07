@@ -3,17 +3,20 @@ import { Card } from "@material-ui/core";
 import Avatar from '@material-ui/core/Avatar'
 import { useState } from "react";
 import { Typography } from "@material-ui/core";
+import {useSelector} from "react-redux";
 
 const Profile = () => {
 
 
+
+  const currUser = useSelector((state) => state.user.currentUser);
 
   const [values, setValues] = useState({
     name: '',
     surname: '',
     adress: '',
     username: '',
-    user_role: 'customer',
+    user_role: '',
     email: '',
   })
 
@@ -70,27 +73,6 @@ const Profile = () => {
   }
 
 
-
-
-
-
-  const handleChange = name => event => {
-
-    const get ={
-      name: this.values.name,
-      adress: this.values.adress,
-      surname: this.values.surname,
-      username: this.values.username, 
-      user_role: this.values.user_role,
-      email: this.values.email,
-
-    }
-
-    axios.get('http://localhost:5001/api/users/'+"id", get).then(response => console.log(response.data))
-    setValues({...values, [name]: event.target.value})
-  }
-
-
     return (
         <Card>
           <div class="upper-container">
@@ -106,24 +88,24 @@ const Profile = () => {
 
               <div>
                 <h2>Name: </h2>
-                <Typography id = "name" onChange={handleChange('name')} margin="normal"/><br/>
+                <Typography id = "name" onChange={currUser.name} margin="normal"/><br/>
                 <h3> Surname: </h3>
-                <Typography id = "surname" onChange={handleChange('surname')} margin="normal"/><br/>
+                <Typography id = "surname" onChange={currUser.surname} margin="normal"/><br/>
                 {userstatus(this.values.user_role)}
                 <h5>E-MAIL: </h5>
-                <Typography id = "email" onChange={handleChange('email')} margin="normal"/><br/>
+                <Typography id = "email" onChange={currUser.email} margin="normal"/><br/>
                 <h4>Username: </h4>
-                <Typography id = "username" onChange={handleChange('username')} margin="normal"/><br/>
+                <Typography id = "username" onChange={currUser.username} margin="normal"/><br/>
 
                 <h5>Name: </h5>
-                <Typography id = "adress" onChange={handleChange('adress')} margin="normal"/><br/>
+                <Typography id = "adress" onChange={currUser.adress} margin="normal"/><br/>
 
               </div>
 
 
               <div>
                 <Button href = "/editprofile" className="btn">Edit Profile</Button>
-                {buttonstatus(this.values.user_role)}
+                {buttonstatus(currUser.user_role)}
               </div>
           </div>
         </Card>

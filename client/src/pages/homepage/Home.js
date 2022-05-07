@@ -41,8 +41,6 @@ const topProducts = getTopProducts();
 
 const HomePage = () => {
 
-<<<<<<< HEAD
-=======
   const goallproducts = useRef(null);
   const gomoststarts = useRef(null);
   const gocampaign = useRef(null);
@@ -56,7 +54,6 @@ const HomePage = () => {
 
 
 
->>>>>>> 52119ad (homepage and profile page final updates set up)
   const [currentSlide, setCurrentSlide] = useState(1);
   const [currentSlide2, setCurrentSlide2] = useState(1);
   const slideLength = sliderData.length;
