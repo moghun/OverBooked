@@ -1,89 +1,52 @@
 import 'package:flutter/material.dart';
-import 'package:mobile/utils/color.dart';
+import 'package:mobile/utils/colors.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-final kHeadingTextStyle = GoogleFonts.dmSans(
+
+import 'colors.dart';
+
+final kHeadingTextStyle = GoogleFonts.montserrat(
   color: AppColors.headingColor,
   fontWeight: FontWeight.w900,
   fontSize: 30.0,
   letterSpacing: -0.7,
 );
 
-final kHeadingTextStyleWhite = GoogleFonts.dmSans(
-  color: Colors.white,
-  fontWeight: FontWeight.w900,
-  fontSize: 30.0,
-  letterSpacing: -0.7,
-);
-
-
-final kLogoTextStyle = GoogleFonts.dmSans(
-  color: AppColors.primary,
-  fontWeight: FontWeight.w900,
-  fontSize: 64.0,
-  letterSpacing: -0.5,
-);
-
-final kButtonLightTextStyle = GoogleFonts.dmSans(
+final kButtonLightTextStyle = GoogleFonts.montserrat(
   color: AppColors.lightTextColor,
-  fontWeight: FontWeight.w700,
-  fontSize: 18.0,
-  letterSpacing: 0,
-
+  fontSize: 20.0,
+  letterSpacing: -0.7,
 );
 
-final kButtonDarkTextStyle = GoogleFonts.dmSans(
-  color: Colors.white,
-  fontWeight: FontWeight.w700,
-  fontSize: 18.0,
-  letterSpacing: 0,
+final kButtonDarkTextStyle = GoogleFonts.montserrat(
+  color: AppColors.darkTextColor,
+  fontSize: 20.0,
+  letterSpacing: -0.7,
 );
 
-final kAppBarTitleTextStyle = GoogleFonts.dmSans(
-  color: Colors.black,
+final kAppBarTitleTextStyle = GoogleFonts.montserrat(
+  color: AppColors.appBarText,
   fontSize: 24.0,
-  fontWeight: FontWeight.w700,
+  fontWeight: FontWeight.w600,
   letterSpacing: -0.7,
 );
 
-final kTextTitle = GoogleFonts.dmSans(
-  color: AppColors.primary,
-  fontSize: 24.0,
-  fontWeight: FontWeight.w800,
-  letterSpacing: -0.7,
-);
-final kTextTitleMedium = GoogleFonts.montserrat(
-  color: AppColors.primary,
-  fontWeight: FontWeight.w500,
-  fontSize: 18.0,
-  letterSpacing: -0.7,
-);
-
-
-final kTextTitleSmall = GoogleFonts.montserrat(
+final kSmallTitle = GoogleFonts.montserrat(
   color: AppColors.secondary,
-  fontWeight: FontWeight.w500,
-  fontSize: 14.0,
+  fontSize: 12.0,
   letterSpacing: -0.7,
 );
 
-final kTextCaption = GoogleFonts.montserrat(
+final kSmallText = GoogleFonts.montserrat(
   fontStyle: FontStyle.italic,
   color: AppColors.lightTextColor,
-  fontSize: 11.0,
+  fontSize: 10.0,
   letterSpacing: -0.7,
 );
 
 final kImportantText = GoogleFonts.montserrat(
   fontWeight: FontWeight.bold,
+  color: AppColors.notification,
   fontSize: 10.0,
-  color: Colors.black,
   letterSpacing: -0.7,
-);
-
-
-final kButtonLight = TextStyle(
-  color: AppColors.primary,
-  fontSize: 30,
-  letterSpacing: 0,
 );
