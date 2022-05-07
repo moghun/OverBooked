@@ -10,7 +10,7 @@ import StarIcon from "@mui/icons-material/Star";
 
 export default function BookCard(props) {
   return (
-    <Card sx={{ maxWidth: "350px", minWidth: "250px", padding: "15px", margin: "20px",  transition: ".3s ease", ':hover': {boxShadow: 20,}}}>
+    <Card onClick={() => {}} sx={{ maxWidth: "350px", minWidth: "250px", padding: "15px", margin: "20px",  transition: ".3s ease", ':hover': {boxShadow: 20,}}}>
       <CardMedia
         component="img"
         height="200"
@@ -66,9 +66,6 @@ export default function BookCard(props) {
           </Grid>
         </Grid>
       </CardContent>
-      <CardActions style={{ justifyContent: "center", display: "flex" }}>
-        <Button variant="contained" size="small" sx = {{':hover': {boxShadow: 20,}}}>Add To Cart</Button>
-      </CardActions>
     </Card>
   );
 }
