@@ -1,10 +1,14 @@
 import { useState, useEffect, useRef } from "react";
-import { AiOutlineArrowLeft, AiOutlineArrowRight, AiFillForward, AiFillBackward } from "react-icons/ai";
+import {
+  AiOutlineArrowLeft,
+  AiOutlineArrowRight,
+  AiFillForward,
+  AiFillBackward,
+} from "react-icons/ai";
 import { sliderData } from "./data";
 import "../../components/Navigation_Bar/NavigationBar.css";
 import { Button } from "@material-ui/core";
 import ScrollToTop from "../../components/Scroll/ScrollToTop";
-
 
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -15,9 +19,7 @@ import axios from "axios";
 import BookCard from "../../components/BookCard";
 import { Grid } from "@mui/material";
 
-
 //in order to have sequence products with slider
-
 
 function SampleNextArrow(props) {
   const { className, style, onClick } = props;
@@ -41,9 +43,6 @@ function SamplePrevArrow(props) {
   );
 }
 
-
-
-
 const carouselProperties = {
   nextArrow: <SampleNextArrow />,
   prevArrow: <SamplePrevArrow />,
@@ -60,90 +59,71 @@ const carouselProperties = {
         slidesToShow: 3,
         slidesToScroll: 3,
         infinite: true,
-        dots: true
-      }
+        dots: true,
+      },
     },
     {
       breakpoint: 600,
       settings: {
         slidesToShow: 2,
         slidesToScroll: 2,
-        initialSlide: 2
-      }
+        initialSlide: 2,
+      },
     },
     {
       breakpoint: 480,
       settings: {
         slidesToShow: 1,
-        slidesToScroll: 1
-      }
-    }
-  ]
+        slidesToScroll: 1,
+      },
+    },
+  ],
 };
 
-
-
 function avgrating(items) {
-
-  
   var totalrate = 0;
   for (var i = 0; i < items.rating.length; i++) {
-
     totalrate += items.rating[i].rating;
-
   }
 
-  if(isNaN(totalrate/items.rating.length)) {
-
+  if (isNaN(totalrate / items.rating.length)) {
     return 0;
-
-
-
   }
-  return ((totalrate/items.rating.length).toFixed(1));
-
+  return (totalrate / items.rating.length).toFixed(1);
 }
 
-
 const HomePage = () => {
-
-
   const [allsale, setallsale] = useState([]);
   const [topprod, settopprod] = useState([]);
 
   const getAllProducts = async () => {
-    try{
-        const res = await axios.get("http://localhost:5001/api/products");
-        console.log(res.data);
-        return res.data;
-    } catch (err){}
+    try {
+      const res = await axios.get("http://localhost:5001/api/products");
+      return res.data;
+    } catch (err) {}
   };
-  
+
   const getSaleProducts = async () => {
-    try{
-        const res = await axios.get("http://localhost:5001/api/products?sale=true");
-        setallsale(res.data);
-        console.log(res.data);
-        return res.data;
-    } catch (err){}
-  }
-  
+    try {
+      const res = await axios.get(
+        "http://localhost:5001/api/products?sale=true"
+      );
+      setallsale(res.data);
+      return res.data;
+    } catch (err) {}
+  };
+
   const getTopProducts = async () => {
-    try{
-        const res = await axios.get("http://localhost:5001/api/products?top=10");
-        settopprod(res.data);
-        console.log(res.data);
-        return res.data;
-    } catch (err){}
-  }
-  
+    try {
+      const res = await axios.get("http://localhost:5001/api/products?top=10");
+      settopprod(res.data);
+      return res.data;
+    } catch (err) {}
+  };
+
   getAllProducts();
   getSaleProducts();
   getTopProducts();
-
-
-
-
 
   const goallproducts = useRef(null);
   const gomoststarts = useRef(null);
@@ -164,13 +144,15 @@ const HomePage = () => {
   let intervalTime = 5000;
 
   const nextSlide2 = () => {
-    setCurrentSlide2(currentSlide2 === slideLength2 - 1 ? 0 : currentSlide2 + 1);
-    console.log("next");
+    setCurrentSlide2(
+      currentSlide2 === slideLength2 - 1 ? 0 : currentSlide2 + 1
+    );
   };
 
   const prevSlide2 = () => {
-    setCurrentSlide2(currentSlide2 === 0 ? slideLength2 - 1 : currentSlide2 - 1);
-    console.log("prev");
+    setCurrentSlide2(
+      currentSlide2 === 0 ? slideLength2 - 1 : currentSlide2 - 1
+    );
   };
 
   function auto2() {
@@ -180,7 +162,6 @@ const HomePage = () => {
   useEffect(() => {
     setCurrentSlide2(0);
   }, []);
-
 
   useEffect(() => {
     if (autoScroll2) {
@@ -194,17 +175,18 @@ const HomePage = () => {
       <ScrollToTop />
 
       <div className="some-container">
-
-      <Button onClick={() => scrollToSection(gomoststarts)} className="btn">Go To Most Stars</Button>
-      <Button onClick={() => scrollToSection(gocampaign)} className="btn3">Go To In Campaign</Button>
-
+        <Button onClick={() => scrollToSection(gomoststarts)} className="btn">
+          Go To Most Stars
+        </Button>
+        <Button onClick={() => scrollToSection(gocampaign)} className="btn3">
+          Go To In Campaign
+        </Button>
       </div>
 
-      <br/>
-      <br/>
+      <br />
+      <br />
 
       <div className="slider2">
-
         <AiFillBackward className="arrow prev" onClick={prevSlide2} />
         <AiFillForward className="arrow next" onClick={nextSlide2} />
         {topprod.map((slide, index) => {
@@ -214,8 +196,8 @@ const HomePage = () => {
               key={index}
             >
               {index === currentSlide2 && (
-                <div style={{display: 'flex', justifyContent: 'center'}}>
-                  <img src={slide.img} alt="slide"/>
+                <div style={{ display: "flex", justifyContent: "center" }}>
+                  <img src={slide.img} alt="slide" />
                   <div className="content">
                     <h2>{slide.name}</h2>
                     <p> {slide.description}</p>
@@ -233,41 +215,68 @@ const HomePage = () => {
         })}
       </div>
 
-      <br/>
-      <br/>
+      <br />
+      <br />
 
       <div class="upper-container2" ref={gomoststarts}>
-        <p style = {{ display: 'flex', justifyContent: 'center', fontWeight: 'bold', fontSize: 40, color: "white"}}>
+        <p
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            fontWeight: "bold",
+            fontSize: 40,
+            color: "white",
+          }}
+        >
           MOST STARS
         </p>
       </div>
 
       <div style={{ margin: "30px" }} className="carousel">
-      <Slider className="procontainer" {...carouselProperties}>
-        {         
-        allsale.map((AllSales) => (
-          <BookCard onclick = {AllSales._id} name = {AllSales.name} author = {AllSales.author} imgurl = {AllSales.img} publisher = {AllSales.publisher} price = {AllSales.cost} score = {avgrating(AllSales)}></BookCard>
-        ))}
-      </Slider>
+        <Slider className="procontainer" {...carouselProperties}>
+          {allsale.map((AllSales) => (
+            <BookCard
+              onclick={AllSales._id}
+              name={AllSales.name}
+              author={AllSales.author}
+              imgurl={AllSales.img}
+              publisher={AllSales.publisher}
+              price={AllSales.cost}
+              score={avgrating(AllSales)}
+            ></BookCard>
+          ))}
+        </Slider>
       </div>
 
       <div class="upper-container2" ref={gocampaign}>
-        <p style = {{ display: 'flex', justifyContent: 'center', fontWeight: 'bold', fontSize: 40, color: "white"}}>
+        <p
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            fontWeight: "bold",
+            fontSize: 40,
+            color: "white",
+          }}
+        >
           IN CAMPAIGN
         </p>
       </div>
 
       <div style={{ margin: "30px" }} className="carousel">
-      <Slider className="procontainer2" {...carouselProperties}>
-        {         
-        topprod.map((AllSales) => (
-          <BookCard onclick = {AllSales._id} name = {AllSales.name} author = {AllSales.author} imgurl = {AllSales.img} publisher = {AllSales.publisher} price = {AllSales.cost} score = {avgrating(AllSales)}></BookCard>
-        ))}
-      </Slider>
-
+        <Slider className="procontainer2" {...carouselProperties}>
+          {topprod.map((AllSales) => (
+            <BookCard
+              onclick={AllSales._id}
+              name={AllSales.name}
+              author={AllSales.author}
+              imgurl={AllSales.img}
+              publisher={AllSales.publisher}
+              price={AllSales.cost}
+              score={avgrating(AllSales)}
+            ></BookCard>
+          ))}
+        </Slider>
       </div>
-
-
     </div>
   );
 };

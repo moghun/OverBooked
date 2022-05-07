@@ -35,8 +35,18 @@ class SignUp extends Component{
             password:event.target.value
         })
     }
+    
+    popup(result) {
+        if(result === 201){
+            return(<h>Registration Successfull</h>)
+        }
+    }
 
-
+    myFunction(data) {
+        if(data === 201){alert("Confirmed");}
+        else{alert("Error");}
+      }
+    
     onSubmit(event){
         event.preventDefault();
         const registered ={
@@ -45,7 +55,7 @@ class SignUp extends Component{
             password: this.state.password,
         }
 
-        axios.post('http://localhost:5001/api/auth/register', registered).then(response => console.log(response.data))
+        axios.post('http://localhost:5001/api/auth/register', registered).then(response => this.myFunction(response.status))
         this.setState({
             username: '',
             email: '',

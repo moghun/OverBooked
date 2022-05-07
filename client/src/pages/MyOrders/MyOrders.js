@@ -1,12 +1,31 @@
-import React from "react";
+import React,{useState} from "react";
 import "../MyOrders/MyOrders.css";
+
+
+
+const Popup = props => {
+  return (
+    <div className="popup-box">
+      <div className="box">
+        <span className="close-icon" onClick={props.handleClose}>x</span>
+        {props.content}
+      </div>
+    </div>
+  );
+};
 
 const MyOrders = () => {
 
+  const [isOpen, setIsOpen] = useState(false);
+ 
+  const togglePopup = () => {
+    setIsOpen(!isOpen);
+  }
+
   const orderList = [
-    {date: "2022-05-03", status: "delivered", total: 99.90, oid: 123456} ,
-    {date: "2022-05-03", status: "confirmed", total: 78.90, oid: 789456} ,
-    {date: "2022-05-03", status: "shipped", total: 25.90, oid: 193782} 
+    {date: "2022-05-03", status: "delivered", total: 99.90, oid: 123456, products:["Kolpaçino" , "Arog", "Gora"]} ,
+    {date: "2022-05-03", status: "confirmed", total: 78.90, oid: 789456,products:["Kolpaçino" , "Arog", "Gora"]} ,
+    {date: "2022-05-03", status: "shipped", total: 25.90, oid: 193782,products:["Kolpaçino" , "Arog", "Gora"]} 
   ]
 
 
@@ -44,11 +63,28 @@ const MyOrders = () => {
                       <h style={{marginLeft: '25px'}}>{item.date}</h>
                       {orderStatus(item.status)}
                       <h style={{marginLeft: '100px', fontWeight:'bold'}}>Total: {item.total} TL</h>
-                      <input type = "submit" value = "Details"  style={{marginLeft: '100px', width:"50px",borderRadius:'5px'}}/>
+                      <input onClick={togglePopup} type = "button" value = "Details"  style={{marginLeft: '100px', width:"50px",borderRadius:'5px'}}/>
+                      {isOpen && 
+                      <Popup content={
+                      <>
+                      <b>Products</b>
+                      {item.products.map(
+                        (prdct) => {
+                          return(
+                            <p style={{fontSize:'15px'}}>-{prdct}</p>
+                            
+                          )
+                        }
+                      )}
+                      </>}
+                      handleClose={togglePopup}
+                      />}
                     </div>
                 );})}
+                
   
           </div>
+
         </div>
       </div>
       </div>

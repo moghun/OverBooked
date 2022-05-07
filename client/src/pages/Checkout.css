@@ -1,10 +1,18 @@
 
 @import url('https://fonts.googleapis.com/css?family=Open+Sans');
 
+.checkout-wholepage{
+    background-image: url(bookshelfforcheckout.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+
+}
 
 
 .checkout-container{
-    border: 1px solid black;
+    border: none;
+    outline: none;
     margin: 0.5rem;
     padding: 2rem 2rem;
     text-align: center;
@@ -18,13 +26,13 @@
     align-items: center;
     margin: auto;
     margin-top: 20px;
-    padding-left: 40px;
+    padding-left: 70px;
     padding-right: 40px;
-    outline: solid;
+    outline: none;
     outline-width: 2px;
     outline-offset: 25%;
-    width: 300px;
-    height: 1000px;
+    width: 350px;
+    height: 1050px;
     border-radius: 10px;
     
 }
@@ -258,112 +266,6 @@
 
 
 
-
-/* Card Information Div */
-.cardinfo-container{
-    background-color: white;
-    padding-top: 10px;
-    align-items: center;
-    margin: auto;
-    margin-top: 20px;
-    padding-left: 40px;
-    padding-right: 40px;
-    outline: solid;
-    outline-width: 2px;
-    outline-offset: 25%;
-    width: 300px;
-    height: 500px;
-    border-radius: 10px;
-}
-
-
-/*Card Number Entry Div */
-.cardnumber{
-    outline: none;
-    outline-width: 2px;
-    width: 100%;
-    margin-bottom: 40px;
-    margin-top: 10px;
-    border-radius: 10px;
-}
-
-.cardnumber h{
-    padding-right: 110px;
-    font-family: 'Open Sans';
-}
-
-.cardnumber .text{
-    width: 200px;
-    height: 24px;
-    text-size-adjust: auto;
-    margin-left: 5px;
-    margin-top: 5px;
-    margin-right: 5px;
-    text-align: center;
-    border-radius: 5px;
-    border: none;
-    outline: none;
-}
-
-
-/*Expiration Date Entry Div */
-.expirationdate{
-    outline: none;
-    outline-width: 2px;
-    width: 100%;
-    margin-bottom: 40px;
-    margin-top: 10px;
-    border-radius: 10px;
-}
-
-.expirationdate h{
-    padding-right: 110px;
-    font-family: 'Open Sans';
-}
-
-.expirationdate .text{
-    width: 200px;
-    height: 24px;
-    text-size-adjust: auto;
-    margin-left: 5px;
-    margin-top: 5px;
-    margin-right: 5px;
-    text-align: center;
-    border-radius: 5px;
-    border: none;
-    outline: none;
-}
-
-/*Expiration Date Entry Div */
-.securitynumber{
-    outline: none;
-    outline-width: 2px;
-    width: 100%;
-    margin-bottom: 40px;
-    margin-top: 10px;
-    border-radius: 10px;
-}
-
-.securitynumber h{
-    padding-right: 110px;
-    font-family: 'Open Sans';
-}
-
-.securitynumber .number{
-    width: 200px;
-    height: 24px;
-    text-size-adjust: auto;
-    margin-left: 5px;
-    margin-top: 5px;
-    margin-right: 5px;
-    text-align: center;
-    border-radius: 5px;
-    border: none;
-    outline: none;
-}
-
-
-
 /* Checkout Button Div */
 .checkout-button input{
     width: 240px;
@@ -373,10 +275,10 @@
     margin-top: 10px;
     transition-duration: 0.3s;
     background-color: rgb(80, 200, 247);
-    color: white;
     font-weight: bold;
     border: hidden;
     outline: solid;
+    margin-left: 40%;
 }
 
 .checkout-button input:hover{
