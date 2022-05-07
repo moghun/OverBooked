@@ -87,6 +87,61 @@ router.put("/rate/:id", verifyToken, async (req, res) => {
   }
 });
 
+//GET COMMENTS OF ITEMS THAT HAVE ONE OR MORE COMMENTS
+router.get("/commentApproval", verifyTokenAndProductManager,async (req, res) => {
+  try {
+    const products = await Product.find(
+        {$nor: [
+          {comments: {$exists: false}},
+          {comments: {$size: 0}},
+      ]}
+    );
+
+    res.status(200).json(products);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+//APPROVE COMMENT
+router.put("/commentApproval/:id/:cno", verifyTokenAndProductManager, async (req, res) => {
+  try {
+    let comment_update = {comment_id: req.params.cno}
+    await Product.findByIdAndUpdate(
+      req.params.id,
+      {
+        $pull: {comments: comment_update},
+      },
+    );
+
+    const updatedProduct = await Product.findByIdAndUpdate(
+      req.params.id,
+      {
+        $push: {comments: req.body},
+      },
+      { new: true }
+    );
+    res.status(200).json(updatedProduct);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+//DISAPPROVE COMMENT
+router.put("/commentApproval/delete/:id/:cno", verifyTokenAndProductManager, async (req, res) => {
+  try {
+    let comment_update = {comment_id: req.params.cno}
+    await Product.findByIdAndUpdate(
+      req.params.id,
+      {
+        $pull: {comments: comment_update},
+      },
+    );
+    res.status(200).json("Comment is disapproved");
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
 //DELETE
 router.delete("/:id", verifyTokenAndProductManager, async (req, res) => {

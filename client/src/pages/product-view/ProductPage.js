@@ -8,6 +8,9 @@ import { useDispatch } from "react-redux";
 import axios from "axios";
 import { useSelector } from "react-redux";
 
+const { 
+    v1: uuidv1,
+  } = require('uuid')
 
 
 const DetailsThumb = () => {
@@ -38,6 +41,7 @@ const DetailsThumb = () => {
             {
                 const sendComment = {
                     //user_id must be taken from the redux storage
+                    comment_id: uuidv1(),
                     user_id: currUser._id,
                     comment: comment,
                     isApproved: false,
