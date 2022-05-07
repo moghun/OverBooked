@@ -1,5 +1,5 @@
 import { padding } from '@mui/system';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import {FaStar} from 'react-icons/fa';
 import { publicRequest } from "../requestMethods";
 import { useLocation } from "react-router-dom";
@@ -16,7 +16,7 @@ const {
 const DetailsThumb = () => {
     const currUser = useSelector((state) => state.user.currentUser);
     const location = useLocation();
-    const id = location.pathname.split("/")[2];
+    const id = useMemo(() => location.pathname.split("/")[2]);
     const [product, setProduct] = useState({});
     const [amount, setAmount] = useState(null);
     const [maxAmount, setMaxAmount] = useState(null);
@@ -34,8 +34,6 @@ const DetailsThumb = () => {
             console.log("Rating and Comment cannot be left empty!")
         }
         else{
-            console.log(comment)
-            console.log(rating)
 
             if(comment != "")
             {
@@ -50,6 +48,7 @@ const DetailsThumb = () => {
                     //token needed to be sent from the redux storage
                     axios.put("http://localhost:5001/api/products/comment/" + id, sendComment, {headers: {token: ("Bearer "+ currUser.accessToken)}}
                     );
+                    window.location.reload();
                 } catch (err){}
             }
 
@@ -68,7 +67,6 @@ const DetailsThumb = () => {
             }
 
         }
-        window.location.reload();
 
     }
     
@@ -81,7 +79,7 @@ const DetailsThumb = () => {
           } catch {}
         };
         getProduct();
-      }, [id]);
+      },[]);
    
     
     function getAmount(val){ 
@@ -98,18 +96,19 @@ const DetailsThumb = () => {
     }
 
     function commentDiv(item){
-        if(item.comments.length === 0){
+        
+        if(item && item.comments.length === 0){
             return(<h>This product has no comment yet</h>); 
         }
         else{
             
             return(
                 
-                item.comments.map(
-                    (cmt) =>{
+                item.comments.map((cmt) => 
+                {
                         return(
                             
-                            <div className='comment-row' style={{outline:'solid',  outlineWidth:'1px', borderRadius: '5px', margin:'20px', padding:'5px'}}>
+                            <div key={cmt.comment_id} className='comment-row' style={{outline:'solid',  outlineWidth:'1px', borderRadius: '5px', margin:'20px', padding:'5px'}}>
                                 <h className='comment-text'>{cmt.comment}</h>
                             </div>
                             
@@ -183,6 +182,7 @@ const DetailsThumb = () => {
 
             <div className='comment-box' style={{textAlign:'center'}}>
                 <h3 style={{marginBottom: '10px'}}>Product Comments</h3>
+                {console.log(product)}
                 {/*
                     product.comments.length === 0
                     ? <h>This product has no comment yet</h>
@@ -196,6 +196,7 @@ const DetailsThumb = () => {
                         }
                     )
                     */
+                   
                    //commentDiv(product)
                 }
                 
