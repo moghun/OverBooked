@@ -109,7 +109,6 @@ const HomePage = () => {
         "http://localhost:5001/api/products?sale=true"
       );
       setallsale(res.data);
-      return res.data;
     } catch (err) {}
   };
 
@@ -117,7 +116,6 @@ const HomePage = () => {
     try {
       const res = await axios.get("http://localhost:5001/api/products?top=10");
       settopprod(res.data);
-      return res.data;
     } catch (err) {}
   };
 
@@ -234,7 +232,7 @@ const HomePage = () => {
 
       <div style={{ margin: "30px" }} className="carousel">
         <Slider className="procontainer" {...carouselProperties}>
-          {allsale.map((AllSales) => (
+          {topprod.map((AllSales) => (
             <BookCard
               onclick={AllSales._id}
               name={AllSales.name}
@@ -264,7 +262,7 @@ const HomePage = () => {
 
       <div style={{ margin: "30px" }} className="carousel">
         <Slider className="procontainer2" {...carouselProperties}>
-          {topprod.map((AllSales) => (
+          {allsale.map((AllSales) => (
             <BookCard
               onclick={AllSales._id}
               name={AllSales.name}
