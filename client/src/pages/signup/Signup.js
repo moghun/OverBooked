@@ -35,7 +35,13 @@ class SignUp extends Component{
             password:event.target.value
         })
     }
+    
+    popup(result) {
+        if(result === 201){
+            return(<h>Registration Successfull</h>)
+        }
 
+    }
 
     onSubmit(event){
         event.preventDefault();
@@ -46,6 +52,7 @@ class SignUp extends Component{
         }
 
         axios.post('http://localhost:5001/api/auth/register', registered).then(response => console.log(response.data))
+        
         this.setState({
             username: '',
             email: '',

@@ -1,5 +1,8 @@
 import "./NavigationBar.css"
 const NavigationBar= () =>{
+
+
+    const isSigned = false;
     return (
 
         <nav class="navbar">
@@ -27,11 +30,12 @@ const NavigationBar= () =>{
                 </div>
             </div>
             
-            
+            {!isSigned
+            ?            
             <a href="/signin" class="  item">
-
                 <div class="group">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Google_account_icon.svg/803px-Google_account_icon.svg.png" alt="search"/>
+                    
                     
                     <div class="detail">
                         Account
@@ -39,6 +43,23 @@ const NavigationBar= () =>{
                     </div>
                 </div>
             </a>
+            :   
+            <div>        
+            <a href="/editprofile" class="  item">
+                <div class="group">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Google_account_icon.svg/803px-Google_account_icon.svg.png" alt="search"/>
+                    
+                    
+                    <div class="detail">
+                        Account
+                    </div>
+                </div>
+            </a>
+            <button style={{marginTop:'-10px',marginLeft:'37px', color:'white', outline:'none', marginTop:'-10px'}}>Logout</button>
+            </div> 
+            
+            }
+
 
             <a href="" class="item">
                 <div class="group">
