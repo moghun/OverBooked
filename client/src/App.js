@@ -17,8 +17,9 @@ import Success from './pages/success';
 import SignUp from './pages/signup/Signup';
 import Signin from './pages/signin/Signin';
 import { useSelector } from "react-redux";
-
 import MyOrders from './pages/MyOrders/MyOrders';
+import CommentApprove from './pages/profilePage/product-managerPage/product-managerProfile';
+
 function App() {
     const user = useSelector((state) => state.user.currentUser);
     return (
@@ -47,6 +48,7 @@ function App() {
           <Route path = "/shoppingcart" element = {<ShoppingCart/>} />
           <Route path = "/myorders" element = {<MyOrders/>} />
           <Route path = "/success" element = {<Success/>} />
+          <Route path = "/approvaldisapproval" element = {<CommentApprove/>} />
           
         </Routes>
         <div>
