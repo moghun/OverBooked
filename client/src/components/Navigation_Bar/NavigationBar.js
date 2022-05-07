@@ -1,8 +1,11 @@
-import "./NavigationBar.css"
+import "./NavigationBar.css";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { logOut } from "../../redux/userRedux";
 const NavigationBar= () =>{
 
+    const currUser = useSelector((state) => state.user.currentUser);
 
-    const isSigned = false;
     return (
 
         <nav class="navbar">
@@ -30,7 +33,7 @@ const NavigationBar= () =>{
                 </div>
             </div>
             
-            {!isSigned
+            {currUser === null
             ?            
             <a href="/signin" class="  item">
                 <div class="group">
@@ -45,7 +48,7 @@ const NavigationBar= () =>{
             </a>
             :   
             <div>        
-            <a href="/editprofile" class="  item">
+            <a href="/profile" class="  item">
                 <div class="group">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Google_account_icon.svg/803px-Google_account_icon.svg.png" alt="search"/>
                     
@@ -55,7 +58,7 @@ const NavigationBar= () =>{
                     </div>
                 </div>
             </a>
-            <button style={{marginTop:'-10px',marginLeft:'37px', color:'white', outline:'none', marginTop:'-10px'}}>Logout</button>
+            <button onClick={logOut} style={{marginTop:'-10px',marginLeft:'37px', color:'white', outline:'none', marginTop:'-10px'}}>Logout</button>
             </div> 
             
             }
