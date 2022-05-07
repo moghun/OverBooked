@@ -4,6 +4,12 @@ import { useSelector } from "react-redux";
 import { removeProduct } from "../redux/cartRedux";
 import { clearCart } from "../redux/cartRedux";
 import { useDispatch } from "react-redux";
+import StripeCheckout from "react-stripe-checkout";
+import {useEffect,useState } from 'react';
+import {useNavigate } from "react-router-dom";
+import {userRequest} from "./requestMethods";
+
+const KEY = process.env.REACT_APP_STRIPE;
 
 const ShoppingCart = () => {
   const cart = useSelector((state) => state.cart);
@@ -25,13 +31,28 @@ const ShoppingCart = () => {
     );
   };
 
-  function addItem(){
+  const [stripeToken,setStripeToken]  = useState(null);
+  const history = useNavigate();
 
-  }
+  const onToken = (token) => {
+    setStripeToken(token);
 
-  function decreaseItem(){}
+  };
 
-  
+  useEffect(() => {
+    const makeRequest = async () => {
+      try {
+        const res = await userRequest.post("/checkout/payment", {
+          tokenId: stripeToken.id,
+          amount: cart.total*100,
+        });
+        history("/success", {
+          stripeData: res.data,
+          products: cart, });
+      } catch {}
+    };
+    stripeToken && cart.total > 0 && makeRequest();
+  }, [stripeToken, cart.total, history]);
 
   return (
     <div className='shoppingcart-container'>
@@ -57,10 +78,20 @@ const ShoppingCart = () => {
 
             <hr style={{width: '100%', borderColor:'black',  borderWidth: "2px"}}></hr>
             <div><h style={{marginLeft:"50px"}}>Total: {cart.total}</h></div>
-            {signedIn 
-              ? <form style={{marginLeft:"50px"}} action='/checkout'><input type='submit' value="Checkout"/></form> 
-              : <a style={{marginLeft:"50px"}} href='/'>Sign in to checkout</a>
-            }
+            
+            <StripeCheckout
+              name="OverBooked"
+              image="https://st3.depositphotos.com/1031343/33199/v/1600/depositphotos_331995822-stock-illustration-overbooked-sign-or-stamp.jpg"
+              billingAddress
+              shippingAddress
+              description={`Your total is $${cart.total}`}
+              amount={cart.total * 100}
+              token={onToken}
+              stripeKey={KEY}
+            >
+              <button style={{ marginLeft: '25px', width: "50px"}}>CHECKOUT</button>
+            </StripeCheckout>
+           
           
           </div>
 
