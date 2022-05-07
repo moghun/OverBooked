@@ -1,12 +1,29 @@
 import { Button } from "@material-ui/core";
 import { Card } from "@material-ui/core";
 import Avatar from "@material-ui/core/Avatar";
-import { useState } from "react";
+import axios from "axios";
+import React, { useState, useEffect } from "react";
 import { Typography } from "@material-ui/core";
+
 import { useSelector } from "react-redux";
 
 const Profile = () => {
-  const currUser = useSelector((state) => state.user.currentUser);
+  const loggedUser = useSelector((state) => state.user.currentUser);
+  const [currUser, setUser] = useState({});
+
+  const getUserInfo = async () => {
+    try {
+      const res = await axios.get(
+        "http://localhost:5001/api/users/find/" + loggedUser._id,
+        { headers: { token: "Bearer " + loggedUser.accessToken } }
+      );
+      setUser(res.data);
+    } catch (err) {}
+  };
+
+  useEffect(async () => {
+    getUserInfo();
+  }, []);
 
   function userstatus(userrole) {
     if (userrole === "customer") {
@@ -51,7 +68,7 @@ const Profile = () => {
         <div>
           <Avatar style={{ width: 200, height: 200 }} />
         </div>
-
+        {console.log(currUser)}
         <div>
           <h2>Name: {currUser.name} </h2>
           <br />
