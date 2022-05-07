@@ -15,10 +15,7 @@ class Checkout extends Component{
         country: '',
         province: '',
         city: '',
-        address: '',
-        cardnumber: '',
-        expirationdate: '',
-        securitynumber: ''
+        address: ''
     }
 
     this.changeMail = this.changeMail.bind(this);
@@ -29,9 +26,6 @@ class Checkout extends Component{
     this.changeProvince = this.changeProvince.bind(this);
     this.changeCity = this.changeCity.bind(this);
     this.changeAddress = this.changeAddress.bind(this);
-    this.changeCardNumber = this.changeCardNumber.bind(this);
-    this.changeDate = this.changeDate.bind(this);
-    this.changeSecurityNumber = this.changeSecurityNumber.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
 
   }
@@ -83,25 +77,6 @@ class Checkout extends Component{
         address:event.target.value
     })
   }
-
-  changeCardNumber(event){
-    this.setState({
-      cardnumber: event.target.value
-    })
-  }
-
-  changeDate(event){
-    this.setState({
-      expirationdate: event.target.value
-    })
-  }
-
-  changeSecurityNumber(event){
-    this.setState({
-      securitynumber: event.target.value
-    })
-  }
-
   
   onSubmit(event){
     event.preventDefault();
@@ -114,9 +89,7 @@ class Checkout extends Component{
         province: this.state.province, 
         city: this.state.city,
         address: this.state.address,
-        cardnumber: this.state.cardnumber, 
-        expirationdate: this.state.expirationdate,
-        securitynumber: this.state.securitynumber
+
     }
 
     console.log("Email: ", registered.address)
@@ -126,10 +99,6 @@ class Checkout extends Component{
     console.log("Country: ", registered.country)
     console.log("Province: ", registered.province)
     console.log("City: ", registered.city)
-    console.log("Card Number: ", registered.cardnumber)
-    console.log("Expiration Date: ", registered.expirationdate)
-    console.log("Security Number: ", registered.securitynumber)
-
 
     this.setState({
       email: '',
@@ -139,22 +108,19 @@ class Checkout extends Component{
       country: '',
       province: '',
       city: '',
-      address: '', 
-      cardnumber: '',
-      expirationdate: '',
-      securitynumber: ''
+      address: ''
     })
   }
 
   render(){
     return(
-
+    <div className='checkout-wholepage'>
     <div className='checkout-container'>
 
       <div className="personalinfo-container">
 
-      <h1 style={{fontFamily:'Open Sans'}}>Personal</h1>
-      <h1 style={{fontFamily:'Open Sans', marginLeft: -35}}>INFORMATIONS</h1>
+        <h1 style={{fontFamily:'Open Sans'}}>Personal</h1>
+        <h1 style={{fontFamily:'Open Sans', marginLeft: -50}}>INFORMATIONS</h1>
 
         <div className="name">
           <h>Name</h>
@@ -268,52 +234,7 @@ class Checkout extends Component{
           <hr style={{width:200}}></hr>
         </div>
 
-      </div>
-
-      <div className='cardinfo-container'>
-
-        <h1 style={{fontFamily:'Open Sans'}}>CARD</h1>
-        <h1 style={{fontFamily:'Open Sans', marginLeft: -35}}>INFORMATIONS</h1>
-
-        <div className="cardnumber">
-          <h>Card Number</h>
-          <form onSubmit={this.onSubmit}>
-            <input 
-            className="text" 
-            placeholder="Type your card number"
-            onChange={this.changeCardNumber}
-            value={this.state.cardnumber}
-            />
-          </form>
-          <hr style={{width:200}}></hr>
-        </div>
-
-        <div className="expirationdate">
-          <h>Expiration Date</h>
-          <form onSubmit={this.onSubmit}>
-            <input 
-            className="text"
-            placeholder="Type your expiration date"
-            onChange={this.changeDate}
-            value={this.state.expirationdate}
-            />
-          </form>
-          <hr style={{width:200}}></hr>
-        </div>
-
-        <div className="securitynumber">
-          <h>Security Number</h>
-          <form onSubmit={this.onSubmit}>
-            <input 
-            className="number" 
-            placeholder="Type your security number"
-            pattern='[0-9]{3}'
-            onChange={this.changeSecurityNumber}
-            value={this.state.securitynumber}
-            />
-          </form>
-          <hr style={{width:200}}></hr>
-        </div>
+        
 
       </div>
 
@@ -323,6 +244,7 @@ class Checkout extends Component{
         </form>
       </div>
 
+    </div>
     </div>
     
     )

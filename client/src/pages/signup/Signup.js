@@ -35,6 +35,12 @@ class SignUp extends Component{
             password:event.target.value
         })
     }
+    
+    popup(result) {
+        if(result === 201){
+            return(<h>Registration Successfull</h>)
+        }
+    }
 
     myFunction(data) {
         if(data === 201){alert("Confirmed");}

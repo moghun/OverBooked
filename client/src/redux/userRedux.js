@@ -20,7 +20,11 @@ const userSlice = createSlice({
       state.isFetching = false;
       state.error = true;
     },
+<<<<<<< HEAD
+    logOut: (state) => {
+=======
     logOut: (state) => {  
+>>>>>>> remotes/origin/master
       state.currentUser = null;
     },
   },
