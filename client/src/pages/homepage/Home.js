@@ -5,11 +5,104 @@ import "../../components/Navigation_Bar/NavigationBar.css";
 import { Button } from "@material-ui/core";
 import ScrollToTop from "../../components/Scroll/ScrollToTop";
 
-// import {Link} from "react-router-dom";
+
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import { ArrowBackIos, ArrowForwardIos } from "@material-ui/icons";
 
 import axios from "axios";
 import BookCard from "../../components/BookCard";
 import { Grid } from "@mui/material";
+
+
+//in order to have sequence products with slider
+
+
+function SampleNextArrow(props) {
+  const { className, style, onClick } = props;
+  return (
+    <div
+      className={className}
+      style={{ ...style, display: "block", background: "yellow" }}
+      onClick={onClick}
+    />
+  );
+}
+
+function SamplePrevArrow(props) {
+  const { className, style, onClick } = props;
+  return (
+    <div
+      className={className}
+      style={{ ...style, display: "block", background: "green" }}
+      onClick={onClick}
+    />
+  );
+}
+
+
+
+
+const carouselProperties = {
+  nextArrow: <SampleNextArrow />,
+  prevArrow: <SamplePrevArrow />,
+  dots: true,
+  infinite: false,
+  speed: 500,
+  slidesToShow: 4,
+  slidesToScroll: 4,
+  initialSlide: 0,
+  responsive: [
+    {
+      breakpoint: 1024,
+      settings: {
+        slidesToShow: 3,
+        slidesToScroll: 3,
+        infinite: true,
+        dots: true
+      }
+    },
+    {
+      breakpoint: 600,
+      settings: {
+        slidesToShow: 2,
+        slidesToScroll: 2,
+        initialSlide: 2
+      }
+    },
+    {
+      breakpoint: 480,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1
+      }
+    }
+  ]
+};
+
+
+
+function avgrating(items) {
+
+  
+  var totalrate = 0;
+  for (var i = 0; i < items.rating.length; i++) {
+
+    totalrate += items.rating[i].rating;
+
+  }
+
+  if(isNaN(totalrate/items.rating.length)) {
+
+    return 0;
+
+
+
+  }
+  return ((totalrate/items.rating.length).toFixed(1));
+
+}
 
 
 const HomePage = () => {
@@ -63,28 +156,12 @@ const HomePage = () => {
     });
   };
 
-
-
-  const [currentSlide, setCurrentSlide] = useState(1);
   const [currentSlide2, setCurrentSlide2] = useState(1);
-  const slideLength = allsale.length;
   const slideLength2 = topprod.length;
 
-  const autoScroll = true;
   const autoScroll2 = true;
-  let slideInterval;
   let slideInterval2;
   let intervalTime = 5000;
-
-  const nextSlide = () => {
-    setCurrentSlide(currentSlide === slideLength - 1 ? 0 : currentSlide + 1);
-    console.log("next");
-  };
-
-  const prevSlide = () => {
-    setCurrentSlide(currentSlide === 0 ? slideLength - 1 : currentSlide - 1);
-    console.log("prev");
-  };
 
   const nextSlide2 = () => {
     setCurrentSlide2(currentSlide2 === slideLength2 - 1 ? 0 : currentSlide2 + 1);
@@ -96,28 +173,13 @@ const HomePage = () => {
     console.log("prev");
   };
 
-  function auto() {
-    slideInterval = setInterval(nextSlide, intervalTime);
-  }
-
   function auto2() {
     slideInterval2 = setInterval(nextSlide2, intervalTime);
   }
 
   useEffect(() => {
-    setCurrentSlide(0);
-  }, []);
-
-  useEffect(() => {
     setCurrentSlide2(0);
   }, []);
-
-  useEffect(() => {
-    if (autoScroll) {
-      auto();
-    }
-    return () => clearInterval(slideInterval);
-  }, [currentSlide]);
 
 
   useEffect(() => {
@@ -138,37 +200,6 @@ const HomePage = () => {
 
       </div>
 
-      <div className="slider">
-
-        <AiFillBackward className="arrow prev" onClick={prevSlide} />
-        <AiFillForward className="arrow next" onClick={nextSlide} />
-        {allsale.map((slide, index) => {
-          return (
-            <div
-              className={index === currentSlide ? "slide current" : "slide"}
-              key={index}
-            >
-              {index === currentSlide && (
-                <div style={{display: 'flex', justifyContent: 'center'}}>
-                  <img src={slide.img} alt="slide"/>
-                  <div className="content">
-                    <p>MOST STARS PRODUCTS</p>
-                    <h2>{slide.name}</h2>
-                    <p>{slide.description}</p>
-                    <hr />
-                    <form action={"/productpage/" + slide._id} method="get">
-                      <button className="--btn --btn-primary">
-                        Go To This Product
-                      </button>
-                    </form>
-                  </div>
-                </div>
-              )}
-            </div>
-          );
-        })}
-      </div>
-
       <br/>
       <br/>
 
@@ -186,7 +217,8 @@ const HomePage = () => {
                 <div style={{display: 'flex', justifyContent: 'center'}}>
                   <img src={slide.img} alt="slide"/>
                   <div className="content">
-                    <p>{slide.name}</p>
+                    <h2>{slide.name}</h2>
+                    <p> {slide.description}</p>
                     <hr />
                     <form action={"/productpage/" + slide._id} method="get">
                       <button className="--btn --btn-primary">
@@ -210,21 +242,14 @@ const HomePage = () => {
         </p>
       </div>
 
-      <Grid container direction="row" justifyContent="space-around">
-        {
-
-          
-        allsale.map((AllSales)=>(
-
-
-          <BookCard onclick = {AllSales._id} name = {AllSales.name} author = {AllSales.author} imgurl = {AllSales.img} publisher = {AllSales.publisher} price = {AllSales.cost}></BookCard>
-
-
-
-
-        ))
-        }
-      </Grid>
+      <div style={{ margin: "30px" }} className="carousel">
+      <Slider className="procontainer" {...carouselProperties}>
+        {         
+        allsale.map((AllSales) => (
+          <BookCard onclick = {AllSales._id} name = {AllSales.name} author = {AllSales.author} imgurl = {AllSales.img} publisher = {AllSales.publisher} price = {AllSales.cost} score = {avgrating(AllSales)}></BookCard>
+        ))}
+      </Slider>
+      </div>
 
       <div class="upper-container2" ref={gocampaign}>
         <p style = {{ display: 'flex', justifyContent: 'center', fontWeight: 'bold', fontSize: 40, color: "white"}}>
@@ -232,21 +257,16 @@ const HomePage = () => {
         </p>
       </div>
 
-      <Grid container direction="row" justifyContent="space-around">
-        {
+      <div style={{ margin: "30px" }} className="carousel">
+      <Slider className="procontainer2" {...carouselProperties}>
+        {         
+        topprod.map((AllSales) => (
+          <BookCard onclick = {AllSales._id} name = {AllSales.name} author = {AllSales.author} imgurl = {AllSales.img} publisher = {AllSales.publisher} price = {AllSales.cost} score = {avgrating(AllSales)}></BookCard>
+        ))}
+      </Slider>
 
-          
-        topprod.map((AllSales)=>(
+      </div>
 
-
-          <BookCard onclick = {AllSales._id} name = {AllSales.name} author = {AllSales.author} imgurl = {AllSales.img} publisher = {AllSales.publisher} price = {AllSales.cost}></BookCard>
-
-
-
-
-        ))
-        }
-      </Grid>
 
     </div>
   );
