@@ -1,12 +1,17 @@
 import "./NavigationBar.css";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { logOut } from "../../redux/userRedux";
 import { useEffect, useState } from "react";
+import { logout } from "../../redux/apiCalls";
 const NavigationBar= () =>{
 
     const currUser = useSelector((state) => state.user.currentUser);
     const [searchValue, setSearchValue] = useState("");
+    const dispatch = useDispatch()
+    
+    const handleClick = () => {       
+        logout(dispatch,currUser);
+      };
 
     const onValueChange = (event) => {
         setSearchValue(event.target.value);
@@ -65,7 +70,10 @@ const NavigationBar= () =>{
                     </div>
                 </div>
             </a>
-            <button onClick={logOut} style={{marginTop:'-10px',marginLeft:'37px', color:'white', outline:'none', marginTop:'-10px'}}>Logout</button>
+            <button onClick= {handleClick} style={{marginTop:'-10px',marginLeft:'37px', color:'white', outline:'none', marginTop:'-10px'}}>Logout</button>
+            
+
+            
             </div> 
             
             }

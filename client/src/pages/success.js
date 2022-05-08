@@ -2,10 +2,12 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useLocation } from "react-router";
 import { userRequest } from "./requestMethods";
+import { useNavigate } from "react-router-dom";
+import { Button } from "@material-ui/core";
+
 
 const Success = () => {
   const location = useLocation();
-  
   const data = location.state.stripeData;
   const cart = location.state.cart;
   const currentUser = useSelector((state) => state.user.currentUser);
@@ -42,7 +44,8 @@ const Success = () => {
       {orderId
         ? `Order has been created successfully. Your order number is ${orderId}`
         : `Successfull. Your order is being prepared...`}
-      <button style={{ padding: 10, marginTop: 20 }}>Go to Homepage</button>
+      <Button href = {"/"} style={{ padding: 10, marginTop: 20 }}>Go to Homepage</Button>
+
     </div>
   );
 };

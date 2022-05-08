@@ -69,13 +69,12 @@ const ShoppingCart = () => {
           tokenId: stripeToken.id,
           amount: cart.total * 100,
         });
-        history("/success", {
+        history("/success", {state:{
           stripeData: res.data,
-          products: cart,
-        });
+          products: cart }});
       } catch {}
     };
-    stripeToken && cart.total > 0 && makeRequest();
+    stripeToken && cart.total >= 1 && makeRequest();
   }, [stripeToken, cart.total, history]);
 
   return (
