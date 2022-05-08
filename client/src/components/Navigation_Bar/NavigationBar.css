@@ -3339,6 +3339,23 @@ footer {
       }
 
 
+      .borders {
+
+
+
+        text-decoration-color: red;
+        text-decoration-line: line-through; 
+        border-top: 2px solid black;
+        font-size: 100%;
+      }
+
+
+      .borders2 {
+
+        border-top: 2px solid rgb(0, 255, 162);
+        font-weight: bold;
+        font-size: 150%;
+      }
 
 
 
