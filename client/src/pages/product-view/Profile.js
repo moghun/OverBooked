@@ -70,18 +70,32 @@ const Profile = () => {
         </div>
         {console.log(currUser)}
         <div>
+          <div class= "userInfo-container"> 
           <h2>Name: {currUser.name} </h2>
+          </div>
           <br />
+          <div class= "userInfo-container"> 
           <h2 style={{}}>Surname: {currUser.surname} </h2>
-          <br />
-          {userstatus(currUser.user_role)}
-          <br />
-          <h2>E-MAIL: {currUser.email} </h2>
-          <br />
-          <h2>Username: {currUser.username} </h2>
-          <br />
+          </div>
 
+          <br />
+          <div class= "userInfo-container"> 
+          </div>
+          <div class= "userInfo-container"> 
+          {userstatus(currUser.user_role)}
+          </div>
+          <br />
+          <div class= "userInfo-container"> 
+          <h2>E-MAIL: {currUser.email} </h2>
+          </div>
+          <br />
+          <div class= "userInfo-container"> 
+          <h2>Username: {currUser.username} </h2>
+          </div>
+          <br />
+          <div class= "userInfo-container"> 
           <h2>Adress: {currUser.adress} </h2>
+          </div>
           <br />
         </div>
 

@@ -3497,3 +3497,12 @@ footer {
   transition: 500ms;
 }
 
+.userInfo-container {
+  outline: none;
+  display: table-cell;
+  outline-width: thick;
+  padding: 10px 5px 10px 5px;
+  outline: solid;
+  background-color: burlywood;
+  outline-color: goldenrod;
+}
