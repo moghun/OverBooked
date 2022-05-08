@@ -31,20 +31,37 @@ function App() {
       <div>
         <NavigationBar2 />
       </div>
+
       <Routes>
-        <Route exact path="/" element={<HomePage />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/productpage/:id" element={<ProductPage />} />
-        <Route path="/editprofile" element={<EditProfile />} />
-        <Route path="/createstore" element={<CreateStore />} />
-        <Route path="/searchpage/:q" element={<SearchPage />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/signin" element={<Signin />} />
-        <Route path="/checkout" element={<Checkout />} />
-        <Route path="/shoppingcart" element={<ShoppingCart />} />
-        <Route path="/myorders" element={<MyOrders />} />
-        <Route path="/success" element={<Success />} />
-        <Route path="/approvaldisapproval" element={<ProductManagerAPI />} />
+        {user ? (
+          <>
+            <Route exact path="/" element={<HomePage />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/productpage/:id" element={<ProductPage />} />
+            <Route path="/editprofile" element={<EditProfile />} />
+            <Route path="/createstore" element={<CreateStore />} />
+            <Route path="/searchpage/:q" element={<SearchPage />} />
+            <Route path="/checkout" element={<Checkout />} />
+            <Route path="/shoppingcart" element={<ShoppingCart />} />
+            <Route path="/myorders" element={<MyOrders />} />
+            <Route path="/success" element={<Success />} />
+            <Route
+              path="/approvaldisapproval"
+              element={<ProductManagerAPI />}
+            />
+            <Route path="*" element={<HomePage />} />
+          </>
+        ) : (
+          <>
+            <Route exact path="/" element={<HomePage />} />
+            <Route path="/shoppingcart" element={<ShoppingCart />} />
+            <Route path="/productpage/:id" element={<ProductPage />} />
+            <Route path="/searchpage/:q" element={<SearchPage />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/signin" element={<Signin />} />
+            <Route path="*" element={<HomePage />} />
+          </>
+        )}
       </Routes>
       <div>
         <Footer />
