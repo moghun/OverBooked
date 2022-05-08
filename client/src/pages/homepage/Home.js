@@ -5,7 +5,6 @@ import {
   AiFillForward,
   AiFillBackward,
 } from "react-icons/ai";
-import { sliderData } from "./data";
 import "../../components/Navigation_Bar/NavigationBar.css";
 import { Button } from "@material-ui/core";
 import ScrollToTop from "../../components/Scroll/ScrollToTop";
@@ -174,10 +173,10 @@ const HomePage = () => {
 
       <div className="some-container">
         <Button onClick={() => scrollToSection(gomoststarts)} className="btn">
-          Go To Most Stars
+          Check Recent Products
         </Button>
         <Button onClick={() => scrollToSection(gocampaign)} className="btn3">
-          Go To In Campaign
+          Check Products on sale
         </Button>
       </div>
 
@@ -223,10 +222,10 @@ const HomePage = () => {
             justifyContent: "center",
             fontWeight: "bold",
             fontSize: 40,
-            color: "white",
+            color: "black",
           }}
         >
-          MOST STARS
+          RECENTLY ADDED PRODUCTS
         </p>
       </div>
 
@@ -253,10 +252,10 @@ const HomePage = () => {
             justifyContent: "center",
             fontWeight: "bold",
             fontSize: 40,
-            color: "white",
+            color: "black",
           }}
         >
-          IN CAMPAIGN
+          ON SALE
         </p>
       </div>
 

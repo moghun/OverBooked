@@ -27,7 +27,7 @@ const Profile = () => {
 
   function userstatus(userrole) {
     if (userrole === "customer") {
-      return <h2> CUSTOMER </h2>;
+      return <h2> Customer </h2>;
     } else if (userrole === "product-manager") {
       return <h2> Product Manager </h2>;
     } else if (userrole === "sales-manager") {
@@ -44,7 +44,7 @@ const Profile = () => {
         </Button>
       );
     } else if (userrole === "product-manager") {
-      return <Button className="btn3"> Edit Product Panel </Button>;
+      return <Button className="btn3" href = "\approvaldisapproval"> Edit Product Panel </Button>;
     } else if (userrole === "sales-manager") {
       return <Button className="btn3"> Edit Sales Panel </Button>;
     }
@@ -72,7 +72,7 @@ const Profile = () => {
         <div>
           <h2>Name: {currUser.name} </h2>
           <br />
-          <h2>Surname: {currUser.surname} </h2>
+          <h2 style={{}}>Surname: {currUser.surname} </h2>
           <br />
           {userstatus(currUser.user_role)}
           <br />

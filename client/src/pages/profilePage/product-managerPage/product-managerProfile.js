@@ -76,7 +76,7 @@ function ProductManagerAPI() {
       try {
         await axios.put(
           "http://localhost:5001/api/products/commentApproval/" +product_id +"/" +comment_no, commentStruct, { headers: { token: "Bearer " + CurrUser.accessToken } });
-        
+          window.location.reload();
       } catch (err) {console.log(err)}
     };
 
@@ -89,6 +89,7 @@ function ProductManagerAPI() {
             comment_no, undefined,
           { headers: { token: "Bearer " + CurrUser.accessToken } }
         );
+        window.location.reload();
       } catch (err) {}
     };
 
