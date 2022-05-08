@@ -3356,6 +3356,13 @@ footer {
         font-weight: bold;
         font-size: 150%;
       }
+      .borders3 {
+        color: crimson;
+        border-top: 2px solid rgb(0, 0, 0);
+        font-weight: bold;
+        font-size: 150%;
+      }
+    
 
 
 

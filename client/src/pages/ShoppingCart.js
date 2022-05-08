@@ -8,6 +8,7 @@ import StripeCheckout from "react-stripe-checkout";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { userRequest } from "./requestMethods";
+import { Button } from "@material-ui/core";
 import axios from "axios";
 
 const KEY = process.env.REACT_APP_STRIPE;
@@ -69,9 +70,12 @@ const ShoppingCart = () => {
           tokenId: stripeToken.id,
           amount: cart.total * 100,
         });
-        history("/success", {state:{
-          stripeData: res.data,
-          products: cart }});
+        history("/success", {
+          state: {
+            stripeData: res.data,
+            products: cart,
+          },
+        });
       } catch {}
     };
     stripeToken && cart.total >= 1 && makeRequest();
@@ -88,33 +92,30 @@ const ShoppingCart = () => {
             {cart.products.map((item) => {
               return (
                 <div style={{ padding: "10px", margin: "20px" }}>
-                  <img
-                    src={item.img}
-                    style={{ marginLeft: "25px" }}
-                    className="itemimage"
-                  ></img>
-                  <h style={{ marginLeft: "25px" }}>{item.name}</h>
-                  <button style={{ marginLeft: "25px", width: "50px" }}>
-                    -
-                  </button>
-                  <input
-                    type="number"
-                    min={0}
-                    value={item.amount}
-                    style={{ marginLeft: "10px" }}
-                  ></input>
-                  <button style={{ marginLeft: "10px", width: "50px" }}>
-                    +
-                  </button>
-                  <h style={{ marginLeft: "25px" }}>
-                    {item.amount * item.cost} TL
-                  </h>
-                  <input
-                    type="submit"
-                    value="delete item"
-                    onClick={() => removeItem(item)}
-                    style={{ marginLeft: "25px" }}
-                  />
+                  <div className="product-container">
+                    <img
+                      src={item.img}
+                      style={{ marginLeft: "25px" }}
+                      className="itemimage"
+                    ></img>
+                    <h style={{ marginLeft: "25px" }}>{item.name}</h>
+
+                    <p style={{ marginLeft: "35px" }}>
+                      {" "}
+                      Amount: {item.amount}{" "}
+                    </p>
+                    <h style={{ marginLeft: "25px" }}>
+                      {item.amount * item.cost} $
+                    </h>
+                  </div>
+                  <div>
+                    <input
+                      type="submit"
+                      value="Delete Product"
+                      onClick={() => removeItem(item)}
+                      style={{ marginLeft: "25px", width: "222px" }}
+                    />
+                  </div>
                 </div>
               );
             })}
@@ -127,23 +128,31 @@ const ShoppingCart = () => {
               }}
             ></hr>
             <div>
-              <h style={{ marginLeft: "50px" }}>Total: {cart.total}</h>
+              <h style={{ marginLeft: "50px" }}>Total: {cart.total} $</h>
             </div>
-
-            <StripeCheckout
-              name="OverBooked"
-              image="https://st3.depositphotos.com/1031343/33199/v/1600/depositphotos_331995822-stock-illustration-overbooked-sign-or-stamp.jpg"
-              billingAddress
-              shippingAddress
-              description={`Your total is $${cart.total}`}
-              amount={cart.total * 100}
-              token={onToken}
-              stripeKey={KEY}
-            >
-              <button style={{ marginLeft: "25px", width: "50px" }}>
-                CHECKOUT
-              </button>
-            </StripeCheckout>
+            <div className="checkout-container">
+              {currUser !== null ? (
+                <StripeCheckout
+                  name="OverBooked"
+                  image="https://st3.depositphotos.com/1031343/33199/v/1600/depositphotos_331995822-stock-illustration-overbooked-sign-or-stamp.jpg"
+                  billingAddress
+                  shippingAddress
+                  description={`Your total is $${cart.total}`}
+                  amount={cart.total * 100}
+                  token={onToken}
+                  stripeKey={KEY}
+                >
+                  <Button style={{ width: "50px" }}>CHECKOUT</Button>
+                </StripeCheckout>
+              ) : (
+                <Button
+                  href="/signin"
+                  style={{ marginLeft: "25px", width: "50px" }}
+                >
+                  CHECKOUT
+                </Button>
+              )}
+            </div>
           </div>
         </div>
       </div>

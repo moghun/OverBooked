@@ -12,87 +12,89 @@ import { CardActionArea } from "@material-ui/core";
 export default function BookCard(props) {
   return (
     <Link href={"/productpage/" + props.onclick} underline="none">
-    <Card onClick={() => {}} sx={{ maxWidth: "350px", minWidth: "250px", padding: "15px", margin: "20px",  transition: ".3s ease", ':hover': {boxShadow: 20,}}}>
-      <CardMedia
-        component="img"
-        height="200"
-        image={props.imgurl}
-        alt="book picture"
-        style={{ objectFit: "contain" }}
-      />
-      <CardContent style={{ justifyContent: "center", display: "flex" }}>
-        <Grid
-          container
-          spacing={0}
-          margin="-25px"
-          direction="column"
-          justifyContent="space-around"
-          alignItems="center"
-        >
-          <Grid item>
-            <Typography
-              gutterBottom
-              variant="h6"
-              component="div"
-              paddingTop="10px"
-              marginBottom="0px"
-              textAlign="center"
-            >
-              {props.name}
-            </Typography>
-          </Grid>
-          <Grid item>
-            <Typography variant="body2" color="darkblue">
-              {props.author}
-            </Typography>
-          </Grid>
-          <Grid item container justifyContent="space-around" alignItems="center">
+      <Card
+        onClick={() => {}}
+        sx={{
+          maxWidth: "350px",
+          minWidth: "250px",
+          padding: "15px",
+          margin: "20px",
+          transition: ".3s ease",
+          ":hover": { boxShadow: 20 },
+        }}
+      >
+        <CardMedia
+          component="img"
+          height="200"
+          image={props.imgurl}
+          alt="book picture"
+          style={{ objectFit: "contain" }}
+        />
+        <CardContent style={{ justifyContent: "center", display: "flex" }}>
+          <Grid
+            container
+            spacing={0}
+            margin="-25px"
+            direction="column"
+            justifyContent="space-around"
+            alignItems="center"
+          >
             <Grid item>
-              <Typography variant="subtitle2" color="text.secondary">
-                {props.publisher}
+              <Typography
+                gutterBottom
+                variant="h6"
+                component="div"
+                paddingTop="10px"
+                marginBottom="0px"
+                textAlign="center"
+              >
+                {props.name}
               </Typography>
             </Grid>
             <Grid item>
-              <Box>
-                <Typography variant="subtitle2" color="text.secondary">
-                  {props.score}
-                <StarIcon style={{ marginTop: "-4px", color: "gold"}} />
-                </Typography>
-              </Box>
+              <Typography variant="body2" color="darkblue">
+                {props.author}
+              </Typography>
             </Grid>
-          </Grid>
+            <Grid
+              item
+              container
+              justifyContent="space-around"
+              alignItems="center"
+            >
+              <Grid item>
+                <Typography variant="subtitle2" color="text.secondary">
+                  {props.publisher}
+                </Typography>
+              </Grid>
+              <Grid item>
+                <Box>
+                  <Typography variant="subtitle2" color="text.secondary">
+                    {props.score}
+                    <StarIcon style={{ marginTop: "-4px", color: "gold" }} />
+                  </Typography>
+                </Box>
+              </Grid>
+            </Grid>
 
-          <>
-          
-          { (props.beforeprice !== -1) ?(
+            <>
+              {props.amount === 0 ? (
+                <h4 className="borders3">Sold Out</h4>
+              ) : props.beforeprice !== -1 ? (
+                <Grid item>
+                  <h4 className="borders">{props.beforeprice} $</h4>
+                </Grid>
+              ) : (
+                <h1> </h1>
+              )}
+            </>
 
             <Grid item>
-              <h4 className="borders">
-                {props.beforeprice} $
-              </h4>
-            </Grid>            
-
-          )
-
-          : (
-
-            <h1> </h1>
-            
-          )
-
-          }
-
-
-          </>
-
-          <Grid item>
-            <h5 className = "borders2">
-              {props.price} $
-            </h5>
+              <h5 className="borders2">{props.price} $</h5>
+            </Grid>
           </Grid>
-        </Grid>
-      </CardContent>
-    </Card>
+        </CardContent>
+      </Card>
     </Link>
   );
 }
