@@ -17,14 +17,14 @@ const ShoppingCart = () => {
   const currUser = useSelector((state) => state.user.currentUser);
   const dispatch = useDispatch();
 
-  const removeFromCartAPI = async (product_id) => {
+  const removeFromCartAPI = async (pid) => {
     try {
       await axios.put(
         "http://localhost:5001/api/users/removeFromCart/" + currUser._id,
-        product_id,
+        { product_id: pid },
         { headers: { token: "Bearer " + currUser.accessToken } }
       );
-      console.log(product_id);
+      console.log(pid);
     } catch (err) {
       console.log(err);
     }
@@ -33,6 +33,7 @@ const ShoppingCart = () => {
     try {
       await axios.put(
         "http://localhost:5001/api/users/clearCart/" + currUser._id,
+        undefined,
         { headers: { token: "Bearer " + currUser.accessToken } }
       );
     } catch (err) {
