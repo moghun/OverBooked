@@ -5,12 +5,13 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import { Box, Grid } from "@mui/material";
+import { Box, Grid, Link } from "@mui/material";
 import StarIcon from "@mui/icons-material/Star";
 import { CardActionArea } from "@material-ui/core";
 
 export default function BookCard(props) {
   return (
+    <Link href={"/productpage/" + props.onclick} underline="none">
     <Card onClick={() => {}} sx={{ maxWidth: "350px", minWidth: "250px", padding: "15px", margin: "20px",  transition: ".3s ease", ':hover': {boxShadow: 20,}}}>
       <CardMedia
         component="img"
@@ -68,5 +69,6 @@ export default function BookCard(props) {
         </Grid>
       </CardContent>
     </Card>
+    </Link>
   );
 }

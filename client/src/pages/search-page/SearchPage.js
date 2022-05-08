@@ -14,18 +14,67 @@ import {
   ListItemIcon,
   Checkbox,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useState, useMemo, useEffect, useRef } from "react";
+import axios from "axios";
 import BookCard from "../../components/BookCard";
+import { useLocation } from "react-router-dom";
+
+
+function avgrating(items) {
+  var totalrate = 0;
+  for (var i = 0; i < items.rating.length; i++) {
+    totalrate += items.rating[i].rating;
+  }
+
+  if (isNaN(totalrate / items.rating.length)) {
+    return 0;
+  }
+  return (totalrate / items.rating.length).toFixed(1);
+}
+
 
 function SearchPage() {
+  const location = useLocation();
+  const searchQuery = useMemo(() => location.pathname.split("/")[2]);
+  const [searchResults, setSearchResults] = useState([]);
   const [filter, setFilter] = useState(0);
   const [includeBook, setIncludeBook] = useState(false);
   const [includeComic, setincludeComic] = useState(false);
   const [includeMagazine, setIncludeMagazine] = useState(false);
 
+
+  useEffect(() => {
+    console.log(searchQuery);
+    const findProduct = async (query) => {
+      try{
+        var res;
+        if(query === ""){
+          res = await axios.get("http://localhost:5001/api/products");
+        } else{
+          res = await axios.get("http://localhost:5001/api/products/find?q="+query);
+        }
+          
+          setSearchResults(res.data);
+          console.log(searchResults);
+          //return res.data;
+      } catch (err){}
+  }
+  findProduct(searchQuery);
+  }, []);
+
   const onFilterChange = (event) => {
     setFilter(event.target.value);
   };
+
+  const sortByFilter = (arr) => {
+    if (filter === 1){
+      return arr.sort((a, b) => (a.cost < b.cost ? 1 : -1));
+    } else if (filter === 2){
+      return arr.sort((a, b) => (a.cost > b.cost ? 1 : -1));
+    } else {
+      return arr;
+    }
+  }
 
   return (
     <div>
@@ -142,69 +191,21 @@ function SearchPage() {
                 <MenuItem value={0}>No filter</MenuItem>
                 <MenuItem value={1}>Price descending</MenuItem>
                 <MenuItem value={2}>Price ascending</MenuItem>
-                <MenuItem value={3}>Rating descending</MenuItem>
-                <MenuItem value={4}>Rating ascending</MenuItem>
               </Select>
             </FormControl>
           </Grid>
           <Grid item container justifyContent="space-around" display="flex">
             {/* Results of search and outcome of filters (right) */}
-            <BookCard
-              name="deneme1"
-              author="author1"
-              imgurl="/images/animalfarm.jpg"
-              publisher="yayınevi"
-              price="87.99 TL"
-              score="3.7/5.0"
-            ></BookCard>
-            <BookCard
-              name="deneme1"
-              author="author1"
-              imgurl="/images/animalfarm.jpg"
-              publisher="yayınevi"
-              price="87.99 TL"
-              score="3.7/5.0"
-            ></BookCard>
-            <BookCard
-              name="deneme1"
-              author="author1"
-              imgurl="/images/animalfarm.jpg"
-              publisher="yayınevi"
-              price="87.99 TL"
-              score="3.7/5.0"
-            ></BookCard>
-            <BookCard
-              name="deneme1"
-              author="author1"
-              imgurl="/images/animalfarm.jpg"
-              publisher="yayınevi"
-              price="87.99 TL"
-              score="3.7/5.0"
-            ></BookCard>
-            <BookCard
-              name="deneme1"
-              author="author1"
-              imgurl="/images/animalfarm.jpg"
-              publisher="yayınevi"
-              price="87.99 TL"
-              score="3.7/5.0"
-            ></BookCard>
-            <BookCard
-              name="deneme1"
-              author="author1"
-              imgurl="/images/animalfarm.jpg"
-              publisher="yayınevi"
-              price="87.99 TL"
-              score="3.7/5.0"
-            ></BookCard>
-            <BookCard
-              name="deneme1"
-              author="author1"
-              imgurl="/images/animalfarm.jpg"
-              publisher="yayınevi"
-              price="87.99 TL"
-              score="3.7/5.0"
-            ></BookCard>
+            {sortByFilter(searchResults).map((book) => (
+              <BookCard 
+              onclick={book._id}
+              name={book.name}
+              author={book.author}
+              imgurl={book.img}
+              publisher={book.publisher}
+              price={book.cost}
+              score={avgrating(book)}></BookCard>
+            ))}
           </Grid>
           {/* TODO: Create a map function to Grid items */}
         </Grid>
