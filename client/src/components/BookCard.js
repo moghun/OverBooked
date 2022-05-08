@@ -62,9 +62,15 @@ export default function BookCard(props) {
             </Grid>
           </Grid>
           <Grid item>
-            <Typography variant="h6" color="text.primary">
+            <h4 className="borders">
+              {props.beforeprice} TL
+            </h4>
+          </Grid>
+
+          <Grid item>
+            <h5 className = "borders2">
               {props.price} TL
-            </Typography>
+            </h5>
           </Grid>
         </Grid>
       </CardContent>
