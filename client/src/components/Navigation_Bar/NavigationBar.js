@@ -2,9 +2,16 @@ import "./NavigationBar.css";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { logOut } from "../../redux/userRedux";
+import { useEffect, useState } from "react";
 const NavigationBar= () =>{
 
     const currUser = useSelector((state) => state.user.currentUser);
+    const [searchValue, setSearchValue] = useState("");
+
+    const onValueChange = (event) => {
+        setSearchValue(event.target.value);
+        console.log(event.target.value);
+    }
 
     return (
 
@@ -23,8 +30,8 @@ const NavigationBar= () =>{
                         <option value="all">Comics</option>
                         <option value="all">Magazines</option>
                     </select>
-                    <input type="text"/>
-                    <form action="\searchpage" method="get">
+                    <input type="text" onChange={onValueChange} value={searchValue}/>
+                    <form action={"/searchpage/" + searchValue} method="get">
                       <button className="--btn --btn-primary">
                       <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Search_Icon.svg/2048px-Search_Icon.svg.png" alt="search"/>
                       </button>
