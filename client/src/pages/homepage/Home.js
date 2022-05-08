@@ -240,6 +240,7 @@ const HomePage = () => {
               publisher={AllSales.publisher}
               price={AllSales.cost}
               score={avgrating(AllSales)}
+              beforeprice = {AllSales.before_sale_price}
             ></BookCard>
           ))}
         </Slider>
@@ -270,6 +271,7 @@ const HomePage = () => {
               publisher={AllSales.publisher}
               price={AllSales.cost}
               score={avgrating(AllSales)}
+              beforeprice = {AllSales.before_sale_price}
             ></BookCard>
           ))}
         </Slider>
