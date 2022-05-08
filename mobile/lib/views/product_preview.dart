@@ -78,7 +78,7 @@ class _ProductPreviewState extends State<ProductPreview> {
                             height: 20,
                           ),
                           RatingBarIndicator(
-                            rating: widget.product.rating?.toDouble() ?? 0, //it will be debugged
+                            rating: widget.product.rating!.map((e) => e["rating"]).reduce((a, b) => a + b) / widget.product.rating!.length, //it will be debugged
                             itemBuilder: (context, index) =>
                             const Icon(
                               Icons.star,

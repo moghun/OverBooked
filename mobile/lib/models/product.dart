@@ -9,10 +9,10 @@ class Product {
   num? warranty;
   String? category;
   String? subCategory;
-  num? rating;
+  List<dynamic>? rating;
   bool? sale;
   num? costAfterSale;
-  List<String>? comments;
+  List<dynamic>? comments;
 
   Product({
   required this.id,
