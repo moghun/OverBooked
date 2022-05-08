@@ -1,3 +1,8 @@
+import 'dart:convert';
+
+import 'package:mobile/models/user.dart';
+import 'package:mobile/services/auth_service.dart';
+import 'package:mobile/services/user_service.dart';
 import 'package:mobile/utils/colors.dart';
 import 'package:mobile/utils/dimensions.dart';
 import 'package:mobile/utils/styles.dart';
@@ -12,11 +17,31 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
+  final AuthService _authService = AuthService();
+
   final _formKey = GlobalKey<FormState>();
   String username = "";
   String email = "";
   String emailConfirmation = "";
-  String pass = "";
+  String password = "";
+
+  signUp(){
+    _authService.registerUser(username, email, password).then((resp) {
+      if (resp.statusCode >= 200 && resp.statusCode < 400) {
+        var loginInfo = jsonDecode(resp.body);
+        User newUser = User(
+          email: loginInfo["email"],
+          username: loginInfo["username"],
+        );
+        UserService.updateUser(newUser);
+        Navigator.pushReplacementNamed(context, "/");
+      } else {
+        print(resp.statusCode);
+        print(resp.body);
+        print(resp.headers);
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -147,10 +172,6 @@ class _SignUpState extends State<SignUp> {
                                 if (value == null) {
                                   return "Email can not be empty";
                                 }
-                                String trimmedValue = value.trim();
-                                if(trimmedValue != email){
-                                  return "Emails do not match";
-                                }
                                 return null;
                               },
                               onSaved: (value) {
@@ -194,18 +215,12 @@ class _SignUpState extends State<SignUp> {
                                 if (trimmedValue.isEmpty) {
                                   return "Password can not be empty";
                                 }
-                                if (trimmedValue.toLowerCase() == trimmedValue) {
-                                  return "there must be upper case letter in the password ";
-                                }
-                                if (trimmedValue.toUpperCase() == trimmedValue) {
-                                  return "there must be lower case letter in the password ";
-                                }
                               }
                               return null;
                             },
                             onSaved: (value) {
                               if (value != null) {
-                                pass = value;
+                                password = value;
                               }
                             },
                           ),
@@ -224,6 +239,7 @@ class _SignUpState extends State<SignUp> {
                             onPressed: () {
                               if (_formKey.currentState!.validate()) {
                                 _formKey.currentState!.save();
+                                signUp();
                               }
                             },
                             child: Padding(

@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:mobile/models/user.dart';
 import 'package:mobile/services/auth_service.dart';
 import 'package:mobile/services/user_service.dart';
@@ -29,8 +28,9 @@ class _LogInState extends State<LogIn> {
         User newUser = User(
           email: loginInfo["email"],
           username: loginInfo["username"],
-          name: loginInfo["name"],
-          surname: loginInfo["surname"],
+          name: loginInfo["name"] == "" ? "no-name" : loginInfo["name"],
+          surname: loginInfo["surname"] == "" ? "no-surname" : loginInfo["surname"],
+          cart: loginInfo["cart"],
         );
         UserService.updateUser(newUser);
         Navigator.pushReplacementNamed(context, "/");
