@@ -25,20 +25,22 @@ const DetailsThumb = () => {
     setComment(val.target.value);
   }
 
-
   const addCartAPI = async (product_id, amount) => {
-
     const cartStruct = {
-        product_id: product_id,
-        amount: amount,
-    }
+      product_id: product_id,
+      amount: amount,
+    };
 
     try {
       await axios.put(
-        "http://localhost:5001/api/users/addToCart/" + currUser._id, cartStruct, { headers: { token: "Bearer " + currUser.accessToken } });
-    } catch (err) {console.log(err)}
+        "http://localhost:5001/api/users/addToCart/" + currUser._id,
+        cartStruct,
+        { headers: { token: "Bearer " + currUser.accessToken } }
+      );
+    } catch (err) {
+      console.log(err);
+    }
   };
-
 
   function postCommentOrRating() {
     if (comment === null && rating === null) {
@@ -127,6 +129,7 @@ const DetailsThumb = () => {
   }
   const addCart = () => {
     dispatch(addProduct({ ...product, amount, maxAmount }));
+    addCartAPI(product._id, amount);
   };
   let approvedComments;
   if (product.comments) {
@@ -148,10 +151,9 @@ const DetailsThumb = () => {
           <h5>Publisher: {product.publisher}</h5>
           <p>Amount: {product.amount}</p>
           {product.sale ? (
-
             <div>
-            <p>Before Sale Cost: {product.before_sale_price} $</p>
-            <p>Cost: {product.cost} $</p>
+              <p>Before Sale Cost: {product.before_sale_price} $</p>
+              <p>Cost: {product.cost} $</p>
             </div>
           ) : (
             <p>Cost: {product.cost} $</p>

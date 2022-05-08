@@ -1,60 +1,80 @@
-import React , {useState} from "react";
-import '../signin/Signin.css';
-import 'bootstrap';
+import React, { useState } from "react";
+import "../signin/Signin.css";
+import "bootstrap";
 import { login } from "../../redux/apiCalls";
-import { useDispatch,useSelector } from "react-redux";
-
-
-
-
+import { useDispatch, useSelector } from "react-redux";
 
 const Signin = () => {
-
-  const[email,setEmail] = useState("");
-  const[password,setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const dispatch = useDispatch();
-  const {isFetching,error} = useSelector((state)=>state.user);
+  const { isFetching, error } = useSelector((state) => state.user);
 
   const handleClick = (e) => {
     e.preventDefault();
-    login(dispatch,{email,password});
+    login(dispatch, { email, password });
   };
 
   return (
     <div className="signincontainerholder">
       <div className="signincontainer">
-
-        <h1 style={{fontFamily:'Open Sans', marginLeft:50}}>LOGIN</h1>
+        <h1 style={{ fontFamily: "Open Sans", marginLeft: 50 }}>LOGIN</h1>
         <div className="email">
           <h>Email</h>
-          <input className="text" placeholder="Type your email" onChange={(e)=>setEmail(e.target.value)}></input>
-          <hr style={{width:200}}></hr>
+          <input
+            className="text"
+            placeholder="Type your email"
+            onChange={(e) => setEmail(e.target.value)}
+          ></input>
+          <hr style={{ width: 200 }}></hr>
         </div>
 
         <div className="passworddiv">
           <h>Password</h>
-          <input type="password" className="password" placeholder="Type your password" onChange={(e)=>setPassword(e.target.value)}></input>
-          <hr style={{width:200}}></hr>
+          <input
+            type="password"
+            className="password"
+            placeholder="Type your password"
+            onChange={(e) => setPassword(e.target.value)}
+          ></input>
+          <hr style={{ width: 200 }}></hr>
         </div>
 
         <div className="loginbutton">
-            <button onClick={handleClick} disabled = {isFetching} type="button" style={{fontFamily:'Open Sans'}}>Login</button> 
-            
+          <button
+            onClick={handleClick}
+            disabled={isFetching}
+            type="button"
+            style={{ fontFamily: "Open Sans" }}
+          >
+            Login
+          </button>
         </div>
 
         <div className="forgetmypassword">
-          <a href="/" style={{color:'black', textDecoration:'none'}}>Forget Password?</a>
+          <a href="/" style={{ color: "black", textDecoration: "none" }}>
+            Forget Password?
+          </a>
         </div>
 
         <div className="manuelsignup">
-          <p style={{fontSize: 14, marginLeft:50}}>Or</p>
-          <a href="/Signup" style={{fontSize: 16, color:'black', textDecoration:'none', marginLeft:30}}>Sign Up</a>
+          <p style={{ fontSize: 14, marginLeft: 50 }}>Or</p>
+          <a
+            href="/Signup"
+            style={{
+              fontSize: 16,
+              color: "black",
+              textDecoration: "none",
+              marginLeft: 30,
+            }}
+          >
+            Sign Up
+          </a>
         </div>
-
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default Signin;
 

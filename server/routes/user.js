@@ -7,7 +7,7 @@ const {
   verifyTokenOrManager,
   verifyTokenAndManager,
   verifyTokenAndProductManager,
-  verifyTokenAndSalesManager
+  verifyTokenAndSalesManager,
 } = require("./verifyToken");
 
 const router = require("express").Router();
@@ -69,14 +69,13 @@ router.get("/", verifyTokenAndManager, async (req, res) => {
   }
 });
 
-
 //ADD TO CART
-router.put("/addToCart/:id",verifyToken, async (req, res) => {
+router.put("/addToCart/:id", verifyToken, async (req, res) => {
   try {
     const updatedUser = await User.findByIdAndUpdate(
       req.params.id,
       {
-        $push: {cart: req.body},
+        $push: { cart: req.body },
       },
       { new: true }
     );
@@ -86,7 +85,33 @@ router.put("/addToCart/:id",verifyToken, async (req, res) => {
   }
 });
 
+//Remove From Cart
+router.put("/removeFromCart/:id", verifyToken, async (req, res) => {
+  try {
+    const updatedUser = await User.findByIdAndUpdate(
+      req.params.id,
+      {
+        $pull: { cart: req.body },
+      },
+      { new: true }
+    );
+    res.status(200).json(updatedUser);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
+// Clear CART
+router.put("/clearCart/:id", verifyToken, async (req, res) => {
+  try {
+    const updatedUser = await User.findByIdAndUpdate(req.params.id, {
+      $set: { cart: [] },
+    });
+    res.status(200).json(updatedUser);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
 //GET USER STATS
 
