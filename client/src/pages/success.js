@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { useLocation } from "react-router";
 import { userRequest } from "./requestMethods";
 import { useNavigate } from "react-router-dom";
-
+import { Button } from "@material-ui/core";
 
 
 const Success = () => {
@@ -44,7 +44,8 @@ const Success = () => {
       {orderId
         ? `Order has been created successfully. Your order number is ${orderId}`
         : `Successfull. Your order is being prepared...`}
-      <button onClick = "useNavigate(/homepage);" style={{ padding: 10, marginTop: 20 }}>Go to Homepage</button>
+      <Button href = {"/"} style={{ padding: 10, marginTop: 20 }}>Go to Homepage</Button>
+
     </div>
   );
 };
