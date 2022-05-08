@@ -29,7 +29,7 @@ const DetailsThumb = () => {
     if (comment === null && rating === null) {
       console.log("Rating and Comment cannot be left empty!");
     } else {
-      if (comment != "") {
+      if (comment !== "") {
         const sendComment = {
           //user_id must be taken from the redux storage
           comment_id: uuidv1(),
@@ -113,7 +113,10 @@ const DetailsThumb = () => {
   const addCart = () => {
     dispatch(addProduct({ ...product, amount, maxAmount }));
   };
-
+  let approvedComments;
+  if (product.comments) {
+    approvedComments = product.comments.filter((c) => c.isApproved === true);
+  }
   return (
     <div className="app">
       <div className="details" key={product.id}>
@@ -203,12 +206,11 @@ const DetailsThumb = () => {
 
       <div className="comment-box" style={{ textAlign: "center" }}>
         <h3 style={{ marginBottom: "10px" }}>Product Comments</h3>
-        {console.log(product)}
         {
-          !product.comments || product.comments.length === 0 ? (
+          !approvedComments || approvedComments.length === 0 ? (
             <h>This product has no comment yet</h>
           ) : (
-            product.comments.map((cmt) => {
+            approvedComments.map((cmt) => {
               return (
                 <div
                   className="comment-row"
