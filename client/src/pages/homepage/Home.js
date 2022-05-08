@@ -117,10 +117,11 @@ const HomePage = () => {
       settopprod(res.data);
     } catch (err) {}
   };
-
-  getAllProducts();
-  getSaleProducts();
-  getTopProducts();
+  useEffect(() => {
+    getAllProducts();
+    getSaleProducts();
+    getTopProducts();
+  }, []);
 
   const goallproducts = useRef(null);
   const gomoststarts = useRef(null);
