@@ -204,7 +204,11 @@ function SearchPage() {
               imgurl={book.img}
               publisher={book.publisher}
               price={book.cost}
-              score={avgrating(book)}></BookCard>
+              score={avgrating(book)}
+              beforeprice={book.before_sale_price}>
+
+              </BookCard>
+
             ))}
           </Grid>
           {/* TODO: Create a map function to Grid items */}

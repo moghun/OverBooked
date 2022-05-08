@@ -68,7 +68,7 @@ export default function BookCard(props) {
 
             <Grid item>
               <h4 className="borders">
-                {props.beforeprice} TL
+                {props.beforeprice} $
               </h4>
             </Grid>            
 
@@ -87,7 +87,7 @@ export default function BookCard(props) {
 
           <Grid item>
             <h5 className = "borders2">
-              {props.price} TL
+              {props.price} $
             </h5>
           </Grid>
         </Grid>
