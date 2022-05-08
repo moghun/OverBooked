@@ -25,6 +25,21 @@ const DetailsThumb = () => {
     setComment(val.target.value);
   }
 
+
+  const addCartAPI = async (product_id, amount) => {
+
+    const cartStruct = {
+        product_id: product_id,
+        amount: amount,
+    }
+
+    try {
+      await axios.put(
+        "http://localhost:5001/api/users/addToCart/" + currUser._id, cartStruct, { headers: { token: "Bearer " + currUser.accessToken } });
+    } catch (err) {console.log(err)}
+  };
+
+
   function postCommentOrRating() {
     if (comment === null && rating === null) {
       console.log("Rating and Comment cannot be left empty!");

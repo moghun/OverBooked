@@ -69,6 +69,25 @@ router.get("/", verifyTokenAndManager, async (req, res) => {
   }
 });
 
+
+//ADD TO CART
+router.put("/addToCart/:id",verifyToken, async (req, res) => {
+  try {
+    const updatedUser = await User.findByIdAndUpdate(
+      req.params.id,
+      {
+        $push: {cart: req.body},
+      },
+      { new: true }
+    );
+    res.status(200).json(updatedUser);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+
+
 //GET USER STATS
 
 router.get("/stats", verifyTokenAndManager, async (req, res) => {
