@@ -69,13 +69,17 @@ const ShoppingCart = () => {
           tokenId: stripeToken.id,
           amount: cart.total * 100,
         });
-        history("/success", {
+        history("/success", {state:{
           stripeData: res.data,
+<<<<<<< HEAD
           products: cart,
         });
+=======
+          products: cart }});
+>>>>>>> 0fc4028 (Go to success page is fixed)
       } catch {}
     };
-    stripeToken && cart.total > 0 && makeRequest();
+    stripeToken && cart.total >= 1 && makeRequest();
   }, [stripeToken, cart.total, history]);
 
   return (
