@@ -19,7 +19,6 @@ import axios from "axios";
 import BookCard from "../../components/BookCard";
 import { useLocation } from "react-router-dom";
 
-
 function avgrating(items) {
   var totalrate = 0;
   for (var i = 0; i < items.rating.length; i++) {
@@ -32,7 +31,6 @@ function avgrating(items) {
   return (totalrate / items.rating.length).toFixed(1);
 }
 
-
 function SearchPage() {
   const location = useLocation();
   const searchQuery = useMemo(() => location.pathname.split("/")[2]);
@@ -42,24 +40,25 @@ function SearchPage() {
   const [includeComic, setincludeComic] = useState(false);
   const [includeMagazine, setIncludeMagazine] = useState(false);
 
-
   useEffect(() => {
     console.log(searchQuery);
     const findProduct = async (query) => {
-      try{
+      try {
         var res;
-        if(query === ""){
+        if (query === "") {
           res = await axios.get("http://localhost:5001/api/products");
-        } else{
-          res = await axios.get("http://localhost:5001/api/products/find?q="+query);
+        } else {
+          res = await axios.get(
+            "http://localhost:5001/api/products/find?q=" + query
+          );
         }
-          
-          setSearchResults(res.data);
-          console.log(searchResults);
-          //return res.data;
-      } catch (err){}
-  }
-  findProduct(searchQuery);
+
+        setSearchResults(res.data);
+        console.log(searchResults);
+        //return res.data;
+      } catch (err) {}
+    };
+    findProduct(searchQuery);
   }, []);
 
   const onFilterChange = (event) => {
@@ -67,14 +66,14 @@ function SearchPage() {
   };
 
   const sortByFilter = (arr) => {
-    if (filter === 1){
+    if (filter === 1) {
       return arr.sort((a, b) => (a.cost < b.cost ? 1 : -1));
-    } else if (filter === 2){
+    } else if (filter === 2) {
       return arr.sort((a, b) => (a.cost > b.cost ? 1 : -1));
     } else {
       return arr;
     }
-  }
+  };
 
   return (
     <div>
@@ -91,42 +90,32 @@ function SearchPage() {
           <Button>Remove filters</Button>
           <List
             sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
-            subheader={<ListSubheader>Categories</ListSubheader>} dense={true}
+            subheader={<ListSubheader>Categories</ListSubheader>}
+            dense={true}
           >
             <ListItem>
               <ListItemIcon>
-                <Checkbox
-                  edge="start"
-                  tabIndex={-1}
-                  disableRipple
-                />
+                <Checkbox edge="start" tabIndex={-1} disableRipple />
               </ListItemIcon>
               <ListItemText primary="Book" />
             </ListItem>
             <ListItem>
               <ListItemIcon>
-                <Checkbox
-                  edge="start"
-                  tabIndex={-1}
-                  disableRipple
-                />
+                <Checkbox edge="start" tabIndex={-1} disableRipple />
               </ListItemIcon>
               <ListItemText primary="Comic" />
             </ListItem>
             <ListItem>
               <ListItemIcon>
-                <Checkbox
-                  edge="start"
-                  tabIndex={-1}
-                  disableRipple
-                />
+                <Checkbox edge="start" tabIndex={-1} disableRipple />
               </ListItemIcon>
               <ListItemText primary="Magazine" />
             </ListItem>
           </List>
           <List
             sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
-            subheader={<ListSubheader>Sub-Categories</ListSubheader>} dense={true}
+            subheader={<ListSubheader>Sub-Categories</ListSubheader>}
+            dense={true}
           >
             <ListItem>
               <ListItemIcon>
@@ -141,21 +130,13 @@ function SearchPage() {
             </ListItem>
             <ListItem>
               <ListItemIcon>
-                <Checkbox
-                  edge="start"
-                  tabIndex={-1}
-                  disableRipple
-                />
+                <Checkbox edge="start" tabIndex={-1} disableRipple />
               </ListItemIcon>
               <ListItemText primary="Poem" />
             </ListItem>
             <ListItem>
               <ListItemIcon>
-                <Checkbox
-                  edge="start"
-                  tabIndex={-1}
-                  disableRipple
-                />
+                <Checkbox edge="start" tabIndex={-1} disableRipple />
               </ListItemIcon>
               <ListItemText primary="Science" />
             </ListItem>
@@ -197,18 +178,17 @@ function SearchPage() {
           <Grid item container justifyContent="space-around" display="flex">
             {/* Results of search and outcome of filters (right) */}
             {sortByFilter(searchResults).map((book) => (
-              <BookCard 
-              onclick={book._id}
-              name={book.name}
-              author={book.author}
-              imgurl={book.img}
-              publisher={book.publisher}
-              price={book.cost}
-              score={avgrating(book)}
-              beforeprice={book.before_sale_price}>
-
-              </BookCard>
-
+              <BookCard
+                onclick={book._id}
+                name={book.name}
+                amount={book.amount}
+                author={book.author}
+                imgurl={book.img}
+                publisher={book.publisher}
+                price={book.cost}
+                score={avgrating(book)}
+                beforeprice={book.before_sale_price}
+              ></BookCard>
             ))}
           </Grid>
           {/* TODO: Create a map function to Grid items */}

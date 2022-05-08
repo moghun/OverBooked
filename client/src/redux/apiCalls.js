@@ -1,4 +1,4 @@
-import { loginFailure, loginStart, loginSuccess,logOut } from "./userRedux";
+import { loginFailure, loginStart, loginSuccess, logOut } from "./userRedux";
 import { publicRequest } from "../pages/requestMethods";
 
 export const login = async (dispatch, user) => {
@@ -6,12 +6,16 @@ export const login = async (dispatch, user) => {
   try {
     const res = await publicRequest.post("/auth/login", user);
     dispatch(loginSuccess(res.data));
+    alert("You are successfuly logged in");
   } catch (err) {
     dispatch(loginFailure());
+    alert("Wrong email or password");
+    window.location.reload();
   }
 };
 
-export const logout = (dispatch,user) => {
+export const logout = (dispatch, user) => {
   dispatch(logOut());
   user = null;
+  alert("You are successfuly logged out");
 };

@@ -236,12 +236,13 @@ const HomePage = () => {
             <BookCard
               onclick={AllSales._id}
               name={AllSales.name}
+              amount={AllSales.amount}
               author={AllSales.author}
               imgurl={AllSales.img}
               publisher={AllSales.publisher}
               price={AllSales.cost}
               score={avgrating(AllSales)}
-              beforeprice = {AllSales.before_sale_price}
+              beforeprice={AllSales.before_sale_price}
             ></BookCard>
           ))}
         </Slider>
@@ -267,12 +268,13 @@ const HomePage = () => {
             <BookCard
               onclick={AllSales._id}
               name={AllSales.name}
+              amount={AllSales.amount}
               author={AllSales.author}
               imgurl={AllSales.img}
               publisher={AllSales.publisher}
               price={AllSales.cost}
               score={avgrating(AllSales)}
-              beforeprice = {AllSales.before_sale_price}
+              beforeprice={AllSales.before_sale_price}
             ></BookCard>
           ))}
         </Slider>

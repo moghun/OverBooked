@@ -35,8 +35,9 @@ const EditProfile = () => {
       axios.put("http://localhost:5001/api/users/" + currUser._id, update, {
         headers: { token: "Bearer " + currUser.accessToken },
       });
+      alert("You are updated successfuly");
     } catch (err) {
-      toast.error(err);
+      alert(err);
     }
 
     this.setState({

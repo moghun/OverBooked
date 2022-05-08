@@ -61,6 +61,7 @@ const DetailsThumb = () => {
             sendComment,
             { headers: { token: "Bearer " + currUser.accessToken } }
           );
+          alert("Your comment is sent for approve");
           window.location.reload();
         } catch (err) {}
       }
@@ -104,32 +105,10 @@ const DetailsThumb = () => {
     }
   }
 
-  function CommentDiv(item) {
-    if (item && item.comments.length === 0) {
-      return <h>This product has no comment yet</h>;
-    } else {
-      return item.comments.map((cmt) => {
-        return (
-          <div
-            key={cmt.comment_id}
-            className="comment-row"
-            style={{
-              outline: "solid",
-              outlineWidth: "1px",
-              borderRadius: "5px",
-              margin: "20px",
-              padding: "5px",
-            }}
-          >
-            <h className="comment-text">{cmt.comment}</h>
-          </div>
-        );
-      });
-    }
-  }
   const addCart = () => {
     dispatch(addProduct({ ...product, amount, maxAmount }));
     addCartAPI(product._id, amount);
+    alert("Product added to Cart");
   };
   let approvedComments;
   if (product.comments) {
