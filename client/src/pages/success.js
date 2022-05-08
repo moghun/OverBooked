@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useLocation } from "react-router";
 import { userRequest } from "./requestMethods";
-import { useNavigate } from "react-router-dom";
 import { Button } from "@material-ui/core";
 
 
