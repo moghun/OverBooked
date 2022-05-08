@@ -34,3 +34,17 @@
 
   
   
+  .name-container{
+    outline: none;
+    display: table-cell;
+    outline: solid;
+    background-color: burlywood;
+  }
+
+  .product-container{
+    outline: none;
+    display: table-cell;
+    outline: solid;
+    background-color: burlywood;
+    outline-color: goldenrod;
+  }

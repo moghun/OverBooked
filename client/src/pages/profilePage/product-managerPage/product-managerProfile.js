@@ -31,6 +31,7 @@ function ProductManagerAPI() {
         ) {
           returnArr.push({
             product_id: productsWithComments[product]._id,
+            product_name: productsWithComments[product].name,
             initCommit: productsWithComments[product].comments[comment].comment,
             comment_id: productsWithComments[product].comments[comment].comment_id
           });
@@ -110,6 +111,7 @@ function ProductManagerAPI() {
                     className="approval-column"
                     style={{ padding: "10px", margin: "20px" }}
                   >
+                    <div className="product-container">
                     <h
                       style={{
                         marginLeft: "25px",
@@ -117,8 +119,14 @@ function ProductManagerAPI() {
                         marginRight: "20px",
                       }}
                     >
-                      Product ID:{item.product_id}
+                      <div>
+                    ID:{item.product_id}
+                      <br></br>
+                      <br></br>
+                    Name:{item.product_name}
+                    </div>
                     </h>
+                    </div>
                     <h
                       style={{
                         marginLeft: "50px",
