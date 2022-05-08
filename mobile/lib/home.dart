@@ -20,15 +20,24 @@ class _HomeState extends State<Home> {
     const LogIn(),
   ];
 
-  @override
-  void initState() {
-    super.initState();
-    // obtain shared preferences
-  }
-
   //BottomNavigation
   static int _selectedBottomTabIndex = 0;
   static int _routeIndex = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    if(_selectedBottomTabIndex == 2 && UserService.getCurrentUser() != null){
+      setState(() {
+        _routeIndex = 2;
+      });
+    }
+    else if(_selectedBottomTabIndex == 2 && UserService.getCurrentUser() == null){
+      setState(() {
+        _routeIndex = 3;
+      });
+    }
+  }
 
   void onBottomTabPress(int index) {
     if (index == 2 && UserService.getCurrentUser() == null) {
