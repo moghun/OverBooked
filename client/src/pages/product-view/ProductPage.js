@@ -137,8 +137,8 @@ const DetailsThumb = () => {
           ) : (
             <p>Cost: {product.cost} TL</p>
           )}
-          <p>{product.description}</p>
-          <p>{product.category}</p>
+          <p>Description: {product.description}</p>
+          <p>Category: {product.category}</p>
 
           {product.amount !== 0 ? (
             <>
