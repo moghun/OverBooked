@@ -15,7 +15,9 @@ const router = require("express").Router();
 async function updateStock(id, quantity) {
   const product = await Product.findById(id);
 
-  product.amount -= quantity;
+  if(product.amount -= quantity >= 0){
+    product.amount -= quantity;
+  }
 
   await product.save({ validateBeforeSave: false });
 }
