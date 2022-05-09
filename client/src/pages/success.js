@@ -8,26 +8,43 @@ import { Button } from "@material-ui/core";
 const Success = () => {
   const location = useLocation();
   const data = location.state.stripeData;
-  const cart = location.state.cart;
+  const cart = location.state.products;
   const currentUser = useSelector((state) => state.user.currentUser);
   const [orderId, setOrderId] = useState(null);
 
+  console.log(data);
+  console.log(cart);
+  console.log(currentUser);
+
+
   useEffect(() => {
-    const createOrder = async () => {
+    function createOrder(){
+
+
+      const idArray = cart.products.map((book) =>book._id)
+      const amountArray = cart.products.map((book) =>book.amount)
+      
+      
+
+      const orderStruct = {
+        order_id: Math.floor(Math.random() * 10),
+        buyer_email: currentUser.email,
+        status: "Processing",
+        cost: cart.total,
+        date: Date.now(),
+        bought_products: idArray,
+        amounts: amountArray,
+      };
+
+
       try {
-        const res = await userRequest.post("/orders", {
-          userId: currentUser._id,
-          products: cart.products.map((item) => ({
-            productId: item._id,
-            quantity: item._quantity,
-          })),
-          amount: cart.total,
-          address: data.billing_details.address,
-        });
-        setOrderId(res.data._id);
-      } catch {}
+        userRequest.post("/orders",
+        orderStruct,{ headers: { token: "Bearer " + currentUser.accessToken } });
+      } catch(err){
+        console.log(err);
+      }
     };
-    data && createOrder();
+    createOrder();
   }, [cart, data, currentUser]);
 
   return (
