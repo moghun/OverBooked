@@ -1,3 +1,6 @@
+let client = require('@sendgrid/mail')
+client.setApiKey(process.env.SENDGRID_API_KEY)
+
 const Order = require("../models/order_dbmod");
 const Product = require("../models/product_dbmod");
 const {
