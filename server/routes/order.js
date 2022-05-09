@@ -1,3 +1,6 @@
+let client = require('@sendgrid/mail')
+client.setApiKey(process.env.SENDGRID_API_KEY)
+
 const Order = require("../models/order_dbmod");
 const Product = require("../models/product_dbmod");
 const {
@@ -15,7 +18,8 @@ const router = require("express").Router();
 async function updateStock(id, quantity) {
   const product = await Product.findById(id);
 
-  if(product.amount -= quantity >= 0){
+  const weight = product.amount - quantity;
+  if( weight >= 0){
     product.amount -= quantity;
   }
 
@@ -102,5 +106,30 @@ router.get("/find/:userId", async (req, res) => {
     res.status(500).json(err);
   }
 });
+
+
+//SEND RECEPIT
+router.post("/sendRecepit/:orderid", async (req, res)  => {
+try{
+client.send({
+  to: {
+    email: req.body.email,
+    name: req.body.username,
+  },
+  from: {
+    email: 'overbookedstore1@gmail.com',
+    name: "overbooked"
+  },
+  templateId: 'd-9eeb7db78dff4ac384f3d2bf511cdf1a',
+  dynamicTemplateData: {
+    username: req.body.username,
+    email: req.body.email,
+    cost: req.body.cost,
+    products: req.body.products,
+    order_id: req.params.orderid,
+  },
+}).then()
+}catch(err){console.log(err)}
+}); 
 
 module.exports = router;

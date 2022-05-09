@@ -31,17 +31,34 @@ const Success = () => {
     dispatch(clearCart());
     clearCartAPI();
   };
+
+
+  const sendEmail = async (order_id) => {
+    try{
+      await axios.post("http://localhost:5001/api/orders/sendRecepit/" + order_id, 
+      {
+        email: currentUser.email,
+        username: currentUser.username,
+        cost: cart.total,
+        products: cart.products,
+        amount: cart.amount,
+      })
+      console.log(currentUser.email)
+      console.log(order_id)
+    } catch(err){}
+  }
+
+
   useEffect(() => {
+    const or_id = Math.floor(Math.random() * 10);
     function createOrder(){
 
 
       const idArray = cart.products.map((book) =>book._id)
       const amountArray = cart.products.map((book) =>book.amount)
       
-      
-
       const orderStruct = {
-        order_id: Math.floor(Math.random() * 10),
+        order_id: or_id,
         buyer_email: currentUser.email,
         status: "Processing",
         cost: cart.total,
@@ -59,6 +76,7 @@ const Success = () => {
       }
     };
     createOrder();
+    sendEmail(or_id);
     clear();
   }, [cart, data, currentUser]);
 
