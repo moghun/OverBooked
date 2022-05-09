@@ -20,6 +20,12 @@ class _CartState extends State<Cart> {
   final User? user = UserService.getCurrentUser();
 
   @override
+  void initState() {
+    super.initState();
+
+  }
+
+  @override
   Widget build(BuildContext context) {
     if(user == null){
       return const Center(child: Text("You need to login to see your cart"),);
@@ -65,6 +71,10 @@ class _CartState extends State<Cart> {
                                                 const SizedBox(width: 8)
                                               ])),
                                         ),
+                                        const SizedBox(height: 12,),
+                                        OutlinedButton(onPressed: (){
+                                          _cartService.buyCart(snapshot.data!);
+                                        }, child: Text("Buy your cart")),
                                       ],
                                     ),
                                   ),

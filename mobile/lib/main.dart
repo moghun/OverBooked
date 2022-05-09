@@ -8,7 +8,7 @@ void main() {
     routes: {
       '/': (context) => const Home(),
       '/logIn': (context) => const LogIn(),
-      '/signUp': (context) => const SignUp()
+      '/signUp': (context) => const SignUp(),
     },
   ));
 }

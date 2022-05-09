@@ -31,6 +31,8 @@ class _LogInState extends State<LogIn> {
           name: loginInfo["name"] == "" ? "no-name" : loginInfo["name"],
           surname: loginInfo["surname"] == "" ? "no-surname" : loginInfo["surname"],
           cart: loginInfo["cart"],
+          token: loginInfo["accessToken"],
+          uid: loginInfo["_id"],
         );
         print(loginInfo["cart"]);
         UserService.updateUser(newUser);
