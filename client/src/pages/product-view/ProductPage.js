@@ -10,6 +10,7 @@ import { useSelector } from "react-redux";
 
 const { v1: uuidv1 } = require("uuid");
 
+
 const DetailsThumb = () => {
   const currUser = useSelector((state) => state.user.currentUser);
   const location = useLocation();
@@ -106,9 +107,12 @@ const DetailsThumb = () => {
   }
 
   const addCart = () => {
+    
     dispatch(addProduct({ ...product, amount, maxAmount }));
     addCartAPI(product._id, amount);
     alert("Product added to Cart");
+    
+    
   };
   let approvedComments;
   if (product.comments) {
@@ -148,6 +152,7 @@ const DetailsThumb = () => {
                 className="addcount"
                 min="1"
                 max={product.amount}
+                onKeyDown={(e) => e.preventDefault()}
               ></input>{" "}
               <button className="cart" onClick={addCart}>
                 Add to cart
