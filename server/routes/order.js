@@ -1,4 +1,5 @@
 const Order = require("../models/order_dbmod");
+const Product = require("../models/product_dbmod");
 const {
   verifyToken,
   verifyTokenAndUser,
@@ -10,6 +11,30 @@ const {
 
 const router = require("express").Router();
 
+
+async function updateStock(id, quantity) {
+  const product = await Product.findById(id);
+
+  if(product.amount -= quantity >= 0){
+    product.amount -= quantity;
+  }
+
+  await product.save({ validateBeforeSave: false });
+}
+
+async function reduceAmount(idArray,amountArray){
+
+  for (let i = 0; i < idArray.length; i++) {
+    const id = idArray[i]; 
+    const reduceAmount = amountArray[i];
+
+    await updateStock(id,reduceAmount);
+  }
+
+
+};
+
+
 //CREATE
 
 router.post("/", verifyToken, async (req, res) => {
@@ -17,6 +42,11 @@ router.post("/", verifyToken, async (req, res) => {
 
   try {
     const savedOrder = await newOrder.save();
+    const bookArray = savedOrder.bought_products;
+    const amountArray = savedOrder.amounts;
+    
+    reduceAmount(bookArray,amountArray);
+
     res.status(200).json(savedOrder);
   } catch (err) {
     res.status(500).json(err);
