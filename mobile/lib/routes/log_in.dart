@@ -32,6 +32,7 @@ class _LogInState extends State<LogIn> {
           surname: loginInfo["surname"] == "" ? "no-surname" : loginInfo["surname"],
           cart: loginInfo["cart"],
         );
+        print(loginInfo["cart"]);
         UserService.updateUser(newUser);
         Navigator.pushReplacementNamed(context, "/");
       } else {
