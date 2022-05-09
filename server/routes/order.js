@@ -14,8 +14,8 @@ const router = require("express").Router();
 
 async function updateStock(id, quantity) {
   const product = await Product.findById(id);
-
-  if(product.amount -= quantity >= 0){
+  const weight = product.amount - quantity;
+  if( weight >= 0){
     product.amount -= quantity;
   }
 
@@ -82,7 +82,7 @@ router.delete("/:id", verifyTokenAndUser, async (req, res) => {
 //GET USER ORDERS
 router.get("/find/:userId", verifyTokenOrManager, async (req, res) => {
   try {
-    const orders = await Order.find({ userId: req.params.userId });
+    const orders = await Order.find({ buyer_email: req.params.buyer_email });
     res.status(200).json(orders);
   } catch (err) {
     res.status(500).json(err);
