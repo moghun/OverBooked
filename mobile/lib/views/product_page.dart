@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mobile/models/product.dart';
+import 'package:mobile/models/user.dart';
 import 'package:mobile/services/product_service.dart';
+import 'package:mobile/services/user_service.dart';
 import 'package:mobile/utils/colors.dart';
 import 'package:mobile/utils/styles.dart';
 
@@ -80,7 +82,7 @@ class _ProductPageState extends State<ProductPage> {
                             height: 12,
                           ),
                           Text(
-                            snapshot.data!.cost.toString() + " TL",
+                            "\$ " + snapshot.data!.cost.toString(),
                             style: const TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 22),
                             textAlign: TextAlign.center,
@@ -102,7 +104,26 @@ class _ProductPageState extends State<ProductPage> {
                             height: 12,
                           ),
                           OutlinedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              User? user = UserService.getCurrentUser();
+                              bool exists = false;
+                              for (int i = 0; i < user!.cart!.length; i++) {
+                                if (user.cart![i]["product_id"] ==
+                                    snapshot.data!.id) {
+                                  exists = true;
+                                  user.cart![i]["amount"] =
+                                      (int.parse(user.cart![i]["amount"]) + 1)
+                                          .toString();
+                                }
+                              }
+                              if (!exists) {
+                                user.cart!.add({
+                                  "product_id": snapshot.data!.id,
+                                  "amount": "1"
+                                });
+                              }
+                              UserService.updateUser(user);
+                            },
                             child: Text(
                               "Add to cart",
                               style: kButtonLightTextStyle,
