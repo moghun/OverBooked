@@ -70,6 +70,10 @@ function SearchPage() {
       return arr.sort((a, b) => (a.cost < b.cost ? 1 : -1));
     } else if (filter === 2) {
       return arr.sort((a, b) => (a.cost > b.cost ? 1 : -1));
+    } else if (filter === 3){
+      return arr.sort((a, b) => (a.name > b.name ? 1 : -1));
+    } else if (filter === 4){
+      return arr.sort((a, b) => (a.name < b.name ? 1 : -1));
     } else {
       return arr;
     }
@@ -172,12 +176,14 @@ function SearchPage() {
                 <MenuItem value={0}>No filter</MenuItem>
                 <MenuItem value={1}>Price descending</MenuItem>
                 <MenuItem value={2}>Price ascending</MenuItem>
+                <MenuItem value={3}>Name ascending (A-Z)</MenuItem>
+                <MenuItem value={4}>Name descending (Z-A)</MenuItem>
               </Select>
             </FormControl>
           </Grid>
           <Grid item container justifyContent="space-around" display="flex">
             {/* Results of search and outcome of filters (right) */}
-            {sortByFilter(searchResults).map((book) => (
+            {sortByFilter([...searchResults]).map((book) => (
               <BookCard
                 onclick={book._id}
                 name={book.name}
