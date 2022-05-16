@@ -11,13 +11,13 @@ import { CardActionArea } from "@material-ui/core";
 
 export default function BookCard(props) {
   return (
-    <Link href={"/productpage/" + props.onclick} underline="none">
+    <Link href={"/productpage/" + props.onclick} underline="none" style={{ textDecoration: "none" }}>
       <Card
-        onClick={() => {}}
         sx={{
-          maxWidth: "350px",
-          minWidth: "250px",
-          padding: "15px",
+          width: "220px",
+          height: "330px",
+          underline: "none",
+          padding: "5px",
           margin: "20px",
           transition: ".3s ease",
           ":hover": { boxShadow: 20 },
@@ -25,34 +25,46 @@ export default function BookCard(props) {
       >
         <CardMedia
           component="img"
-          height="200"
+          height="170"
           image={props.imgurl}
           alt="book picture"
           style={{ objectFit: "contain" }}
         />
-        <CardContent style={{ justifyContent: "center", display: "flex" }}>
+        <CardContent sx={{ justifyContent: "space-around", display: "flex", height: "165px" }}>
           <Grid
             container
             spacing={0}
-            margin="-25px"
+            margin="-15px"
             direction="column"
+            flex="1"
             justifyContent="space-around"
             alignItems="center"
           >
             <Grid item>
               <Typography
                 gutterBottom
-                variant="h6"
+                underline="none"
+                variant="body1"
                 component="div"
-                paddingTop="10px"
                 marginBottom="0px"
                 textAlign="center"
+                sx={{
+                  display: '-webkit-box',
+                  overflow: 'hidden',
+                  WebkitBoxOrient: 'vertical',
+                  WebkitLineClamp: 2,
+              }}
               >
                 {props.name}
               </Typography>
             </Grid>
             <Grid item>
-              <Typography variant="body2" color="darkblue">
+              <Typography variant="body2" color="darkblue" sx={{
+                  display: '-webkit-box',
+                  overflow: 'hidden',
+                  WebkitBoxOrient: 'vertical',
+                  WebkitLineClamp: 1,
+              }}>
                 {props.author}
               </Typography>
             </Grid>
@@ -61,15 +73,21 @@ export default function BookCard(props) {
               container
               justifyContent="space-around"
               alignItems="center"
+              marginTop="-3px"
             >
               <Grid item>
-                <Typography variant="subtitle2" color="text.secondary">
+                <Typography maxWidth="130px" variant="caption" color="text.secondary" sx={{
+                  display: '-webkit-box',
+                  overflow: 'hidden',
+                  WebkitBoxOrient: 'vertical',
+                  WebkitLineClamp: 1,
+              }}>
                   {props.publisher}
                 </Typography>
               </Grid>
               <Grid item>
                 <Box>
-                  <Typography variant="subtitle2" color="text.secondary">
+                  <Typography variant="caption" color="text.secondary">
                     {props.score}
                     <StarIcon style={{ marginTop: "-4px", color: "gold" }} />
                   </Typography>
@@ -79,18 +97,18 @@ export default function BookCard(props) {
 
             <>
               {props.amount === 0 ? (
-                <h4 className="borders3">Sold Out</h4>
+                <Typography color="red">Sold Out</Typography>
               ) : props.beforeprice !== -1 ? (
                 <Grid item>
-                  <h4 className="borders">{props.beforeprice} $</h4>
+                  <Typography sx={{ textDecorationLine: "line-through", color: "red" }}>{props.beforeprice} $</Typography>
                 </Grid>
               ) : (
-                <h1> </h1>
+                <></>
               )}
             </>
 
             <Grid item>
-              <h5 className="borders2">{props.price} $</h5>
+              <Typography>{props.price} $</Typography>
             </Grid>
           </Grid>
         </CardContent>
