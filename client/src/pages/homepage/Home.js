@@ -94,10 +94,12 @@ function avgrating(items) {
 const HomePage = () => {
   const [allsale, setallsale] = useState([]);
   const [topprod, settopprod] = useState([]);
+  const [allprod, settallprod] = useState([]);
 
   const getAllProducts = async () => {
     try {
       const res = await axios.get("http://localhost:5001/api/products");
+      settallprod(res.data);
       return res.data;
     } catch (err) {}
   };
@@ -187,7 +189,7 @@ const HomePage = () => {
       <div className="slider2">
         <AiFillBackward className="arrow prev" onClick={prevSlide2} />
         <AiFillForward className="arrow next" onClick={nextSlide2} />
-        {topprod.map((slide, index) => {
+        {allprod.map((slide, index) => {
           return (
             <div
               className={index === currentSlide2 ? "slide current" : "slide"}
@@ -233,17 +235,18 @@ const HomePage = () => {
       <div style={{ margin: "30px" }} className="carousel">
         <Slider className="procontainer" {...carouselProperties}>
           {topprod.map((AllSales) => (
+            AllSales.amount === 0 ? (false) : (   
             <BookCard
-              onclick={AllSales._id}
-              name={AllSales.name}
-              amount={AllSales.amount}
-              author={AllSales.author}
-              imgurl={AllSales.img}
-              publisher={AllSales.publisher}
-              price={AllSales.cost}
-              score={avgrating(AllSales)}
-              beforeprice={AllSales.before_sale_price}
-            ></BookCard>
+                onclick={AllSales._id}
+                name={AllSales.name}
+                amount={AllSales.amount}
+                author={AllSales.author}
+                imgurl={AllSales.img}
+                publisher={AllSales.publisher}
+                price={AllSales.cost}
+                score={avgrating(AllSales)}
+                beforeprice={AllSales.before_sale_price}
+              ></BookCard>)
           ))}
         </Slider>
       </div>
