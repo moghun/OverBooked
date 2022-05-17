@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:mobile/models/user.dart';
-import 'package:mobile/routes/myorders.dart';
+import 'package:mobile/pages/user_orders_page.dart';
 import 'package:mobile/services/user_service.dart';
 import 'package:mobile/utils/colors.dart';
 import 'package:mobile/utils/styles.dart';
 
-class Profile extends StatefulWidget {
-  const Profile({Key? key}) : super(key: key);
+class ProfilePage extends StatefulWidget {
+  const ProfilePage({Key? key}) : super(key: key);
 
   @override
-  State<Profile> createState() => _ProfileState();
+  State<ProfilePage> createState() => _ProfilePageState();
 }
 
-class _ProfileState extends State<Profile> {
+class _ProfilePageState extends State<ProfilePage> {
   @override
   void initState() {
     super.initState();
@@ -81,7 +81,7 @@ class _ProfileState extends State<Profile> {
                         onPressed: () {
 
                           Navigator.push(context, MaterialPageRoute(
-                              builder: (context) => MyOrders(
+                              builder: (context) => UserOrdersPage(
                               )));
                         },
                         child: Text("My Orders")),

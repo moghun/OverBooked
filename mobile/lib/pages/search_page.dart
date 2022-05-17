@@ -3,8 +3,8 @@ import 'package:mobile/models/product.dart';
 import 'package:mobile/services/product_service.dart';
 import 'package:mobile/utils/dimensions.dart';
 import 'package:mobile/utils/styles.dart';
-import 'package:mobile/views/main_app_bar.dart';
-import 'package:mobile/views/product_preview.dart';
+import 'package:mobile/components/main_app_bar.dart';
+import 'package:mobile/components/product_preview.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({Key? key, required this.query}) : super(key: key);

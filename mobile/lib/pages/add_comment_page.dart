@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:mobile/services/product_service.dart';
-import 'package:mobile/views/main_app_bar.dart';
+import 'package:mobile/components/main_app_bar.dart';
 
-class AddComment extends StatefulWidget {
-  const AddComment({Key? key, required this.productID}) : super(key: key);
+class AddCommentPage extends StatefulWidget {
+  const AddCommentPage({Key? key, required this.productID}) : super(key: key);
 
   final String productID;
 
   @override
-  _AddCommentState createState() => _AddCommentState();
+  _AddCommentPageState createState() => _AddCommentPageState();
 }
 
-class _AddCommentState extends State<AddComment> {
+class _AddCommentPageState extends State<AddCommentPage> {
   final ProductService _productService = ProductService();
   String comment = "";
 

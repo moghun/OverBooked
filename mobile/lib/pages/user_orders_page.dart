@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:mobile/services/product_service.dart';
 import 'package:mobile/utils/dimensions.dart';
 import 'package:mobile/utils/styles.dart';
-import 'package:mobile/views/main_app_bar.dart';
+import 'package:mobile/components/main_app_bar.dart';
 
-class MyOrders extends StatefulWidget {
-  const MyOrders({Key? key}) : super(key: key);
+class UserOrdersPage extends StatefulWidget {
+  const UserOrdersPage({Key? key}) : super(key: key);
 
   @override
-  _MyOrdersState createState() => _MyOrdersState();
+  _UserOrdersPageState createState() => _UserOrdersPageState();
 }
 
-class _MyOrdersState extends State<MyOrders> {
+class _UserOrdersPageState extends State<UserOrdersPage> {
   final ProductService _productService = ProductService();
 
   @override

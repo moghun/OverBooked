@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:mobile/models/product.dart';
-import 'package:mobile/routes/add_comment.dart';
-import 'package:mobile/views/main_app_bar.dart';
+import 'package:mobile/pages/add_comment_page.dart';
+import 'package:mobile/components/main_app_bar.dart';
 
-class Comments extends StatefulWidget {
-  const Comments({Key? key, required this.product}) : super(key: key);
+class CommentsPage extends StatefulWidget {
+  const CommentsPage({Key? key, required this.product}) : super(key: key);
 
   final Product product;
 
   @override
-  _CommentsState createState() => _CommentsState();
+  _CommentsPageState createState() => _CommentsPageState();
 }
 
-class _CommentsState extends State<Comments> {
+class _CommentsPageState extends State<CommentsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,7 +32,7 @@ class _CommentsState extends State<Comments> {
                       ))),
               OutlinedButton(onPressed: (){
                 Navigator.push(context, MaterialPageRoute(
-                    builder: (context) => AddComment(
+                    builder: (context) => AddCommentPage(
                       productID: widget.product.id,
                     )));
               }, child: Text("Add comment")),

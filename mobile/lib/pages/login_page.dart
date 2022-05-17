@@ -7,14 +7,14 @@ import 'package:mobile/utils/dimensions.dart';
 import 'package:mobile/utils/styles.dart';
 import 'package:flutter/material.dart';
 
-class LogIn extends StatefulWidget {
-  const LogIn({Key? key}) : super(key: key);
+class LoginPage extends StatefulWidget {
+  const LoginPage({Key? key}) : super(key: key);
 
   @override
-  _LogInState createState() => _LogInState();
+  _LoginPageState createState() => _LoginPageState();
 }
 
-class _LogInState extends State<LogIn> {
+class _LoginPageState extends State<LoginPage> {
   final AuthService _authService = AuthService();
 
   final _formKey = GlobalKey<FormState>();
