@@ -45,7 +45,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     const SizedBox(
                       height: 12,
                     ),
-                    CircleAvatar(
+                    const CircleAvatar(
                       backgroundColor: Color(0xffE6E6E6),
                       radius: 30,
                       child: Icon(
@@ -81,10 +81,10 @@ class _ProfilePageState extends State<ProfilePage> {
                         onPressed: () {
 
                           Navigator.push(context, MaterialPageRoute(
-                              builder: (context) => UserOrdersPage(
+                              builder: (context) => const UserOrdersPage(
                               )));
                         },
-                        child: Text("My Orders")),
+                        child: const Text("My Orders")),
                     const SizedBox(
                       height: 12,
                     ),
@@ -93,7 +93,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           UserService.removeUser();
                           Navigator.pushReplacementNamed(context, "/");
                         },
-                        child: Text("Log Out")),
+                        child: const Text("Log Out")),
                     const SizedBox(
                       height: 12,
                     ),

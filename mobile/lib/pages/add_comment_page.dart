@@ -22,7 +22,7 @@ class _AddCommentPageState extends State<AddCommentPage> {
     '4',
     '5',
   ];
-  String dropdownvalue = '1';
+  String dropDownValue = '5';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,11 +41,11 @@ class _AddCommentPageState extends State<AddCommentPage> {
               ),
               Row(
                 children: [
-                  Text("Rate product: "),
+                  const Text("Rate product: "),
                   DropdownButton(
 
                     // Initial Value
-                    value: dropdownvalue,
+                    value: dropDownValue,
 
                     // Down Arrow Icon
                     icon: const Icon(Icons.keyboard_arrow_down),
@@ -61,7 +61,7 @@ class _AddCommentPageState extends State<AddCommentPage> {
                     // change button value to selected value
                     onChanged: (String? newValue) {
                       setState(() {
-                        dropdownvalue = newValue!;
+                        dropDownValue = newValue!;
                       });
                     },
                   ),
@@ -70,9 +70,9 @@ class _AddCommentPageState extends State<AddCommentPage> {
               OutlinedButton(
                   onPressed: () {
                     _productService.addCommentOnProduct(
-                        widget.productID, comment, int.parse(dropdownvalue));
+                        widget.productID, comment, int.parse(dropDownValue));
                   },
-                  child: Text("Add")),
+                  child: const Text("Add")),
             ],
           ),
         ),

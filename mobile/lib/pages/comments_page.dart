@@ -35,7 +35,7 @@ class _CommentsPageState extends State<CommentsPage> {
                     builder: (context) => AddCommentPage(
                       productID: widget.product.id,
                     )));
-              }, child: Text("Add comment")),
+              }, child: const Text("Add comment")),
             ],
           ),
         ),

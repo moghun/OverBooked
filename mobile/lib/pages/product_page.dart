@@ -137,7 +137,7 @@ class _ProductPageState extends State<ProductPage> {
                               MaterialPageRoute(
                                   builder: (context) => CommentsPage(
                                     product: snapshot.data!,
-                                  )));}, child: Text("Comments")),
+                                  )));}, child: const Text("Comments")),
                         ],
                       ),
                     ),
