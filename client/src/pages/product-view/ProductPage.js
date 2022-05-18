@@ -20,8 +20,24 @@ const DetailsThumb = () => {
   const [maxAmount, setMaxAmount] = useState(null);
   const [comment, setComment] = useState(null);
   const [rating, setRating] = useState(null);
+  //const [userrName, setUserrname] = useState(null);
   const dispatch = useDispatch();
 
+  /*
+  const getUserInfo = async (id) => {
+    try {
+      const res = await axios.get(
+        "http://localhost:5001/api/users/find/" + id,
+        { headers: { token: "Bearer " + currUser.accessToken } }
+      );
+      setUserrname(res.data.username);
+    } catch (err) {}
+  };
+
+  useEffect(async (id) => {
+    getUserInfo(id);
+  }, [id]);
+*/
   function getComment(val) {
     setComment(val.target.value);
   }
@@ -118,6 +134,8 @@ const DetailsThumb = () => {
   if (product.comments) {
     approvedComments = product.comments.filter((c) => c.isApproved === true);
   }
+
+
   return (
     <div className="app">
       <div className="details" key={product.id}>
@@ -153,8 +171,9 @@ const DetailsThumb = () => {
                 min="1"
                 max={product.amount}
                 onKeyDown={(e) => e.preventDefault()}
+                style={{borderRadius:'5px', borderWidth:'1px'}}
               ></input>{" "}
-              <button className="cart" onClick={addCart}>
+              <button className="cart" onClick={addCart} style={{borderRadius:'5px'}}>
                 Add to cart
               </button>
             </>
@@ -168,11 +187,7 @@ const DetailsThumb = () => {
                 const ratingValue = i + 1;
                 return (
                   <label>
-                    <input
-                      type="radio"
-                      name="rating"
-                      style={{ display: "none" }}
-                    />
+                    <input type="radio" name="rating" style={{ display: "none" }}/>
                     <FaStar
                       className="star"
                       size={20}
@@ -190,7 +205,7 @@ const DetailsThumb = () => {
               placeholder=" Write your comment here..."
               rows="4"
               cols="50"
-              style={{ resize: "none", borderWidth: "bold" }}
+              style={{ resize: "none", borderWidth: "bold", borderRadius:'10px' }}
             ></textarea>
             <div>
               <button
@@ -200,6 +215,7 @@ const DetailsThumb = () => {
                   backgroundColor: "#333",
                   color: "white",
                   width: 60,
+                  borderRadius:'5px'
                 }}
               >
                 Submit
@@ -209,6 +225,8 @@ const DetailsThumb = () => {
         </div>
       </div>
 
+      <hr style={{width:'95%', marginLeft:'2.5%', borderWidth:'2px'}}></hr>
+
       <div className="comment-box" style={{ textAlign: "center" }}>
         <h3 style={{ marginBottom: "10px" }}>Product Comments</h3>
         {
@@ -216,18 +234,23 @@ const DetailsThumb = () => {
             <h>This product has no comment yet</h>
           ) : (
             approvedComments.map((cmt) => {
+              //getUserInfo(cmt.user_id);
               return (
-                <div
-                  className="comment-row"
-                  style={{
-                    outline: "solid",
-                    outlineWidth: "1px",
-                    borderRadius: "5px",
-                    margin: "20px",
-                    padding: "5px",
-                  }}
-                >
-                  <h className="comment-text">{cmt.comment}</h>
+                <div className="comment-row" style={{ boxShadow: '0 0 5px #ccc', outline: "solid", outlineColor: 'lightgray',outlineWidth: "0.5px", borderRadius: "5px", margin: "20px", padding: "10px",}}>
+                  
+                  
+                  <div class="comment-header d-flex justify-content-between">
+                        <div class="comment-owner">
+                            <strong>Username: </strong>
+                            <h>{cmt.user_id}</h>
+                        </div>
+                  </div>
+
+                  <div style={{textAlign:'left'}}>
+                    <br></br>
+                    <h className="comment-text">{cmt.comment}</h>
+                  </div>
+                  
                 </div>
               );
             })
