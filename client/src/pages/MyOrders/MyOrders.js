@@ -56,7 +56,7 @@ const MyOrders = () => {
     return (
       <div className='orders-holder'>
   
-      <div className='Row'>
+      <div className='Order-Row'>
   
         <div className='orders-container'>
           <div>
@@ -68,7 +68,7 @@ const MyOrders = () => {
             orders.map((order) => {
               if(isOpen){
                 return(
-                <div style={{backgroundColor: "aliceblue", borderRadius:'10px'}}>
+                <div style={{backgroundColor: "aliceblue", borderRadius:'10px', margin:'20px'}}>
                   <div key = {order._id} className="order-column"style={{padding: '10px', margin:'20px'}}>
                     <h style={{marginLeft: '25px', fontWeight:'bold', marginRight:-20}}>Order ID:</h>
                     <h style={{marginLeft: '25px'}}>{order._id}</h>
@@ -80,7 +80,7 @@ const MyOrders = () => {
                     
                   </div>
                   <div>
-                    <hr color="black" style={{width:'90%', marginLeft:'5%', borderWidth:'1.5px', borderColor:'black'}}></hr>
+                    <hr color="black" style={{width:'95%', marginLeft:'2.5%', borderWidth:'1.5px', borderColor:'black'}}></hr>
                     {order.bought_products.map((bitem, i) =>
                     {
                       return(
