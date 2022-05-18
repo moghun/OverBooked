@@ -3,31 +3,21 @@ import "../MyOrders/MyOrders.css";
 import { useSelector } from "react-redux";
 import axios from "axios";
 
-/*
-const Popup = props => {
-  return (
-    <div className="popup-box">
-      <div className="box">
-        <span className="close-icon" onClick={props.handleClose}>x</span>
-        {props.content}
-      </div>
-    </div>
-  );
-};
-*/
 const MyOrders = () => {
 
   const currUser = useSelector((state) => state.user.currentUser)
 
-  //const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const [orders, setOrder] = useState([]);
+  const [items, setItems] = useState([]);
   
   
- /*
-  const togglePopup = () => {
+ 
+  const togglePopup = (key) => {
     setIsOpen(!isOpen);
+    console.log(isOpen)
   }
-*/
+
   const getOrders = async () => {
     const userStruct = {buyer_email:currUser.email}
     try {
@@ -40,37 +30,25 @@ const MyOrders = () => {
       setOrder(res.data);
       
     } catch (error) {
-      
     }
-
-    
   }
+
 
   
-/*
-  const getProducts = (orderlist) => {
-    let products = []
-    for(let i = 0; i<orderList.length;i++){
-        const editProduct = Product.findById(orderList[i]);
-        products.push(editProduct);
-    }
-    return products;
-  }
-*/
+  
   useEffect(() => {getOrders()},[currUser]);
-  console.log(orders)
-  //const product = getProducts(orderList);
-  
 
+  console.log(orders)
+  
   function orderStatus(item){
     if(item === "delivered"){
-      return(<input disabled="disabled" type = "text" value={item} style={{color:'black',borderRadius:"10px",backgroundColor: 'lightgreen',textAlign:'center',marginLeft: '100px', width:"100px"}} readonly></input>);
+      return(<input disabled="disabled" type = "text" value={item} style={{color:'black',borderRadius:"10px",backgroundColor: 'lightgreen',textAlign:'center',marginLeft: '20px', width:"100px"}} readonly></input>);
     }
     else if(item === "in-transit"){
-      return(<input disabled="disabled" type = "text" value={item} style={{color:'black',borderRadius:"10px",backgroundColor: 'yellow',textAlign:'center',marginLeft: '100px', width:"100px"}} readonly></input>);
+      return(<input disabled="disabled" type = "text" value={item} style={{color:'black',borderRadius:"10px",backgroundColor: 'yellow',textAlign:'center',marginLeft: '20px', width:"100px"}} readonly></input>);
     }
     else{
-      return(<input disabled="disabled" type = "text" value={item} style={{color:'black',borderRadius:"10px",backgroundColor: 'orange',textAlign:'center',marginLeft: '100px', width:"100px"}} readonly></input>);
+      return(<input disabled="disabled" type = "text" value={item} style={{color:'black',borderRadius:"10px",backgroundColor: 'orange',textAlign:'center',marginLeft: '20px', width:"100px"}} readonly></input>);
     }
   }
 
@@ -88,17 +66,50 @@ const MyOrders = () => {
             :
             
             orders.map((order) => {
-              return(
-              <div key = {order._id} className="order-column"style={{padding: '10px', margin:'20px'}}>
-                      <h style={{marginLeft: '25px', fontWeight:'bold', marginRight:-20}}>Order ID:</h>
-                      <h style={{marginLeft: '25px'}}>{order._id}</h>
-                      <h style={{marginLeft: '25px',marginRight:-20, fontWeight:'bold'}}>Order Date: </h>
-                      <h style={{marginLeft: '25px'}}>{order.updatedAt}</h>
-                      {orderStatus(order.status)}
-                      <h style={{marginLeft: '100px', fontWeight:'bold'}}>Total: {order.cost} USD</h>
-                      
+              if(isOpen){
+                return(
+                <div style={{backgroundColor: "aliceblue", borderRadius:'10px'}}>
+                  <div key = {order._id} className="order-column"style={{padding: '10px', margin:'20px'}}>
+                    <h style={{marginLeft: '25px', fontWeight:'bold', marginRight:-20}}>Order ID:</h>
+                    <h style={{marginLeft: '25px'}}>{order._id}</h>
+                    <h style={{marginLeft: '25px',marginRight:-20, fontWeight:'bold'}}>Order Date: </h>
+                    <h style={{marginLeft: '25px'}}>{order.updatedAt}</h>
+                    {orderStatus(order.status)}
+                    <h style={{marginLeft: '15px', fontSize:'16px'}}><strong>Total:</strong> {order.cost} USD</h>
+                    <button onClick={togglePopup} style={{borderRadius:'5px', backgroundColor:'lightgray', marginLeft:'10px', padding:'5px'}}>Details</button>
+                    
+                  </div>
+                  <div>
+                    <hr color="black" style={{width:'90%', marginLeft:'5%', borderWidth:'1.5px', borderColor:'black'}}></hr>
+                    {order.bought_products.map((bitem, i) =>
+                    {
+                      return(
+                        <div style={{marginTop:'5px'}}>
+                          <h style={{marginLeft:'50px', marginRight:'100px'}}><strong>Product Name:</strong> {bitem}</h>
+                          <h><strong>Amount:</strong> {order.amounts[i]}</h>
+                        </div>
+                      );}
+                    )}
                     </div>
-              );
+                  </div>
+            );
+              }
+              else{
+                return(
+                
+                  <div key = {order._id} className="order-column"style={{padding: '10px', margin:'20px'}}>
+                    <h style={{marginLeft: '25px', fontWeight:'bold', marginRight:-20}}>Order ID:</h>
+                    <h style={{marginLeft: '25px'}}>{order._id}</h>
+                    <h style={{marginLeft: '25px',marginRight:-20, fontWeight:'bold'}}>Order Date: </h>
+                    <h style={{marginLeft: '25px'}}>{order.updatedAt}</h>
+                    {orderStatus(order.status)}
+                    <h style={{marginLeft: '15px', fontSize:'16px'}}><strong>Total:</strong> {order.cost} USD</h>
+                    <button onClick={togglePopup} style={{borderRadius:'5px', backgroundColor:'lightgray', marginLeft:'10px', padding:'5px'}}>Details</button>
+                    
+                  </div>
+            );
+              }
+
             })      
                     
 }
