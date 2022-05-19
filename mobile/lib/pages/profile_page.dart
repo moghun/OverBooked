@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:mobile/models/user.dart';
+import 'package:mobile/pages/user_orders_page.dart';
 import 'package:mobile/services/user_service.dart';
 import 'package:mobile/utils/colors.dart';
 import 'package:mobile/utils/styles.dart';
 
-class Profile extends StatefulWidget {
-  const Profile({Key? key}) : super(key: key);
+class ProfilePage extends StatefulWidget {
+  const ProfilePage({Key? key}) : super(key: key);
 
   @override
-  State<Profile> createState() => _ProfileState();
+  State<ProfilePage> createState() => _ProfilePageState();
 }
 
-class _ProfileState extends State<Profile> {
+class _ProfilePageState extends State<ProfilePage> {
   @override
   void initState() {
     super.initState();
@@ -44,7 +45,7 @@ class _ProfileState extends State<Profile> {
                     const SizedBox(
                       height: 12,
                     ),
-                    CircleAvatar(
+                    const CircleAvatar(
                       backgroundColor: Color(0xffE6E6E6),
                       radius: 30,
                       child: Icon(
@@ -78,10 +79,21 @@ class _ProfileState extends State<Profile> {
                     ),
                     OutlinedButton(
                         onPressed: () {
+
+                          Navigator.push(context, MaterialPageRoute(
+                              builder: (context) => const UserOrdersPage(
+                              )));
+                        },
+                        child: const Text("My Orders")),
+                    const SizedBox(
+                      height: 12,
+                    ),
+                    OutlinedButton(
+                        onPressed: () {
                           UserService.removeUser();
                           Navigator.pushReplacementNamed(context, "/");
                         },
-                        child: Text("Log Out")),
+                        child: const Text("Log Out")),
                     const SizedBox(
                       height: 12,
                     ),
