@@ -40,15 +40,14 @@ async function reduceAmount(idArray,amountArray){
 
 
 //CREATE
+
 router.post("/", verifyToken, async (req, res) => {
   const newOrder = new Order(req.body);
 
   try {
     const savedOrder = await newOrder.save();
     const bookArray = savedOrder.bought_products;
-    console.log(bookArray);
     const amountArray = savedOrder.amounts;
-    console.log(amountArray);
     
     reduceAmount(bookArray,amountArray);
 
