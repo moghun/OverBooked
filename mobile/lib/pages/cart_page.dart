@@ -73,7 +73,7 @@ class _CartPageState extends State<CartPage> {
                                         ),
                                         const SizedBox(height: 12,),
                                         OutlinedButton(onPressed: (){
-                                          _cartService.buyCart(snapshot.data!);
+                                          _cartService.purchaseCart(snapshot.data!);
                                         }, child: const Text("Buy your cart")),
                                       ],
                                     ),

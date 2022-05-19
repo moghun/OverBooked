@@ -19,9 +19,19 @@ class CartService {
     return result;
   }
 
-  addToCart(Product product) {}
+  addToCart(Product product) {
 
-  buyCart(List<dynamic> products) {
+  }
+
+  removeFromCart(Product product) {
+
+  }
+
+  deleteCart() {
+
+  }
+
+  purchaseCart(List<dynamic> products) {
     User user = UserService.getCurrentUser()!;
     var totalCost = 0;
     for (int i = 0; i < user.cart!.length; i++) {
