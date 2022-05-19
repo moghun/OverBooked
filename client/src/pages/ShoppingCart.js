@@ -2,7 +2,7 @@ import React from "react";
 import "./ShoppingCart.css";
 import { useSelector } from "react-redux";
 import { removeProduct } from "../redux/cartRedux";
-import { clearCart, addProduct } from "../redux/cartRedux";
+import { clearCart } from "../redux/cartRedux";
 import { useDispatch } from "react-redux";
 import StripeCheckout from "react-stripe-checkout";
 import { useEffect, useState } from "react";
@@ -18,35 +18,6 @@ const ShoppingCart = () => {
   const cart = useSelector((state) => state.cart);
   const currUser = useSelector((state) => state.user.currentUser);
   const dispatch = useDispatch();
-
-  async function getProduct(id) {
-    try {
-      const res = await publicRequest.get("/products/find/" + id);
-      return res.data;
-    } catch {}
-  }
-
-  async function getUserInfo() {
-    try {
-      const res = await axios.get(
-        "http://localhost:5001/api/users/find/" + currUser._id,
-        { headers: { token: "Bearer " + currUser.accessToken } }
-      );
-      return res.data.cart;
-    } catch (err) {}
-  }
-  const syncCart = async () => {
-    let userCart = await getUserInfo();
-    for (let i = 0; i < userCart.length; i++) {
-      let product = await getProduct(userCart[i].product_id);
-      let amount = userCart[i].amount;
-      let maxAmount = product.amount;
-      dispatch(addProduct({ ...product, amount, maxAmount }));
-    }
-  };
-  useEffect(() => {
-    syncCart();
-  }, [currUser]);
 
   const removeFromCartAPI = async (pid) => {
     try {

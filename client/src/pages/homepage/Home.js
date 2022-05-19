@@ -18,11 +18,6 @@ import axios from "axios";
 import BookCard from "../../components/BookCard";
 import { Grid } from "@mui/material";
 
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
-import { addProduct } from "../../redux/cartRedux";
-import { publicRequest } from "../requestMethods";
-
 //in order to have sequence products with slider
 
 function SampleNextArrow(props) {
@@ -99,39 +94,6 @@ function avgrating(items) {
 const HomePage = () => {
   const [allsale, setallsale] = useState([]);
   const [topprod, settopprod] = useState([]);
-
-  const currUser = useSelector((state) => state.user.currentUser);
-  const total = useSelector((state) => state.cart.total);
-  const dispatch = useDispatch();
-
-  async function getProduct(id) {
-    try {
-      const res = await publicRequest.get("/products/find/" + id);
-      return res.data;
-    } catch {}
-  }
-
-  async function getUserInfo() {
-    try {
-      const res = await axios.get(
-        "http://localhost:5001/api/users/find/" + currUser._id,
-        { headers: { token: "Bearer " + currUser.accessToken } }
-      );
-      return res.data.cart;
-    } catch (err) {}
-  }
-  const syncCart = async () => {
-    let userCart = await getUserInfo();
-    for (let i = 0; i < userCart.length; i++) {
-      let product = await getProduct(userCart[i].product_id);
-      let amount = userCart[i].amount;
-      let maxAmount = product.amount;
-      dispatch(addProduct({ ...product, amount, maxAmount }));
-    }
-  };
-  useEffect(() => {
-    total < 1 && syncCart();
-  }, []);
 
   const getAllProducts = async () => {
     try {
