@@ -2,7 +2,7 @@ import React from "react";
 import "./ShoppingCart.css";
 import { useSelector } from "react-redux";
 import { removeProduct } from "../redux/cartRedux";
-import { clearCart } from "../redux/cartRedux";
+import { clearCart, addProduct } from "../redux/cartRedux";
 import { useDispatch } from "react-redux";
 import StripeCheckout from "react-stripe-checkout";
 import { useEffect, useState } from "react";
@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 import { userRequest } from "./requestMethods";
 import { Button } from "@material-ui/core";
 import axios from "axios";
+import { publicRequest } from "./requestMethods";
 
 const KEY = process.env.REACT_APP_STRIPE;
 
@@ -18,6 +19,35 @@ const ShoppingCart = () => {
   const currUser = useSelector((state) => state.user.currentUser);
   const dispatch = useDispatch();
 
+  async function getProduct(id) {
+    try {
+      const res = await publicRequest.get("/products/find/" + id);
+      return res.data;
+    } catch {}
+  }
+
+  async function getUserInfo() {
+    try {
+      const res = await axios.get(
+        "http://localhost:5001/api/users/find/" + currUser._id,
+        { headers: { token: "Bearer " + currUser.accessToken } }
+      );
+      return res.data.cart;
+    } catch (err) {}
+  }
+  const syncCart = async () => {
+    let userCart = await getUserInfo();
+    for (let i = 0; i < userCart.length; i++) {
+      let product = await getProduct(userCart[i].product_id);
+      let amount = userCart[i].amount;
+      let maxAmount = product.amount;
+      dispatch(addProduct({ ...product, amount, maxAmount }));
+    }
+  };
+  useEffect(() => {
+    syncCart();
+  }, [currUser]);
+
   const removeFromCartAPI = async (pid) => {
     try {
       await axios.put(
@@ -25,7 +55,6 @@ const ShoppingCart = () => {
         { product_id: pid },
         { headers: { token: "Bearer " + currUser.accessToken } }
       );
-      console.log(pid);
     } catch (err) {
       console.log(err);
     }
@@ -42,13 +71,9 @@ const ShoppingCart = () => {
     }
   };
 
-  var signedIn = true;
-  var total = 0;
-
   const removeItem = (item) => {
     dispatch(removeProduct(item));
     removeFromCartAPI(item._id);
-    console.log("calısıyo keriz");
   };
 
   const clear = () => {
