@@ -83,6 +83,7 @@ router.delete("/:id", verifyTokenAndUser, async (req, res) => {
   }
 });
 
+<<<<<<< HEAD
 //GET USER ORDERS
 router.get("/find/:userId", verifyTokenOrManager, async (req, res) => {
   try {
@@ -93,6 +94,9 @@ router.get("/find/:userId", verifyTokenOrManager, async (req, res) => {
     res.status(500).json(err);
   }
 });
+=======
+
+>>>>>>> fc2b1067017d0c8134ccd7c75acd65f427f88431
 
 //GET ALL
 
