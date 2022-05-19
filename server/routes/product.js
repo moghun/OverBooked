@@ -56,7 +56,7 @@ router.put("/setSale/:id",verifyTokenAndSalesManager,async (req, res) => {
 });
 
 //COMMENT ON PRODUCT
-router.put("/comment/:id",verifyToken, async (req, res) => {
+router.put("/comment/:id", async (req, res) => {
   try {
     const updatedProduct = await Product.findByIdAndUpdate(
       req.params.id,
@@ -72,7 +72,7 @@ router.put("/comment/:id",verifyToken, async (req, res) => {
 });
 
 //RATE PRODUCT
-router.put("/rate/:id", verifyToken, async (req, res) => {
+router.put("/rate/:id", async (req, res) => {
   try {
     const updatedProduct = await Product.findByIdAndUpdate(
       req.params.id,
@@ -88,7 +88,7 @@ router.put("/rate/:id", verifyToken, async (req, res) => {
 });
 
 //GET COMMENTS OF ITEMS THAT HAVE ONE OR MORE COMMENTS
-router.get("/commentApproval", verifyTokenAndProductManager,async (req, res) => {
+router.get("/commentApproval", async (req, res) => {
   try {
     const products = await Product.find(
         {$nor: [

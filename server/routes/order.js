@@ -18,8 +18,12 @@ const router = require("express").Router();
 async function updateStock(id, quantity) {
   const product = await Product.findById(id);
 
+<<<<<<< HEAD
   const weight = product.amount - quantity;
   if( weight >= 0){
+=======
+  if(product.amount - quantity >= 0){
+>>>>>>> 01e92a0 (mobile: demo time)
     product.amount -= quantity;
   }
 
@@ -40,14 +44,15 @@ async function reduceAmount(idArray,amountArray){
 
 
 //CREATE
-
-router.post("/", verifyToken, async (req, res) => {
+router.post("/", async (req, res) => {
   const newOrder = new Order(req.body);
 
   try {
     const savedOrder = await newOrder.save();
     const bookArray = savedOrder.bought_products;
+    console.log(bookArray);
     const amountArray = savedOrder.amounts;
+    console.log(amountArray);
     
     reduceAmount(bookArray,amountArray);
 
@@ -83,6 +88,7 @@ router.delete("/:id", verifyTokenAndUser, async (req, res) => {
   }
 });
 
+<<<<<<< HEAD
 
 
 //GET ALL
@@ -90,14 +96,25 @@ router.delete("/:id", verifyTokenAndUser, async (req, res) => {
 router.get("/", verifyTokenAndManager, async (req, res) => {
   try {
     const orders = await Order.find();
+=======
+router.get("/find/:userId", async (req, res) => {
+  try {
+    const orders = await Order.find({ buyer_email: req.query.buyer_email });
+    console.log(req.query.buyer_email)
+>>>>>>> 01e92a0 (mobile: demo time)
     res.status(200).json(orders);
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
+<<<<<<< HEAD
 //GET USER ORDERS
 router.get("/find/:userId", async (req, res) => {
+=======
+//GET ALL
+router.get("/", verifyTokenAndManager, async (req, res) => {
+>>>>>>> 01e92a0 (mobile: demo time)
   try {
     const orders = await Order.find({ buyer_email: req.query.buyer_email });
     console.log(req.query.buyer_email)

@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:mobile/models/product.dart';
 import 'package:http/http.dart' as http;
+import 'package:mobile/models/user.dart';
 import 'package:mobile/services/user_service.dart';
 import 'package:uuid/uuid.dart';
 
@@ -56,12 +57,30 @@ class ProductService {
       "comment": comment,
       "isApproved": false,
     });
-    http.put(Uri.parse(apiBaseURL + "/comment/" + productID),
-        headers: {"Content-Type": "application/json"}, body: body).then((value) => print(value.body));
+    http
+        .put(Uri.parse(apiBaseURL + "/comment/" + productID),
+            headers: {"Content-Type": "application/json"}, body: body)
+        .then((value) => print(value.body));
 
-    final body2 = jsonEncode({"user_id": UserService.getCurrentUser()!.uid, "rating": rating});
-    
-    http.put(Uri.parse(apiBaseURL + "/rate/" + productID),
-        headers: {"Content-Type": "application/json"}, body: body2).then((value) => print(value.body));
+    final body2 = jsonEncode(
+        {"user_id": UserService.getCurrentUser()!.uid, "rating": rating});
+
+    http
+        .put(Uri.parse(apiBaseURL + "/rate/" + productID),
+            headers: {"Content-Type": "application/json"}, body: body2)
+        .then((value) => print(value.body));
+  }
+
+  Future<List<dynamic>> getMyOrders() async{
+    User user = UserService.getCurrentUser()!;
+    var body = jsonEncode({"params": {"buyer_email": user.email}});
+    var resp = await http.get(Uri.parse("http://10.0.2.2:5001/api/orders/find/" + user.uid!),
+        headers: {
+          "Content-Type": "application/json"
+        });
+    print(resp.body);
+    var productsJson = jsonDecode(resp.body) as List;
+    print(productsJson);
+    return productsJson;
   }
 }

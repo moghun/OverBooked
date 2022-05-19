@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobile/models/user.dart';
+import 'package:mobile/routes/myorders.dart';
 import 'package:mobile/services/user_service.dart';
 import 'package:mobile/utils/colors.dart';
 import 'package:mobile/utils/styles.dart';
@@ -73,6 +74,17 @@ class _ProfileState extends State<Profile> {
                       user.surname ?? "no surname",
                       style: kButtonLightTextStyle,
                     ),
+                    const SizedBox(
+                      height: 12,
+                    ),
+                    OutlinedButton(
+                        onPressed: () {
+
+                          Navigator.push(context, MaterialPageRoute(
+                              builder: (context) => MyOrders(
+                              )));
+                        },
+                        child: Text("My Orders")),
                     const SizedBox(
                       height: 12,
                     ),

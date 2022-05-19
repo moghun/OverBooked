@@ -29,7 +29,7 @@ class CartService {
           (products[i].cost as int) * int.parse(user.cart![i]["amount"]);
     }
     List<String> boughtProducts =
-        user.cart!.map((e) => e["product_id"].toString()).toList();
+    user.cart!.map((e) => e["product_id"].toString()).toList();
     final body = jsonEncode({
       "order_id": Random().nextInt(8493283),
       "buyer_email": user.email,
@@ -41,7 +41,16 @@ class CartService {
     });
     http
         .post(Uri.parse(apiBaseURL + "/orders/"),
-            headers: {"Content-Type": "application/json", "token": user.token!}, body: body)
+        headers: {"Content-Type": "application/json", "token": user.token!},
+        body: body)
         .then((resp) => print(resp.body + resp.statusCode.toString()));
+    UserService.updateUser(User(username: user.username,
+      cart: [],
+      email: user.email,
+      uid: user.uid,
+      name: user.name,
+      surname: user.surname,
+      token: user.token,
+    ));
   }
 }
