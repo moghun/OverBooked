@@ -1,13 +1,16 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { publicRequest } from "../requestMethods";
 import { useDispatch } from "react-redux";
 import { addProduct } from "../../redux/cartRedux";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 const Synch = () => {
+  const [waitingDB, setWaitingDB] = useState(true);
   const currUser = useSelector((state) => state.user.currentUser);
   const cart = useSelector((state) => state.cart.products);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   async function getProduct(id) {
     try {
@@ -33,6 +36,7 @@ const Synch = () => {
       let maxAmount = product.amount;
       dispatch(addProduct({ ...product, amount, maxAmount }));
     }
+    setWaitingDB(false);
   };
 
   const addCartAPI = async (product_id, amount) => {
@@ -70,21 +74,26 @@ const Synch = () => {
       console.log(err);
     }
   };
-  addToRedux();
   const synchDb = async () => {
     await clearCartAPI();
     await addToDB();
+    navigate("/");
   };
 
   useEffect(() => {
-    synchDb();
-  }, [cart]);
+    addToRedux();
+  }, [currUser]);
+
+  useEffect(() => {
+    if (!waitingDB) {
+      synchDb();
+    }
+  });
 
   return (
     //
     <>
       <p>Loading...</p>
-      {cart.length > 0 && (window.location.href = "/")}
     </>
   );
 };
