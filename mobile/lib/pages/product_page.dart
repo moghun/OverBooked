@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobile/models/product.dart';
 import 'package:mobile/models/user.dart';
+import 'package:mobile/pages/comments_page.dart';
 import 'package:mobile/services/product_service.dart';
 import 'package:mobile/services/user_service.dart';
 import 'package:mobile/utils/colors.dart';
@@ -131,6 +132,12 @@ class _ProductPageState extends State<ProductPage> {
                             style: OutlinedButton.styleFrom(
                                 backgroundColor: AppColors.background),
                           ),
+                          OutlinedButton(onPressed: (){Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => CommentsPage(
+                                    product: snapshot.data!,
+                                  )));}, child: const Text("Comments")),
                         ],
                       ),
                     ),

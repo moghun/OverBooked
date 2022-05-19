@@ -45,6 +45,6 @@ class Product {
     rating: json["rating"],
     sale: json["sale"],
     costAfterSale: json["after_sale_price"],
-    //comments: json["comments"],
+    comments: json["comments"],
   );
 }
