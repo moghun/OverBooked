@@ -19,9 +19,6 @@ class ProductPreview extends StatefulWidget {
 }
 
 class _ProductPreviewState extends State<ProductPreview> {
-  void childRefreshFunc() {
-    setState(() {});
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,83 +41,87 @@ class _ProductPreviewState extends State<ProductPreview> {
         alignment: Alignment.center,
         children: [
           Stack(
-              alignment: Alignment.topRight,
+              alignment: Alignment.center,
               children: <Widget>[
-                Column(
+                Row(
                   children: [
-                    Container(
-                      width: 150,
-                      alignment: Alignment.topCenter,
-                      margin: const EdgeInsets.all(0),
-                      padding: Dimen.smallPadding,
-                      child: Column(
-                        children: [
-                          Image.network(
-                            widget.product.img ?? "",
-                            height: 150,
-                            width: 75,
-                          ),
-                          Text(
-                            widget.product.name,
-                            style: kSmallTitle,
-                            textAlign: TextAlign.center,
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                          Text(
-                            widget.product.publisher ?? "",
-                            style: kSmallText,
-                            textAlign: TextAlign.center,
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          RatingBarIndicator(
-                            rating: widget.product.rating!.map((e) => e["rating"]).reduce((a, b) => a + b) / widget.product.rating!.length, //it will be debugged
-                            itemBuilder: (context, index) =>
-                            const Icon(
-                              Icons.star,
-                              color: Colors.amber,
-                            ),
-                            itemCount: 5,
-                            itemSize: 18.0,
-                            unratedColor: Colors.amber.withAlpha(80),
-                            direction: Axis.horizontal,
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          Column(
+                    Column(
+                      children: [
+                        Container(
+                          width: 150,
+                          alignment: Alignment.topCenter,
+                          margin: const EdgeInsets.all(0),
+                          padding: Dimen.smallPadding,
+                          child: Column(
                             children: [
-                              /*Visibility(
-                                visible: widget.product.oldPrice >
-                                    widget.product.price,
-                                child: Row(
-                                  mainAxisAlignment:
-                                  MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      "\$ ${widget.product.oldPrice}",
-                                      style: const TextStyle(
-                                          fontSize: 12,
-                                          color: AppColors.primary,
-                                          decoration:
-                                          TextDecoration.lineThrough),
-                                    ),
-                                    // Text(
-                                    //     "${(((widget.product.oldPrice - widget.product.price) / widget.product.oldPrice) * 100).toStringAsFixed(0)}%"),
-                                  ],
-                                ),
+                              Image.network(
+                                widget.product.img ?? "",
+                                height: 150,
+                                width: 75,
                               ),
-                              */
-                              Text("\$ ${widget.product.cost}"),
+                              Text(
+                                widget.product.name,
+                                style: kSmallTitle,
+                                textAlign: TextAlign.center,
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                              Text(
+                                widget.product.publisher ?? "",
+                                style: kSmallText,
+                                textAlign: TextAlign.center,
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                              const SizedBox(
+                                height: 20,
+                              ),
+                              RatingBarIndicator(
+                                rating: widget.product.rating!.map((e) => e["rating"]).reduce((a, b) => a + b) / widget.product.rating!.length, //it will be debugged
+                                itemBuilder: (context, index) =>
+                                const Icon(
+                                  Icons.star,
+                                  color: Colors.amber,
+                                ),
+                                itemCount: 5,
+                                itemSize: 18.0,
+                                unratedColor: Colors.amber.withAlpha(80),
+                                direction: Axis.horizontal,
+                              ),
+                              const SizedBox(
+                                height: 20,
+                              ),
+                              Column(
+                                children: [
+                                  /*Visibility(
+                                    visible: widget.product.oldPrice >
+                                        widget.product.price,
+                                    child: Row(
+                                      mainAxisAlignment:
+                                      MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          "\$ ${widget.product.oldPrice}",
+                                          style: const TextStyle(
+                                              fontSize: 12,
+                                              color: AppColors.primary,
+                                              decoration:
+                                              TextDecoration.lineThrough),
+                                        ),
+                                        // Text(
+                                        //     "${(((widget.product.oldPrice - widget.product.price) / widget.product.oldPrice) * 100).toStringAsFixed(0)}%"),
+                                      ],
+                                    ),
+                                  ),
+                                  */
+                                  Text("\$ ${widget.product.cost}"),
+                                ],
+                              ),
                             ],
                           ),
-                        ],
-                      ),
-                    )
+                        )
+                      ],
+                    ),
                   ],
                 ),
 
