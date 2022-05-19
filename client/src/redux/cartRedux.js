@@ -9,7 +9,6 @@ const cartSlice = createSlice({
   },
   reducers: {
     addProduct: (state, action) => {
-      console.log("bi kere calıs");
       if (state.products.find((o) => o._id === action.payload._id)) {
         if (
           state.products[
@@ -18,7 +17,15 @@ const cartSlice = createSlice({
             action.payload.amount >
           action.payload.maxAmount
         ) {
-          alert("You can not buy products above its amount");
+          state.total +=
+            action.payload.cost *
+            (action.payload.maxAmount -
+              state.products[
+                state.products.findIndex((x) => x._id === action.payload._id)
+              ].amount);
+          state.products[
+            state.products.findIndex((x) => x._id === action.payload._id)
+          ].amount = action.payload.maxAmount;
         } else {
           state.total += action.payload.cost * action.payload.amount;
           state.products[

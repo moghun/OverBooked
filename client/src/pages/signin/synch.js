@@ -88,7 +88,7 @@ const Synch = () => {
     if (!waitingDB) {
       synchDb();
     }
-  });
+  }, [waitingDB]);
 
   return (
     //
