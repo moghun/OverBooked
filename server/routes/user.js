@@ -113,6 +113,50 @@ router.put("/clearCart/:id", verifyToken, async (req, res) => {
   }
 });
 
+//ADD TO Wishlist
+router.put("/addToWishlist/:id", verifyToken, async (req, res) => {
+  try {
+    const updatedUser = await User.findByIdAndUpdate(
+      req.params.id,
+      {
+        $push: { wishlist: req.body },
+      },
+      { new: true }
+    );
+    res.status(200).json(updatedUser);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+//Remove From Wishlist
+router.put("/removeFromWishlist/:id", verifyToken, async (req, res) => {
+  try {
+    const updatedUser = await User.findByIdAndUpdate(
+      req.params.id,
+      {
+        $pull: { wishlist: req.body },
+      },
+      { new: true }
+    );
+    res.status(200).json(updatedUser);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+// Clear Wishlist
+router.put("/clearWishlist/:id", verifyToken, async (req, res) => {
+  try {
+    const updatedUser = await User.findByIdAndUpdate(req.params.id, {
+      $set: { wishlist: [] },
+    });
+    res.status(200).json(updatedUser);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 //GET USER STATS
 
 router.get("/stats", verifyTokenAndManager, async (req, res) => {
