@@ -33,9 +33,9 @@ const Success = () => {
   };
 
 
-  const sendEmail = async (order_id) => {
+  const sendEmail = async () => {
     try{
-      await axios.post("http://localhost:5001/api/orders/sendRecepit/" + order_id, 
+      await axios.post("http://localhost:5001/api/orders/sendRecepit", 
       {
         email: currentUser.email,
         username: currentUser.username,
@@ -44,13 +44,11 @@ const Success = () => {
         amount: cart.amount,
       })
       console.log(currentUser.email)
-      console.log(order_id)
     } catch(err){}
   }
 
 
   useEffect(() => {
-    const or_id = Math.floor(Math.random() * 10);
     function createOrder(){
 
 
@@ -58,7 +56,6 @@ const Success = () => {
       const amountArray = cart.products.map((book) =>book.amount)
       
       const orderStruct = {
-        order_id: or_id,
         buyer_email: currentUser.email,
         status: "Processing",
         cost: cart.total,
@@ -76,7 +73,7 @@ const Success = () => {
       }
     };
     createOrder();
-    sendEmail(or_id);
+    sendEmail();
     clear();
   }, [cart, data, currentUser]);
 
