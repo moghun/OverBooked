@@ -17,7 +17,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final ProductService _productService = ProductService();
-  String _search="";
+  final _searchFormKey = GlobalKey<FormState>();
+  String _search = "";
 
   @override
   void initState() {
@@ -39,17 +40,29 @@ class _HomePageState extends State<HomePage> {
           children: [
             Padding(
               padding: const EdgeInsets.all(12.0),
-              child: Row(children: [
-                Expanded(child: TextFormField(onChanged: (value) { setState(() { _search = value; }); },)),
-                IconButton(onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => SearchPage(
-                            query: _search,
-                          )));
-                }, icon: const Icon(Icons.search))
-              ]),
+              child: Form(
+                key: _searchFormKey,
+                child: Row(children: [
+                  Expanded(child: TextFormField(
+                    onSaved: (value) {
+                      if (value != null) {
+                        _search = value;
+                      }
+                    },
+                  )),
+                  IconButton(
+                      onPressed: () {
+                        _searchFormKey.currentState!.save();
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => SearchPage(
+                                      query: _search,
+                                    )));
+                      },
+                      icon: const Icon(Icons.search))
+                ]),
+              ),
             ),
             const SizedBox(
               height: 8,
@@ -114,15 +127,14 @@ class _HomePageState extends State<HomePage> {
                         child: Row(
                           children: List.generate(
                               snapshot.data!.length,
-                                  (index) => Row(children: [
-                                    if(snapshot.data![index].sale!) ... [
-
+                              (index) => Row(children: [
+                                    if (snapshot.data![index].sale!) ...[
                                       ProductPreview(
                                         product: snapshot.data![index],
                                       ),
                                       const SizedBox(width: 8),
                                     ],
-                              ])),
+                                  ])),
                         ),
                       ),
                     );
