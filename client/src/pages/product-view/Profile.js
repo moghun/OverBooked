@@ -45,8 +45,14 @@ const Profile = () => {
       );
     } else if (userrole === "product-manager") {
       return <Button className="btn3" href = "\approvaldisapproval"> Edit Product Panel </Button>;
-    } else if (userrole === "sales-manager") {
-      return <Button className="btn3"> Edit Sales Panel </Button>;
+    } 
+    else if (userrole === "sales-manager") {
+      return(
+      <>
+      <Button className="btn3" href='/manager'> Edit Sales Panel </Button>
+      <Button className="btn3" href='/invoices'> Invoices Panel </Button>
+      <Button className="btn3"> Revenue Panel </Button>
+      </>);
     }
   }
 

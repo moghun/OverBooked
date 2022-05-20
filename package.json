@@ -18,9 +18,12 @@
   },
   "homepage": "https://bitbucket.org/overbooked-team20/overbooked#readme",
   "dependencies": {
+    "@chakra-ui/react": "^2.0.2",
+    "@mui/x-data-grid": "^5.11.1",
     "axios": "^0.27.2",
     "mongoose": "^6.2.10",
     "mongoose-double": "^0.0.1",
+    "react-select": "^5.3.2",
     "react-slick": "^0.29.0"
   }
 }

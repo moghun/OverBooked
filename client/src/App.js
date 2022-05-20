@@ -19,6 +19,8 @@ import Signin from "./pages/signin/Signin";
 import { useSelector } from "react-redux";
 import MyOrders from "./pages/MyOrders/MyOrders";
 import ProductManagerAPI from "./pages/profilePage/product-managerPage/product-managerProfile";
+import EditSales from "./pages/profilePage/sales-manager/EditSales";
+import InvoicesPage from "./pages/profilePage/sales-manager/InvoicesPage";
 
 function App() {
   const user = useSelector((state) => state.user.currentUser);
@@ -50,6 +52,8 @@ function App() {
               element={<ProductManagerAPI />}
             />
             <Route path="*" element={<HomePage />} />
+            <Route path="/manager" element={<EditSales />} />
+            <Route path="/invoices" element={<InvoicesPage />} />
           </>
         ) : (
           <>
