@@ -11,7 +11,7 @@ class Product {
   String? subCategory;
   List<dynamic>? rating;
   bool? sale;
-  num? costAfterSale;
+  num? costBeforeSale;
   List<dynamic>? comments;
 
   Product({
@@ -27,7 +27,7 @@ class Product {
     this.subCategory,
     this.rating,
     this.sale,
-    this.costAfterSale,
+    this.costBeforeSale,
     this.comments,
 });
 
@@ -44,7 +44,7 @@ class Product {
     //subCategory: json["subcategories"],
     rating: json["rating"],
     sale: json["sale"],
-    costAfterSale: json["after_sale_price"],
+    costBeforeSale: json["before_sale_price"],
     comments: json["comments"],
   );
 }

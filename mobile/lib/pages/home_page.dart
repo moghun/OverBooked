@@ -91,6 +91,49 @@ class _HomePageState extends State<HomePage> {
                 }
               },
             ),
+            const SizedBox(
+              height: 12,
+            ),
+            Text(
+              "On Sale",
+              style: kHeadingTextStyle,
+            ),
+            FutureBuilder<List<Product>>(
+              future: getAllBooks(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const CircularProgressIndicator();
+                } else if (snapshot.connectionState == ConnectionState.done) {
+                  if (snapshot.hasError) {
+                    return const Text('Error');
+                  } else if (snapshot.hasData) {
+                    return SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Padding(
+                        padding: Dimen.regularPadding,
+                        child: Row(
+                          children: List.generate(
+                              snapshot.data!.length,
+                                  (index) => Row(children: [
+                                    if(snapshot.data![index].sale!) ... [
+
+                                      ProductPreview(
+                                        product: snapshot.data![index],
+                                      ),
+                                      const SizedBox(width: 8),
+                                    ],
+                              ])),
+                        ),
+                      ),
+                    );
+                  } else {
+                    return const Text('Empty data');
+                  }
+                } else {
+                  return Text('State: ${snapshot.connectionState}');
+                }
+              },
+            ),
             //Book of the Day
           ],
         ),
