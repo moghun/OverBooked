@@ -98,7 +98,7 @@ const ShoppingCart = () => {
 
   return (
     <div className="shoppingcart-container">
-      <div className="Row">
+      <div className="Rowx">
         <div className="products-container">
           
           <div className="product-row">
@@ -144,17 +144,16 @@ const ShoppingCart = () => {
             <hr
               style={{
                 width: "100%",
-                borderColor: "black",
+                borderColor: "gray",
                 borderWidth: "2px",
               }}
             ></hr>
-            <div>
-              <h style={{ color: '#F0F0F0',fontSize: '20px', fontFamily:'OpenSans' ,marginLeft: "35px" }}>
-                <strong style={{fontFamily:'OpenSans'}}>Total:</strong> {cart.total} $
-              </h>
-            </div>
+
 
             <div className="checkout-container">
+            <h style={{ color: '#F0F0F0',fontSize: '20px', fontFamily:'OpenSans' }}>
+                <strong style={{fontFamily:'OpenSans'}}>Total:</strong> {cart.total} $
+              </h>
               {currUser !== null ? (
                 <StripeCheckout
                   name="OverBooked"
@@ -166,7 +165,7 @@ const ShoppingCart = () => {
                   token={onToken}
                   stripeKey={KEY}
                 >
-                  <Button style={{ outline:'none',color: '#F0F0F0',width: "100px", padding:'5px', border:'none'}}>CHECKOUT</Button>
+                  <Button style={{ marginLeft:'790%',outline:'none',color: '#F0F0F0',width: "100px", padding:'5px', border:'none'}}>CHECKOUT</Button>
                 </StripeCheckout>
               ) : (
                 <Button

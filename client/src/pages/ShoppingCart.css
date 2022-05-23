@@ -1,13 +1,14 @@
-.Row {
+.Rowx {
     display: table;
     width: 80%; /*Optional*/
     border-spacing: 10px; /*Optional*/
-    outline: solid;
+    outline: none;
     margin-top: 40px;
     margin-left: 10%;
     border-radius: 20px;
+    background-color: #e6b619;
     
-}
+  }
 
 .product-row .product-container{
     outline: none;
@@ -20,6 +21,7 @@
     width: 100%;
     padding: 10px;
     border-radius: 5px;
+
   }
 
 .checkout-container{
@@ -35,6 +37,7 @@
     display: table-cell;
     width: 100px;
     height: 100px;
+
 }
 
 
