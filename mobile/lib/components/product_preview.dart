@@ -25,7 +25,7 @@ class _ProductPreviewState extends State<ProductPreview> {
           backgroundColor: MaterialStateProperty.resolveWith(
               (states) => AppColors.primary.withOpacity(0.1)),
           shape: MaterialStateProperty.resolveWith((states) =>
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20))),
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
           padding:
               MaterialStateProperty.resolveWith((states) => EdgeInsets.zero)),
       onPressed: () {

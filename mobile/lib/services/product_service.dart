@@ -27,7 +27,7 @@ class ProductService {
       if (resp.statusCode >= 200 && resp.statusCode < 400) {
         var productsJson = jsonDecode(resp.body) as List;
         List<Product> products =
-            productsJson.map((prod) => Product.fromJson(prod)).toList();
+        productsJson.map((prod) => Product.fromJson(prod)).toList();
         return products;
       } else {
         print(resp.statusCode);
@@ -45,7 +45,7 @@ class ProductService {
         headers: {"Content-Type": "application/json"});
     var productsJson = jsonDecode(resp.body) as List;
     List<Product> products =
-        productsJson.map((prod) => Product.fromJson(prod)).toList();
+    productsJson.map((prod) => Product.fromJson(prod)).toList();
     return products;
   }
 
@@ -59,7 +59,7 @@ class ProductService {
     });
     http
         .put(Uri.parse(apiBaseURL + "/comment/" + productID),
-            headers: {"Content-Type": "application/json"}, body: body)
+        headers: {"Content-Type": "application/json"}, body: body)
         .then((value) => print(value.body));
 
     final body2 = jsonEncode(
@@ -67,14 +67,15 @@ class ProductService {
 
     http
         .put(Uri.parse(apiBaseURL + "/rate/" + productID),
-            headers: {"Content-Type": "application/json"}, body: body2)
+        headers: {"Content-Type": "application/json"}, body: body2)
         .then((value) => print(value.body));
   }
 
-  Future<List<dynamic>> getMyOrders() async{
+  Future<List<dynamic>> getMyOrders() async {
     User user = UserService.getCurrentUser()!;
     var body = jsonEncode({"params": {"buyer_email": user.email}});
-    var resp = await http.get(Uri.parse("http://10.0.2.2:5001/api/orders/find/" + user.uid!),
+    var resp = await http.get(
+        Uri.parse("http://10.0.2.2:5001/api/orders/find/" + user.uid!),
         headers: {
           "Content-Type": "application/json"
         });
@@ -82,5 +83,32 @@ class ProductService {
     var productsJson = jsonDecode(resp.body) as List;
     print(productsJson);
     return productsJson;
+  }
+
+  Future<User> getUserbyID(String userID) async {
+    var resp = await http.get(
+        Uri.parse("http://10.0.2.2:5001/api/users/find/" + userID), headers: {
+      "Content-Type": "application/json"
+    });
+    print(resp.body);
+    var userInfo = jsonDecode(resp.body);
+    User user = User(
+      email: userInfo["email"],
+      username: userInfo["username"],
+      name: userInfo["name"] == "" ? "no-name" : userInfo["name"],
+      surname: userInfo["surname"] == "" ? "no-surname" : userInfo["surname"],
+      cart: userInfo["cart"],
+      uid: userInfo["_id"],
+    );
+    return user;
+  }
+  
+  Future<List<User>> getUsersByCommentList(List<dynamic> commentList) async {
+    List<User> users = [];
+    for(int i = 0; i < commentList.length; i++){
+      User tempUser = await getUserbyID(commentList[i]["user_id"]);
+      users.add(tempUser);
+    }
+    return users;
   }
 }
