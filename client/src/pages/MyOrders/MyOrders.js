@@ -2,20 +2,37 @@ import React,{useEffect, useState} from "react";
 import "../MyOrders/MyOrders.css";
 import { useSelector } from "react-redux";
 import axios from "axios";
-
+import Popup from "./Popup";
 const MyOrders = () => {
 
   const currUser = useSelector((state) => state.user.currentUser)
 
   const [isOpen, setIsOpen] = useState(false);
+  const [index, setIndex] = useState(null);
   const [orders, setOrder] = useState([]);
-  const [items, setItems] = useState([]);
-  
-  
- 
+  const [popupOpen, setPopup] = useState(false);
+   
   const togglePopup = (key) => {
-    setIsOpen(!isOpen);
+    if(key !== index && index !== null && isOpen === true){
+    setIndex(key);
     console.log(isOpen)
+    }
+    else if(key !== index && index !== null && isOpen === false){
+      setIndex(key);
+      setIsOpen(!isOpen);
+    }
+    else if(index === null){
+      setIndex(key);
+      setIsOpen(!isOpen);
+    }
+    else if(key === index){
+      setIsOpen(!isOpen);
+    }
+
+  }
+
+  const openPopup = () => {
+    setPopup(!popupOpen);
   }
 
   const getOrders = async () => {
@@ -33,13 +50,10 @@ const MyOrders = () => {
     }
   }
 
-
-  
-  
   useEffect(() => {getOrders()},[currUser]);
 
   console.log(orders)
-  
+
   function orderStatus(item){
     if(item === "delivered"){
       return(<input disabled="disabled" type = "text" value={item} style={{color:'black',borderRadius:"10px",backgroundColor: 'lightgreen',textAlign:'center',marginLeft: '20px', width:"100px"}} readonly></input>);
@@ -65,8 +79,10 @@ const MyOrders = () => {
             ? <h1 style={{padding: "50px",textAlign:'center'}}>You have no order</h1>
             :
             
-            orders.map((order) => {
-              if(isOpen){
+            orders.map((order,i) => {
+              
+              if(isOpen && i === index){
+                
                 return(
                 <div style={{backgroundColor: "aliceblue", borderRadius:'10px', margin:'20px'}}>
                   <div key = {order._id} className="order-column"style={{padding: '10px', margin:'20px'}}>
@@ -76,8 +92,13 @@ const MyOrders = () => {
                     <h style={{marginLeft: '25px'}}>{order.updatedAt}</h>
                     {orderStatus(order.status)}
                     <h style={{marginLeft: '15px', fontSize:'16px'}}><strong>Total:</strong> {order.cost} USD</h>
-                    <button onClick={togglePopup} style={{borderRadius:'5px', backgroundColor:'lightgray', marginLeft:'10px', padding:'5px'}}>Details</button>
-                    
+                    <button onClick={() => {togglePopup(i)}} style={{borderRadius:'5px', backgroundColor:'lightgray', marginLeft:'10px', padding:'5px'}}>Details</button>
+                    {order.status === "Delivered"
+                    ?
+                    <button onClick = {openPopup}  style={{borderRadius:'5px', backgroundColor:'lightgray', marginLeft:'10px', padding:'5px'}}>Refund</button>                    
+                    :
+                    <button onClick = {openPopup}  style={{borderRadius:'5px', backgroundColor:'lightgray', marginLeft:'10px', padding:'5px'}}>Cancel</button>
+                }
                   </div>
                   <div>
                     <hr color="black" style={{width:'95%', marginLeft:'2.5%', borderWidth:'1.5px', borderColor:'black'}}></hr>
@@ -104,17 +125,21 @@ const MyOrders = () => {
                     <h style={{marginLeft: '25px'}}>{order.updatedAt}</h>
                     {orderStatus(order.status)}
                     <h style={{marginLeft: '15px', fontSize:'16px'}}><strong>Total:</strong> {order.cost} USD</h>
-                    <button onClick={togglePopup} style={{borderRadius:'5px', backgroundColor:'lightgray', marginLeft:'10px', padding:'5px'}}>Details</button>
-                    
+                    <button onClick={() => {togglePopup(i)}} style={{borderRadius:'5px', backgroundColor:'lightgray', marginLeft:'10px', padding:'5px'}}>Details</button>
+                    {order.status === "Delivered"
+                    ?
+                    <button onClick = {openPopup} style={{borderRadius:'5px', backgroundColor:'lightgray', marginLeft:'10px', padding:'5px'}}>Refund</button>                    
+                    :
+                    <button onClick = {openPopup} style={{borderRadius:'5px', backgroundColor:'lightgray', marginLeft:'10px', padding:'5px'}}>Cancel</button>
+                }
+                  {popupOpen? <Popup id = {orders[i]._id} handleClose={openPopup}/>  : ""}
                   </div>
-            );
+                );
               }
 
             })      
-                    
-}
-                
-  
+                  
+            }
           </div>
 
         </div>
