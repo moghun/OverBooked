@@ -81,13 +81,26 @@ const ShoppingCart = () => {
     stripeToken && cart.total >= 1 && makeRequest();
   }, [stripeToken, cart.total, history]);
 
+
+  const reduceAmount = (item) =>{
+    if(item.amount === 1){
+      removeItem(item)
+    }
+    else {
+      alert(item.amount)
+    }
+  }
+
+  const increaseAmount = (item) => {
+    if(item.amount === item.maxAmount){alert("No more increase")}
+    else{}
+  }
+
   return (
     <div className="shoppingcart-container">
       <div className="Row">
         <div className="products-container">
-          <button className="clear" onClick={clear}>
-            Clear Cart
-          </button>
+          
           <div className="product-row">
             {cart.products.map((item) => {
               return (
@@ -100,25 +113,33 @@ const ShoppingCart = () => {
                     ></img>
                     <h style={{ marginLeft: "25px" }}>{item.name}</h>
 
-                    <p style={{ marginLeft: "35px" }}>
+                    <h style={{ marginLeft: "35px" }}>
                       {" "}
                       Amount: {item.amount}{" "}
-                    </p>
+                    </h>
                     <h style={{ marginLeft: "25px" }}>
                       {item.amount * item.cost} $
                     </h>
-                  </div>
-                  <div>
+                    <button  onClick={() => reduceAmount(item)} style={{ outline:'none',fontWeight:'bold',fontSize:'20px',marginLeft: "25px", width:'25px' }}>-</button>
+                    <input readOnly onKeyDown={(e) => e.preventDefault()} defaultValue={item.amount} type="number" style={{borderRadius:'10px',border:'none',textAlign:'center',outline:'none',marginLeft:"5px", width:'100px' }}></input>
+                    <button onClick={() => increaseAmount(item)} style={{outline:'none',fontWeight:'bold',fontSize:'20px', marginLeft: "5px", width:'25px' }}>+</button>
+                  
                     <input
                       type="submit"
                       value="Delete Product"
                       onClick={() => removeItem(item)}
-                      style={{ marginLeft: "25px", width: "222px" }}
+                      style={{ cursor:'pointer',border:'none', borderRadius:'10px',marginLeft:'25px',width: "150px" }}
                     />
                   </div>
+
                 </div>
               );
             })}
+
+              <button className="clear" style = {{outline:'none',color: '#F0F0F0',marginLeft:'88%' , padding:'5px',width: '100px', border:'none', marginBottom:'10px'}}onClick={clear}>
+                Clear Cart
+              </button>
+              
 
             <hr
               style={{
@@ -128,8 +149,11 @@ const ShoppingCart = () => {
               }}
             ></hr>
             <div>
-              <h style={{ marginLeft: "50px" }}>Total: {cart.total} $</h>
+              <h style={{ color: '#F0F0F0',fontSize: '20px', fontFamily:'OpenSans' ,marginLeft: "35px" }}>
+                <strong style={{fontFamily:'OpenSans'}}>Total:</strong> {cart.total} $
+              </h>
             </div>
+
             <div className="checkout-container">
               {currUser !== null ? (
                 <StripeCheckout
@@ -142,16 +166,18 @@ const ShoppingCart = () => {
                   token={onToken}
                   stripeKey={KEY}
                 >
-                  <Button style={{ width: "50px" }}>CHECKOUT</Button>
+                  <Button style={{ outline:'none',color: '#F0F0F0',width: "100px", padding:'5px', border:'none'}}>CHECKOUT</Button>
                 </StripeCheckout>
               ) : (
                 <Button
                   href="/signin"
-                  style={{ marginLeft: "25px", width: "50px" }}
+                  style={{outline:'none',marginLeft: "25px", width: "100px", padding:'5px', border:'solid' }}
                 >
                   CHECKOUT
                 </Button>
               )}
+
+
             </div>
           </div>
         </div>
