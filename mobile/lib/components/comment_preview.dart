@@ -13,8 +13,7 @@ class CommentPreview extends StatelessWidget {
       margin: EdgeInsets.all(5),
       padding: EdgeInsets.all(10),
       decoration: BoxDecoration(
-          border:
-              Border.all(color: AppColors.primary.withOpacity(0.2), width: 1),
+          border: Border.all(color: AppColors.primary.withOpacity(0.2), width: 1),
           borderRadius: BorderRadius.circular(10),
           color: AppColors.primary.withOpacity(0.1)),
       width: double.infinity,

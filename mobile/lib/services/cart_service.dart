@@ -27,10 +27,7 @@ class CartService {
       user.cart!.add(toBeAdded);
       var body = jsonEncode(toBeAdded);
       http.put(Uri.parse(apiBaseURL + "/users/addToCart/" + user.uid!),
-          headers: {
-            "Content-Type": "application/json",
-            "token": "Bearer " + user.token!
-          },
+          headers: {"Content-Type": "application/json", "token": "Bearer " + user.token!},
           body: body);
     }
   }
@@ -43,10 +40,7 @@ class CartService {
       user.cart!.remove(toBeRemoved);
       var body = jsonEncode(toBeRemoved);
       http.put(Uri.parse(apiBaseURL + "/users/removeFromCart/" + user.uid!),
-          headers: {
-            "Content-Type": "application/json",
-            "token": "Bearer " + user.token!
-          },
+          headers: {"Content-Type": "application/json", "token": "Bearer " + user.token!},
           body: body);
     }
   }
@@ -57,10 +51,7 @@ class CartService {
       UserService.userCart.clear();
     } else {
       http.put(Uri.parse(apiBaseURL + "/users/clearCart/" + user.uid!),
-          headers: {
-            "Content-Type": "application/json",
-            "token": "Bearer " + user.token!
-          });
+          headers: {"Content-Type": "application/json", "token": "Bearer " + user.token!});
     }
   }
 
@@ -68,11 +59,9 @@ class CartService {
     User user = UserService.getCurrentUser()!;
     var totalCost = 0;
     for (int i = 0; i < user.cart!.length; i++) {
-      totalCost +=
-          (products[i].cost as int) * user.cart![i]["amount"] as int;
+      totalCost += (products[i].cost as int) * user.cart![i]["amount"] as int;
     }
-    List<String> boughtProducts =
-        user.cart!.map((e) => e["product_id"].toString()).toList();
+    List<String> boughtProducts = user.cart!.map((e) => e["product_id"].toString()).toList();
     final body = jsonEncode({
       "buyer_email": user.email,
       "status": "shipped",

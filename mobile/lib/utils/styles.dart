@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:mobile/utils/colors.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-
 import 'colors.dart';
 
 final kHeadingTextStyle = GoogleFonts.montserrat(

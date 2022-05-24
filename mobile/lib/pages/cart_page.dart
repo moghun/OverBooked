@@ -26,109 +26,91 @@ class _CartPageState extends State<CartPage> {
 
   @override
   Widget build(BuildContext context) {
-    if (user == null) {
-      return Center(
+    return Scaffold(
+      appBar: MainAppBar(),
+      body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            OutlinedButton(
-                onPressed: () {
-                  Fluttertoast.showToast(
-                      msg: "toast test here",
-                      gravity: ToastGravity.TOP,
-                      backgroundColor: Colors.green);
-                },
-                child: Text("toast test")),
-            Text("You need to login to see your cart"),
-          ],
-        ),
-      );
-    } else {
-      return Scaffold(
-        appBar: MainAppBar(),
-        body: Center(
-          child: Column(
-            children: [
-              const SizedBox(
-                height: 8,
-              ),
-              Text(
-                "Your Cart",
-                style: kHeadingTextStyle,
-              ),
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Padding(
-                  padding: Dimen.regularPadding,
-                  child: Column(
-                    children: [
-                      Row(
-                        children: [
-                          FutureBuilder<List<dynamic>>(
-                            future: _cartService.getProductsByCart(user!.cart!),
-                            builder: (context, snapshot) {
-                              if (snapshot.connectionState ==
-                                  ConnectionState.waiting) {
-                                return const CircularProgressIndicator();
-                              } else if (snapshot.connectionState ==
-                                  ConnectionState.done) {
-                                if (snapshot.hasError) {
-                                  return const Text('Error');
-                                } else if (snapshot.hasData) {
-                                  return SingleChildScrollView(
-                                    scrollDirection: Axis.horizontal,
-                                    child: Padding(
-                                      padding: Dimen.regularPadding,
-                                      child: Column(
-                                        children: [
-                                          Row(
-                                            children: List.generate(
-                                                snapshot.data!.length,
-                                                (index) => Row(children: [
-                                                      CartPreview(
-                                                        product: snapshot
-                                                            .data![index],
-                                                        amount:
-                                                            user!.cart![index]
-                                                                ["amount"],
-                                                      ),
-                                                      const SizedBox(width: 8)
-                                                    ])),
-                                          ),
-                                          const SizedBox(
-                                            height: 12,
-                                          ),
-                                          OutlinedButton(
-                                              onPressed: () {
-                                                _cartService.purchaseCart(
-                                                    snapshot.data!);
-                                              },
-                                              child:
-                                                  const Text("Buy your cart")),
-                                        ],
-                                      ),
+            const SizedBox(
+              height: 8,
+            ),
+            Text(
+              "Your Cart",
+              style: kHeadingTextStyle,
+            ),
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Padding(
+                padding: Dimen.regularPadding,
+                child: Column(
+                  children: [
+                    Row(
+                      children: [
+                        FutureBuilder<List<dynamic>>(
+                          future: user == null
+                              ? _cartService.getProductsByCart(UserService.userCart)
+                              : _cartService.getProductsByCart(user!.cart!),
+                          builder: (context, snapshot) {
+                            if (snapshot.connectionState == ConnectionState.waiting) {
+                              return const CircularProgressIndicator();
+                            } else if (snapshot.connectionState == ConnectionState.done) {
+                              if (snapshot.hasError) {
+                                return const Text('Error');
+                              } else if (snapshot.hasData) {
+                                return SingleChildScrollView(
+                                  scrollDirection: Axis.horizontal,
+                                  child: Padding(
+                                    padding: Dimen.regularPadding,
+                                    child: Column(
+                                      children: [
+                                        Row(
+                                          children: List.generate(
+                                              snapshot.data!.length,
+                                              (index) => Row(children: [
+                                                    CartPreview(
+                                                      product: snapshot.data![index],
+                                                      amount: user!.cart![index]["amount"],
+                                                    ),
+                                                    const SizedBox(width: 8)
+                                                  ])),
+                                        ),
+                                        const SizedBox(
+                                          height: 12,
+                                        ),
+                                        OutlinedButton(
+                                            onPressed: () {
+                                              User? user = UserService.getCurrentUser();
+                                              if (user == null) {
+                                                Fluttertoast.showToast(
+                                                    msg: "You need to login to check out!",
+                                                    gravity: ToastGravity.CENTER,
+                                                    backgroundColor: Colors.red);
+                                              } else {
+                                                _cartService.purchaseCart(snapshot.data!);
+                                              }
+                                            },
+                                            child: const Text("Buy your cart")),
+                                      ],
                                     ),
-                                  );
-                                } else {
-                                  return const Text('Empty data');
-                                }
+                                  ),
+                                );
                               } else {
-                                return Text(
-                                    'State: ${snapshot.connectionState}');
+                                return const Text('Empty data');
                               }
-                            },
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
+                            } else {
+                              return Text('State: ${snapshot.connectionState}');
+                            }
+                          },
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
-      );
-    }
+      ),
+    );
   }
 }

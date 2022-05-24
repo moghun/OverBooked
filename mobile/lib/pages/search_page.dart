@@ -55,8 +55,7 @@ class _SearchPageState extends State<SearchPage> {
                 height: 40,
                 child: InputDecorator(
                   decoration: const InputDecoration(
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(8))),
+                    border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(8))),
                     contentPadding: EdgeInsets.all(10),
                   ),
                   child: DropdownButton(

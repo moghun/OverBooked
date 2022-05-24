@@ -11,6 +11,8 @@ class Dimen {
   static const double productWidth = 150;
 
   static get regularPadding => const EdgeInsets.all(parentMargin);
+
   static get smallPadding => const EdgeInsets.all(smallMargin);
+
   static get productPadding => const EdgeInsets.all(textFieldHeight);
 }

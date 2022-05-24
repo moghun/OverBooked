@@ -75,8 +75,7 @@ class _ProductPageState extends State<ProductPage> {
                               snapshot.data!.publisher! +
                                   " - " +
                                   (snapshot.data!.author ?? "No author"),
-                              style: const TextStyle(
-                                  fontStyle: FontStyle.italic, fontSize: 18),
+                              style: const TextStyle(fontStyle: FontStyle.italic, fontSize: 18),
                               textAlign: TextAlign.center,
                               overflow: TextOverflow.ellipsis,
                               maxLines: 3,
@@ -86,8 +85,7 @@ class _ProductPageState extends State<ProductPage> {
                             ),
                             Text(
                               "\$ " + snapshot.data!.cost.toString(),
-                              style: const TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 22),
+                              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
                               textAlign: TextAlign.center,
                               overflow: TextOverflow.ellipsis,
                               maxLines: 2,
@@ -97,8 +95,7 @@ class _ProductPageState extends State<ProductPage> {
                             ),
                             Text(
                               "Stock: " + snapshot.data!.amount.toString(),
-                              style: const TextStyle(
-                                  fontWeight: FontWeight.normal, fontSize: 16),
+                              style: const TextStyle(fontWeight: FontWeight.normal, fontSize: 16),
                               textAlign: TextAlign.center,
                               overflow: TextOverflow.ellipsis,
                               maxLines: 2,
@@ -111,18 +108,13 @@ class _ProductPageState extends State<ProductPage> {
                                 User? user = UserService.getCurrentUser();
                                 bool exists = false;
                                 for (int i = 0; i < user!.cart!.length; i++) {
-                                  if (user.cart![i]["product_id"] ==
-                                      snapshot.data!.id) {
+                                  if (user.cart![i]["product_id"] == snapshot.data!.id) {
                                     exists = true;
-                                    user.cart![i]["amount"] =
-                                        (user.cart![i]["amount"] + 1);
+                                    user.cart![i]["amount"] = (user.cart![i]["amount"] + 1);
                                   }
                                 }
                                 if (!exists) {
-                                  user.cart!.add({
-                                    "product_id": snapshot.data!.id,
-                                    "amount": 1
-                                  });
+                                  user.cart!.add({"product_id": snapshot.data!.id, "amount": 1});
                                 }
                                 UserService.updateUser(user);
                               },
@@ -130,8 +122,8 @@ class _ProductPageState extends State<ProductPage> {
                                 "Add to cart",
                                 style: kButtonLightTextStyle,
                               ),
-                              style: OutlinedButton.styleFrom(
-                                  backgroundColor: AppColors.background),
+                              style:
+                                  OutlinedButton.styleFrom(backgroundColor: AppColors.background),
                             ),
                             const SizedBox(
                               height: 12,
@@ -143,9 +135,7 @@ class _ProductPageState extends State<ProductPage> {
                                 ),
                                 Text(
                                   "Comments",
-                                  style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold),
+                                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                                 ),
                               ],
                             ),
@@ -157,11 +147,10 @@ class _ProductPageState extends State<ProductPage> {
                               ),
                             ),
                             FutureBuilder<List<User>>(
-                              future: _productService.getUsersByCommentList(
-                                  snapshot.data!.comments!),
+                              future:
+                                  _productService.getUsersByCommentList(snapshot.data!.comments!),
                               builder: (context, comment_snapshot) {
-                                if (comment_snapshot.connectionState ==
-                                    ConnectionState.waiting) {
+                                if (comment_snapshot.connectionState == ConnectionState.waiting) {
                                   return const CircularProgressIndicator();
                                 } else if (comment_snapshot.connectionState ==
                                     ConnectionState.done) {
@@ -179,14 +168,9 @@ class _ProductPageState extends State<ProductPage> {
                                                 (index) => CommentPreview(
                                                     comment: Comment(
                                                         username:
-                                                            comment_snapshot
-                                                                .data![index]
-                                                                .username!,
+                                                            comment_snapshot.data![index].username!,
                                                         commentContent: snapshot
-                                                                    .data!
-                                                                    .comments![
-                                                                index]
-                                                            ["comment"]))),
+                                                            .data!.comments![index]["comment"]))),
                                           ))
                                         ],
                                       ),
@@ -195,8 +179,7 @@ class _ProductPageState extends State<ProductPage> {
                                     return const Text('Empty data');
                                   }
                                 } else {
-                                  return Text(
-                                      'State: ${comment_snapshot.connectionState}');
+                                  return Text('State: ${comment_snapshot.connectionState}');
                                 }
                               },
                             ),

@@ -17,5 +17,5 @@ class User {
     this.token,
     this.uid,
     this.wishlist,
-});
+  });
 }

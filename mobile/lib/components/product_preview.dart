@@ -23,12 +23,11 @@ class _ProductPreviewState extends State<ProductPreview> {
   Widget build(BuildContext context) {
     return OutlinedButton(
       style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.resolveWith(
-              (states) => AppColors.primary.withOpacity(0.1)),
-          shape: MaterialStateProperty.resolveWith((states) =>
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
-          padding:
-              MaterialStateProperty.resolveWith((states) => EdgeInsets.zero)),
+          backgroundColor:
+              MaterialStateProperty.resolveWith((states) => AppColors.primary.withOpacity(0.1)),
+          shape: MaterialStateProperty.resolveWith(
+              (states) => RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
+          padding: MaterialStateProperty.resolveWith((states) => EdgeInsets.zero)),
       onPressed: () {
         Navigator.push(
             context,
@@ -40,7 +39,14 @@ class _ProductPreviewState extends State<ProductPreview> {
       child: Stack(
         alignment: Alignment.center,
         children: [
-          Positioned(child: FavoriteButton(valueChanged: () {}, iconSize: 40,), top: 3, right: 3,),
+          Positioned(
+            child: FavoriteButton(
+              valueChanged: () {},
+              iconSize: 40,
+            ),
+            top: 3,
+            right: 3,
+          ),
           Stack(alignment: Alignment.center, children: <Widget>[
             Row(
               children: [
@@ -107,9 +113,7 @@ class _ProductPreviewState extends State<ProductPreview> {
                             children: [
                               Text(
                                 (widget.product.sale!
-                                    ? "\$ " +
-                                        widget.product.costBeforeSale!
-                                            .toString()
+                                    ? "\$ " + widget.product.costBeforeSale!.toString()
                                     : ""),
                                 style: const TextStyle(
                                   color: Colors.red,

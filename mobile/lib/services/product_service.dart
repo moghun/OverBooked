@@ -26,8 +26,7 @@ class ProductService {
       var resp = await http.get(Uri.parse(apiBaseURL + "/"));
       if (resp.statusCode >= 200 && resp.statusCode < 400) {
         var productsJson = jsonDecode(resp.body) as List;
-        List<Product> products =
-            productsJson.map((prod) => Product.fromJson(prod)).toList();
+        List<Product> products = productsJson.map((prod) => Product.fromJson(prod)).toList();
         return products;
       } else {
         print(resp.statusCode);
@@ -44,8 +43,7 @@ class ProductService {
     var resp = await http.get(Uri.parse(apiBaseURL + "/find?q=" + query),
         headers: {"Content-Type": "application/json"});
     var productsJson = jsonDecode(resp.body) as List;
-    List<Product> products =
-        productsJson.map((prod) => Product.fromJson(prod)).toList();
+    List<Product> products = productsJson.map((prod) => Product.fromJson(prod)).toList();
     return products;
   }
 
@@ -66,8 +64,7 @@ class ProductService {
             body: body)
         .then((value) => print(value.body));
 
-    final body2 = jsonEncode(
-        {"user_id": UserService.getCurrentUser()!.uid, "rating": rating});
+    final body2 = jsonEncode({"user_id": UserService.getCurrentUser()!.uid, "rating": rating});
 
     http
         .put(Uri.parse(apiBaseURL + "/rate/" + productID),
@@ -81,11 +78,10 @@ class ProductService {
 
   Future<List<dynamic>> getMyOrders() async {
     User user = UserService.getCurrentUser()!;
-    var resp = await http.get(
-        Uri.parse("http://10.0.2.2:5001/api/orders/find/" + user.uid!),
-        headers: {
-          "Content-Type": "application/json",
-        });
+    var resp =
+        await http.get(Uri.parse("http://10.0.2.2:5001/api/orders/find/" + user.uid!), headers: {
+      "Content-Type": "application/json",
+    });
     print(resp.body);
     var productsJson = jsonDecode(resp.body) as List;
     print(productsJson);
@@ -93,8 +89,7 @@ class ProductService {
   }
 
   Future<User> getUserByID(String userID) async {
-    var resp = await http.get(
-        Uri.parse("http://10.0.2.2:5001/api/users/find/" + userID),
+    var resp = await http.get(Uri.parse("http://10.0.2.2:5001/api/users/find/" + userID),
         headers: {"Content-Type": "application/json"});
     print(resp.body);
     var userInfo = jsonDecode(resp.body);

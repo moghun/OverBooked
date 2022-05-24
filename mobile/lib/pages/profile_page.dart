@@ -79,10 +79,8 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                     OutlinedButton(
                         onPressed: () {
-
-                          Navigator.push(context, MaterialPageRoute(
-                              builder: (context) => const UserOrdersPage(
-                              )));
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) => const UserOrdersPage()));
                         },
                         child: const Text("My Orders")),
                     const SizedBox(

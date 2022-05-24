@@ -25,30 +25,26 @@ class SideDrawer extends StatelessWidget {
     return Drawer(
       backgroundColor: Colors.amber,
       elevation: 2.0,
-      child:ListView(
+      child: ListView(
         scrollDirection: Axis.vertical,
         children: List.generate(_categories.length, (int index) {
           return OutlinedButton(
-            
             style: ButtonStyle(
               backgroundColor: MaterialStateProperty.all<Color>(const Color(0xFFFFFFFF)),
-              padding:  MaterialStateProperty.all(const EdgeInsets.all(20)),
-
+              padding: MaterialStateProperty.all(const EdgeInsets.all(20)),
             ),
-
-            onPressed: () {
-
-            },
+            onPressed: () {},
             child: Container(
               width: 200,
-
-
               color: const Color(0xFFe6b619),
               height: 50.0,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(_categories[index],style: const TextStyle(color: Colors.black),),
+                  Text(
+                    _categories[index],
+                    style: const TextStyle(color: Colors.black),
+                  ),
                 ],
               ),
             ),
