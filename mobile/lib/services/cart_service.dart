@@ -50,12 +50,21 @@ class CartService {
     }
   }
 
-  removeFromCart(Product product, int amount) {
+  removeFromCart(Product product) {
     User? user = UserService.getCurrentUser();
     if (user == null) {
+      for (int i = 0; i < UserService.userCart.length; i++) {
+        if (UserService.userCart[i]["product_id"] == product.id) {
+          UserService.userCart.removeAt(i);
+        }
+      }
     } else {
-      var toBeRemoved = {"product": product.id, "amount": amount};
-      user.cart!.remove(toBeRemoved);
+      var toBeRemoved = {"product": product.id};
+      for (int i = 0; i < user.cart!.length; i++) {
+        if (user.cart![i]["product_id"] == product.id) {
+          user.cart!.removeAt(i);
+        }
+      }
       var body = jsonEncode(toBeRemoved);
       http.put(Uri.parse(apiBaseURL + "/users/removeFromCart/" + user.uid!),
           headers: {"Content-Type": "application/json", "token": "Bearer " + user.token!},
