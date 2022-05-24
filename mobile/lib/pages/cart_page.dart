@@ -108,7 +108,7 @@ class _CartPageState extends State<CartPage> {
                                           height: 12,
                                         ),
                                         OutlinedButton(
-                                            onPressed: () {
+                                            onPressed: snapshot.data!.isEmpty ? null : () {
                                               User? user = UserService.getCurrentUser();
                                               if (user == null) {
                                                 Fluttertoast.showToast(

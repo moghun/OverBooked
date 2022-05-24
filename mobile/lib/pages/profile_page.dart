@@ -35,22 +35,39 @@ class _ProfilePageState extends State<ProfilePage> {
               children: [
                 Expanded(
                   child: Column(children: [
-                    const SizedBox(
-                      height: 12,
-                    ),
-                    Text(
-                      user.username!,
-                      style: kHeadingTextStyle,
-                    ),
-                    const SizedBox(
-                      height: 12,
-                    ),
-                    const CircleAvatar(
-                      backgroundColor: Color(0xffE6E6E6),
-                      radius: 30,
-                      child: Icon(
-                        Icons.person,
-                        color: Color(0xffCCCCCC),
+                    Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Container(
+                              decoration: BoxDecoration(color: Colors.blue, borderRadius: BorderRadius.circular(20)),
+                              child: Column(
+                                children: [
+                                  const SizedBox(
+                                    height: 12,
+                                  ),
+                                  const CircleAvatar(
+                                    backgroundColor: Color(0xffE6E6E6),
+                                    radius: 50,
+                                    child: Icon(
+                                      Icons.person,
+                                      color: Color(0xffCCCCCC),
+                                      size: 80,
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: 12,
+                                  ),
+                                  Text(
+                                    user.username!,
+                                    style: kHeadingTextStyle,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                     const SizedBox(

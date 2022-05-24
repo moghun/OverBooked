@@ -80,7 +80,7 @@ class _ProductPreviewState extends State<ProductPreview> {
                             overflow: TextOverflow.ellipsis,
                           ),
                           Text(
-                            widget.product.publisher ?? "",
+                            widget.product.author ?? "",
                             style: kSmallText,
                             textAlign: TextAlign.center,
                             maxLines: 1,
