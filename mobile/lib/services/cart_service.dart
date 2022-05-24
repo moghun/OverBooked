@@ -21,10 +21,28 @@ class CartService {
   addToCart(Product product, int amount) {
     User? user = UserService.getCurrentUser();
     if (user == null) {
-      UserService.userCart.add({"product_id": product.id, "amount": amount});
+      bool exists = false;
+      for (int i = 0; i < UserService.userCart.length; i++) {
+        if (UserService.userCart[i]["product_id"] == product.id) {
+          exists = true;
+          UserService.userCart[i]["amount"] += amount;
+        }
+      }
+      if (!exists) {
+        UserService.userCart.add({"product_id": product.id, "amount": amount});
+      }
     } else {
       var toBeAdded = {"product_id": product.id, "amount": amount};
-      user.cart!.add(toBeAdded);
+      bool exists = false;
+      for (int i = 0; i < user.cart!.length; i++) {
+        if (product.id == user.cart![i]["product_id"]) {
+          exists = true;
+          user.cart![i]["amount"] += amount;
+        }
+      }
+      if (!exists) {
+        user.cart!.add(toBeAdded);
+      }
       var body = jsonEncode(toBeAdded);
       http.put(Uri.parse(apiBaseURL + "/users/addToCart/" + user.uid!),
           headers: {"Content-Type": "application/json", "token": "Bearer " + user.token!},

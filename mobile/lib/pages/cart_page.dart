@@ -83,7 +83,7 @@ class _CartPageState extends State<CartPage> {
                                               if (user == null) {
                                                 Fluttertoast.showToast(
                                                     msg: "You need to login to check out!",
-                                                    gravity: ToastGravity.CENTER,
+                                                    gravity: ToastGravity.BOTTOM,
                                                     backgroundColor: Colors.red);
                                               } else {
                                                 _cartService.purchaseCart(snapshot.data!);
