@@ -63,17 +63,47 @@ class _CartPageState extends State<CartPage> {
                                     padding: Dimen.regularPadding,
                                     child: Column(
                                       children: [
-                                        Row(
-                                          children: List.generate(
-                                              snapshot.data!.length,
-                                              (index) => Row(children: [
-                                                    CartPreview(
-                                                      product: snapshot.data![index],
-                                                      amount: user!.cart![index]["amount"],
-                                                    ),
-                                                    const SizedBox(width: 8)
-                                                  ])),
-                                        ),
+                                        snapshot.data!.isEmpty
+                                            ? Column(
+                                                children: [
+                                                  const SizedBox(
+                                                    height: 60,
+                                                  ),
+                                                  Stack(
+                                                    alignment: Alignment.center,
+                                                    children: [
+                                                      const Text(
+                                                        "Your cart is empty!",
+                                                        style: TextStyle(
+                                                            fontSize: 16,
+                                                            fontWeight: FontWeight.bold),
+                                                      ),
+                                                      Icon(
+                                                        Icons.shopping_cart_outlined,
+                                                        size: 120,
+                                                        color: Colors.black.withOpacity(0.1),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  const SizedBox(
+                                                    height: 60,
+                                                  ),
+                                                ],
+                                              )
+                                            : Row(
+                                                children: List.generate(
+                                                    snapshot.data!.length,
+                                                    (index) => Row(children: [
+                                                          CartPreview(
+                                                            product: snapshot.data![index],
+                                                            amount: user == null
+                                                                ? UserService.userCart[index]
+                                                                    ["amount"]
+                                                                : user!.cart![index]["amount"],
+                                                          ),
+                                                          const SizedBox(width: 8)
+                                                        ])),
+                                              ),
                                         const SizedBox(
                                           height: 12,
                                         ),
@@ -89,7 +119,7 @@ class _CartPageState extends State<CartPage> {
                                                 _cartService.purchaseCart(snapshot.data!);
                                               }
                                             },
-                                            child: const Text("Buy your cart")),
+                                            child: const Text("Check out")),
                                       ],
                                     ),
                                   ),
