@@ -1,3 +1,4 @@
+import 'package:favorite_button/favorite_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:mobile/utils/colors.dart';
@@ -39,13 +40,14 @@ class _ProductPreviewState extends State<ProductPreview> {
       child: Stack(
         alignment: Alignment.center,
         children: [
+          Positioned(child: FavoriteButton(valueChanged: () {}, iconSize: 40,), top: 3, right: 3,),
           Stack(alignment: Alignment.center, children: <Widget>[
             Row(
               children: [
                 Column(
                   children: [
                     Container(
-                      width: 150,
+                      width: 170,
                       height: 280,
                       alignment: Alignment.topCenter,
                       margin: const EdgeInsets.all(0),

@@ -55,8 +55,8 @@ class _ProductPageState extends State<ProductPage> {
                             ),
                             Image.network(
                               snapshot.data!.img!,
-                              width: 150,
-                              height: 200,
+                              width: 190,
+                              height: 230,
                             ),
                             const SizedBox(
                               height: 12,
@@ -115,14 +115,13 @@ class _ProductPageState extends State<ProductPage> {
                                       snapshot.data!.id) {
                                     exists = true;
                                     user.cart![i]["amount"] =
-                                        (int.parse(user.cart![i]["amount"]) + 1)
-                                            .toString();
+                                        (user.cart![i]["amount"] + 1);
                                   }
                                 }
                                 if (!exists) {
                                   user.cart!.add({
                                     "product_id": snapshot.data!.id,
-                                    "amount": "1"
+                                    "amount": 1
                                   });
                                 }
                                 UserService.updateUser(user);
