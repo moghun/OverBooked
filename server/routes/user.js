@@ -201,7 +201,7 @@ router.put("/invoice/:id", verifyToken, async (req, res) => {
 });
 
 //GET USERNAME
-router.get("/getUsername/:id", verifyTokenOrManager, async (req, res) => {
+router.get("/getUsername/:id", async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
     const { username, ...others } = user._doc;
