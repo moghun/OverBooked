@@ -184,4 +184,20 @@ router.get("/stats", verifyTokenAndManager, async (req, res) => {
   }
 });
 
+//CREATE INVOICE
+router.put("/invoice/:id", verifyToken, async (req, res) => {
+  try {
+    const updatedUser = await User.findByIdAndUpdate(
+      req.params.id,
+      {
+        $push: { invoices: req.body },
+      },
+      { new: true }
+    );
+    res.status(200).json(updatedUser);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 module.exports = router;
