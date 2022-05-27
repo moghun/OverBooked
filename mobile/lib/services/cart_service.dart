@@ -41,7 +41,6 @@ class CartService {
     List<String> boughtProducts =
     user.cart!.map((e) => e["product_id"].toString()).toList();
     final body = jsonEncode({
-      "order_id": Random().nextInt(8493283),
       "buyer_email": user.email,
       "status": "shipped",
       "cost": totalCost,
