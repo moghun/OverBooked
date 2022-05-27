@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import HomePage from "./pages/homepage/Home";
+import HomePage from "./pages/homePage/Home";
 import NavigationBar from "./components/Navigation_Bar/NavigationBar";
 import ProductPage from "./pages/product-view/ProductPage";
 import SearchPage from "./pages/search-page/SearchPage";
@@ -16,6 +16,7 @@ import Success from "./pages/success";
 
 import SignUp from "./pages/signup/Signup";
 import Signin from "./pages/signin/Signin";
+import Synch from "./pages/signin/synch";
 import { useSelector } from "react-redux";
 import MyOrders from "./pages/MyOrders/MyOrders";
 import ProductManagerAPI from "./pages/profilePage/product-managerPage/product-managerProfile";
@@ -45,6 +46,7 @@ function App() {
             <Route path="/shoppingcart" element={<ShoppingCart />} />
             <Route path="/myorders" element={<MyOrders />} />
             <Route path="/success" element={<Success />} />
+            <Route path="/synch" element={<Synch />} />
             <Route
               path="/approvaldisapproval"
               element={<ProductManagerAPI />}

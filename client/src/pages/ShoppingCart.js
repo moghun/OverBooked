@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 import { userRequest } from "./requestMethods";
 import { Button } from "@material-ui/core";
 import axios from "axios";
+import { publicRequest } from "./requestMethods";
 
 const KEY = process.env.REACT_APP_STRIPE;
 
@@ -25,7 +26,6 @@ const ShoppingCart = () => {
         { product_id: pid },
         { headers: { token: "Bearer " + currUser.accessToken } }
       );
-      console.log(pid);
     } catch (err) {
       console.log(err);
     }
@@ -42,13 +42,9 @@ const ShoppingCart = () => {
     }
   };
 
-  var signedIn = true;
-  var total = 0;
-
   const removeItem = (item) => {
     dispatch(removeProduct(item));
     removeFromCartAPI(item._id);
-    console.log("calısıyo keriz");
   };
 
   const clear = () => {
