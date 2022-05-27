@@ -13,6 +13,7 @@ const UserSchema = new mongoose.Schema(
     cart: { type: Array, required: false },
     wishlist: { type: Array, required: false },
     orders: { type: Array, required: false },
+    invoices: { type: Array, required: false, default: [] },
 
     user_role: { type: String, required: true, default: "customer" },
   },
