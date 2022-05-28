@@ -19,7 +19,27 @@ const DetailsThumb = () => {
   const [maxAmount, setMaxAmount] = useState(null);
   const [comment, setComment] = useState(null);
   const [rating, setRating] = useState(null);
+  const [usernames, setUsernames] = useState([]);
+  const [approvedComments, setapprovedComments] = useState([]);
   const dispatch = useDispatch();
+  console.log(approvedComments);
+  const getUserInfo = async () => {
+    var names = [];
+    for (let i = 0; i < approvedComments.length; i++) {
+      try {
+        var userId = approvedComments[i].user_id;
+        const res = await axios.get(
+          "http://localhost:5001/api/users/getUsername/" + userId,
+          { headers: { token: "Bearer " + currUser.accessToken } }
+        );
+        names.push(res.data);
+      } catch (err) {}
+    }
+    setUsernames(names);
+  };
+  useEffect(async () => {
+    getUserInfo();
+  }, [approvedComments.length > 0]);
 
   async function getUserCart() {
     try {
@@ -33,7 +53,8 @@ const DetailsThumb = () => {
   function getComment(val) {
     setComment(val.target.value);
   }
-
+  console.log(usernames);
+  console.log(product);
   const addCartAPI = async (product_id, amount) => {
     let userCart = await getUserCart();
     let oldAmount = 0;
@@ -105,6 +126,9 @@ const DetailsThumb = () => {
       try {
         const res = await publicRequest.get("/products/find/" + id);
         setProduct(res.data);
+        setapprovedComments(
+          res.data.comments.filter((c) => c.isApproved === true)
+        );
       } catch {}
     };
     getProduct();
@@ -126,10 +150,7 @@ const DetailsThumb = () => {
     addCartAPI(product._id, amount);
     alert("Product added to Cart");
   };
-  let approvedComments;
-  if (product.comments) {
-    approvedComments = product.comments.filter((c) => c.isApproved === true);
-  }
+
   return (
     <div className="app">
       <div className="details" key={product.id}>
@@ -165,8 +186,13 @@ const DetailsThumb = () => {
                 min="1"
                 max={product.amount}
                 onKeyDown={(e) => e.preventDefault()}
+                style={{ borderRadius: "5px", borderWidth: "1px" }}
               ></input>{" "}
-              <button className="cart" onClick={addCart}>
+              <button
+                className="cart"
+                onClick={addCart}
+                style={{ borderRadius: "5px" }}
+              >
                 Add to cart
               </button>
             </>
@@ -202,7 +228,11 @@ const DetailsThumb = () => {
               placeholder=" Write your comment here..."
               rows="4"
               cols="50"
-              style={{ resize: "none", borderWidth: "bold" }}
+              style={{
+                resize: "none",
+                borderWidth: "bold",
+                borderRadius: "10px",
+              }}
             ></textarea>
             <div>
               <button
@@ -212,6 +242,7 @@ const DetailsThumb = () => {
                   backgroundColor: "#333",
                   color: "white",
                   width: 60,
+                  borderRadius: "5px",
                 }}
               >
                 Submit
@@ -221,25 +252,40 @@ const DetailsThumb = () => {
         </div>
       </div>
 
+      <hr style={{ width: "95%", marginLeft: "2.5%", borderWidth: "2px" }}></hr>
+
       <div className="comment-box" style={{ textAlign: "center" }}>
         <h3 style={{ marginBottom: "10px" }}>Product Comments</h3>
         {
           !approvedComments || approvedComments.length === 0 ? (
             <h>This product has no comment yet</h>
           ) : (
-            approvedComments.map((cmt) => {
+            approvedComments.map((cmt, i) => {
+              //getUserInfo(cmt.user_id);
               return (
                 <div
                   className="comment-row"
                   style={{
+                    boxShadow: "0 0 5px #ccc",
                     outline: "solid",
-                    outlineWidth: "1px",
+                    outlineColor: "lightgray",
+                    outlineWidth: "0.5px",
                     borderRadius: "5px",
                     margin: "20px",
-                    padding: "5px",
+                    padding: "10px",
                   }}
                 >
-                  <h className="comment-text">{cmt.comment}</h>
+                  <div class="comment-header d-flex justify-content-between">
+                    <div class="comment-owner">
+                      <strong>Username: </strong>
+                      <h>{usernames[i]}</h>
+                    </div>
+                  </div>
+
+                  <div style={{ textAlign: "left" }}>
+                    <br></br>
+                    <h className="comment-text">{cmt.comment}</h>
+                  </div>
                 </div>
               );
             })
