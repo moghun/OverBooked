@@ -20,31 +20,27 @@ const DetailsThumb = () => {
   const [comment, setComment] = useState(null);
   const [rating, setRating] = useState(null);
   const [usernames, setUsernames] = useState([]);
-  const [isProductSet, setIsProductSet] = useState(false);
+  const [approvedComments, setapprovedComments] = useState([]);
   const dispatch = useDispatch();
-
-<<<<<<< HEAD
+  console.log(approvedComments);
   const getUserInfo = async () => {
     var names = [];
-    for (let i = 0; i < product.comments.length; i++) {
+    for (let i = 0; i < approvedComments.length; i++) {
       try {
-        id = product.comments[i].user_id;
+        var userId = approvedComments[i].user_id;
         const res = await axios.get(
-          "http://localhost:5001/api/users/find/" + id,
+          "http://localhost:5001/api/users/getUsername/" + userId,
           { headers: { token: "Bearer " + currUser.accessToken } }
         );
-        names.push(res.data.username);
+        names.push(res.data);
       } catch (err) {}
-      setUsernames(names);
     }
+    setUsernames(names);
   };
-  console.log(product);
-  console.log(usernames);
   useEffect(async () => {
     getUserInfo();
-  }, [isProductSet]);
+  }, [approvedComments.length > 0]);
 
-=======
   async function getUserCart() {
     try {
       const res = await axios.get(
@@ -54,11 +50,11 @@ const DetailsThumb = () => {
       return res.data.cart;
     } catch (err) {}
   }
->>>>>>> master
   function getComment(val) {
     setComment(val.target.value);
   }
-
+  console.log(usernames);
+  console.log(product);
   const addCartAPI = async (product_id, amount) => {
     let userCart = await getUserCart();
     let oldAmount = 0;
@@ -130,7 +126,9 @@ const DetailsThumb = () => {
       try {
         const res = await publicRequest.get("/products/find/" + id);
         setProduct(res.data);
-        setIsProductSet(true);
+        setapprovedComments(
+          res.data.comments.filter((c) => c.isApproved === true)
+        );
       } catch {}
     };
     getProduct();
@@ -152,10 +150,6 @@ const DetailsThumb = () => {
     addCartAPI(product._id, amount);
     alert("Product added to Cart");
   };
-  let approvedComments;
-  if (product.comments) {
-    approvedComments = product.comments.filter((c) => c.isApproved === true);
-  }
 
   return (
     <div className="app">
