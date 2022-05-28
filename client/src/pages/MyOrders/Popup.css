@@ -15,8 +15,8 @@
     height: auto;
     max-height: 70vh;
     margin-top: calc(100vh - 85vh - 20px);
-    background: rgba(255, 255, 255, 0.795);
-    border-radius: 4px;
+    background: #e6b619;
+    border-radius: 10px;
     padding: 20px;
     border: 1px solid #999;
     overflow: auto;
@@ -36,4 +36,14 @@
     text-align: center;
     border: 1px solid #999;
     font-size: 20px;
+  }
+
+  .close-icon:hover{
+    background: black;
+    color:aliceblue;
+  }
+
+  .box button:hover{
+    
+    color: #e6b619;
   }
