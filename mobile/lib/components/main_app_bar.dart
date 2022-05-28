@@ -4,7 +4,7 @@ import '../utils/styles.dart';
 
 class MainAppBar extends StatelessWidget with PreferredSizeWidget {
   MainAppBar({Key? key, this.title = "Overbooked"}) : super(key: key);
-  String title;
+  final String title;
 
   @override
   Widget build(BuildContext context) {

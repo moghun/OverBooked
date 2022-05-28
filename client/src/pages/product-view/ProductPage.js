@@ -23,6 +23,7 @@ const DetailsThumb = () => {
   const [isProductSet, setIsProductSet] = useState(false);
   const dispatch = useDispatch();
 
+<<<<<<< HEAD
   const getUserInfo = async () => {
     var names = [];
     for (let i = 0; i < product.comments.length; i++) {
@@ -43,16 +44,34 @@ const DetailsThumb = () => {
     getUserInfo();
   }, [isProductSet]);
 
+=======
+  async function getUserCart() {
+    try {
+      const res = await axios.get(
+        "http://localhost:5001/api/users/find/" + currUser._id,
+        { headers: { token: "Bearer " + currUser.accessToken } }
+      );
+      return res.data.cart;
+    } catch (err) {}
+  }
+>>>>>>> master
   function getComment(val) {
     setComment(val.target.value);
   }
 
   const addCartAPI = async (product_id, amount) => {
+    let userCart = await getUserCart();
+    let oldAmount = 0;
+    for (let i = 0; i < userCart.length; i++) {
+      if (userCart[i].product_id == product_id) {
+        oldAmount = userCart[i].amount;
+      }
+    }
+    const newAmount = amount + oldAmount;
     const cartStruct = {
       product_id: product_id,
-      amount: amount,
+      amount: newAmount,
     };
-
     try {
       await axios.put(
         "http://localhost:5001/api/users/addToCart/" + currUser._id,
