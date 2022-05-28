@@ -15,7 +15,6 @@ const NavigationBar = () => {
 
   const onValueChange = (event) => {
     setSearchValue(event.target.value);
-    console.log(event.target.value);
   };
 
   return (

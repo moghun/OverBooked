@@ -48,7 +48,6 @@ const ShoppingCart = () => {
   const removeItem = (item) => {
     dispatch(removeProduct(item));
     removeFromCartAPI(item._id);
-    console.log("calısıyo keriz");
   };
 
   const clear = () => {
