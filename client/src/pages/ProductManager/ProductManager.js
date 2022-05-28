@@ -1,17 +1,21 @@
 import SideBar from './SideBar';
 import React, { Component } from 'react';
 import { Container, Card } from 'react-bootstrap';
+import { Button } from '@material-ui/core';
+import './ProductManager.css';
 
 const AddProduct = () => {
     return (
 
 
-        <Card>
+        <Card style={{borderRadius: '30px', border: '2px solid #0400ff'}}>
+          <br/>
         <form className='form-horizontal'>
           <fieldset>
-            <legend>ADD PRODUCTS</legend>
-            <div className='row form-group'>
-              <label className='col-md-4 control-label' htmlFor='product_id'>
+            <br/>
+            <legend className='upper-container2'>ADD PRODUCTS</legend>
+            <div className='row form-group' style={{marginLeft: '50px'}}>
+              <label className='col-md-4 control-label' htmlFor='product_id' style = {{padding: '12px 20px', background: 'red', border: 'none', borderRadius: '30px', fontWeight: 'bold', boxShadow: "10px 20px 30px lightblue"}}>
                 PRICE
               </label>
               <div className='col-md-4'>
@@ -25,8 +29,8 @@ const AddProduct = () => {
                 />
               </div>
             </div>
-            <div className='row form-group'>
-              <label className='col-md-4 control-label' htmlFor='product_name'>
+            <div className='row form-group' style={{marginLeft: '50px'}}>
+              <label className='col-md-4 control-label' htmlFor='product_name' style = {{padding: '12px 20px', background: 'red', border: 'none', borderRadius: '30px', fontWeight: 'bold', boxShadow: "10px 20px 30px lightblue"}}>
                 OLD PRICE
               </label>
               <div className='col-md-4'>
@@ -40,10 +44,10 @@ const AddProduct = () => {
                 />
               </div>
             </div>
-            <div className=' row form-group'>
+            <div className=' row form-group' style={{marginLeft: '50px'}}>
               <label
                 className='col-md-4 control-label'
-                htmlFor='product_name_fr'
+                htmlFor='product_name_fr' style = {{padding: '12px 20px', background: 'red', border: 'none', borderRadius: '30px', fontWeight: 'bold', boxShadow: "10px 20px 30px lightblue"}}
               >
                 STOCK
               </label>
@@ -59,10 +63,10 @@ const AddProduct = () => {
               </div>
             </div>
 
-            <div className='row form-group'>
+            <div className='row form-group' style={{marginLeft: '50px'}}>
               <label
                 className='col-md-4 control-label'
-                htmlFor='available_quantity'
+                htmlFor='available_quantity' style = {{padding: '12px 20px', background: 'red', border: 'none', borderRadius: '30px', fontWeight: 'bold', boxShadow: "10px 20px 30px lightblue"}}
               >
                 IMAGE SOURCE
               </label>
@@ -78,10 +82,10 @@ const AddProduct = () => {
               </div>
             </div>
 
-            <div className='row form-group'>
+            <div className='row form-group' style={{marginLeft: '50px'}}>
               <label
                 className='col-md-4 control-label'
-                htmlFor='available_quantity'
+                htmlFor='available_quantity' style = {{padding: '12px 20px', background: 'red', border: 'none', borderRadius: '30px', fontWeight: 'bold', boxShadow: "10px 20px 30px lightblue"}}
               >
                 NAME
               </label>
@@ -97,10 +101,10 @@ const AddProduct = () => {
               </div>
             </div>
 
-            <div className='row form-group'>
+            <div className='row form-group' style={{marginLeft: '50px'}}>
               <label
                 className='col-md-4 control-label'
-                htmlFor='product_weight'
+                htmlFor='product_weight' style = {{padding: '12px 20px', background: 'red', border: 'none', borderRadius: '30px', fontWeight: 'bold', boxShadow: "10px 20px 30px lightblue"}}
               >
                 MODEL NUMBER
               </label>
@@ -116,10 +120,10 @@ const AddProduct = () => {
               </div>
             </div>
 
-            <div className='row form-group'>
+            <div className='row form-group' style={{marginLeft: '50px'}}>
               <label
                 className='col-md-4 control-label'
-                htmlFor='product_weight'
+                htmlFor='product_weight' style = {{padding: '12px 20px', background: 'red', border: 'none', borderRadius: '30px', fontWeight: 'bold', boxShadow: "10px 20px 30px lightblue"}}
               >
                 COST
               </label>
@@ -134,10 +138,10 @@ const AddProduct = () => {
                 />
               </div>
             </div>
-            <div className='row form-group'>
+            <div className='row form-group' style={{marginLeft: '50px'}}>
               <label
                 className='col-md-4 control-label'
-                htmlFor='percentage_discount'
+                htmlFor='percentage_discount'  style = {{padding: '12px 20px', background: 'red', border: 'none', borderRadius: '30px', fontWeight: 'bold', boxShadow: "10px 20px 30px lightblue"}}
               >
                 DESCRIPTION
               </label>
@@ -152,8 +156,8 @@ const AddProduct = () => {
                 />
               </div>
             </div>
-            <div className='row form-group'>
-              <label className='col-md-4 control-label' htmlFor='stock_alert'>
+            <div className='row form-group' style={{marginLeft: '50px'}}>
+              <label className='col-md-4 control-label' htmlFor='stock_alert'  style = {{padding: '12px 20px', background: 'red', border: 'none', borderRadius: '30px', fontWeight: 'bold', boxShadow: "10px 20px 30px lightblue"}}>
                 WARRANTY STATUS
               </label>
               <div className='col-md-4'>
@@ -167,10 +171,10 @@ const AddProduct = () => {
                 />
               </div>
             </div>
-            <div className='row form-group'>
+            <div className='row form-group' style={{marginLeft: '50px'}}>
               <label
                 className='col-md-4 control-label'
-                htmlFor='product_categorie'
+                htmlFor='product_categorie'   style = {{padding: '12px 20px', background: 'red', border: 'none', borderRadius: '30px', fontWeight: 'bold', boxShadow: "10px 20px 30px lightblue"}}
               >
                 PRODUCT CATEGORY
               </label>
@@ -185,53 +189,13 @@ const AddProduct = () => {
                 />
               </div>
             </div>
-            <div className='row form-group'>
-              <label className='col-md-4 control-label' htmlFor='author'>
-                LISTED DATE
-              </label>
-              <div className='col-md-4'>
-                <input
-                  id='listedDate'
-                  name='listedDate'
-                  placeholder='LISTED DATE'
-                  className='form-control input-md'
-                  required
-                  type='text'
-                />
-              </div>
-            </div>
-            <div className='row form-group'>
-              <label
-                className='col-md-4 control-label'
-                htmlFor='enable_display'
-              >
-                CATEGORY ICON
-              </label>
-              <div className='col-md-4'>
-                <input
-                  id='categoryIconScr'
-                  name='categoryIconScr'
-                  placeholder='CATEGORY ICON'
-                  className='form-control input-md'
-                  required
-                  type='text'
-                />
-              </div>
-            </div>
-            <div className='row form-group'>
+            <div className='row form-group' style={{marginLeft: '50px'}}>
               <label
                 className='col-md-4 control-label'
                 htmlFor='singlebutton'
               ></label>
               <div className='col-md-4'>
-                <button
-                  id='singlebutton'
-                  name='singlebutton'
-                  className='btn btn-primary'
-                  type='submit'
-                >
-                  ADD
-                </button>
+                <Button variant="contained" style={{backgroundColor: 'green'}}> Add </Button>
               </div>
             </div>
           </fieldset>
@@ -251,12 +215,13 @@ const RemoveProduct = () => {
 
 
 
-        <Card>
+        <Card style={{borderRadius: '30px', border: '2px solid #0400ff'}}>
+        <br/>
         <form className='form-horizontal'>
           <fieldset>
-            <legend>REMOVE PRODUCTS</legend>
-            <div className='row form-group'>
-              <label className='col-md-4 control-label'>
+            <legend className='upper-container2'>REMOVE PRODUCTS</legend>
+            <div className='row form-group'  style={{marginLeft: '50px'}}>
+              <label className='col-md-4 control-label'      style = {{padding: '12px 20px', background: 'red', border: 'none', borderRadius: '30px', fontWeight: 'bold', boxShadow: "10px 20px 30px lightblue"}}>
                 PRODUCT NAME
             </label>
               <div className='col-md-4'>
@@ -271,20 +236,13 @@ const RemoveProduct = () => {
             </div>
 
             {/* Button */}
-            <div className='row form-group'>
+            <div className='row form-group'  style={{marginLeft: '50px'}}>
               <label
                 className='col-md-4 control-label'
 
               ></label>
               <div className='col-md-4'>
-                <button
-                  id='singlebutton1'
-                  name='singlebutton'
-                  className='btn btn-primary'
-                  type='submit'
-                >
-                  REMOVE
-              </button>
+              <Button variant="contained" style={{backgroundColor: 'green'}}> Remove </Button>
               </div>
             </div>
           </fieldset>
@@ -302,13 +260,14 @@ const RemoveProduct = () => {
 
 const UpdateStock = () => {
     return (
-        <Card>
+        <Card style={{borderRadius: '30px', border: '2px solid #0400ff'}}>
+        <br/>
             <form className='form-horizontal'>
             <fieldset>
-                <legend>UPDATE STOCK</legend>
+                <legend className='upper-container2'>UPDATE STOCK</legend>
 
-                <div className='row form-group'>
-                <label className='col-md-4 control-label' htmlFor='product_id'>
+                <div className='row form-group'  style={{marginLeft: '50px'}}>
+                <label className='col-md-4 control-label' htmlFor='product_id'   style = {{padding: '12px 20px', background: 'red', border: 'none', borderRadius: '30px', fontWeight: 'bold', boxShadow: "10px 20px 30px lightblue"}}>  
                     PRODUCT NAME
                 </label>
                 <div className='col-md-4'>
@@ -322,8 +281,8 @@ const UpdateStock = () => {
                 </div>
                 </div>
 
-                <div className='row form-group'>
-                <label className='col-md-4 control-label' htmlFor='product_id'>
+                <div className='row form-group' style={{marginLeft: '50px'}}>
+                <label className='col-md-4 control-label' htmlFor='product_id' style = {{padding: '12px 20px', background: 'red', border: 'none', borderRadius: '30px', fontWeight: 'bold', boxShadow: "10px 20px 30px lightblue"}}>
                     STOCK
                 </label>
                 <div className='col-md-4'>
@@ -338,20 +297,13 @@ const UpdateStock = () => {
                 </div>
                 </div>
 
-                <div className='row form-group'>
+                <div className='row form-group' style={{marginLeft: '50px'}}>
                 <label
-                    className='col-md-4 control-label'
+                    className='col-md-4 control-label'   
                     htmlFor='singlebutton'
                 ></label>
                 <div className='col-md-4'>
-                    <button
-                    id='singlebutton'
-                    name='singlebutton'
-                    className='btn btn-primary'
-                    type='submit'
-                    >
-                    UPDATE STOCK
-                </button>
+                <Button variant="contained" style={{backgroundColor: 'green'}}> Update </Button>
                 </div>
                 </div>
             </fieldset>
