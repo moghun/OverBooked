@@ -11,6 +11,7 @@ import { userRequest } from "./requestMethods";
 import { Button } from "@material-ui/core";
 import axios from "axios";
 import { publicRequest } from "./requestMethods";
+import { addProduct } from "../redux/cartRedux";
 
 const KEY = process.env.REACT_APP_STRIPE;
 
@@ -35,6 +36,38 @@ const ShoppingCart = () => {
       await axios.put(
         "http://localhost:5001/api/users/clearCart/" + currUser._id,
         undefined,
+        { headers: { token: "Bearer " + currUser.accessToken } }
+      );
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  async function getUserCart() {
+    try {
+      const res = await axios.get(
+        "http://localhost:5001/api/users/find/" + currUser._id,
+        { headers: { token: "Bearer " + currUser.accessToken } }
+      );
+      return res.data.cart;
+    } catch (err) {}
+  }
+  const addCartAPI = async (product_id, amount) => {
+    let userCart = await getUserCart();
+    let oldAmount = 0;
+    for (let i = 0; i < userCart.length; i++) {
+      if (userCart[i].product_id == product_id) {
+        oldAmount = userCart[i].amount;
+      }
+    }
+    const newAmount = amount + oldAmount;
+    const cartStruct = {
+      product_id: product_id,
+      amount: newAmount,
+    };
+    try {
+      await axios.put(
+        "http://localhost:5001/api/users/addToCart/" + currUser._id,
+        cartStruct,
         { headers: { token: "Bearer " + currUser.accessToken } }
       );
     } catch (err) {
@@ -77,26 +110,32 @@ const ShoppingCart = () => {
     stripeToken && cart.total >= 1 && makeRequest();
   }, [stripeToken, cart.total, history]);
 
-
-  const reduceAmount = (item) =>{
-    if(item.amount === 1){
-      removeItem(item)
+  const reduceAmount = (item) => {
+    var amount = -1;
+    var maxAmount = item.maxAmount;
+    if (item.amount === 1) {
+      removeItem(item);
+    } else {
+      addCartAPI(item._id, amount);
+      dispatch(addProduct({ ...item, amount, maxAmount }));
     }
-    else {
-      alert(item.amount)
-    }
-  }
+  };
 
   const increaseAmount = (item) => {
-    if(item.amount === item.maxAmount){alert("No more increase")}
-    else{}
-  }
+    var amount = 1;
+    var maxAmount = item.maxAmount;
+    if (item.amount === item.maxAmount) {
+      alert("No more increase");
+    } else {
+      addCartAPI(item._id, amount);
+      dispatch(addProduct({ ...item, amount, maxAmount }));
+    }
+  };
 
   return (
     <div className="shoppingcart-container">
       <div className="Rowx">
         <div className="products-container">
-          
           <div className="product-row">
             {cart.products.map((item) => {
               return (
@@ -116,26 +155,77 @@ const ShoppingCart = () => {
                     <h style={{ marginLeft: "25px" }}>
                       {item.amount * item.cost} $
                     </h>
-                    <button  onClick={() => reduceAmount(item)} style={{ outline:'none',fontWeight:'bold',fontSize:'20px',marginLeft: "25px", width:'25px' }}>-</button>
-                    <input readOnly onKeyDown={(e) => e.preventDefault()} defaultValue={item.amount} type="number" style={{borderRadius:'10px',border:'none',textAlign:'center',outline:'none',marginLeft:"5px", width:'100px' }}></input>
-                    <button onClick={() => increaseAmount(item)} style={{outline:'none',fontWeight:'bold',fontSize:'20px', marginLeft: "5px", width:'25px' }}>+</button>
-                  
+                    <button
+                      onClick={() => reduceAmount(item)}
+                      style={{
+                        outline: "none",
+                        fontWeight: "bold",
+                        fontSize: "20px",
+                        marginLeft: "25px",
+                        width: "25px",
+                      }}
+                    >
+                      -
+                    </button>
+                    <input
+                      readOnly
+                      onKeyDown={(e) => e.preventDefault()}
+                      defaultValue={item.amount}
+                      type="number"
+                      style={{
+                        borderRadius: "10px",
+                        border: "none",
+                        textAlign: "center",
+                        outline: "none",
+                        marginLeft: "5px",
+                        width: "100px",
+                      }}
+                    ></input>
+                    <button
+                      onClick={() => increaseAmount(item)}
+                      style={{
+                        outline: "none",
+                        fontWeight: "bold",
+                        fontSize: "20px",
+                        marginLeft: "5px",
+                        width: "25px",
+                      }}
+                    >
+                      +
+                    </button>
+
                     <input
                       type="submit"
                       value="Delete Product"
                       onClick={() => removeItem(item)}
-                      style={{ cursor:'pointer',border:'none', borderRadius:'10px',marginLeft:'25px',width: "150px" }}
+                      style={{
+                        cursor: "pointer",
+                        border: "none",
+                        borderRadius: "10px",
+                        marginLeft: "25px",
+                        width: "150px",
+                      }}
                     />
                   </div>
-
                 </div>
               );
             })}
 
-              <button className="clear" style = {{outline:'none',color: '#F0F0F0',marginLeft:'88%' , padding:'5px',width: '100px', border:'none', marginBottom:'10px'}}onClick={clear}>
-                Clear Cart
-              </button>
-              
+            <button
+              className="clear"
+              style={{
+                outline: "none",
+                color: "#F0F0F0",
+                marginLeft: "88%",
+                padding: "5px",
+                width: "100px",
+                border: "none",
+                marginBottom: "10px",
+              }}
+              onClick={clear}
+            >
+              Clear Cart
+            </button>
 
             <hr
               style={{
@@ -145,10 +235,16 @@ const ShoppingCart = () => {
               }}
             ></hr>
 
-
             <div className="checkout-container">
-            <h style={{ color: '#F0F0F0',fontSize: '20px', fontFamily:'OpenSans' }}>
-                <strong style={{fontFamily:'OpenSans'}}>Total:</strong> {cart.total} $
+              <h
+                style={{
+                  color: "#F0F0F0",
+                  fontSize: "20px",
+                  fontFamily: "OpenSans",
+                }}
+              >
+                <strong style={{ fontFamily: "OpenSans" }}>Total:</strong>{" "}
+                {cart.total} $
               </h>
               {currUser !== null ? (
                 <StripeCheckout
@@ -161,18 +257,33 @@ const ShoppingCart = () => {
                   token={onToken}
                   stripeKey={KEY}
                 >
-                  <Button style={{ marginLeft:'790%',outline:'none',color: '#F0F0F0',width: "100px", padding:'5px', border:'none'}}>CHECKOUT</Button>
+                  <Button
+                    style={{
+                      marginLeft: "790%",
+                      outline: "none",
+                      color: "#F0F0F0",
+                      width: "100px",
+                      padding: "5px",
+                      border: "none",
+                    }}
+                  >
+                    CHECKOUT
+                  </Button>
                 </StripeCheckout>
               ) : (
                 <Button
                   href="/signin"
-                  style={{outline:'none',marginLeft: "25px", width: "100px", padding:'5px', border:'solid' }}
+                  style={{
+                    outline: "none",
+                    marginLeft: "25px",
+                    width: "100px",
+                    padding: "5px",
+                    border: "solid",
+                  }}
                 >
                   CHECKOUT
                 </Button>
               )}
-
-
             </div>
           </div>
         </div>
