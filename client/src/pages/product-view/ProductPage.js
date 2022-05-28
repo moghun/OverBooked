@@ -25,12 +25,12 @@ const DetailsThumb = () => {
   console.log(approvedComments);
   const getUserInfo = async () => {
     var names = [];
+
     for (let i = 0; i < approvedComments.length; i++) {
       try {
         var userId = approvedComments[i].user_id;
         const res = await axios.get(
-          "http://localhost:5001/api/users/getUsername/" + userId,
-          { headers: { token: "Bearer " + currUser.accessToken } }
+          "http://localhost:5001/api/users/getUsername/" + userId
         );
         names.push(res.data);
       } catch (err) {}
@@ -38,8 +38,10 @@ const DetailsThumb = () => {
     setUsernames(names);
   };
   useEffect(async () => {
-    getUserInfo();
-  }, [approvedComments.length > 0]);
+    if (approvedComments.length > 0) {
+      getUserInfo();
+    }
+  }, [approvedComments]);
 
   async function getUserCart() {
     try {
@@ -50,6 +52,7 @@ const DetailsThumb = () => {
       return res.data.cart;
     } catch (err) {}
   }
+
   function getComment(val) {
     setComment(val.target.value);
   }
@@ -125,6 +128,7 @@ const DetailsThumb = () => {
     const getProduct = async () => {
       try {
         const res = await publicRequest.get("/products/find/" + id);
+        console.log("hasdfhhasdfh",res.data.comments);
         setProduct(res.data);
         setapprovedComments(
           res.data.comments.filter((c) => c.isApproved === true)
