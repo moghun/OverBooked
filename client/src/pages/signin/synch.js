@@ -40,9 +40,17 @@ const Synch = () => {
   };
 
   const addCartAPI = async (product_id, amount) => {
+    let userCart = await getUserCart();
+    let oldAmount = 0;
+    for (let i = 0; i < userCart.length; i++) {
+      if (userCart[i].product_id == product_id) {
+        oldAmount = userCart[i].amount;
+      }
+    }
+    const newAmount = amount + oldAmount;
     const cartStruct = {
       product_id: product_id,
-      amount: amount,
+      amount: newAmount,
     };
     try {
       await axios.put(
