@@ -24,6 +24,7 @@
     "mongoose": "^6.2.10",
     "mongoose-double": "^0.0.1",
     "react-select": "^5.3.2",
-    "react-slick": "^0.29.0"
+    "react-slick": "^0.29.0",
+    "react-to-print": "^2.14.7"
   }
 }

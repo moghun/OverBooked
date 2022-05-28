@@ -5,10 +5,9 @@ import PrintIcon from '@mui/icons-material/Print';
 import DownloadIcon from '@mui/icons-material/Download';
 import TextField from "@material-ui/core/TextField";
 import { Container } from "@mui/material";
-import { DataGrid } from '@mui/x-data-grid';
+import { DataGrid ,GridActionsCellItem} from '@mui/x-data-grid';
 
 function InvoicesPage(){
-
 
     const [starting, setStarting] = useState(null);
     const [ending, setEnding] = useState(null);
@@ -46,6 +45,39 @@ function InvoicesPage(){
           }
       ]
 
+      const [filtered, setFiltered] = useState(rows);
+      
+
+      function clearFilter(){
+        setStarting(null);
+        setEnding(null);
+        setFiltered(rows);
+      }
+
+      function checkDate(date) {
+        return ((starting <= date) && (date <= ending));
+      }
+  
+      function filterDate() {
+        if((starting > ending) || starting === null || ending === null){
+          alert("Invalid")
+        }
+        else{
+          
+          setFiltered(
+            rows.filter((item) => checkDate(item.date))
+          )
+          console.log(filtered)
+          //alert(ending + starting)
+        }
+      }
+
+      /*
+      function alertInfo(item){
+        alert("Date: " + item.date + "\nID: " + item.id + "\nFullName: " + item.fullName);
+      }
+      */
+
 
       const columns = [
         { field: 'id', headerName: 'Invoice ID', width: 150, sortable:false, disableColumnMenu:true},
@@ -58,7 +90,7 @@ function InvoicesPage(){
             disableColumnMenu:true,
             renderCell: (params) => {
 
-            return(<> <Button onClick={()=> {alert("Print")}} style = {{width: '100px',fontFamily: "OpenSans"}} variant="outlined" startIcon={<PrintIcon />}>
+            return(<> <Button style = {{outline:'none',width: '100px',fontFamily: "OpenSans"}} variant="outlined" startIcon={<PrintIcon />}>
             Print
             </Button></>);
             },
@@ -70,24 +102,22 @@ function InvoicesPage(){
           disableColumnMenu:true,
           renderCell: (params) => {
 
-            return(<> <Button onClick={()=> {alert("Save")}} style = {{width: '100px',fontFamily: "OpenSans"}} variant="outlined" startIcon={<DownloadIcon />}>
+            return(<> <Button onClick={(params)=> {window.print()}} style = {{outline:'none',width: '100px',fontFamily: "OpenSans"}} variant="outlined" startIcon={<DownloadIcon />}>
             Save
             </Button></>);
           },
         },
       ];
 
-
     return (
         <div style={{width: '60%', marginLeft:'20%'}}>
-
+          <form>
           <TextField
-              
               id="startdate"
               InputProps={{ inputProps: { min: 0, max: 100 } }}
               label="Starting Date"
               margin="normal"
-              style={{width:'40%', marginLeft:'10%', marginRight:'5%'}}
+              style={{width:'30%', marginLeft:'5%', marginRight:'5%'}}
               onChange = {(e) => {setStarting(e.target.value)}}
             />
             <TextField
@@ -97,11 +127,19 @@ function InvoicesPage(){
               onChange = {(e) => {setEnding(e.target.value)}}
               label="Ending Date"
               margin="normal"
-              style={{width:'40%'}}
+              style={{width:'30%'}}
             />
+            
+            <Button onClick = {filterDate} style={{outline:'none',marginTop:'24px', marginLeft:'15px'}} color="primary" variant="contained">
+              Filter
+            </Button>
+            <Button  type= 'reset' onClick={clearFilter} style={{outline:'none',marginTop:'24px', marginLeft:'15px'}} color="primary" variant="contained">
+              Clear
+            </Button>
+          </form>
           <Container sx={{height: 460}}>
               <DataGrid
-              rows={rows}
+              rows={filtered}
               columns={columns}
               pageSize={5}
               headerHeight={75}
@@ -114,47 +152,3 @@ function InvoicesPage(){
 }
 
 export default InvoicesPage
-
-
-/*
-
-            <input type='date'></input>
-            <input type='date'></input>
-            <input type='submit' value="Sort"></input>
-            <table>
-                <thead>
-                    <tr>
-                    <th style={{fontFamily: "OpenSans"}}>Receiver</th>
-                    <th style={{fontFamily: "OpenSans"}}>Invoice ID</th>
-                    <th style={{fontFamily: "OpenSans"}}>Date</th>
-                    <th style={{fontFamily: "OpenSans"}}>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-
-                    {mock.map((data) => {
-                        return(                        
-                        <tr>
-                            <td style={{fontFamily: "OpenSans"}}>{data.fullName}</td>
-                            <td style={{fontFamily: "OpenSans"}}>{data.id}</td>
-                            <td style={{fontFamily: "OpenSans"}}>{data.date}</td>
-                            <td>
-                                <div>
-                                    <Button style = {{width: '100px',fontFamily: "OpenSans"}} variant="outlined" startIcon={<PrintIcon />}>
-                                    Print
-                                    </Button>
-                                </div>
-                                <div>
-                                    <Button style = {{width: '100px',fontFamily: "OpenSans"}} variant="outlined" startIcon={<DownloadIcon />}>
-                                    Save
-                                    </Button>
-                                </div>
-                            </td>
-                            
-                        </tr>);
-
-                    })}
-
-                </tbody>
-            </table>
-*/
