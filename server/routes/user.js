@@ -72,6 +72,11 @@ router.get("/", verifyTokenAndManager, async (req, res) => {
 //ADD TO CART
 router.put("/addToCart/:id", verifyToken, async (req, res) => {
   try {
+    let product_update = { product_id: req.body.product_id };
+    await User.findByIdAndUpdate(req.params.id, {
+      $pull: { cart: product_update },
+    });
+
     const updatedUser = await User.findByIdAndUpdate(
       req.params.id,
       {
