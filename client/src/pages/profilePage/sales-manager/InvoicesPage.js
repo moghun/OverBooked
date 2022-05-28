@@ -1,12 +1,17 @@
-import React from 'react'
+import React,{useState} from 'react'
 import './invoce.css';
 import Button from '@material-ui/core/Button';
 import PrintIcon from '@mui/icons-material/Print';
 import DownloadIcon from '@mui/icons-material/Download';
+import TextField from "@material-ui/core/TextField";
 import { Container } from "@mui/material";
 import { DataGrid } from '@mui/x-data-grid';
 
 function InvoicesPage(){
+
+
+    const [starting, setStarting] = useState(null);
+    const [ending, setEnding] = useState(null);
 
     const rows = [
         {
@@ -53,7 +58,7 @@ function InvoicesPage(){
             disableColumnMenu:true,
             renderCell: (params) => {
 
-            return(<> <Button style = {{width: '100px',fontFamily: "OpenSans"}} variant="outlined" startIcon={<PrintIcon />}>
+            return(<> <Button onClick={()=> {alert("Print")}} style = {{width: '100px',fontFamily: "OpenSans"}} variant="outlined" startIcon={<PrintIcon />}>
             Print
             </Button></>);
             },
@@ -65,7 +70,7 @@ function InvoicesPage(){
           disableColumnMenu:true,
           renderCell: (params) => {
 
-            return(<> <Button style = {{width: '100px',fontFamily: "OpenSans"}} variant="outlined" startIcon={<DownloadIcon />}>
+            return(<> <Button onClick={()=> {alert("Save")}} style = {{width: '100px',fontFamily: "OpenSans"}} variant="outlined" startIcon={<DownloadIcon />}>
             Save
             </Button></>);
           },
@@ -75,16 +80,35 @@ function InvoicesPage(){
 
     return (
         <div style={{width: '60%', marginLeft:'20%'}}>
-        <Container sx={{height: 460}}>
-            <DataGrid
-            rows={rows}
-            columns={columns}
-            pageSize={5}
-            headerHeight={75}
-            rowHeight={65}
-            disableSelectionOnClick
+
+          <TextField
+              
+              id="startdate"
+              InputProps={{ inputProps: { min: 0, max: 100 } }}
+              label="Starting Date"
+              margin="normal"
+              style={{width:'40%', marginLeft:'10%', marginRight:'5%'}}
+              onChange = {(e) => {setStarting(e.target.value)}}
             />
-        </Container>
+            <TextField
+              
+              id="enddate"
+              InputProps={{ inputProps: { min: 0, max: 100 } }}
+              onChange = {(e) => {setEnding(e.target.value)}}
+              label="Ending Date"
+              margin="normal"
+              style={{width:'40%'}}
+            />
+          <Container sx={{height: 460}}>
+              <DataGrid
+              rows={rows}
+              columns={columns}
+              pageSize={5}
+              headerHeight={75}
+              rowHeight={65}
+              disableSelectionOnClick
+              />
+          </Container>
     </div>
     );
 }

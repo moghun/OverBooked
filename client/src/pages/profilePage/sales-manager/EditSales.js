@@ -27,13 +27,6 @@ function EditSales() {
     console.log(rate);
   }
 
-  function addItem(item){
-    if(items.indexOf(item) === -1){
-      items.push(item);
-      console.log(items);
-    }
-  }
-
   useEffect(() => {
     const getProduct = async () => {
       try {
@@ -51,7 +44,7 @@ function EditSales() {
       <div style={{ display: "flex", justifyContent: "center" }}>
         <Card>
           <CardContent>
-            <Typography variant="h6" style={{marginLeft:'30%'}}>Edit Sales</Typography>
+            <Typography variant="h6" style={{marginLeft:'25%'}}>Edit Sales</Typography>
             <br/>
             
             <select onClick={(e) => setProduct(e.target.value)} style={{width:'100%'}}>
@@ -62,8 +55,11 @@ function EditSales() {
             <br/>
 
             <TextField
+              
               id="discountrate"
-              type="discountrate"
+              type="number"
+              InputProps={{ inputProps: { min: 0, max: 100 } }}
+              onKeyDown={(e) => e.preventDefault()}
               label="Discount Rate"
               margin="normal"
               onChange={handleChange}
@@ -73,14 +69,11 @@ function EditSales() {
           </CardContent>
 
           <CardActions>
-            <Button color="primary" variant="contained" >
+            <Button color="primary" variant="contained" onClick={()=>{alert(product + " " + rate)}}>
               Submit
             </Button>
             <Button color="secondary" href="/profile" variant="contained">
               Cancel
-            </Button>
-            <Button color="primary" variant="contained" style={{marginLeft:'10px'}} onClick={() => {addItem(product)}}>
-              Add
             </Button>
           </CardActions>
         </Card>
