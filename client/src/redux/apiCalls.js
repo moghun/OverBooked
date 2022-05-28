@@ -7,6 +7,7 @@ export const login = async (dispatch, user) => {
     const res = await publicRequest.post("/auth/login", user);
     dispatch(loginSuccess(res.data));
     alert("You are successfuly logged in");
+    window.location.href = "/synch";
   } catch (err) {
     dispatch(loginFailure());
     alert("Wrong email or password");
