@@ -1,11 +1,12 @@
+import 'package:mobile/pages/search_page.dart';
 import 'package:mobile/services/product_service.dart';
 import 'package:mobile/utils/dimensions.dart';
 import 'package:mobile/utils/styles.dart';
-import 'package:mobile/views/main_app_bar.dart';
-import 'package:mobile/views/product_preview.dart';
+import 'package:mobile/components/main_app_bar.dart';
+import 'package:mobile/components/product_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile/models/product.dart';
-import '../views/side_drawer.dart';
+import '../components/side_drawer.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -16,6 +17,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final ProductService _productService = ProductService();
+  String _search="";
 
   @override
   void initState() {
@@ -38,8 +40,15 @@ class _HomePageState extends State<HomePage> {
             Padding(
               padding: const EdgeInsets.all(12.0),
               child: Row(children: [
-                Expanded(child: TextFormField()),
-                IconButton(onPressed: () {}, icon: const Icon(Icons.search))
+                Expanded(child: TextFormField(onChanged: (value) { setState(() { _search = value; }); },)),
+                IconButton(onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => SearchPage(
+                            query: _search,
+                          )));
+                }, icon: const Icon(Icons.search))
               ]),
             ),
             const SizedBox(

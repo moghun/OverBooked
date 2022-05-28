@@ -4,20 +4,26 @@ import 'package:mobile/services/cart_service.dart';
 import 'package:mobile/services/user_service.dart';
 import 'package:mobile/utils/dimensions.dart';
 import 'package:mobile/utils/styles.dart';
-import 'package:mobile/views/cart_preview.dart';
-import 'package:mobile/views/main_app_bar.dart';
+import 'package:mobile/components/cart_preview.dart';
+import 'package:mobile/components/main_app_bar.dart';
 
-class Cart extends StatefulWidget {
-  const Cart({Key? key}) : super(key: key);
+class CartPage extends StatefulWidget {
+  const CartPage({Key? key}) : super(key: key);
 
   @override
-  State<Cart> createState() => _CartState();
+  State<CartPage> createState() => _CartPageState();
 }
 
-class _CartState extends State<Cart> {
+class _CartPageState extends State<CartPage> {
 
   final CartService _cartService = CartService();
   final User? user = UserService.getCurrentUser();
+
+  @override
+  void initState() {
+    super.initState();
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -65,6 +71,10 @@ class _CartState extends State<Cart> {
                                                 const SizedBox(width: 8)
                                               ])),
                                         ),
+                                        const SizedBox(height: 12,),
+                                        OutlinedButton(onPressed: (){
+                                          _cartService.purchaseCart(snapshot.data!);
+                                        }, child: const Text("Buy your cart")),
                                       ],
                                     ),
                                   ),

@@ -100,7 +100,7 @@ router.get("/find/:userId", async (req, res) => {
 });
 
 //SEND RECEPIT
-router.post("/sendRecepit/:orderid", async (req, res) => {
+router.post("/sendRecepit", verifyToken, async (req, res) => {
   try {
     client
       .send({
@@ -114,11 +114,13 @@ router.post("/sendRecepit/:orderid", async (req, res) => {
         },
         templateId: "d-9eeb7db78dff4ac384f3d2bf511cdf1a",
         dynamicTemplateData: {
+          invoice_id: req.body.invoice_id,
           username: req.body.username,
+          name: req.body.username,
+          surname: req.body.username,
           email: req.body.email,
           cost: req.body.cost,
           products: req.body.products,
-          order_id: req.params.orderid,
         },
       })
       .then();
