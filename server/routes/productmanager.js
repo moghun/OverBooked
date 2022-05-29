@@ -63,5 +63,16 @@ router.post("/changestock",verifyTokenAndProductManager, async(req,res) => {
 
 });
 
+//GET INVOICES
+router.get("/getinvoices",verifyTokenAndProductManager,async(req,res)=>{
+    try{
+        const orders = Order.find({where:{status:"Tranship"}});
+        const invoices = orders.invoice;
+        res.status(200).json(invoices);
+    } catch (err){
+        res.status(500).json(err);
+    }
+    
+});
 
 module.exports = router;
