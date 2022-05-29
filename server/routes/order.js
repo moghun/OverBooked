@@ -89,7 +89,7 @@ router.put("/:id", verifyTokenAndUser, async (req, res) => {
 });
 
 //DELETE
-router.delete("/:id/:oid", verifyToken, async (req, res) => {
+router.delete("/:id/:oid", verifyTokenOrManager, async (req, res) => {
   try {
     const deleteOrder = await Order.find({ _id: req.params.oid });
     const books = deleteOrder[0].bought_products;
