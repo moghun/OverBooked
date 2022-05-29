@@ -1,4 +1,5 @@
 const Product = require("../models/product_dbmod");
+const Order = require("../models/order_dbmod");
 const {
   verifyToken,
   verifyTokenAndUser,
@@ -6,7 +7,7 @@ const {
   verifyTokenAndManager,
   verifyTokenAndProductManager,  
 } = require("./verifyToken");
-const Order = require("../models/order_dbmod");
+
 const router = require("express").Router();
 
 
@@ -18,11 +19,10 @@ router.post("/changestatus", verifyTokenAndProductManager, async (req, res) => {
     const gstatus = req.body.status;
 
 
-
     try{
         const order = await Order.findById(o_id);
         if(!order){
-            return res.status(401).json("There is no order with given ID!");
+            return res.status(400).json("There is no order with given ID!");
         }
         order.status = gstatus;
         await order.save();
@@ -31,9 +31,37 @@ router.post("/changestatus", verifyTokenAndProductManager, async (req, res) => {
         return res.status(500).json(err);
     }
 
-
-
-
   });
 
-  module.exports = router;
+
+//CHANGE STOCK
+
+router.post("/changestock",verifyTokenAndProductManager, async(req,res) => {
+    const p_id = req.body.product_id;
+    const stock = req.body.stock;
+
+    try{
+        const product = await Product.findById(p_id);
+
+        if(!product){
+            return res.status(400).json("There is no product with given ID!");
+        }
+
+        if(!parseInt(stock) || stock < 0)
+        {   
+            return res.status(400).json("Stock is not integer!");
+        }
+
+        product.amount = stock;
+        await product.save();
+        return res.status(200).json("Stock is updated!");
+
+    }catch(err){
+        return res.status(500).json(err);
+    }
+
+
+});
+
+
+module.exports = router;
