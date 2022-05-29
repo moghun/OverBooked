@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:mobile/routes/homepage.dart';
-import 'package:mobile/routes/log_in.dart';
-import 'package:mobile/routes/cart.dart';
-import 'package:mobile/routes/profile.dart';
+import 'package:mobile/pages/home_page.dart';
+import 'package:mobile/pages/login_page.dart';
+import 'package:mobile/pages/cart_page.dart';
+import 'package:mobile/pages/profile_page.dart';
 import 'package:mobile/services/user_service.dart';
 
 class Home extends StatefulWidget {
@@ -15,9 +15,9 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   var routes = [
     const HomePage(),
-    const Cart(),
-    const Profile(),
-    const LogIn(),
+    const CartPage(),
+    const ProfilePage(),
+    const LoginPage(),
   ];
 
   //BottomNavigation

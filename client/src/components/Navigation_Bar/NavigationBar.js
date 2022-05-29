@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { logout } from "../../redux/apiCalls";
+import { clearCart } from "../../redux/cartRedux";
 import { Button } from "@material-ui/core";
 const NavigationBar = () => {
   const currUser = useSelector((state) => state.user.currentUser);
@@ -11,11 +12,11 @@ const NavigationBar = () => {
 
   const handleClick = () => {
     logout(dispatch, currUser);
+    dispatch(clearCart());
   };
 
   const onValueChange = (event) => {
     setSearchValue(event.target.value);
-    console.log(event.target.value);
   };
 
   return (
