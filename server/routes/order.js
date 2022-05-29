@@ -25,6 +25,26 @@ async function updateStock(id, quantity) {
   await product.save({ validateBeforeSave: false });
 }
 
+async function increaseStock(id, quantity) {
+  const product = await Product.findById(id);
+
+  const weight = product.amount - quantity;
+  if (weight >= 0) {
+    product.amount += quantity;
+  }
+
+  await product.save({ validateBeforeSave: false });
+}
+
+async function increaseAmount(idArray, amountArray) {
+  for (let i = 0; i < idArray.length; i++) {
+    const id = idArray[i];
+    const increaseAmount = amountArray[i];
+
+    await increaseStock(id, increaseAmount);
+  }
+}
+
 async function reduceAmount(idArray, amountArray) {
   for (let i = 0; i < idArray.length; i++) {
     const id = idArray[i];
@@ -69,9 +89,14 @@ router.put("/:id", verifyTokenAndUser, async (req, res) => {
 });
 
 //DELETE
-router.delete("/:id", verifyTokenAndUser, async (req, res) => {
+router.delete("/:id/:oid", async (req, res) => {
   try {
-    await Order.findByIdAndDelete(req.params.id);
+    const deleteOrder = await Order.find({ _id: req.params.oid });
+    const books = deleteOrder[0].bought_products;
+    const amounts = deleteOrder[0].amounts;
+
+    increaseAmount(books, amounts);
+    await Order.findByIdAndDelete(req.params.oid);
     res.status(200).json("Order has been deleted...");
   } catch (err) {
     res.status(500).json(err);
