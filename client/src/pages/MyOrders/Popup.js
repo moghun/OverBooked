@@ -13,7 +13,10 @@ const Popup = (props) => {
   function deleteOrder() {
     try {
       axios.delete(
-        "http://localhost:5001/api/orders/" + currUser._id + "/" + id
+        "http://localhost:5001/api/orders/" + currUser._id + "/" + id,
+        {
+          headers: { token: "Bearer " + currUser.accessToken },
+        }
       );
       alert("Order Canceled");
     } catch (err) {
