@@ -75,7 +75,23 @@ class _HomePageState extends State<HomePage> {
               future: getAllBooks(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const CircularProgressIndicator();
+                  return Column(
+                    children: const [
+                      SizedBox(
+                        height: 121,
+                      ),
+                      SizedBox(
+                        child: CircularProgressIndicator(
+                          strokeWidth: 7,
+                        ),
+                        width: 70,
+                        height: 70,
+                      ),
+                      SizedBox(
+                        height: 121,
+                      ),
+                    ],
+                  );
                 } else if (snapshot.connectionState == ConnectionState.done) {
                   if (snapshot.hasError) {
                     return const Text('Error');
@@ -115,7 +131,23 @@ class _HomePageState extends State<HomePage> {
               future: getAllBooks(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const CircularProgressIndicator();
+                  return Column(
+                    children: const [
+                      SizedBox(
+                        height: 30,
+                      ),
+                      SizedBox(
+                        child: CircularProgressIndicator(
+                          strokeWidth: 7,
+                        ),
+                        width: 70,
+                        height: 70,
+                      ),
+                      SizedBox(
+                        height: 30,
+                      ),
+                    ],
+                  );
                 } else if (snapshot.connectionState == ConnectionState.done) {
                   if (snapshot.hasError) {
                     return const Text('Error');

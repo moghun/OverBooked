@@ -41,7 +41,8 @@ class _ProfilePageState extends State<ProfilePage> {
                         children: [
                           Expanded(
                             child: Container(
-                              decoration: BoxDecoration(color: Colors.blue, borderRadius: BorderRadius.circular(20)),
+                              decoration: BoxDecoration(
+                                  color: AppColors.background2, borderRadius: BorderRadius.circular(20)),
                               child: Column(
                                 children: [
                                   const SizedBox(
@@ -63,6 +64,30 @@ class _ProfilePageState extends State<ProfilePage> {
                                     user.username!,
                                     style: kHeadingTextStyle,
                                   ),
+                                  const SizedBox(
+                                    height: 12,
+                                  ),
+                                  Text(
+                                    user.email,
+                                    style: kButtonLightTextStyle,
+                                  ),
+                                  const SizedBox(
+                                    height: 12,
+                                  ),
+                                  Text(
+                                    "Name: " + (user.name ?? "no name"),
+                                    style: kButtonLightTextStyle,
+                                  ),
+                                  const SizedBox(
+                                    height: 12,
+                                  ),
+                                  Text(
+                                    "Surname: " + (user.surname ?? "no surname"),
+                                    style: kButtonLightTextStyle,
+                                  ),
+                                  const SizedBox(
+                                    height: 12,
+                                  ),
                                 ],
                               ),
                             ),
@@ -70,45 +95,39 @@ class _ProfilePageState extends State<ProfilePage> {
                         ],
                       ),
                     ),
-                    const SizedBox(
-                      height: 12,
-                    ),
-                    Text(
-                      user.email,
-                      style: kButtonLightTextStyle,
-                    ),
-                    const SizedBox(
-                      height: 12,
-                    ),
-                    Text(
-                      user.name ?? "no name",
-                      style: kButtonLightTextStyle,
-                    ),
-                    const SizedBox(
-                      height: 12,
-                    ),
-                    Text(
-                      user.surname ?? "no surname",
-                      style: kButtonLightTextStyle,
+                    Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: OutlinedButton(
+                                onPressed: () {
+                                  Navigator.push(context,
+                                      MaterialPageRoute(builder: (context) => const UserOrdersPage()));
+                                },
+                                child: const Text("My Orders")),
+                          ),
+                        ],
+                      ),
                     ),
                     const SizedBox(
                       height: 12,
                     ),
-                    OutlinedButton(
-                        onPressed: () {
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (context) => const UserOrdersPage()));
-                        },
-                        child: const Text("My Orders")),
-                    const SizedBox(
-                      height: 12,
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: OutlinedButton(
+                                onPressed: () {
+                                  UserService.removeUser();
+                                  Navigator.pushReplacementNamed(context, "/");
+                                },
+                                child: const Text("Log Out", style: TextStyle(fontSize: 18, color: AppColors.background),)),
+                          ),
+                        ],
+                      ),
                     ),
-                    OutlinedButton(
-                        onPressed: () {
-                          UserService.removeUser();
-                          Navigator.pushReplacementNamed(context, "/");
-                        },
-                        child: const Text("Log Out")),
                     const SizedBox(
                       height: 12,
                     ),
