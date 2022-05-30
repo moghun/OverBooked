@@ -57,10 +57,11 @@ const Success = () => {
         email: currentUser.email,
         username: currentUser.username,
         name: currentUser.name,
-        surname: currentUser.surname,
         cost: cart.total,
         products: cart.products,
         amount: cart.amount,
+        //        tax_id: currentUser.tax_id,
+        //        card_no: credit_card_no_here
       };
       await axios.post(
         "http://localhost:5001/api/orders/sendRecepit",
