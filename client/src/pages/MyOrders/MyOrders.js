@@ -4,6 +4,8 @@ import { useSelector } from "react-redux";
 import axios from "axios";
 import Popup from "./Popup";
 import { publicRequest } from "../requestMethods";
+import CancelPopup from "./CancelPopUp";
+
 const MyOrders = () => {
   const currUser = useSelector((state) => state.user.currentUser);
 
@@ -13,6 +15,8 @@ const MyOrders = () => {
   const [productNames, setProductNames] = useState([]);
   const [isNamesSet, setNames] = useState(false);
   const [popupOpen, setPopup] = useState(false);
+  const [cancelpopup, setCancelPopUp] = useState(false);
+
 
   const togglePopup = (key) => {
     if (key !== index && index !== null && isOpen === true) {
@@ -27,6 +31,7 @@ const MyOrders = () => {
       setIsOpen(!isOpen);
     }
   };
+
   async function getProductName() {
     var products = [];
     for (let i = 0; i < orders.length; i++) {
@@ -46,6 +51,10 @@ const MyOrders = () => {
     setPopup(!popupOpen);
   };
 
+  const openCancel = () => {
+    setCancelPopUp(!cancelpopup);
+  }
+
   const getOrders = async () => {
     const userStruct = { buyer_email: currUser.email };
     try {
@@ -60,13 +69,14 @@ const MyOrders = () => {
   useEffect(() => {
     getOrders();
   }, [currUser]);
+  
   useEffect(() => {
     getProductName();
     setNames(true);
   }, [orders.length > 0, !isNamesSet]);
 
   function orderStatus(item) {
-    if (item === "delivered") {
+    if (item === "Delivered") {
       return (
         <input
           disabled="disabled"
@@ -83,7 +93,7 @@ const MyOrders = () => {
           readonly
         ></input>
       );
-    } else if (item === "in-transit") {
+    } else if (item === "In-transit") {
       return (
         <input
           disabled="disabled"
@@ -119,6 +129,29 @@ const MyOrders = () => {
       );
     }
   }
+
+
+  function cancelRefund(item, date){
+    var orderdate = new Date(date);
+    var today = new Date();
+    var difference = today.getTime() - orderdate.getTime();
+    var days = Math.floor(difference / (1000 * 3600 * 24));
+
+    if(item === "Delivered" && (days <= 30)){
+      return(
+      <button onClick={openPopup} style={{ borderRadius: "5px", backgroundColor: "lightgray", marginLeft: "10px", padding: "5px",}}>
+        Refund
+      </button>
+    )}
+    
+    else if(item === "Processing"){ 
+      return(
+      <button onClick={openCancel} style={{ borderRadius: "5px", backgroundColor: "lightgray", marginLeft: "10px", padding: "5px",}}>
+        Cancel
+      </button>
+      )} 
+    }
+  
 
   return (
     <div className="orders-holder">
@@ -164,7 +197,7 @@ const MyOrders = () => {
                         >
                           Order Date:{" "}
                         </h>
-                        <h style={{ marginLeft: "25px" }}>{order.updatedAt}</h>
+                        <h style={{ marginLeft: "25px" }}>{order.updatedAt.substring(0,order.updatedAt.indexOf("T"))}</h>
                         {orderStatus(order.status)}
                         <h style={{ marginLeft: "15px", fontSize: "16px" }}>
                           <strong>Total:</strong> {order.cost} USD
@@ -182,31 +215,7 @@ const MyOrders = () => {
                         >
                           Details
                         </button>
-                        {order.status === "Delivered" ? (
-                          <button
-                            onClick={openPopup}
-                            style={{
-                              borderRadius: "5px",
-                              backgroundColor: "lightgray",
-                              marginLeft: "10px",
-                              padding: "5px",
-                            }}
-                          >
-                            Refund
-                          </button>
-                        ) : (
-                          <button
-                            onClick={openPopup}
-                            style={{
-                              borderRadius: "5px",
-                              backgroundColor: "lightgray",
-                              marginLeft: "10px",
-                              padding: "5px",
-                            }}
-                          >
-                            Cancel
-                          </button>
-                        )}
+                        {cancelRefund(order.status, order.updatedAt)}
                       </div>
                       <div>
                         <hr
@@ -265,7 +274,7 @@ const MyOrders = () => {
                       >
                         Order Date:{" "}
                       </h>
-                      <h style={{ marginLeft: "25px" }}>{order.updatedAt}</h>
+                      <h style={{ marginLeft: "25px" }}>{order.updatedAt.substring(0,order.updatedAt.indexOf("T"))}</h>
                       {orderStatus(order.status)}
                       <h style={{ marginLeft: "15px", fontSize: "16px" }}>
                         <strong>Total:</strong> {order.cost} USD
@@ -283,33 +292,14 @@ const MyOrders = () => {
                       >
                         Details
                       </button>
-                      {order.status === "Delivered" ? (
-                        <button
-                          onClick={openPopup}
-                          style={{
-                            borderRadius: "5px",
-                            backgroundColor: "lightgray",
-                            marginLeft: "10px",
-                            padding: "5px",
-                          }}
-                        >
-                          Refund
-                        </button>
-                      ) : (
-                        <button
-                          onClick={openPopup}
-                          style={{
-                            borderRadius: "5px",
-                            backgroundColor: "lightgray",
-                            marginLeft: "10px",
-                            padding: "5px",
-                          }}
-                        >
-                          Cancel
-                        </button>
-                      )}
+                      {cancelRefund(order.status, order.updatedAt)}
                       {popupOpen ? (
-                        <Popup id={orders[i]._id} handleClose={openPopup} />
+                        <Popup handleClose={openPopup} />
+                      ) : (
+                        ""
+                      )}
+                      {cancelpopup ? (
+                        <CancelPopup handleClose={openCancel} />
                       ) : (
                         ""
                       )}
@@ -323,6 +313,6 @@ const MyOrders = () => {
       </div>
     </div>
   );
-};
+}
 
 export default MyOrders;
