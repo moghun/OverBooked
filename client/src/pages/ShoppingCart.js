@@ -12,6 +12,7 @@ import { Button } from "@material-ui/core";
 import axios from "axios";
 import { publicRequest } from "./requestMethods";
 import { addProduct } from "../redux/cartRedux";
+import { toast } from "react-toastify";
 
 const KEY = process.env.REACT_APP_STRIPE;
 
@@ -78,11 +79,14 @@ const ShoppingCart = () => {
   const removeItem = (item) => {
     dispatch(removeProduct(item));
     removeFromCartAPI(item._id);
+    toast.success("Selected product has been deleted", {position: toast.POSITION.TOP_CENTER});
+    console.log("calısıyo keriz");
   };
 
   const clear = () => {
     dispatch(clearCart());
     clearCartAPI();
+    toast.success("All shopping cart has been deleted", {position: toast.POSITION.TOP_CENTER});
   };
 
   const [stripeToken, setStripeToken] = useState(null);

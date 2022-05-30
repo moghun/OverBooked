@@ -78,6 +78,7 @@ const Success = () => {
       const orderStruct = {
         buyer_email: currentUser.email,
         status: "Processing",
+        payment_method: data.payment_method,
         cost: cart.total,
         date: Date.now(),
         bought_products: idArray,

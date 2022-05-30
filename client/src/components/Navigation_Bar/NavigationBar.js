@@ -1,14 +1,23 @@
 import "./NavigationBar.css";
+import FavoriteIcon from '@material-ui/icons/Favorite';
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { logout } from "../../redux/apiCalls";
 import { clearCart } from "../../redux/cartRedux";
+import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
 import { Button } from "@material-ui/core";
+
+
+import Badge from '@material-ui/core/Badge'
+
+
+
 const NavigationBar = () => {
   const currUser = useSelector((state) => state.user.currentUser);
   const [searchValue, setSearchValue] = useState("");
   const dispatch = useDispatch();
+
 
   const handleClick = () => {
     logout(dispatch, currUser);
@@ -68,8 +77,16 @@ const NavigationBar = () => {
           </div>
         </a>
       ) : (
-        <div>
-          <a href="/profile" class="  item">
+        
+        <div class = "nav-row">
+
+          <Button variant="contained" style={{ color:"white" ,backgroundColor:"#e6b619", width: '60%'}} startIcon={<FavoriteIcon/>} href= "/wishlist">
+             MyWishlist
+             <Badge invisible={false} badgeContent= {0} color="secondary" style={{marginLeft: '10%'}}>
+            </Badge>
+          </Button>
+
+          <Button href="/profile" class="  item" variant="contained">
             <div class="group">
               <img
                 src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Google_account_icon.svg/803px-Google_account_icon.svg.png"
@@ -78,23 +95,15 @@ const NavigationBar = () => {
 
               <div class="detail">Account</div>
             </div>
-          </a>
-          <button
-            onClick={handleClick}
-            style={{
-              marginTop: "-10px",
-              marginLeft: "37px",
-              color: "white",
-              outline: "none",
-              marginTop: "-10px",
-            }}
-          >
-            Logout
-          </button>
+          </Button>
+
+          <Button variant="contained" style={{ color:"white" ,backgroundColor:"#e6b619"}} startIcon={<PowerSettingsNewIcon/>} onClick={handleClick}>
+           Logout
+        </Button>
         </div>
       )}
 
-      <Button href="/shoppingcart" class="item">
+      <Button href="/shoppingcart" class="item" variant="contained">
         <div class="group">
           <img
             class="cart"
@@ -104,7 +113,10 @@ const NavigationBar = () => {
 
           <div class="detail">
             Shopping
-            <div class="sub">Cart</div>
+            <div class="sub">Cart
+            <Badge invisible={false} badgeContent={0} color="secondary" style={{marginLeft: '20%'}}>
+            </Badge>
+            </div>
           </div>
         </div>
       </Button>
