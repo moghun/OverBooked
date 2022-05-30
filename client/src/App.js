@@ -55,6 +55,10 @@ function App() {
             <Route path="/success" element={<Success />} />
             <Route path="/synch" element={<Synch />} />
             <Route path="/wishlist" element={<Wishlist />} />
+            <Route path="/productmanager" element={<ProductManager />} />
+            <Route path='/Invoices' element={<Invoices/>} />
+            <Route path="/removeproduct" element={<RemoveProduct />} />
+            <Route path="/updateproduct" element={<UpdateStock />} />
 
             <Route
               path="/approvaldisapproval"
