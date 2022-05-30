@@ -47,7 +47,6 @@ function App() {
             <Route path="/profile" element={<Profile />} />
             <Route path="/productpage/:id" element={<ProductPage />} />
             <Route path="/editprofile" element={<EditProfile />} />
-            <Route path="/createstore" element={<CreateStore />} />
             <Route path="/searchpage/:q" element={<SearchPage />} />
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/shoppingcart" element={<ShoppingCart />} />
