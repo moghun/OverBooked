@@ -294,12 +294,12 @@ const MyOrders = () => {
                       </button>
                       {cancelRefund(order.status, order.updatedAt)}
                       {popupOpen ? (
-                        <Popup id={orders[i]._id} handleClose={openPopup} />
+                        <Popup handleClose={openPopup} />
                       ) : (
                         ""
                       )}
                       {cancelpopup ? (
-                        <CancelPopup id={orders[i]._id} handleClose={openCancel} />
+                        <CancelPopup handleClose={openCancel} />
                       ) : (
                         ""
                       )}
