@@ -7,6 +7,7 @@ import { addProduct } from "../../redux/cartRedux";
 import { useDispatch } from "react-redux";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
 const { v1: uuidv1 } = require("uuid");
 
@@ -101,7 +102,7 @@ const DetailsThumb = () => {
             sendComment,
             { headers: { token: "Bearer " + currUser.accessToken } }
           );
-          alert("Your comment is sent for approve");
+          toast.success("Your comment has sent for approve", {position: toast.POSITION.TOP_CENTER});
           window.location.reload();
         } catch (err) {}
       }
@@ -152,7 +153,9 @@ const DetailsThumb = () => {
   const addCart = () => {
     dispatch(addProduct({ ...product, amount, maxAmount }));
     addCartAPI(product._id, amount);
-    alert("Product added to Cart");
+    toast.success("Your product has been added to your card", {position: toast.POSITION.TOP_CENTER});
+    
+    
   };
 
   return (

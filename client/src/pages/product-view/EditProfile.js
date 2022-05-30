@@ -21,7 +21,6 @@ const EditProfile = () => {
   });
 
   const clickSubmit = () => {
-    toast.success("User Updated Successfully");
 
     const update = {
       name: values.name || undefined,
@@ -35,7 +34,7 @@ const EditProfile = () => {
       axios.put("http://localhost:5001/api/users/" + currUser._id, update, {
         headers: { token: "Bearer " + currUser.accessToken },
       });
-      alert("You are updated successfuly");
+      toast.success("Your information has been updated successfully", {position: toast.POSITION.TOP_CENTER});
     } catch (err) {
       alert(err);
     }
