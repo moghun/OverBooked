@@ -13,6 +13,8 @@ import EditProfile from "./pages/product-view/EditProfile";
 import Checkout from "./pages/Checkout";
 import ShoppingCart from "./pages/ShoppingCart";
 import Success from "./pages/success";
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer,} from 'react-toastify'; 
 
 import SignUp from "./pages/signup/Signup";
 import Signin from "./pages/signin/Signin";
@@ -26,6 +28,7 @@ function App() {
   const user = useSelector((state) => state.user.currentUser);
   return (
     <BrowserRouter>
+    <ToastContainer style={{display: "flex", justifyContent: "center"}}/>
       <div>
         <NavigationBar />
       </div>

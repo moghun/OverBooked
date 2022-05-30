@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 import { logout } from "../../redux/apiCalls";
 import { clearCart } from "../../redux/cartRedux";
 import { Button } from "@material-ui/core";
+import { toast } from "react-toastify";
+
 const NavigationBar = () => {
   const currUser = useSelector((state) => state.user.currentUser);
   const [searchValue, setSearchValue] = useState("");
@@ -90,6 +92,7 @@ const NavigationBar = () => {
               marginTop: "-10px",
             }}
           >
+            {toast.success("Your information has been updated successfully", {position: toast.POSITION.TOP_CENTER})}
             Logout
           </button>
         </div>
