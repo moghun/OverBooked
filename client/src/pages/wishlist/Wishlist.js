@@ -130,7 +130,7 @@ const Wishlist = () => {
               name={list.name}
               imgurl={list.img}
               price={list.cost}
-              score={avgrating(list)}
+              // score={avgrating(list)}
             ></BookCard>
           ))
         )}
