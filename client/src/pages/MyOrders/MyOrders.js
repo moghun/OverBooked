@@ -93,7 +93,7 @@ const MyOrders = () => {
           readonly
         ></input>
       );
-    } else if (item === "in-transit") {
+    } else if (item === "In-transit") {
       return (
         <input
           disabled="disabled"
