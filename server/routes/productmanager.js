@@ -1,5 +1,6 @@
 const Product = require("../models/product_dbmod");
 const Order = require("../models/order_dbmod");
+const User = require("../models/user_dbmod");
 const {
   verifyToken,
   verifyTokenAndUser,
@@ -66,13 +67,30 @@ router.post("/changestock",verifyTokenAndProductManager, async(req,res) => {
 //GET INVOICES
 router.get("/getinvoices",verifyTokenAndProductManager,async(req,res)=>{
     try{
-        const orders = Order.find({where:{status:"Tranship"}});
-        const invoices = orders.invoice;
-        res.status(200).json(invoices);
+        const invoices = await User.find(
+            {$nor: [
+                {invoices: {$exists: false}},
+                {invoices: {$size: 0}},
+            ]}
+        );        
+        return res.status(200).json(invoices);
     } catch (err){
-        res.status(500).json(err);
+        return res.status(500).json(err);
     }
     
+});
+
+//ON DELIVERY
+router.get("/ondeliveries",verifyTokenAndProductManager,async(req,res)=>{
+    try{
+        const orders = await Order.find(
+           {status : "Tranship"}
+        );
+        return res.status(200).json(orders);
+    }catch(err){
+        return res.status(500).json(err);
+    }
+
 });
 
 module.exports = router;
