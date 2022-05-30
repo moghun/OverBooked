@@ -174,7 +174,7 @@ const ShoppingCart = () => {
                     <input
                       readOnly
                       onKeyDown={(e) => e.preventDefault()}
-                      defaultValue={item.amount}
+                      value={item.amount}
                       type="number"
                       style={{
                         borderRadius: "10px",
