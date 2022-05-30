@@ -28,6 +28,8 @@ import ProductManager from "./pages/ProductManager/ProductManager";
 import Invoices from "./pages/ProductManager/Invoices";
 import RemoveProduct from "./pages/ProductManager/RemoveProduct";
 import UpdateStock from "./pages/ProductManager/UpdateProduct";
+import Revenues from "./pages/profilePage/sales-manager/Revenues";
+import RemoveSale from "./pages/profilePage/sales-manager/RemoveSale";
 
 function App() {
   const user = useSelector((state) => state.user.currentUser);
@@ -66,8 +68,10 @@ function App() {
               element={<ProductManagerAPI />}
             />
             <Route path="*" element={<HomePage />} />
-            <Route path="/manager" element={<EditSales />} />
-            <Route path="/invoices" element={<InvoicesPage />} />
+            <Route path="/editsales" element={<EditSales />} />
+            <Route path="/removesales" element={<RemoveSale />} />
+            <Route path="/invoicessalesmanager" element={<InvoicesPage />} />
+            <Route path="/revenues" element={<Revenues />} />
           </>
         ) : (
           <>

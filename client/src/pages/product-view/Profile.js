@@ -7,11 +7,13 @@ import { Typography } from "@material-ui/core";
 import "./Profile.css";
 import { View,} from "react-native";
 
-
+import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import EditIcon from '@material-ui/icons/Edit';
 import PersonIcon from '@material-ui/icons/Person';
 import LocalMallIcon from '@material-ui/icons/LocalMall';
-
+import MailIcon from '@mui/icons-material/Mail';
+import TrendingUpIcon from '@mui/icons-material/TrendingUp';
+import SavingsIcon from '@mui/icons-material/Savings';
 
 
 import { useSelector } from "react-redux";
@@ -50,21 +52,15 @@ const Profile = () => {
         <a href="/myorders"> <LocalMallIcon/> My-Orders</a>
       );
     } else if (userrole === "product-manager") {
-<<<<<<< HEAD
-      return <Button className="btn3" href = "\approvaldisapproval"> Edit Product Panel </Button>;
-    } 
-    else if (userrole === "sales-manager") {
-      return(
-      <>
-      <Button className="btn3" href='/manager'> Edit Sales Panel </Button>
-      <Button className="btn3" href='/invoices'> Invoices Panel </Button>
-      <Button className="btn3"> Revenue Panel </Button>
-      </>);
-=======
       <a href="#"> <LocalMallIcon/> Product-Manager-Panel</a>
     } else if (userrole === "sales-manager") {
-      <a href="#"> <LocalMallIcon/> Sales-Manager-Panel</a>
->>>>>>> 0e7a9270aba64ede9732a3b90042936a0f9375d9
+      return(
+      <><a href="/editsales"> <LocalMallIcon/>Edit Sales</a>
+      <a href="/removesales"><RemoveCircleIcon/>Remove Sales</a>
+      <a href="/invoicessalesmanager"><MailIcon/>Invoices</a>
+      <a href="/revenues"><SavingsIcon/>Revenues</a>
+      </>
+      );
     }
   }
 

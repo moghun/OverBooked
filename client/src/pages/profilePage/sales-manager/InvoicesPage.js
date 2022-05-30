@@ -5,7 +5,7 @@ import PrintIcon from '@mui/icons-material/Print';
 import DownloadIcon from '@mui/icons-material/Download';
 import TextField from "@material-ui/core/TextField";
 import { Container } from "@mui/material";
-import { DataGrid ,GridActionsCellItem} from '@mui/x-data-grid';
+import { DataGrid } from '@mui/x-data-grid';
 
 function InvoicesPage(){
 
@@ -110,14 +110,14 @@ function InvoicesPage(){
       ];
 
     return (
-        <div style={{width: '60%', marginLeft:'20%'}}>
+        <div className="invoice-container" style={{width: '60%', marginLeft:'20%'}}>
           <form>
           <TextField
               id="startdate"
               InputProps={{ inputProps: { min: 0, max: 100 } }}
               label="Starting Date"
               margin="normal"
-              style={{width:'30%', marginLeft:'5%', marginRight:'5%'}}
+              style={{width:'25%', marginLeft:'5%', marginRight:'5%'}}
               onChange = {(e) => {setStarting(e.target.value)}}
             />
             <TextField
@@ -127,7 +127,7 @@ function InvoicesPage(){
               onChange = {(e) => {setEnding(e.target.value)}}
               label="Ending Date"
               margin="normal"
-              style={{width:'30%'}}
+              style={{width:'25%'}}
             />
             
             <Button onClick = {filterDate} style={{outline:'none',marginTop:'24px', marginLeft:'15px'}} color="primary" variant="contained">
@@ -136,8 +136,12 @@ function InvoicesPage(){
             <Button  type= 'reset' onClick={clearFilter} style={{outline:'none',marginTop:'24px', marginLeft:'15px'}} color="primary" variant="contained">
               Clear
             </Button>
+            <Button color="secondary" href="/profile" variant="contained" style={{outline:'none',marginTop:'24px', marginLeft:'15px'}} >
+              Cancel
+            </Button>
           </form>
-          <Container sx={{height: 460}}>
+          
+          <Container sx={{height: 500, width:800}}>
               <DataGrid
               rows={filtered}
               columns={columns}
@@ -147,7 +151,8 @@ function InvoicesPage(){
               disableSelectionOnClick
               />
           </Container>
-    </div>
+          
+        </div>
     );
 }
 

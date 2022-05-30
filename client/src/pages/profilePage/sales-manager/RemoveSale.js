@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
 
-function EditSales() {
+function RemoveSale() {
 
   const mylist = ["Apple",'Banana'];
   const items = [];
@@ -42,12 +42,12 @@ function EditSales() {
       <div style={{ display: "flex", justifyContent: "center" }}>
         <Card>
           <CardContent>
-            <Typography variant="h6" style={{marginLeft:'25%'}}>Edit Sales</Typography>
+            <Typography variant="h6" style={{marginLeft:'15%', fontFamily:'OpenSans'}}>Remove Sales</Typography>
             <br/>
             
-            <select onClick={(e) => setProduct(e.target.value)} style={{borderRadius:'5px',width:'100%', borderColor:'lightgray'}}>
-            <option value="none" selected disabled hidden>Select an Option</option>
-              {mylist.map((item) => {return(<option value = {item}>{item}</option>);})}
+            <select onClick={(e) => setProduct(e.target.value)} style={{borderRadius:'5px',width:'100%', borderColor:'lightgray', fontFamily:'OpenSans'}}>
+            <option style={{fontFamily:'OpenSans'}} value="none" selected disabled hidden>Select an Option</option>
+              {mylist.map((item) => {return(<option style={{fontFamily:'OpenSans'}} value = {item}>{item}</option>);})}
             </select>
 
             <br/>
@@ -67,10 +67,10 @@ function EditSales() {
           </CardContent>
 
           <CardActions>
-            <Button color="secondary" href="/profile" variant="contained">
+            <Button style={{fontFamily:'OpenSans'}} color="secondary" href="/profile" variant="contained">
               Cancel
             </Button>
-            <Button color="primary" variant="contained" onClick={()=>{alert(product + " " + rate)}}>
+            <Button style={{fontFamily:'OpenSans'}} color="primary" variant="contained" onClick={()=>{alert(product + " " + rate)}}>
               Submit
             </Button>
           </CardActions>
@@ -80,4 +80,4 @@ function EditSales() {
   );
 }
 
-export default EditSales
+export default RemoveSale
