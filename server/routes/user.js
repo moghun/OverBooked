@@ -1,4 +1,7 @@
 const User = require("../models/user_dbmod");
+const Product = require("../models/product_dbmod");
+let client = require("@sendgrid/mail");
+client.setApiKey(process.env.SENDGRID_API_KEY);
 const CryptoJS = require("crypto-js");
 
 const {
@@ -211,6 +214,42 @@ router.get("/getUsername/:id", async (req, res) => {
     const user = await User.findById(req.params.id);
     const { username, ...others } = user._doc;
     res.status(200).json(username);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+//NOTIFY USERS FOR SALE
+router.get("/saleNotification/:pid", async (req, res) => {
+  let inUsers = [];
+  try {
+    inUsers = await User.find({
+      wishlist: { $elemMatch: { product_id: req.params.pid } },
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+
+  try {
+    inUsers.forEach((user) => {
+      client
+        .send({
+          to: {
+            email: user.email,
+            name: user.username,
+          },
+          from: {
+            email: "overbookedstore1@gmail.com",
+            name: "overbooked",
+          },
+          templateId: "d-9eeb7db78dff4ac384f3d2bf511cdf1a",
+          dynamicTemplateData: {
+            email: req.body.name,
+          },
+        })
+        .then();
+    });
+    res.status(200).json(inUsers);
   } catch (err) {
     res.status(500).json(err);
   }
