@@ -20,6 +20,7 @@ import Synch from "./pages/signin/synch";
 import { useSelector } from "react-redux";
 import MyOrders from "./pages/MyOrders/MyOrders";
 import ProductManagerAPI from "./pages/profilePage/product-managerPage/product-managerProfile";
+import Wishlist from "./pages/wishlist/Wishlist";
 
 function App() {
   const user = useSelector((state) => state.user.currentUser);
@@ -47,6 +48,8 @@ function App() {
             <Route path="/myorders" element={<MyOrders />} />
             <Route path="/success" element={<Success />} />
             <Route path="/synch" element={<Synch />} />
+            <Route path="/wishlist" element={<Wishlist />} />
+
             <Route
               path="/approvaldisapproval"
               element={<ProductManagerAPI />}

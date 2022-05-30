@@ -10,6 +10,7 @@ const NavigationBar = () => {
   const [searchValue, setSearchValue] = useState("");
   const dispatch = useDispatch();
 
+
   const handleClick = () => {
     logout(dispatch, currUser);
     dispatch(clearCart());
