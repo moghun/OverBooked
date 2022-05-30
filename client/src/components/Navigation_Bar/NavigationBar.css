@@ -38,6 +38,13 @@
 
 }
 
+.nav-row {
+  display: flex;
+  flex-direction: row;         
+  flex-wrap: nowrap;              
+  justify-content: space-between;
+}
+
 .logo .text{
   margin-left: 75px;
 }
@@ -84,13 +91,13 @@
 
 .item .search-group {
   display:flex;
-  width: 100%;
+  width: 70%;
   max-width: 700px;
   border-radius: 20px;
   border: 2px solid grey;
   overflow: hidden;
   background: white;
-  
+  margin-right: 20%;
   border-color: white;
   color: var(--theme-color);
 
@@ -3255,6 +3262,13 @@ footer {
       font-size: 12px;
       text-decoration: none;
       font-weight: bold;
+      width: 80%;
+      margin-left: 10%;
+    }
+
+    .upper-container2:hover{
+      background: #00ff9996;
+
     }
 
 
