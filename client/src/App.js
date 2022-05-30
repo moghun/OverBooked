@@ -22,6 +22,7 @@ import { useSelector } from "react-redux";
 import MyOrders from "./pages/MyOrders/MyOrders";
 import ProductManagerAPI from "./pages/profilePage/product-managerPage/product-managerProfile";
 import Wishlist from "./pages/wishlist/Wishlist";
+import ProductManager from "./pages/ProductManager/ProductManager";
 
 function App() {
   const user = useSelector((state) => state.user.currentUser);
