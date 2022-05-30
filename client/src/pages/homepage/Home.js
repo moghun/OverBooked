@@ -160,8 +160,6 @@ const HomePage = () => {
 
   return (
     <div>
-      <ScrollToTop />
-
       <div className="some-container">
         <Button onClick={() => scrollToSection(gomoststarts)} className="btn">
           Check Recent Products
@@ -232,6 +230,7 @@ const HomePage = () => {
                 imgurl={AllSales.img}
                 publisher={AllSales.publisher}
                 price={AllSales.cost}
+                score={avgrating(AllSales)}
                 beforeprice={AllSales.before_sale_price}
               ></BookCard>)
           ))}

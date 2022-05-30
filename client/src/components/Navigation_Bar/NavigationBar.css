@@ -3510,3 +3510,30 @@ footer {
   background-color: burlywood;
   outline-color: goldenrod;
 }
+
+
+.top-btn-position {
+  position: fixed;
+  bottom: 15px;
+  right: 20px;
+  z-index: 3;
+}
+
+.top-btn-style {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  border: 2px solid #333;
+  background-color: rgb(255, 0, 0);
+  color: #333;
+  cursor: pointer;
+  z-index: 3;
+}
+
+.top-btn-style:hover {
+  animation: none;
+  background-color: #333;
+  color: rgb(0, 255, 217);
+  border: 2px solid #fff;
+  z-index: 3;
+}
