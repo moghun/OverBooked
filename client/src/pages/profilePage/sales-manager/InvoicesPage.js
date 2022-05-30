@@ -6,6 +6,7 @@ import DownloadIcon from '@mui/icons-material/Download';
 import TextField from "@material-ui/core/TextField";
 import { Container } from "@mui/material";
 import { DataGrid } from '@mui/x-data-grid';
+import { toast } from "react-toastify";
 
 function InvoicesPage(){
 
@@ -59,8 +60,11 @@ function InvoicesPage(){
       }
   
       function filterDate() {
-        if((starting > ending) || starting === null || ending === null){
-          alert("Invalid")
+        if(starting === null || ending === null){
+          toast.error("Date cannot be left empty!", {position: toast.POSITION.TOP_CENTER, autoClose:1500});
+        }
+        else if(starting > ending){
+          toast.error("Starting cannot be greater than ending!", {position: toast.POSITION.TOP_CENTER, autoClose:1500});
         }
         else{
           
