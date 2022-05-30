@@ -4,19 +4,17 @@ import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
-import { publicRequest } from "../../requestMethods";
-import React,{Component} from 'react';
+import React from 'react';
 import { useEffect, useState } from "react";
-import axios from "axios";
+import axios from "axios"
 import { useSelector } from "react-redux";
+import {toast} from 'react-toastify';
 
 function EditSales() {
-
-  const mylist = ["Apple",'Banana'];
-  const items = [];
+  const currUser = useSelector((state) => state.user.currentUser);
 
   const [rate, setRate] = useState(null);
-  const [product, setProduct] = useState(null);
+  const [index, setIndex] = useState(null);
   const [allproducts, setAll] = useState([]);
 
   function handleChange(event) {
@@ -24,30 +22,54 @@ function EditSales() {
     console.log(rate);
   }
 
-
   useEffect(() => {
-    const getProduct = async () => {
+    const getAllProducts = async () => {
       try {
-        const res = await publicRequest.get("/");
+        const res = await axios.get("http://localhost:5001/api/products?sale=false");
         setAll(res.data);
-      } catch {}
-    };
-    getProduct();
+      } catch (err) {}
+    }; 
+    getAllProducts();
   }, []);
 
-  console.log(allproducts)
+
+  const addSale = async () => {
+
+    try {
+      axios.put(
+        "http://localhost:5001/api/products/setSale/" + allproducts[index]._id, //Current products' ID here
+        {
+          cost: allproducts[index].cost, //Take current products' before_sale_cost here
+          perc: rate, //Give sale percentage here
+        },
+        {
+          headers: { token: "Bearer " + currUser.accessToken },
+        }
+      );
+      toast.success("Discount applied successfully!", {position: toast.POSITION.TOP_CENTER});
+      setTimeout(() => {window.location.reload()}, 1500)
+
+    } catch (err) {
+      toast.error("Discount cannot be applied!", {position: toast.POSITION.TOP_CENTER});
+      setTimeout(() => {window.location.reload()}, 1500)
+    }
+
+  }
+
+
+  console.log(allproducts);
 
   return (
     <div className="main-container">
       <div style={{ display: "flex", justifyContent: "center" }}>
         <Card>
           <CardContent>
-            <Typography variant="h6" style={{marginLeft:'25%'}}>Edit Sales</Typography>
+            <Typography variant="h6" style={{marginLeft:'30%'}}>Edit Sales</Typography>
             <br/>
             
-            <select onClick={(e) => setProduct(e.target.value)} style={{borderRadius:'5px',width:'100%', borderColor:'lightgray'}}>
+            <select onClick={(e) => setIndex(e.target.value)} style={{borderRadius:'5px',width:'100%', borderColor:'lightgray'}}>
             <option value="none" selected disabled hidden>Select an Option</option>
-              {mylist.map((item) => {return(<option value = {item}>{item}</option>);})}
+              {allproducts.map((item, i) => {return(<option value = {i}>{item.name}</option>);})}
             </select>
 
             <br/>
@@ -67,10 +89,10 @@ function EditSales() {
           </CardContent>
 
           <CardActions>
-            <Button color="secondary" href="/profile" variant="contained">
+            <Button color="secondary" href="/profile" variant="contained" style={{marginLeft:'20%'}}>
               Cancel
             </Button>
-            <Button color="primary" variant="contained" onClick={()=>{alert(product + " " + rate)}}>
+            <Button color="primary" variant="contained" onClick={()=>{addSale()}}>
               Submit
             </Button>
           </CardActions>

@@ -129,7 +129,7 @@ const ShoppingCart = () => {
     var amount = 1;
     var maxAmount = item.maxAmount;
     if (item.amount === item.maxAmount) {
-      alert("No more increase");
+      toast.error("You reached maximum amount possible!", {position: toast.POSITION.TOP_CENTER})
     } else {
       addCartAPI(item._id, amount);
       dispatch(addProduct({ ...item, amount, maxAmount }));

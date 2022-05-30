@@ -2,38 +2,52 @@ import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
-import { publicRequest } from "../../requestMethods";
-import React,{Component} from 'react';
+import React from 'react';
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
 function RemoveSale() {
 
-  const mylist = ["Apple",'Banana'];
-  const items = [];
+  const currUser = useSelector((state) => state.user.currentUser);
 
-  const [rate, setRate] = useState(null);
-  const [product, setProduct] = useState(null);
+  //const [product, setProduct] = useState(null);
+  //const [beforesalecost, setCost] = useState(null);
   const [allproducts, setAll] = useState([]);
-
-  function handleChange(event) {
-    setRate(event.target.value)
-    console.log(rate);
-  }
-
+  const [index, setIndex] = useState(null);
 
   useEffect(() => {
-    const getProduct = async () => {
+
+    const getSaleProducts = async () => {
       try {
-        const res = await publicRequest.get("/");
+        const res = await axios.get("http://localhost:5001/api/products?sale=true");
         setAll(res.data);
-      } catch {}
+      } catch (err) {}
     };
-    getProduct();
+    getSaleProducts();
   }, []);
+
+
+  const removeSale = async () => {
+    try {
+      axios.put(
+        "http://localhost:5001/api/products/stopSale/" + allproducts[index]._id, //Current products' ID here
+        { cost: allproducts[index].before_sale_price }, //Take current products' before_sale_cost here
+        {
+          headers: { token: "Bearer " + currUser.accessToken },
+        }
+
+      );
+      toast.success("Discount removed successfully!", {position: toast.POSITION.TOP_CENTER});
+      setTimeout(() => {window.location.reload()}, 1500)
+    } catch (err) {
+      toast.error("Discount cannot be removed!", {position: toast.POSITION.TOP_CENTER});
+      setTimeout(() => {window.location.reload()}, 1500)
+    }
+
+  }
 
   console.log(allproducts)
 
@@ -42,35 +56,22 @@ function RemoveSale() {
       <div style={{ display: "flex", justifyContent: "center" }}>
         <Card>
           <CardContent>
-            <Typography variant="h6" style={{marginLeft:'15%', fontFamily:'OpenSans'}}>Remove Sales</Typography>
+            <Typography variant="h6" style={{marginLeft:'15%',fontFamily:'OpenSans', marginRight:'15%'}}>Remove Sales</Typography>
             <br/>
             
-            <select onClick={(e) => setProduct(e.target.value)} style={{borderRadius:'5px',width:'100%', borderColor:'lightgray', fontFamily:'OpenSans'}}>
+            <select onClick={(e) => {setIndex(e.target.value);}} style={{borderRadius:'5px',width:'100%', borderColor:'lightgray', fontFamily:'OpenSans'}}>
             <option style={{fontFamily:'OpenSans'}} value="none" selected disabled hidden>Select an Option</option>
-              {mylist.map((item) => {return(<option style={{fontFamily:'OpenSans'}} value = {item}>{item}</option>);})}
+              {allproducts.map((item, i) => {return(<option style={{fontFamily:'OpenSans'}} value = {i}>{item.name}</option>);})}
             </select>
 
             <br/>
-
-            <TextField
-              
-              id="discountrate"
-              type="number"
-              InputProps={{ inputProps: { min: 0, max: 100 } }}
-              onKeyDown={(e) => e.preventDefault()}
-              label="Discount Rate"
-              margin="normal"
-              onChange={handleChange}
-              style={{width:'100%'}}
-            />
-            <br />
           </CardContent>
 
           <CardActions>
-            <Button style={{fontFamily:'OpenSans'}} color="secondary" href="/profile" variant="contained">
+            <Button style={{fontFamily:'OpenSans', marginLeft:'20%'}} color="secondary" href="/profile" variant="contained">
               Cancel
             </Button>
-            <Button style={{fontFamily:'OpenSans'}} color="primary" variant="contained" onClick={()=>{alert(product + " " + rate)}}>
+            <Button style={{fontFamily:'OpenSans',marginRight:'20%'}} color="primary" variant="contained" onClick={()=>{removeSale()}}>
               Submit
             </Button>
           </CardActions>
