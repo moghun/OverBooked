@@ -9,6 +9,8 @@ import { View,} from "react-native";
 import LocalAtmIcon from '@material-ui/icons/LocalAtm';
 import CommentIcon from '@material-ui/icons/Comment';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
+import RemoveCircleIcon from '@material-ui/icons/RemoveCircle';
+import SystemUpdateAltIcon from '@material-ui/icons/SystemUpdateAlt';
 
 const SideBar = () => {
 return (
@@ -43,6 +45,24 @@ return (
             <AddShoppingCartIcon/>
           </div>
           Add Product
+        </Nav.Link>
+      </Nav.Item>
+
+      <Nav.Item>
+        <Nav.Link href='/removeproduct' eventKey='c'>
+          <div className='iconwrap'>
+            <RemoveCircleIcon/>
+          </div>
+          Remove Product
+        </Nav.Link>
+      </Nav.Item>
+
+      <Nav.Item>
+        <Nav.Link href='/updateproduct' eventKey='c'>
+          <div className='iconwrap'>
+            <SystemUpdateAltIcon/>
+          </div>
+          Update Product
         </Nav.Link>
       </Nav.Item>
       <br />

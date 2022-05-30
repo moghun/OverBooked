@@ -7,6 +7,12 @@ import { logout } from "../../redux/apiCalls";
 import { clearCart } from "../../redux/cartRedux";
 import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
 import { Button } from "@material-ui/core";
+
+
+import Badge from '@material-ui/core/Badge'
+
+
+
 const NavigationBar = () => {
   const currUser = useSelector((state) => state.user.currentUser);
   const [searchValue, setSearchValue] = useState("");
@@ -74,8 +80,10 @@ const NavigationBar = () => {
         
         <div class = "nav-row">
 
-          <Button variant="contained" style={{ color:"white" ,backgroundColor:"#e6b619"}} startIcon={<FavoriteIcon/>} href= "/wishlist">
+          <Button variant="contained" style={{ color:"white" ,backgroundColor:"#e6b619", width: '60%'}} startIcon={<FavoriteIcon/>} href= "/wishlist">
              MyWishlist
+             <Badge invisible={false} badgeContent= {0} color="secondary" style={{marginLeft: '10%'}}>
+            </Badge>
           </Button>
 
           <Button href="/profile" class="  item" variant="contained">
@@ -105,7 +113,10 @@ const NavigationBar = () => {
 
           <div class="detail">
             Shopping
-            <div class="sub">Cart</div>
+            <div class="sub">Cart
+            <Badge invisible={false} badgeContent={0} color="secondary" style={{marginLeft: '20%'}}>
+            </Badge>
+            </div>
           </div>
         </div>
       </Button>

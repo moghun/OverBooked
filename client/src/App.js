@@ -24,6 +24,8 @@ import ProductManagerAPI from "./pages/profilePage/product-managerPage/product-m
 import Wishlist from "./pages/wishlist/Wishlist";
 import ProductManager from "./pages/ProductManager/ProductManager";
 import Invoices from "./pages/ProductManager/Invoices";
+import RemoveProduct from "./pages/ProductManager/RemoveProduct";
+import UpdateStock from "./pages/ProductManager/UpdateProduct";
 
 function App() {
   const user = useSelector((state) => state.user.currentUser);
