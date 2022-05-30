@@ -1,10 +1,9 @@
 import React from 'react';
 import {
   Nav,
-  NavItem,
-  NavIcon,
-  NavText,
 } from 'react-bootstrap';
+
+import { View,} from "react-native";
 
 
 import LocalAtmIcon from '@material-ui/icons/LocalAtm';
@@ -14,11 +13,11 @@ import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 const SideBar = () => {
 return (
     <div>
-      <Nav.Item>
-        <Nav.Link eventKey='disabled' disabled>
-          Product Manager
-        </Nav.Link>
-      </Nav.Item>
+      <View style={{flexDirection: 'row', alignItems: 'center'}}>
+        <View>
+          <View style={{width: 10, textAlign: 'center', color: 'green', fontWeight: "bold", fontSize: 40}}>PRODUCT MANAGER</View>
+        </View>
+      </View>
 
       <Nav.Item>
         <Nav.Link href='/Invoices' eventKey='a'>
@@ -39,7 +38,7 @@ return (
       </Nav.Item>
 
       <Nav.Item>
-        <Nav.Link href='/addProduct' eventKey='c'>
+        <Nav.Link href='/productmanager' eventKey='c'>
           <div className='iconwrap'>
             <AddShoppingCartIcon/>
           </div>

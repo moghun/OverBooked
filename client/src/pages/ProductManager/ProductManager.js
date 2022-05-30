@@ -13,7 +13,7 @@ const AddProduct = () => {
         <form className='form-horizontal'>
           <fieldset>
             <br/>
-            <legend className='upper-container2'>ADD PRODUCTS</legend>
+            <legend className='pcontainer'>ADD PRODUCTS</legend>
             <div className='row form-group' style={{marginLeft: '50px'}}>
               <label className='col-md-4 control-label' htmlFor='product_id' style = {{padding: '12px 20px', background: 'red', border: 'none', borderRadius: '30px', fontWeight: 'bold', boxShadow: "10px 20px 30px lightblue"}}>
                 PRICE
@@ -219,7 +219,7 @@ const RemoveProduct = () => {
         <br/>
         <form className='form-horizontal'>
           <fieldset>
-            <legend className='upper-container2'>REMOVE PRODUCTS</legend>
+            <legend className='pcontainer'>REMOVE PRODUCTS</legend>
             <div className='row form-group'  style={{marginLeft: '50px'}}>
               <label className='col-md-4 control-label'      style = {{padding: '12px 20px', background: 'red', border: 'none', borderRadius: '30px', fontWeight: 'bold', boxShadow: "10px 20px 30px lightblue"}}>
                 PRODUCT NAME
@@ -264,7 +264,7 @@ const UpdateStock = () => {
         <br/>
             <form className='form-horizontal'>
             <fieldset>
-                <legend className='upper-container2'>UPDATE STOCK</legend>
+                <legend className='pcontainer'>UPDATE STOCK</legend>
 
                 <div className='row form-group'  style={{marginLeft: '50px'}}>
                 <label className='col-md-4 control-label' htmlFor='product_id'   style = {{padding: '12px 20px', background: 'red', border: 'none', borderRadius: '30px', fontWeight: 'bold', boxShadow: "10px 20px 30px lightblue"}}>  
