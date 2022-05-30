@@ -11,6 +11,7 @@ const Popup = (props) => {
   const currUser = useSelector((state) => state.user.currentUser);
 
   function deleteOrder() {
+    /*
     try {
       axios.delete(
         "http://localhost:5001/api/orders/" + currUser._id + "/" + id,
@@ -20,6 +21,7 @@ const Popup = (props) => {
     } catch (err) {
       console.log(err);
     }
+    */
   }
 
   function printText() {

@@ -299,7 +299,7 @@ const MyOrders = () => {
                         ""
                       )}
                       {cancelpopup ? (
-                        <CancelPopup handleClose={openCancel} />
+                        <CancelPopup id={orders[i]._id} handleClose={openCancel} />
                       ) : (
                         ""
                       )}

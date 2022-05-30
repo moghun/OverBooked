@@ -1,17 +1,31 @@
 import React from "react";
 import './CancelPopUp.css';
 import { useState } from "react";
+import axios from "axios";
+import { useSelector } from "react-redux";
 
 const CancelPopup = props => {
 
-    const [text, setText] = useState(null);
     const [id, setId] = useState(null);
 
+    const currUser = useSelector((state) => state.user.currentUser);
 
+    function deleteOrder() {
+        try {
+          axios.delete(
+            "http://localhost:5001/api/orders/" + currUser._id + "/" + id,
+            { headers: { token: "Bearer " + currUser.accessToken } }
+          );
+          alert("Order Canceled");
+          window.location.reload();
+        } catch (err) {
+          console.log(err);
+        }
+      }
 
     function cancelOrder(){
         alert("Your order has been cancelled");
-        window.location.reload();
+        
     }
 
   return (
@@ -20,15 +34,31 @@ const CancelPopup = props => {
             <span className="close-icon" onClick={props.handleClose}>x</span>
             <h style={{color:'#FAFAFA', fontSize:'20px', fontFamily:'OpenSans', marginLeft:'15%'}}>Do you really want to cancel your order? 😓</h>
             
-            <div style={{display:'flex', marginTop:'20px'}}>
+            <div style={{marginTop:'5px'}}>
+                <textarea
+                    placeholder=" Verify your order id..."
+                    onChange={(e) => {
+                    setId(e.target.value);
+                    }}
+                    rows="1"
+                    cols="50"
+                    style={{
+                    resize: "none",
+                    width: "100%",
+                    outline: "none",
+                    borderRadius: "10px",
+                    }}>
+                </textarea>
+            </div>
+
+            <div style={{display:'flex', marginTop:'5px'}}>
                 <div>            
-                    <button onClick={cancelOrder} style={{
+                    <button onClick={deleteOrder} style={{
                     fontFamily:'OpenSans', 
                     border:'solid',
                     outline:'none', 
                     borderWidth:'1px',
                     borderRadius:'5px',
-                    width:'50px',
                     marginLeft:'150px',
                     fontSize:'20px',
                     backgroundColor:'lightgreen'
