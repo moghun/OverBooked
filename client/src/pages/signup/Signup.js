@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import 'bootstrap'
 import '../signup/Signup.css'
 import axios from 'axios'
+import { toast } from "react-toastify";
 class SignUp extends Component{
     
     constructor(){
@@ -43,8 +44,8 @@ class SignUp extends Component{
     }
 
     myFunction(data) {
-        if(data === 201){alert("Confirmed");}
-        else{alert("Error");}
+        if(data === 201){toast.success("Confirmed", {position: toast.POSITION.TOP_CENTER});}
+        else{toast.error("Error", {position: toast.POSITION.TOP_CENTER});}
       }
     
     onSubmit(event){

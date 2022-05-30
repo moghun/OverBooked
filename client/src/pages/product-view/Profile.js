@@ -4,6 +4,15 @@ import Avatar from "@material-ui/core/Avatar";
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { Typography } from "@material-ui/core";
+import "./Profile.css";
+import { View,} from "react-native";
+
+
+import EditIcon from '@material-ui/icons/Edit';
+import PersonIcon from '@material-ui/icons/Person';
+import LocalMallIcon from '@material-ui/icons/LocalMall';
+
+
 
 import { useSelector } from "react-redux";
 
@@ -38,12 +47,10 @@ const Profile = () => {
   function buttonstatus(userrole) {
     if (userrole === "customer") {
       return (
-        <Button className="btn3" href="\myorders">
-          {" "}
-          My Orders{" "}
-        </Button>
+        <a href="/myorders"> <LocalMallIcon/> My-Orders</a>
       );
     } else if (userrole === "product-manager") {
+<<<<<<< HEAD
       return <Button className="btn3" href = "\approvaldisapproval"> Edit Product Panel </Button>;
     } 
     else if (userrole === "sales-manager") {
@@ -53,66 +60,76 @@ const Profile = () => {
       <Button className="btn3" href='/invoices'> Invoices Panel </Button>
       <Button className="btn3"> Revenue Panel </Button>
       </>);
+=======
+      <a href="#"> <LocalMallIcon/> Product-Manager-Panel</a>
+    } else if (userrole === "sales-manager") {
+      <a href="#"> <LocalMallIcon/> Sales-Manager-Panel</a>
+>>>>>>> 0e7a9270aba64ede9732a3b90042936a0f9375d9
     }
   }
 
   return (
-    <Card>
-      <div class="upper-container">
-        <p
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            fontWeight: "bold",
-            fontSize: 40,
-          }}
-        >
-          YOUR PROFILE
-        </p>
-      </div>
-      <div class="lower-container">
-        <div>
-          <Avatar style={{ width: 200, height: 200 }} />
-        </div>
-        {console.log(currUser)}
-        <div>
-          <div class= "userInfo-container"> 
-          <h2>Name: {currUser.name} </h2>
-          </div>
-          <br />
-          <div class= "userInfo-container"> 
-          <h2 style={{}}>Surname: {currUser.surname} </h2>
+
+<div class="container bootstrap snippets bootdey">
+<div class="row">
+  <div class="profile-nav col-md-3">
+      <div class="panel">
+          <div class="user-heading round">
+              <a href="#">
+                  <Avatar style={{ width: 100, height: 100 }}/>
+              </a>
+              <h1 style={{borderRadius: 'var(--border-radius-md)', backgroundColor:'yellow', color: 'black'}}>{currUser.name}</h1>
+              <h1 style={{borderRadius: 'var(--border-radius-md)', backgroundColor:'green'}}>{currUser.surname}</h1>
+              <p style={{borderRadius: 'var(--border-radius-md)', backgroundColor:'red'}}>{currUser.email}</p>
           </div>
 
-          <br />
-          <div class= "userInfo-container"> 
+          <ul class="nav nav-pills flex-column">
+              <li class="active"><a href="#"> <PersonIcon/> Profile</a></li>
+              <li><a href="/editprofile"> <EditIcon/> Edit profile</a></li>
+              <li>{buttonstatus(currUser.user_role)}</li>
+          </ul>
+      </div>
+  </div>
+  <div class="profile-info col-md-9">
+      <div class="panel">
+          <div class="bio-graph-heading">
+          <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            <View style={{flex: 1, height: 4, backgroundColor: 'black'}} />
+            <View>
+              <View style={{width: 200, textAlign: 'center', color: 'green', fontWeight: "bold", fontSize: 40}}>PROFILE</View>
+            </View>
+            <View style={{flex: 1, height: 4, backgroundColor: 'black'}} />
+          </View>
           </div>
-          <div class= "userInfo-container"> 
-          {userstatus(currUser.user_role)}
-          </div>
-          <br />
-          <div class= "userInfo-container"> 
-          <h2>E-MAIL: {currUser.email} </h2>
-          </div>
-          <br />
-          <div class= "userInfo-container"> 
-          <h2>Username: {currUser.username} </h2>
-          </div>
-          <br />
-          <div class= "userInfo-container"> 
-          <h2>Adress: {currUser.adress} </h2>
-          </div>
-          <br />
-        </div>
 
-        <div>
-          <Button href="/editprofile" className="btn">
-            Edit Profile
-          </Button>
-          {buttonstatus(currUser.user_role)}
+          <br/>
+          <div class="panel-body bio-graph-info">
+            <div class="row">
+                <div class="bio-row">
+                    <p><span>First Name </span>: {currUser.name}</p>
+                </div>
+                <div class="bio-row">
+                    <p><span>Last Name </span>: {currUser.surname}</p>
+                </div>
+                <div class="bio-row">
+                    <p><span>Adress </span>: {currUser.adress}</p>
+                </div>
+                <div class="bio-row">
+                    <p><span>Username</span>: {currUser.username}</p>
+                </div>
+                <div class="bio-row">
+                    <p><span>Email </span>: {currUser.email}</p>
+                </div>
+            </div>
         </div>
       </div>
-    </Card>
+  </div>
+</div>
+</div>
+
+
+
+
   );
 };
 

@@ -4,7 +4,7 @@ const orderSchema = new mongoose.Schema(
   {
     buyer_email: { type: String, required: true },
     status: { type: String, required: true },
-
+    payment_method: {type: String, required: true},
     cost: { type: Number, required: true },
     date: { type: Date, required: true },
     bought_products: { type: Array, required: true},

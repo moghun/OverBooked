@@ -1,34 +1,43 @@
-.Row {
+.Rowx {
     display: table;
     width: 80%; /*Optional*/
     border-spacing: 10px; /*Optional*/
-    outline: solid;
+    outline: none;
     margin-top: 40px;
     margin-left: 10%;
     border-radius: 20px;
+    background-color: #e6b619;
     
-}
+  }
 
-.product-container{
+.product-row .product-container{
     outline: none;
-    display: table-cell;
-    outline: solid;
-    background-color: burlywood;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    outline: none;
+    background-color: rgb(228, 210, 186);
     outline-color: goldenrod;
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+
   }
 
 .checkout-container{
     outline: none;
-    display: table-cell;
-    outline: solid;
-    background-color: rgb(174, 173, 171);
-    outline-color: rgb(207, 51, 19);
+    display: flex;
+    border: none;
+    padding: 0%;
+    margin-left: 25px;
+
   }
 .products-container{
     outline: none;
     display: table-cell;
     width: 100px;
     height: 100px;
+
 }
 
 
@@ -43,4 +52,5 @@
 .itemimage{
     width: 50px;
     height: 65px;
+    border-radius: 5px;
 }
