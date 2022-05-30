@@ -222,6 +222,7 @@ router.get("/getUsername/:id", async (req, res) => {
 //NOTIFY USERS FOR SALE
 router.get("/saleNotification/:pid", async (req, res) => {
   let inUsers = [];
+  let product = {};
   try {
     inUsers = await User.find({
       wishlist: { $elemMatch: { product_id: req.params.pid } },
@@ -231,6 +232,14 @@ router.get("/saleNotification/:pid", async (req, res) => {
   }
 
   try {
+    product = await Product.findById(req.params.pid);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+
+  try {
+    let p = product.cost / product.before_sale_price;
+    let perc = 1 - p;
     inUsers.forEach((user) => {
       client
         .send({
@@ -242,14 +251,17 @@ router.get("/saleNotification/:pid", async (req, res) => {
             email: "overbookedstore1@gmail.com",
             name: "overbooked",
           },
-          templateId: "d-9eeb7db78dff4ac384f3d2bf511cdf1a",
+          templateId: "d-03c38b528bdf40aab21e49e59cc04eb8",
           dynamicTemplateData: {
-            email: req.body.name,
+            name: product.name,
+            before_sale_price: product.before_sale_price,
+            cost: product.cost,
+            perc: Math.floor(perc * 100),
           },
         })
         .then();
     });
-    res.status(200).json(inUsers);
+    res.status(200).json(product);
   } catch (err) {
     res.status(500).json(err);
   }
