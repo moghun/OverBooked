@@ -8,7 +8,6 @@ import SearchPage from "./pages/search-page/SearchPage";
 import Footer from "./components/Footer/Footer";
 import NavigationBar2 from "./components/Navigation_Bar/NavigationBar2";
 import Profile from "./pages/product-view/Profile";
-import CreateStore from "./pages/product-view/CreateStore";
 import EditProfile from "./pages/product-view/EditProfile";
 import Checkout from "./pages/Checkout";
 import ShoppingCart from "./pages/ShoppingCart";

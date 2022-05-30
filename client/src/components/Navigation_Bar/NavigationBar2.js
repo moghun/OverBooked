@@ -1,5 +1,44 @@
 import "./NavigationBar.css"
 const NavigationBar2= () =>{
+
+
+
+  /*
+
+
+
+  const [allprod, settallprod] = useState([]);
+
+  const getAllProducts = async () => {
+    try {
+      const res = await axios.get("http://localhost:5001/api/products");
+      settallprod(res.data);
+      return res.data;
+    } catch (err) {}
+  };
+
+
+  useEffect(() => {
+    getAllProducts();
+  }, []);
+
+        <li class="menu-category">
+        <a href="#" class="menu-title">Science</a>
+
+        <ul class="dropdown-list">
+
+          {allprod.slice(0,3).map((AllSales) => (
+
+            <li class="dropdown-item">
+              {AllSales.name}
+            </li>
+
+          ))}
+
+        </ul>
+      </li>
+
+  */
     return (
 
 
