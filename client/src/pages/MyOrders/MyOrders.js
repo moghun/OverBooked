@@ -76,7 +76,7 @@ const MyOrders = () => {
   }, [orders.length > 0, !isNamesSet]);
 
   function orderStatus(item) {
-    if (item === "delivered") {
+    if (item === "Delivered") {
       return (
         <input
           disabled="disabled"
@@ -131,8 +131,13 @@ const MyOrders = () => {
   }
 
 
-  function cancelRefund(item){
-    if(item === "Delivered"){
+  function cancelRefund(item, date){
+    var orderdate = new Date(date);
+    var today = new Date();
+    var difference = today.getTime() - orderdate.getTime();
+    var days = Math.floor(difference / (1000 * 3600 * 24));
+
+    if(item === "Delivered" && (days <= 30)){
       return(
       <button onClick={openPopup} style={{ borderRadius: "5px", backgroundColor: "lightgray", marginLeft: "10px", padding: "5px",}}>
         Refund
@@ -192,7 +197,7 @@ const MyOrders = () => {
                         >
                           Order Date:{" "}
                         </h>
-                        <h style={{ marginLeft: "25px" }}>{order.updatedAt}</h>
+                        <h style={{ marginLeft: "25px" }}>{order.updatedAt.substring(0,order.updatedAt.indexOf("T"))}</h>
                         {orderStatus(order.status)}
                         <h style={{ marginLeft: "15px", fontSize: "16px" }}>
                           <strong>Total:</strong> {order.cost} USD
@@ -210,7 +215,7 @@ const MyOrders = () => {
                         >
                           Details
                         </button>
-                        {cancelRefund(order.status)}
+                        {cancelRefund(order.status, order.updatedAt)}
                       </div>
                       <div>
                         <hr
@@ -269,7 +274,7 @@ const MyOrders = () => {
                       >
                         Order Date:{" "}
                       </h>
-                      <h style={{ marginLeft: "25px" }}>{order.updatedAt}</h>
+                      <h style={{ marginLeft: "25px" }}>{order.updatedAt.substring(0,order.updatedAt.indexOf("T"))}</h>
                       {orderStatus(order.status)}
                       <h style={{ marginLeft: "15px", fontSize: "16px" }}>
                         <strong>Total:</strong> {order.cost} USD
@@ -287,33 +292,14 @@ const MyOrders = () => {
                       >
                         Details
                       </button>
-                      {order.status === "Delivered" ? (
-                        <button
-                          onClick={openPopup}
-                          style={{
-                            borderRadius: "5px",
-                            backgroundColor: "lightgray",
-                            marginLeft: "10px",
-                            padding: "5px",
-                          }}
-                        >
-                          Refund
-                        </button>
-                      ) : (
-                        <button
-                          onClick={openPopup}
-                          style={{
-                            borderRadius: "5px",
-                            backgroundColor: "lightgray",
-                            marginLeft: "10px",
-                            padding: "5px",
-                          }}
-                        >
-                          Cancel
-                        </button>
-                      )}
+                      {cancelRefund(order.status, order.updatedAt)}
                       {popupOpen ? (
                         <Popup id={orders[i]._id} handleClose={openPopup} />
+                      ) : (
+                        ""
+                      )}
+                      {cancelpopup ? (
+                        <CancelPopup handleClose={openCancel} />
                       ) : (
                         ""
                       )}
