@@ -100,12 +100,13 @@ const EditProfile = () => {
             <br />
             <br />
           </CardContent>
+          
           <CardActions>
+          <Button color="secondary" href="/profile" variant="contained">
+              Cancel
+            </Button>
             <Button color="primary" variant="contained" onClick={clickSubmit}>
               Submit
-            </Button>
-            <Button color="secondary" href="/profile" variant="contained">
-              Cancel
             </Button>
           </CardActions>
         </Card>

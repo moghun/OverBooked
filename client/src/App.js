@@ -21,11 +21,16 @@ import Synch from "./pages/signin/synch";
 import { useSelector } from "react-redux";
 import MyOrders from "./pages/MyOrders/MyOrders";
 import ProductManagerAPI from "./pages/profilePage/product-managerPage/product-managerProfile";
+import EditSales from "./pages/profilePage/sales-manager/EditSales";
+import InvoicesPage from "./pages/profilePage/sales-manager/InvoicesPage";
 import Wishlist from "./pages/wishlist/Wishlist";
 import ProductManager from "./pages/ProductManager/ProductManager";
 import Invoices from "./pages/ProductManager/Invoices";
 import RemoveProduct from "./pages/ProductManager/RemoveProduct";
 import UpdateStock from "./pages/ProductManager/UpdateProduct";
+import Revenues from "./pages/profilePage/sales-manager/Revenues";
+import RemoveSale from "./pages/profilePage/sales-manager/RemoveSale";
+import SetPrice from "./pages/profilePage/sales-manager/SetPrice";
 
 function App() {
   const user = useSelector((state) => state.user.currentUser);
@@ -58,12 +63,17 @@ function App() {
             <Route path='/Invoices' element={<Invoices/>} />
             <Route path="/removeproduct" element={<RemoveProduct />} />
             <Route path="/updateproduct" element={<UpdateStock />} />
+            <Route path="/setprice" element={<SetPrice />} />
 
             <Route
               path="/approvaldisapproval"
               element={<ProductManagerAPI />}
             />
             <Route path="*" element={<HomePage />} />
+            <Route path="/editsales" element={<EditSales />} />
+            <Route path="/removesales" element={<RemoveSale />} />
+            <Route path="/invoicessalesmanager" element={<InvoicesPage />} />
+            <Route path="/revenues" element={<Revenues />} />
           </>
         ) : (
           <>

@@ -248,7 +248,13 @@ router.get("/", async (req, res) => {
           $eq: qSale,
         },
       });
-    } else if (qCategory) {
+    }else if (!qSale) {
+      products = await Product.find({
+        sale: {
+          $eq: qSale,
+        },
+      });
+    }else if (qCategory) {
       products = await Product.find({
         category: {
           $in: [qCategory],
@@ -302,7 +308,7 @@ router.put("/stopSale/:id", verifyTokenAndSalesManager, async (req, res) => {
       {
         $set: {
           sale: false,
-          oldCost: req.body.before_sale_price,
+          cost: req.body.cost,
           before_sale_price: -1,
         },
       },
