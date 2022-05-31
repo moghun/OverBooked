@@ -5,15 +5,47 @@ import { View } from "react-native";
 import { Button } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { clearCart } from "../../redux/cartRedux";
-import { removeProduct } from "../../redux/cartRedux";
 import axios from "axios";
+import { clearWishlist } from "../../redux/userRedux";
 
 const Wishlist = () => {
   const currUser = useSelector((state) => state.user.currentUser);
+
+  const [allprod, settallprod] = useState([]);
+  const [wishlist, setwishlist] = useState([]);
   const dispatch = useDispatch();
 
-  const [wishlist, setwishlist] = useState([]);
+  const getAllProducts = async () => {
+    try {
+      const res = await axios.get("http://localhost:5001/api/products");
+      settallprod(res.data);
+      return res.data;
+    } catch (err) {}
+  };
+
+  const clearWishlistAPI = async () => {
+    try {
+      await axios.put(
+        "http://localhost:5001/api/users/clearWishlist/" + currUser._id,
+        undefined,
+        { headers: { token: "Bearer " + currUser.accessToken } }
+      );
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const CreateWishlist = () => {
+    var returnArray = [];
+    for (let i = 0; i < allprod.length; i++) {
+      for (let j = 0; j < currUser.wishlist.length; j++) {
+        if (allprod[i]._id === currUser.wishlist[j].product_id) {
+          returnArray.push(allprod[i]);
+        }
+      }
+    }
+    setwishlist(returnArray);
+  };
 
   function avgrating(items) {
     var totalrate = 0;
@@ -26,57 +58,16 @@ const Wishlist = () => {
     }
     return (totalrate / items.rating.length).toFixed(1);
   }
-
-  const getWishlist = async () => {
-    const userStruct = { buyer_email: currUser.email };
-    try {
-      const res = await axios.get(
-        "http://localhost:5001/api/orders/find/" + currUser._id,
-        { params: userStruct }
-      );
-      setwishlist(res.data);
-    } catch (error) {}
+  const Clear = () => {
+    clearWishlistAPI();
+    dispatch(clearWishlist());
   };
-
-  const removeFromCartAPI = async (pid) => {
-    try {
-      await axios.put(
-        "http://localhost:5001/api/users/removeFromWishlist/" + currUser._id,
-        { product_id: pid },
-        { headers: { token: "Bearer " + currUser.accessToken } }
-      );
-    } catch (err) {
-      console.log(err);
-    }
-  };
-  const clearCartAPI = async () => {
-    try {
-      await axios.put(
-        "http://localhost:5001/api/users/clearWishlist/" + currUser._id,
-        undefined,
-        { headers: { token: "Bearer " + currUser.accessToken } }
-      );
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
   useEffect(() => {
-    getWishlist();
-    clearCartAPI();
-    removeFromCartAPI();
+    getAllProducts();
   }, [currUser]);
-
-  const clear = () => {
-    dispatch(clearCart());
-    clearCartAPI();
-  };
-
-  const removeItem = (item) => {
-    dispatch(removeProduct(item));
-    removeFromCartAPI(item._id);
-  };
-
+  useEffect(() => {
+    CreateWishlist();
+  }, [allprod.length > 0]);
   return (
     <div>
       <View style={{ flexDirection: "row", alignItems: "center" }}>
@@ -101,7 +92,7 @@ const Wishlist = () => {
         <Button href="\profile" className="containerWbtn3">
           Back to Profile
         </Button>
-        <Button href="\profile" className="containerWbtn3" onClick={clear}>
+        <Button href="\profile" className="containerWbtn3" onClick={Clear}>
           Clear Wishlist
         </Button>
       </div>
@@ -126,11 +117,15 @@ const Wishlist = () => {
         ) : (
           wishlist.map((list) => (
             <BookCard
-              onclick={list._id}
+              id={list._id}
               name={list.name}
+              amount={list.amount}
+              author={list.author}
               imgurl={list.img}
+              publisher={list.publisher}
               price={list.cost}
-              // score={avgrating(list)}
+              score={avgrating(list)}
+              beforeprice={list.before_sale_price}
             ></BookCard>
           ))
         )}

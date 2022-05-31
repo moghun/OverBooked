@@ -3,7 +3,6 @@ const Product = require("../models/product_dbmod");
 let client = require("@sendgrid/mail");
 client.setApiKey(process.env.SENDGRID_API_KEY);
 const CryptoJS = require("crypto-js");
-const pdfService = require("../routes/pdfService");
 
 const {
   verifyToken,
@@ -263,6 +262,28 @@ router.get("/saleNotification/:pid", async (req, res) => {
         .then();
     });
     res.status(200).json(product);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.get("/getInvoices", async (req, res) => {
+  try {
+    const users = await User.find({
+      $nor: [{ invoices: { $exists: false } }, { invoices: { $size: 0 } }]},
+      { invoices: 1 },
+    );
+    console.log(users);
+    let inv = [];
+    users.forEach((us) => {
+      if (us.invoices.length !== 0) {
+        us.invoices.forEach((i) => {
+          inv.push(i);
+        });
+      }
+    });
+
+    res.status(200).json(inv);
   } catch (err) {
     res.status(500).json(err);
   }

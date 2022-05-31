@@ -3,6 +3,7 @@ import './CancelPopUp.css';
 import { useState } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
 const CancelPopup = props => {
 
@@ -16,8 +17,9 @@ const CancelPopup = props => {
             "http://localhost:5001/api/orders/" + currUser._id + "/" + id,
             { headers: { token: "Bearer " + currUser.accessToken } }
           );
-          alert("Order Canceled");
-          window.location.reload();
+          toast.success("Your order has been cancelled.", {position: toast.POSITION.TOP_CENTER});
+          setTimeout(()=>{window.location.reload()},1500)
+         
         } catch (err) {
           console.log(err);
         }
@@ -30,7 +32,7 @@ const CancelPopup = props => {
 
   return (
     <div className="popup-box">
-      <div className="box">
+      <div className="boxboxbox">
             <span className="close-icon" onClick={props.handleClose}>x</span>
             <h style={{color:'#FAFAFA', fontSize:'20px', fontFamily:'OpenSans', marginLeft:'15%'}}>Do you really want to cancel your order? 😓</h>
             
