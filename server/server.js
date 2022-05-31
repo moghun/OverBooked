@@ -11,6 +11,7 @@ const productRoute = require("./routes/product");
 const orderRoute = require("./routes/order");
 const stripeRoute = require("./routes/stripe");
 const productmanRoute = require("./routes/productmanager");
+const salesmanRoute = require("./routes/salesmanager")
 const cors = require("cors");
 const { options } = require("./routes/auth");
 
@@ -30,6 +31,7 @@ app.use("/api/products", productRoute);
 app.use("/api/orders",orderRoute);
 app.use("/api/checkout", stripeRoute);
 app.use("/api/productmanager",productmanRoute);
+app.use("/api/salesmanager",salesmanRoute);
 
 app.listen(process.env.PORT || 8080, () => {
   console.log("Server is running!");
