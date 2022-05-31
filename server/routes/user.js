@@ -267,4 +267,21 @@ router.get("/saleNotification/:pid", async (req, res) => {
   }
 });
 
+//GET USERNAME
+router.get("/downloadInvoice/:iid", async (req, res) => {
+  try {
+    const users = await User.find({
+      invoices: { $elemMatch: { invoice_id: req.params.iid } },
+    });
+
+    var invoice = users[0].invoices.forEach((inv) => {
+      if (inv.invoice_id === req.params.iid) {
+        return res.status(200).json(inv);
+      }
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 module.exports = router;
