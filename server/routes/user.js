@@ -3,6 +3,7 @@ const Product = require("../models/product_dbmod");
 let client = require("@sendgrid/mail");
 client.setApiKey(process.env.SENDGRID_API_KEY);
 const CryptoJS = require("crypto-js");
+const pdfService = require("../routes/pdfService");
 
 const {
   verifyToken,
@@ -267,18 +268,20 @@ router.get("/saleNotification/:pid", async (req, res) => {
   }
 });
 
-//GET USERNAME
-router.get("/downloadInvoice/:iid", async (req, res) => {
+router.get("/getInvoice/:iid", async (req, res) => {
   try {
     const users = await User.find({
       invoices: { $elemMatch: { invoice_id: req.params.iid } },
     });
 
-    var invoice = users[0].invoices.forEach((inv) => {
+    var invoice = {};
+
+    users[0].invoices.forEach((inv) => {
       if (inv.invoice_id === req.params.iid) {
-        return res.status(200).json(inv);
+        invoice = inv;
       }
     });
+    res.status(200).json(invoice);
   } catch (err) {
     res.status(500).json(err);
   }

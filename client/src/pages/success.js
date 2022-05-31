@@ -38,13 +38,16 @@ const Success = () => {
     try {
       const invoice = {
         invoice_id: i_id,
+        email: currentUser.email,
         username: currentUser.username,
         name: currentUser.name,
         surname: currentUser.surname,
         cost: cart.total,
-        product_names: cart.products.map((book) => book.name),
-        products: cart.products.map((book) => book._id),
-        amount: cart.products.map((book) => book.amount),
+        products: [
+          cart.products.map((book) => book.cost),
+          cart.products.map((book) => book.name),
+          cart.products.map((book) => book.amount),
+        ],
         tax_id: currentUser.tax_id,
         card_no: data.source.last4,
       };
