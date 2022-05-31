@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useEffect } from "react";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
@@ -13,10 +13,55 @@ import FavoriteIcon from "@material-ui/icons/Favorite";
 import Favorite from "@material-ui/icons/Favorite";
 import IconButton from "@material-ui/core/IconButton";
 import { useSelector } from "react-redux";
+import axios from "axios";
+import { useDispatch } from "react-redux";
+import { addToWishlist, removeFromWishlist } from "../redux/userRedux";
 
 export default function BookCard(props) {
   const currUser = useSelector((state) => state.user.currentUser);
   const [fav, setFav] = React.useState(false);
+  const dispatch = useDispatch();
+
+  const getWishlist = () => {
+    return currUser.wishlist;
+  };
+
+  const add = async () => {
+    try {
+      await axios.put(
+        "http://localhost:5001/api/users/addToWishlist/" + currUser._id, 
+        { product_id: props.id },
+        { headers: { token: "Bearer " + currUser.accessToken } }
+        );
+      dispatch(addToWishlist(props.id));
+    } catch (error) {
+      
+    }
+  };
+
+  const remove = async () => {
+    try {
+      await axios.put("http://localhost:5001/api/users/removeFromWishlist/" + currUser._id,
+        { product_id: props.id },
+        { headers: { token: "Bearer " + currUser.accessToken } }
+      );
+      dispatch(removeFromWishlist(props.id));
+    } catch (error) {
+      
+    }
+  };
+
+  useEffect(() => {
+    if(currUser){
+      const wishlist = getWishlist();
+      for (let index = 0; index < wishlist.length; index++) {
+        const product = wishlist[index];
+        if(product["product_id"] === props.id){
+          setFav(true);
+        }
+      }
+    }
+  }, [currUser]);
 
   return (
     <Card
@@ -30,11 +75,13 @@ export default function BookCard(props) {
         ":hover": { boxShadow: 20 },
       }}
     >
-      <Container sx={{ padding: "0px", marginBottom: "-30px", marginLeft: "158px" }}>
+      {currUser && (
+        <Container sx={{ padding: "0px", marginBottom: "-30px", marginLeft: "158px" }}>
         {fav && (
           <IconButton
             onClick={() => {
               setFav(!fav);
+              remove();
             }}
             style={{ padding: "0px", color: "red" }}
           >
@@ -45,6 +92,7 @@ export default function BookCard(props) {
           <IconButton
             onClick={() => {
               setFav(!fav);
+              add();
             }}
             style={{ padding: "0px", color: "red" }}
           >
@@ -52,10 +100,12 @@ export default function BookCard(props) {
           </IconButton>
         )}
       </Container>
+      )}
+      
       <Link
         href={"/productpage/" + props.id}
         underline="none"
-        style={{ textDecoration: "none" }}
+        style={{ textDecoration: "none", color: "black" }}
       >
         <CardMedia
           component="img"
