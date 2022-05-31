@@ -6,13 +6,14 @@ import { Button } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import axios from "axios";
+import { clearWishlist } from "../../redux/userRedux";
 
 const Wishlist = () => {
   const currUser = useSelector((state) => state.user.currentUser);
-  const dispatch = useDispatch();
 
   const [allprod, settallprod] = useState([]);
   const [wishlist, setwishlist] = useState([]);
+  const dispatch = useDispatch();
 
   const getAllProducts = async () => {
     try {
@@ -20,6 +21,18 @@ const Wishlist = () => {
       settallprod(res.data);
       return res.data;
     } catch (err) {}
+  };
+
+  const clearWishlistAPI = async () => {
+    try {
+      await axios.put(
+        "http://localhost:5001/api/users/clearWishlist/" + currUser._id,
+        undefined,
+        { headers: { token: "Bearer " + currUser.accessToken } }
+      );
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const CreateWishlist = () => {
@@ -46,7 +59,8 @@ const Wishlist = () => {
     return (totalrate / items.rating.length).toFixed(1);
   }
   const Clear = () => {
-    console.log(wishlist);
+    clearWishlistAPI();
+    dispatch(clearWishlist());
   };
   useEffect(() => {
     getAllProducts();
