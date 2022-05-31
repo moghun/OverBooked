@@ -160,31 +160,33 @@ const DetailsThumb = () => {
   };
 
   return (
-    <div className="app">
-      <div className="details" key={product.id}>
+    <div className="app" >
 
-        <div className="big-img">
+      <div className="details" key={product.id} >
+
+        <div className="big-img" >
           <img src={product.img} alt={product.name} />
         </div>
 
-        <div className="box">
+        <div className="box" >
+
           <div className="row">
             <h2>{product.name}</h2>
           </div>
 
-          <h5>Author: {product.author}</h5>
-          <h5>Publisher: {product.publisher}</h5>
-          <p>Amount: {product.amount}</p>
+          <h5><strong>Author:</strong> {product.author}</h5>
+          <h5><strong>Publisher:</strong> {product.publisher}</h5>
+          <p><strong>Amount:</strong> {product.amount}</p>
           {product.sale ? (
             <div>
-              <p>Before Sale Cost: {product.before_sale_price} $</p>
-              <p>Cost: {product.cost} $</p>
+              <p><strong>Before Sale Cost:</strong> {product.before_sale_price} $</p>
+              <p><strong>Cost:</strong> {product.cost} $</p>
             </div>
           ) : (
-            <p>Cost: {product.cost} $</p>
+            <p><strong>Cost:</strong> {product.cost} $</p>
           )}
-          <p>Description: {product.description}</p>
-          <p>Category: {product.category}</p>
+          <p><strong>Description:</strong> {product.description}</p>
+          <p><strong>Category:</strong> {product.category}</p>
 
           {product.amount !== 0 ? (
             <>
@@ -195,7 +197,7 @@ const DetailsThumb = () => {
                 min="1"
                 max={product.amount}
                 onKeyDown={(e) => e.preventDefault()}
-                style={{ borderRadius: "5px", borderWidth: "1px" }}
+                style={{ borderRadius: "5px", borderWidth: "1px",outline:'none' }}
               ></input>{" "}
               <button
                 className="cart"
@@ -241,6 +243,7 @@ const DetailsThumb = () => {
                 resize: "none",
                 borderWidth: "bold",
                 borderRadius: "10px",
+                outline:'none'
               }}
             ></textarea>
             <div>
