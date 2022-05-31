@@ -141,11 +141,11 @@ router.post("/sendRecepit", verifyToken, async (req, res) => {
         dynamicTemplateData: {
           invoice_id: req.body.invoice_id,
           username: req.body.username,
-          name: req.body.username,
-          surname: req.body.username,
           email: req.body.email,
           cost: req.body.cost,
           products: req.body.products,
+          tax_id: req.body.tax_id,
+          card_no: req.body.card_no
         },
       })
       .then();

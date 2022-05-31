@@ -54,3 +54,16 @@ const getSaleProducts = async () => {
     return res.data;
   } catch (err) {}
 };
+
+//Send notification
+try {
+  axios.put(
+    "http://localhost:5001/api/users/saleNotification/" + product_id, //Current products' ID here
+    undefined, //Take current products' before_sale_cost here
+    {
+      headers: { token: "Bearer " + currUser.accessToken },
+    }
+  );
+} catch (err) {
+  alert(err);
+}
