@@ -6,6 +6,7 @@ const orderSchema = new mongoose.Schema(
     status: { type: String, required: true },
 
     payment_method: { type: String, required: true },
+    last_four_digit: {type:Number,required:true},
     cost: { type: Number, required: true },
     date: { type: Date, required: true },
 

@@ -75,11 +75,11 @@ const Success = () => {
     function createOrder() {
       const idArray = cart.products.map((book) => book._id);
       const amountArray = cart.products.map((book) => book.amount);
-
       const orderStruct = {
         buyer_email: currentUser.email,
         status: "Processing",
         payment_method: data.payment_method,
+        last_four_digit: data.source.last4,
         cost: cart.total,
         date: Date.now(),
         bought_products: idArray,
