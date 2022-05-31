@@ -67,13 +67,16 @@ router.post("/changestock",verifyTokenAndProductManager, async(req,res) => {
 //GET INVOICES
 router.get("/getinvoices",verifyTokenAndProductManager,async(req,res)=>{
     try{
-        const invoices = await User.find(
+        const users = await User.find(
             {$nor: [
                 {invoices: {$exists: false}},
                 {invoices: {$size: 0}},
             ]}
         );        
-        return res.status(200).json(invoices);
+        
+        const invoice = users.map(user =>{return user.invoices});
+
+        return res.status(200).json(invoice);
     } catch (err){
         return res.status(500).json(err);
     }
