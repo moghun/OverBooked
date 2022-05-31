@@ -10,22 +10,23 @@ import axios from "axios"
 import { useSelector } from "react-redux";
 import {toast} from 'react-toastify';
 
-function EditSales() {
+
+function SetPrice() {
   const currUser = useSelector((state) => state.user.currentUser);
 
-  const [rate, setRate] = useState(null);
+  const [price, setCost] = useState(null);
   const [index, setIndex] = useState(null);
   const [allproducts, setAll] = useState([]);
 
   function handleChange(event) {
-    setRate(event.target.value)
-    console.log(rate);
+    setCost(event.target.value)
+    console.log(price);
   }
 
   useEffect(() => {
     const getAllProducts = async () => {
       try {
-        const res = await axios.get("http://localhost:5001/api/products?sale=false");
+        const res = await axios.get("http://localhost:5001/api/products");
         setAll(res.data);
       } catch (err) {}
     }; 
@@ -33,26 +34,23 @@ function EditSales() {
   }, []);
 
 
-  const addSale = async () => {
+  const setPrice = async () => {
 
     try {
-      axios.put(
-        "http://localhost:5001/api/products/setSale/" + allproducts[index]._id, //Current products' ID here
-        {
-          cost: allproducts[index].cost, //Take current products' before_sale_cost here
-          perc: rate, //Give sale percentage here
-        },
-        {
-          headers: { token: "Bearer " + currUser.accessToken },
-        }
-      );
-      toast.success("Discount applied successfully!", {position: toast.POSITION.TOP_CENTER});
-      setTimeout(() => {window.location.reload()}, 1500)
+        axios.put(
+          "http://localhost:5001/api/products/setCost/" + allproducts[index]._id, //Current products' ID here
+          { newCost: price }, //Set cost here
+          {
+            headers: { token: "Bearer " + currUser.accessToken },
+          }
 
-    } catch (err) {
-      toast.error("Discount cannot be applied!", {position: toast.POSITION.TOP_CENTER});
-      setTimeout(() => {window.location.reload()}, 1500)
-    }
+        );
+        toast.success("Price set successfully!", {position: toast.POSITION.TOP_CENTER});
+        setTimeout(() => {window.location.reload()}, 1500);
+      } catch (err) {
+        toast.error("Price cannot be set!", {position: toast.POSITION.TOP_CENTER});
+        setTimeout(() => {window.location.reload()}, 1500)
+      }
 
   }
 
@@ -64,7 +62,7 @@ function EditSales() {
       <div style={{ display: "flex", justifyContent: "center" }}>
         <Card>
           <CardContent>
-            <Typography variant="h6" style={{marginLeft:'35%'}}>Edit Sales</Typography>
+            <Typography variant="h6" style={{marginLeft:'35%'}}>Set Price</Typography>
             <br/>
             
             <select onClick={(e) => setIndex(e.target.value)} style={{borderRadius:'5px',width:'315px', borderColor:'lightgray'}}>
@@ -76,11 +74,11 @@ function EditSales() {
 
             <TextField
               
-              id="discountrate"
+              id="price"
               type="number"
               InputProps={{ inputProps: { min: 0, max: 100 } }}
               onKeyDown={(e) => e.preventDefault()}
-              label="Discount Rate"
+              label="Price"
               margin="normal"
               onChange={handleChange}
               style={{width:'100%'}}
@@ -92,7 +90,7 @@ function EditSales() {
             <Button color="secondary" href="/profile" variant="contained" style={{marginLeft:'22.5%'}}>
               Cancel
             </Button>
-            <Button color="primary" variant="contained" onClick={()=>{addSale()}}>
+            <Button color="primary" variant="contained" onClick={()=>{setPrice()}}>
               Submit
             </Button>
           </CardActions>
@@ -102,4 +100,4 @@ function EditSales() {
   );
 }
 
-export default EditSales
+export default SetPrice

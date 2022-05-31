@@ -30,6 +30,7 @@ import RemoveProduct from "./pages/ProductManager/RemoveProduct";
 import UpdateStock from "./pages/ProductManager/UpdateProduct";
 import Revenues from "./pages/profilePage/sales-manager/Revenues";
 import RemoveSale from "./pages/profilePage/sales-manager/RemoveSale";
+import SetPrice from "./pages/profilePage/sales-manager/SetPrice";
 
 function App() {
   const user = useSelector((state) => state.user.currentUser);
@@ -62,6 +63,7 @@ function App() {
             <Route path='/Invoices' element={<Invoices/>} />
             <Route path="/removeproduct" element={<RemoveProduct />} />
             <Route path="/updateproduct" element={<UpdateStock />} />
+            <Route path="/setprice" element={<SetPrice />} />
 
             <Route
               path="/approvaldisapproval"

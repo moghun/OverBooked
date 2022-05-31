@@ -56,10 +56,10 @@ function RemoveSale() {
       <div style={{ display: "flex", justifyContent: "center" }}>
         <Card>
           <CardContent>
-            <Typography variant="h6" style={{marginLeft:'15%',fontFamily:'OpenSans', marginRight:'15%'}}>Remove Sales</Typography>
+            <Typography variant="h6" style={{marginLeft:'30%',fontFamily:'OpenSans', marginRight:'15%'}}>Remove Sales</Typography>
             <br/>
             
-            <select onClick={(e) => {setIndex(e.target.value);}} style={{borderRadius:'5px',width:'100%', borderColor:'lightgray', fontFamily:'OpenSans'}}>
+            <select onClick={(e) => {setIndex(e.target.value);}} style={{borderRadius:'5px',width:'315px', borderColor:'lightgray', fontFamily:'OpenSans'}}>
             <option style={{fontFamily:'OpenSans'}} value="none" selected disabled hidden>Select an Option</option>
               {allproducts.map((item, i) => {return(<option style={{fontFamily:'OpenSans'}} value = {i}>{item.name}</option>);})}
             </select>
@@ -68,7 +68,7 @@ function RemoveSale() {
           </CardContent>
 
           <CardActions>
-            <Button style={{fontFamily:'OpenSans', marginLeft:'20%'}} color="secondary" href="/profile" variant="contained">
+            <Button style={{fontFamily:'OpenSans', marginLeft:'22.5%'}} color="secondary" href="/profile" variant="contained">
               Cancel
             </Button>
             <Button style={{fontFamily:'OpenSans',marginRight:'20%'}} color="primary" variant="contained" onClick={()=>{removeSale()}}>
