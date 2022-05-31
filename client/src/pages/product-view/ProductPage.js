@@ -8,8 +8,9 @@ import { useDispatch } from "react-redux";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
-
+import "../../App.css"
 const { v1: uuidv1 } = require("uuid");
+
 
 const DetailsThumb = () => {
   const currUser = useSelector((state) => state.user.currentUser);
@@ -161,6 +162,7 @@ const DetailsThumb = () => {
   return (
     <div className="app">
       <div className="details" key={product.id}>
+
         <div className="big-img">
           <img src={product.img} alt={product.name} />
         </div>
@@ -257,6 +259,7 @@ const DetailsThumb = () => {
             </div>
           </div>
         </div>
+
       </div>
 
       <hr style={{ width: "95%", marginLeft: "2.5%", borderWidth: "2px" }}></hr>

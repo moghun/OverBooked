@@ -8,7 +8,7 @@
     left: 0;
   }
   
-  .box {
+  .boxboxbox {
     position: relative;
     width: 40%;
     margin: 0 auto;
@@ -43,7 +43,7 @@
     color:aliceblue;
   }
 
-  .box button:hover{
+  .boxboxbox button:hover{
     
     color: #e6b619;
   }

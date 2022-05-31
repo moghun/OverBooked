@@ -32,7 +32,7 @@ const CancelPopup = props => {
 
   return (
     <div className="popup-box">
-      <div className="box">
+      <div className="boxboxbox">
             <span className="close-icon" onClick={props.handleClose}>x</span>
             <h style={{color:'#FAFAFA', fontSize:'20px', fontFamily:'OpenSans', marginLeft:'15%'}}>Do you really want to cancel your order? 😓</h>
             
