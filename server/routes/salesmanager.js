@@ -17,13 +17,15 @@ router.get("/betweendates", async (req, res) => {
     try {
         const start_date = req.body.start_date;
         const end_date = req.body.end_date;
+
         if(!start_date||!end_date){
             return res.status(403).json("Dates can not be empty!");
         }
+
         const from = new Date(start_date);
         const to = new Date(end_date);
-
-        const orders = Order.find({date:{$gte:ISODate(from),$lt:ISODate(to)}})
+        
+        const orders = Order.find({date:{$gt:from,$lt:to}});
 
         return res.status(200).json(orders);
 
