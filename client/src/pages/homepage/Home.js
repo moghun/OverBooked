@@ -223,7 +223,7 @@ const HomePage = () => {
           {topprod.map((AllSales) => (
             AllSales.amount === 0 ? (false) : (   
             <BookCard
-                onclick={AllSales._id}
+                id={AllSales._id}
                 name={AllSales.name}
                 amount={AllSales.amount}
                 author={AllSales.author}

@@ -25,9 +25,21 @@ const userSlice = createSlice({
       state.isFetching = false;
       state.error = false;
     },
+    addToWishlist: (state, action) => {
+      state.currentUser.wishlist.push({ product_id: action.payload });
+    },
+    removeFromWishlist: (state, action) => {
+      for (let index = 0; index < state.currentUser.wishlist.length; index++) {
+        const product = state.currentUser.wishlist[index];
+        if(product["product_id"] === action.payload){
+          state.currentUser.wishlist.splice(index, 1);
+          break;
+        }
+      }
+    },
   },
 });
 
-export const { loginStart, loginSuccess, loginFailure, logOut } =
+export const { loginStart, loginSuccess, loginFailure, logOut, addToWishlist, removeFromWishlist } =
   userSlice.actions;
 export default userSlice.reducer;
