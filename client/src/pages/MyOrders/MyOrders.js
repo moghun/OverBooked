@@ -252,19 +252,39 @@ const MyOrders = () => {
                         ></hr>
                         {order.bought_products.map((bitem, j) => {
                           return (
-                            <div style={{ marginTop: "5px" }}>
-                              <h
+                            <div style={{ marginTop: "5px", display:'flex' }}>
+
+                              <input
+                                disabled="disabled"
+                                type="text"
+                                value={"Product Name: " + productNames[i][j]}
                                 style={{
-                                  marginLeft: "50px",
-                                  marginRight: "100px",
-                                }}
-                              >
-                                <strong>Product Name:</strong>{" "}
-                                {productNames[i][j]}
-                              </h>
-                              <h>
-                                <strong>Amount:</strong> {order.amounts[j]}
-                              </h>
+                                  color: "black",
+                                  borderRadius: "10px",
+                                  backgroundColor: "aliceblue",
+                                  marginLeft: "30px",
+                                  width: "500px",
+                                  border:'none',
+                                  outline:'none'
+                                  }}
+                                  readonly
+                                ></input>
+                              <input
+                                disabled="disabled"
+                                type="text"
+                                value={"Amount: " + order.amounts[j]}
+                                style={{
+                                  color: "black",
+                                  borderRadius: "10px",
+                                  backgroundColor: "aliceblue",
+                                  marginLeft: "10px",
+                                  width: "500px",
+                                  border:'none',
+                                  outline:'none'
+                                  }}
+                                  readonly
+                                ></input>                              
+
                             </div>
                           );
                         })}
