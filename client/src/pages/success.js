@@ -38,9 +38,15 @@ const Success = () => {
     try {
       const invoice = {
         invoice_id: i_id,
+        username: currentUser.username,
+        name: currentUser.name,
+        surname: currentUser.surname,
         cost: cart.total,
+        product_names: cart.products.map((book) => book.name),
         products: cart.products.map((book) => book._id),
-        amount: cart.amount,
+        amount: cart.products.map((book) => book.amount),
+        tax_id: currentUser.tax_id,
+        card_no: "",
       };
       await axios.put(
         "http://localhost:5001/api/users/invoice/" + currentUser._id,
