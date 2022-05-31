@@ -92,7 +92,7 @@ const Wishlist = () => {
         <Button href="\profile" className="containerWbtn3">
           Back to Profile
         </Button>
-        <Button className="containerWbtn3" onClick={Clear}>
+        <Button href="\profile" className="containerWbtn3" onClick={Clear}>
           Clear Wishlist
         </Button>
       </div>
