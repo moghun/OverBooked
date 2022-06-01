@@ -41,7 +41,7 @@ const savePDF = (invoice) => {
     invoice.tax_id,
     "**** **** **** " + invoice.card_no,
     invoice.cost + "$",
-    format(invoice.date, "dd/MM/yyyy HH:mm:ss"),
+    invoice.date,
   ];
 
   userRows.push(userData);
@@ -86,7 +86,7 @@ const viewPDF = (invoice) => {
     invoice.tax_id,
     "**** **** **** " + invoice.card_no,
     invoice.cost + "$",
-    format(invoice.date, "dd/MM/yyyy HH:mm:ss"),
+    invoice.date,
   ];
 
   userRows.push(userData);
