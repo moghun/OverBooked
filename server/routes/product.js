@@ -281,7 +281,7 @@ router.put("/setSale/:id", verifyTokenAndSalesManager, async (req, res) => {
   try {
     perc = req.body.perc;
     curr_price = req.body.cost;
-    new_price = curr_price - curr_price * (perc / 100.0);
+    new_price = (curr_price - curr_price * (perc / 100)).toFixed(2);
 
     const updatedProduct = await Product.findByIdAndUpdate(
       req.params.id,

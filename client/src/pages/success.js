@@ -38,9 +38,19 @@ const Success = () => {
     try {
       const invoice = {
         invoice_id: i_id,
+        email: currentUser.email,
+        username: currentUser.username,
+        name: currentUser.name,
+        surname: currentUser.surname,
         cost: cart.total,
-        products: cart.products.map((book) => book._id),
-        amount: cart.amount,
+        products: [
+          cart.products.map((book) => book.cost),
+          cart.products.map((book) => book.name),
+          cart.products.map((book) => book.amount),
+        ],
+        tax_id: currentUser.tax_id,
+        card_no: data.source.last4,
+        date: Date.now(),
       };
       await axios.put(
         "http://localhost:5001/api/users/invoice/" + currentUser._id,
@@ -60,8 +70,8 @@ const Success = () => {
         cost: cart.total,
         products: cart.products,
         amount: cart.amount,
-        //        tax_id: currentUser.tax_id,
-        //        card_no: credit_card_no_here
+        tax_id: currentUser.tax_id,
+        card_no: data.source.last4,
       };
       await axios.post(
         "http://localhost:5001/api/orders/sendRecepit",
@@ -80,6 +90,7 @@ const Success = () => {
         buyer_email: currentUser.email,
         status: "Processing",
         payment_method: data.payment_method,
+        last_four_digit: data.source.last4,
         cost: cart.total,
         date: Date.now(),
         bought_products: idArray,

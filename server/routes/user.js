@@ -267,4 +267,44 @@ router.get("/saleNotification/:pid", async (req, res) => {
   }
 });
 
+router.get("/getInvoices", async (req, res) => {
+  try {
+    const users = await User.find({
+      $nor: [{ invoices: { $exists: false } }, { invoices: { $size: 0 } }]},
+      { invoices: 1 },
+    );
+    let inv = [];
+    users.forEach((us) => {
+      if (us.invoices.length !== 0) {
+        us.invoices.forEach((i) => {
+          inv.push(i);
+        });
+      }
+    });
+
+    res.status(200).json(inv);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.get("/getInvoice/:iid", async (req, res) => {
+  try {
+    const users = await User.find({
+      invoices: { $elemMatch: { invoice_id: req.params.iid } },
+    });
+
+    var invoice = {};
+
+    users[0].invoices.forEach((inv) => {
+      if (inv.invoice_id === req.params.iid) {
+        invoice = inv;
+      }
+    });
+    res.status(200).json(invoice);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 module.exports = router;

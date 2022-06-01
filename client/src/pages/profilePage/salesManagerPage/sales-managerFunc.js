@@ -67,3 +67,15 @@ try {
 } catch (err) {
   alert(err);
 }
+
+try {
+  axios.get(
+    "http://localhost:5001/api/users/getInvoice/" + product_id, //Current products' ID here
+    undefined, //Take current products' before_sale_cost here
+    {
+      headers: { token: "Bearer " + currUser.accessToken },
+    }
+  );
+} catch (err) {
+  alert(err);
+}
