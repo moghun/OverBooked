@@ -6,6 +6,7 @@ import { Button } from "@material-ui/core";
 import { clearCart } from "../redux/cartRedux";
 import { useDispatch } from "react-redux";
 import axios from "axios";
+import { format } from "date-fns";
 
 const { v1: uuidv1 } = require("uuid");
 
@@ -50,7 +51,7 @@ const Success = () => {
         ],
         tax_id: currentUser.tax_id,
         card_no: data.source.last4,
-        date: Date.now(),
+        date: format(Date.now(), "MM/dd/yyyy"),
       };
       await axios.put(
         "http://localhost:5001/api/users/invoice/" + currentUser._id,

@@ -51,9 +51,16 @@ function InvoicesPage() {
     setEnding(null);
     setFiltered(rows);
   }
+  const convertToDate = (d) => {
+    const [month, day, year] = d.split("/");
+    return new Date(year, month - 1, day);
+  };
 
   function checkDate(date) {
-    return starting <= date && date <= ending;
+    return (
+      convertToDate(starting) <= convertToDate(date) &&
+      convertToDate(date) <= convertToDate(ending)
+    );
   }
 
   function filterDate() {
@@ -62,7 +69,7 @@ function InvoicesPage() {
         position: toast.POSITION.TOP_CENTER,
         autoClose: 1500,
       });
-    } else if (starting > ending) {
+    } else if (convertToDate(starting) > convertToDate(ending)) {
       toast.error("Starting cannot be greater than ending!", {
         position: toast.POSITION.TOP_CENTER,
         autoClose: 1500,
@@ -99,10 +106,10 @@ function InvoicesPage() {
       field: "date",
       headerName: "Date",
       width: 200,
-      valueFormatter: (params) => {
-        // first converts to JS Date, then to locale option through date-fns
-        return format(params.value, "dd/MM/yyyy");
-      },
+      // valueFormatter: (params) => {
+      //   // first converts to JS Date, then to locale option through date-fns
+      //   return format(params.value, "dd/MM/yyyy HH:mm:ss");
+      // },
     },
     {
       field: "print",
