@@ -39,8 +39,8 @@ const savePDF = (invoice) => {
   const userData = [
     invoice.email,
     invoice.tax_id,
-    invoice.card_no,
-    invoice.cost,
+    "**** **** **** " + invoice.card_no,
+    invoice.cost + "$",
     format(invoice.date, "dd/MM/yyyy HH:mm:ss"),
   ];
 
@@ -49,7 +49,7 @@ const savePDF = (invoice) => {
 
   doc.text("Overbooked Invoice", 80, 15);
   doc.text("ID: " + invoice.invoice_id, 14, 30);
-  doc.save(`overbooked-${invoice.invoice_id}.pdf`);
+  doc.save(`overbooked-${invoice.invoice_id}-invoice.pdf`);
 };
 
 const viewPDF = (invoice) => {
@@ -67,7 +67,7 @@ const viewPDF = (invoice) => {
       const invoiceData = [
         invoice.products[2][i],
         invoice.products[1][i],
-        invoice.products[0][i],
+        invoice.products[0][i] + "$",
       ];
       tableRows.push(invoiceData);
     }
@@ -84,8 +84,8 @@ const viewPDF = (invoice) => {
   const userData = [
     invoice.email,
     invoice.tax_id,
-    invoice.card_no,
-    invoice.cost,
+    "**** **** **** " + invoice.card_no,
+    invoice.cost + "$",
     format(invoice.date, "dd/MM/yyyy HH:mm:ss"),
   ];
 
