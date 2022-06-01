@@ -50,6 +50,7 @@ const Success = () => {
         ],
         tax_id: currentUser.tax_id,
         card_no: data.source.last4,
+        date: Date.now(),
       };
       await axios.put(
         "http://localhost:5001/api/users/invoice/" + currentUser._id,

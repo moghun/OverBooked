@@ -273,7 +273,6 @@ router.get("/getInvoices", async (req, res) => {
       $nor: [{ invoices: { $exists: false } }, { invoices: { $size: 0 } }]},
       { invoices: 1 },
     );
-    console.log(users);
     let inv = [];
     users.forEach((us) => {
       if (us.invoices.length !== 0) {
