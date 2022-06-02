@@ -255,7 +255,7 @@ const HomePage = () => {
         <Slider className="procontainer" {...carouselProperties}>
           {allsale.map((AllSales) => (
             <BookCard
-              onclick={AllSales._id}
+              id={AllSales._id}
               name={AllSales.name}
               amount={AllSales.amount}
               author={AllSales.author}
