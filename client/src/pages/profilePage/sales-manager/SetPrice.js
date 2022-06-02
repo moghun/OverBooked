@@ -91,10 +91,10 @@ function SetPrice() {
             <br />
 
             <TextField
+              onKeyDown={(event) => {if(event.key === "-"){event.preventDefault()}}}
               id="price"
               type="number"
-              InputProps={{ inputProps: { min: 0, max: 100 } }}
-              onKeyDown={(e) => e.preventDefault()}
+              InputProps={{ inputProps: { min: 0} }}
               label="Price"
               margin="normal"
               onChange={handleChange}
