@@ -24,7 +24,9 @@ function SetPrice() {
   useEffect(() => {
     const getAllProducts = async () => {
       try {
-        const res = await axios.get("http://localhost:5001/api/products");
+        const res = await axios.get(
+          "http://localhost:5001/api/products?sale=false"
+        );
         setAll(res.data);
       } catch (err) {}
     };
@@ -82,7 +84,7 @@ function SetPrice() {
               {allproducts.map((item, i) => {
                 return (
                   <option key={item._id} value={i}>
-                    {item.name}
+                    {item.name} - {item.category} - {item._id}
                   </option>
                 );
               })}
@@ -91,10 +93,14 @@ function SetPrice() {
             <br />
 
             <TextField
-              onKeyDown={(event) => {if(event.key === "-"){event.preventDefault()}}}
+              onKeyDown={(event) => {
+                if (event.key === "-") {
+                  event.preventDefault();
+                }
+              }}
               id="price"
               type="number"
-              InputProps={{ inputProps: { min: 0} }}
+              InputProps={{ inputProps: { min: 0 } }}
               label="Price"
               margin="normal"
               onChange={handleChange}

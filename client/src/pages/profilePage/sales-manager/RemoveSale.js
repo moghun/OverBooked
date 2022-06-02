@@ -100,7 +100,7 @@ function RemoveSale() {
                     style={{ fontFamily: "OpenSans" }}
                     value={i}
                   >
-                    {item.name}
+                    {item.name} - {item.category} - {item._id}
                   </option>
                 );
               })}

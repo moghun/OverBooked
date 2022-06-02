@@ -95,7 +95,7 @@ function EditSales() {
               {allproducts.map((item, i) => {
                 return (
                   <option key={item._id} value={i}>
-                    {item.name}
+                    {item.name} - {item.category} - {item._id}
                   </option>
                 );
               })}
