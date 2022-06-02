@@ -33,6 +33,7 @@ class _LoginPageState extends State<LoginPage> {
           cart: loginInfo["cart"],
           token: loginInfo["accessToken"],
           uid: loginInfo["_id"],
+          wishlist: loginInfo["wishlist"],
         );
         print(loginInfo["cart"]);
         UserService.updateUser(newUser);

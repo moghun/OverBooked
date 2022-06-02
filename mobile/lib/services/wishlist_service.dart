@@ -9,17 +9,23 @@ class WishlistService {
 
   addToWishlist(Product product) {
     User user = UserService.getCurrentUser()!;
-    var newWishlist = user.wishlist!;
-    newWishlist.add({"product_id": product.id});
+    user.wishlist!.add({"product_id": product.id});
+    var body = jsonEncode({"product_id": product.id});
+    http.put(Uri.parse(apiBaseURL + "/users/addToWishlist/" + user.uid!),
+        headers: {"Content-Type": "application/json", "token": "Bearer " + user.token!},
+        body: body);
+  }
+
+  removeFromWishlist(Product product) {
+    User user = UserService.getCurrentUser()!;
+    user.wishlist!.remove({"product_id": product.id});
     var body = jsonEncode({"product_id": product.id});
     http.put(
-      Uri.parse(apiBaseURL + "/users/addToWishlist/" + user.uid!),
+      Uri.parse(apiBaseURL + "/users/removeFromWishlist/" + user.uid!),
       headers: {"Content-Type": "application/json", "token": "Bearer " + user.token!},
       body: body
     );
   }
-
-  removeFromWishlist(Product product) {}
 
   clearWishlist() {
     User user = UserService.getCurrentUser()!;
