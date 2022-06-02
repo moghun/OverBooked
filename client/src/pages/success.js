@@ -6,6 +6,9 @@ import { Button } from "@material-ui/core";
 import { clearCart } from "../redux/cartRedux";
 import { useDispatch } from "react-redux";
 import axios from "axios";
+import { format } from "date-fns";
+
+const { v1: uuidv1 } = require("uuid");
 
 const Success = () => {
   const location = useLocation();
@@ -32,48 +35,80 @@ const Success = () => {
     clearCartAPI();
   };
 
-
-  const sendEmail = async () => {
-    try{
-      await axios.post("http://localhost:5001/api/orders/sendRecepit", 
-      {
+  const createInvoice = async (i_id) => {
+    try {
+      const invoice = {
+        invoice_id: i_id,
         email: currentUser.email,
         username: currentUser.username,
+        name: currentUser.name,
+        surname: currentUser.surname,
+        cost: cart.total,
+        products: [
+          cart.products.map((book) => book.cost),
+          cart.products.map((book) => book.name),
+          cart.products.map((book) => book.amount),
+        ],
+        tax_id: currentUser.tax_id,
+        card_no: data.source.last4,
+        date: format(Date.now(), "MM/dd/yyyy"),
+      };
+      await axios.put(
+        "http://localhost:5001/api/users/invoice/" + currentUser._id,
+        invoice,
+        { headers: { token: "Bearer " + currentUser.accessToken } }
+      );
+    } catch (err) {}
+  };
+
+  const sendInvoice = async (i_id) => {
+    try {
+      const invoice_m = {
+        invoice_id: i_id,
+        email: currentUser.email,
+        username: currentUser.username,
+        name: currentUser.name,
         cost: cart.total,
         products: cart.products,
         amount: cart.amount,
-      })
-      console.log(currentUser.email)
-    } catch(err){}
-  }
-
+        tax_id: currentUser.tax_id,
+        card_no: data.source.last4,
+      };
+      await axios.post(
+        "http://localhost:5001/api/orders/sendRecepit",
+        invoice_m,
+        { headers: { token: "Bearer " + currentUser.accessToken } }
+      );
+    } catch (err) {}
+  };
 
   useEffect(() => {
-    function createOrder(){
-
-
-      const idArray = cart.products.map((book) =>book._id)
-      const amountArray = cart.products.map((book) =>book.amount)
-      
+    function createOrder() {
+      const idArray = cart.products.map((book) => book._id);
+      const amountArray = cart.products.map((book) => book.amount);
       const orderStruct = {
         buyer_email: currentUser.email,
         status: "Processing",
+        payment_method: data.payment_method,
+        last_four_digit: data.source.last4,
         cost: cart.total,
         date: Date.now(),
         bought_products: idArray,
         amounts: amountArray,
       };
 
-
       try {
-        userRequest.post("/orders",
-        orderStruct,{ headers: { token: "Bearer " + currentUser.accessToken } });
-      } catch(err){
+        userRequest.post("/orders", orderStruct, {
+          headers: { token: "Bearer " + currentUser.accessToken },
+        });
+      } catch (err) {
         console.log(err);
       }
-    };
+    }
+    const i_id = uuidv1();
     createOrder();
-    sendEmail();
+    createInvoice(i_id);
+    sendInvoice(i_id);
     clear();
   }, [cart, data, currentUser]);
 

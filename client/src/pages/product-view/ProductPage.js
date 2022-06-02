@@ -7,7 +7,8 @@ import { addProduct } from "../../redux/cartRedux";
 import { useDispatch } from "react-redux";
 import axios from "axios";
 import { useSelector } from "react-redux";
-
+import { toast } from "react-toastify";
+import "../../App.css"
 const { v1: uuidv1 } = require("uuid");
 
 
@@ -20,18 +21,58 @@ const DetailsThumb = () => {
   const [maxAmount, setMaxAmount] = useState(null);
   const [comment, setComment] = useState(null);
   const [rating, setRating] = useState(null);
+  const [usernames, setUsernames] = useState([]);
+  const [approvedComments, setapprovedComments] = useState([]);
   const dispatch = useDispatch();
+  console.log(approvedComments);
+  const getUserInfo = async () => {
+    var names = [];
+
+    for (let i = 0; i < approvedComments.length; i++) {
+      try {
+        var userId = approvedComments[i].user_id;
+        const res = await axios.get(
+          "http://localhost:5001/api/users/getUsername/" + userId
+        );
+        names.push(res.data);
+      } catch (err) {}
+    }
+    setUsernames(names);
+  };
+  useEffect(async () => {
+    if (approvedComments.length > 0) {
+      getUserInfo();
+    }
+  }, [approvedComments]);
+
+  async function getUserCart() {
+    try {
+      const res = await axios.get(
+        "http://localhost:5001/api/users/find/" + currUser._id,
+        { headers: { token: "Bearer " + currUser.accessToken } }
+      );
+      return res.data.cart;
+    } catch (err) {}
+  }
 
   function getComment(val) {
     setComment(val.target.value);
   }
-
+  console.log(usernames);
+  console.log(product);
   const addCartAPI = async (product_id, amount) => {
+    let userCart = await getUserCart();
+    let oldAmount = 0;
+    for (let i = 0; i < userCart.length; i++) {
+      if (userCart[i].product_id == product_id) {
+        oldAmount = userCart[i].amount;
+      }
+    }
+    const newAmount = amount + oldAmount;
     const cartStruct = {
       product_id: product_id,
-      amount: amount,
+      amount: newAmount,
     };
-
     try {
       await axios.put(
         "http://localhost:5001/api/users/addToCart/" + currUser._id,
@@ -62,7 +103,7 @@ const DetailsThumb = () => {
             sendComment,
             { headers: { token: "Bearer " + currUser.accessToken } }
           );
-          alert("Your comment is sent for approve");
+          toast.success("Your comment has sent for approve", {position: toast.POSITION.TOP_CENTER});
           window.location.reload();
         } catch (err) {}
       }
@@ -89,7 +130,11 @@ const DetailsThumb = () => {
     const getProduct = async () => {
       try {
         const res = await publicRequest.get("/products/find/" + id);
+        console.log("hasdfhhasdfh",res.data.comments);
         setProduct(res.data);
+        setapprovedComments(
+          res.data.comments.filter((c) => c.isApproved === true)
+        );
       } catch {}
     };
     getProduct();
@@ -107,42 +152,41 @@ const DetailsThumb = () => {
   }
 
   const addCart = () => {
-    
     dispatch(addProduct({ ...product, amount, maxAmount }));
     addCartAPI(product._id, amount);
-    alert("Product added to Cart");
+    toast.success("Your product has been added to your card", {position: toast.POSITION.TOP_CENTER});
     
     
   };
-  let approvedComments;
-  if (product.comments) {
-    approvedComments = product.comments.filter((c) => c.isApproved === true);
-  }
+
   return (
-    <div className="app">
-      <div className="details" key={product.id}>
-        <div className="big-img">
+    <div className="app" >
+
+      <div className="details" key={product.id} >
+
+        <div className="big-img" >
           <img src={product.img} alt={product.name} />
         </div>
 
-        <div className="box">
+        <div className="box" >
+
           <div className="row">
             <h2>{product.name}</h2>
           </div>
 
-          <h5>Author: {product.author}</h5>
-          <h5>Publisher: {product.publisher}</h5>
-          <p>Amount: {product.amount}</p>
+          <h5><strong>Author:</strong> {product.author}</h5>
+          <h5><strong>Publisher:</strong> {product.publisher}</h5>
+          <p><strong>Amount:</strong> {product.amount}</p>
           {product.sale ? (
             <div>
-              <p>Before Sale Cost: {product.before_sale_price} $</p>
-              <p>Cost: {product.cost} $</p>
+              <p><strong>Before Sale Cost:</strong> {product.before_sale_price} $</p>
+              <p><strong>Cost:</strong> {product.cost} $</p>
             </div>
           ) : (
-            <p>Cost: {product.cost} $</p>
+            <p><strong>Cost:</strong> {product.cost} $</p>
           )}
-          <p>Description: {product.description}</p>
-          <p>Category: {product.category}</p>
+          <p><strong>Description:</strong> {product.description}</p>
+          <p><strong>Category:</strong> {product.category}</p>
 
           {product.amount !== 0 ? (
             <>
@@ -153,8 +197,13 @@ const DetailsThumb = () => {
                 min="1"
                 max={product.amount}
                 onKeyDown={(e) => e.preventDefault()}
+                style={{ borderRadius: "5px", borderWidth: "1px",outline:'none' }}
               ></input>{" "}
-              <button className="cart" onClick={addCart}>
+              <button
+                className="cart"
+                onClick={addCart}
+                style={{ borderRadius: "5px" }}
+              >
                 Add to cart
               </button>
             </>
@@ -190,7 +239,12 @@ const DetailsThumb = () => {
               placeholder=" Write your comment here..."
               rows="4"
               cols="50"
-              style={{ resize: "none", borderWidth: "bold" }}
+              style={{
+                resize: "none",
+                borderWidth: "bold",
+                borderRadius: "10px",
+                outline:'none'
+              }}
             ></textarea>
             <div>
               <button
@@ -200,6 +254,7 @@ const DetailsThumb = () => {
                   backgroundColor: "#333",
                   color: "white",
                   width: 60,
+                  borderRadius: "5px",
                 }}
               >
                 Submit
@@ -207,7 +262,10 @@ const DetailsThumb = () => {
             </div>
           </div>
         </div>
+
       </div>
+
+      <hr style={{ width: "95%", marginLeft: "2.5%", borderWidth: "2px" }}></hr>
 
       <div className="comment-box" style={{ textAlign: "center" }}>
         <h3 style={{ marginBottom: "10px" }}>Product Comments</h3>
@@ -215,19 +273,32 @@ const DetailsThumb = () => {
           !approvedComments || approvedComments.length === 0 ? (
             <h>This product has no comment yet</h>
           ) : (
-            approvedComments.map((cmt) => {
+            approvedComments.map((cmt, i) => {
+              //getUserInfo(cmt.user_id);
               return (
                 <div
                   className="comment-row"
                   style={{
+                    boxShadow: "0 0 5px #ccc",
                     outline: "solid",
-                    outlineWidth: "1px",
+                    outlineColor: "lightgray",
+                    outlineWidth: "0.5px",
                     borderRadius: "5px",
                     margin: "20px",
-                    padding: "5px",
+                    padding: "10px",
                   }}
                 >
-                  <h className="comment-text">{cmt.comment}</h>
+                  <div class="comment-header d-flex justify-content-between">
+                    <div class="comment-owner">
+                      <strong>Username: </strong>
+                      <h>{usernames[i]}</h>
+                    </div>
+                  </div>
+
+                  <div style={{ textAlign: "left" }}>
+                    <br></br>
+                    <h className="comment-text">{cmt.comment}</h>
+                  </div>
                 </div>
               );
             })

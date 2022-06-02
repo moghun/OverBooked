@@ -12,7 +12,9 @@ import ScrollToTop from "../../components/Scroll/ScrollToTop";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { ArrowBackIos, ArrowForwardIos } from "@material-ui/icons";
+
+import LeftArrow from "../homepage/left-arrow.svg"
+import RightArrow from "../homepage/right-arrow.svg"
 
 import axios from "axios";
 import BookCard from "../../components/BookCard";
@@ -20,31 +22,17 @@ import { Grid } from "@mui/material";
 
 //in order to have sequence products with slider
 
-function SampleNextArrow(props) {
-  const { className, style, onClick } = props;
-  return (
-    <div
-      className={className}
-      style={{ ...style, display: "block", background: "yellow" }}
-      onClick={onClick}
-    />
-  );
-}
+const SlickArrowLeft = ({ currentSlide, slideCount, ...props }) => (
+  <img src={LeftArrow} alt="prevArrow" {...props} />
+);
 
-function SamplePrevArrow(props) {
-  const { className, style, onClick } = props;
-  return (
-    <div
-      className={className}
-      style={{ ...style, display: "block", background: "green" }}
-      onClick={onClick}
-    />
-  );
-}
+const SlickArrowRight = ({ currentSlide, slideCount, ...props }) => (
+  <img src={RightArrow} alt="nextArrow" {...props} />
+);
 
 const carouselProperties = {
-  nextArrow: <SampleNextArrow />,
-  prevArrow: <SamplePrevArrow />,
+  prevArrow: <SlickArrowLeft />,
+  nextArrow: <SlickArrowRight />,
   dots: true,
   infinite: false,
   speed: 500,
@@ -94,10 +82,12 @@ function avgrating(items) {
 const HomePage = () => {
   const [allsale, setallsale] = useState([]);
   const [topprod, settopprod] = useState([]);
+  const [allprod, settallprod] = useState([]);
 
   const getAllProducts = async () => {
     try {
       const res = await axios.get("http://localhost:5001/api/products");
+      settallprod(res.data);
       return res.data;
     } catch (err) {}
   };
@@ -169,9 +159,7 @@ const HomePage = () => {
   }, [currentSlide2]);
 
   return (
-    <div className="total">
-      <ScrollToTop />
-
+    <div>
       <div className="some-container">
         <Button onClick={() => scrollToSection(gomoststarts)} className="btn">
           Check Recent Products
@@ -187,7 +175,7 @@ const HomePage = () => {
       <div className="slider2">
         <AiFillBackward className="arrow prev" onClick={prevSlide2} />
         <AiFillForward className="arrow next" onClick={nextSlide2} />
-        {topprod.map((slide, index) => {
+        {allprod.map((slide, index) => {
           return (
             <div
               className={index === currentSlide2 ? "slide current" : "slide"}
@@ -233,17 +221,18 @@ const HomePage = () => {
       <div style={{ margin: "30px" }} className="carousel">
         <Slider className="procontainer" {...carouselProperties}>
           {topprod.map((AllSales) => (
+            AllSales.amount === 0 ? (false) : (   
             <BookCard
-              onclick={AllSales._id}
-              name={AllSales.name}
-              amount={AllSales.amount}
-              author={AllSales.author}
-              imgurl={AllSales.img}
-              publisher={AllSales.publisher}
-              price={AllSales.cost}
-              score={avgrating(AllSales)}
-              beforeprice={AllSales.before_sale_price}
-            ></BookCard>
+                id={AllSales._id}
+                name={AllSales.name}
+                amount={AllSales.amount}
+                author={AllSales.author}
+                imgurl={AllSales.img}
+                publisher={AllSales.publisher}
+                price={AllSales.cost}
+                score={avgrating(AllSales)}
+                beforeprice={AllSales.before_sale_price}
+              ></BookCard>)
           ))}
         </Slider>
       </div>
@@ -263,10 +252,10 @@ const HomePage = () => {
       </div>
 
       <div style={{ margin: "30px" }} className="carousel">
-        <Slider className="procontainer2" {...carouselProperties}>
+        <Slider className="procontainer" {...carouselProperties}>
           {allsale.map((AllSales) => (
             <BookCard
-              onclick={AllSales._id}
+              id={AllSales._id}
               name={AllSales.name}
               amount={AllSales.amount}
               author={AllSales.author}

@@ -25,6 +25,26 @@ async function updateStock(id, quantity) {
   await product.save({ validateBeforeSave: false });
 }
 
+async function increaseStock(id, quantity) {
+  const product = await Product.findById(id);
+
+  const weight = product.amount - quantity;
+  if (weight >= 0) {
+    product.amount += quantity;
+  }
+
+  await product.save({ validateBeforeSave: false });
+}
+
+async function increaseAmount(idArray, amountArray) {
+  for (let i = 0; i < idArray.length; i++) {
+    const id = idArray[i];
+    const increaseAmount = amountArray[i];
+
+    await increaseStock(id, increaseAmount);
+  }
+}
+
 async function reduceAmount(idArray, amountArray) {
   for (let i = 0; i < idArray.length; i++) {
     const id = idArray[i];
@@ -69,9 +89,14 @@ router.put("/:id", verifyTokenAndUser, async (req, res) => {
 });
 
 //DELETE
-router.delete("/:id", verifyTokenAndUser, async (req, res) => {
+router.delete("/:id/:oid", verifyTokenOrManager, async (req, res) => {
   try {
-    await Order.findByIdAndDelete(req.params.id);
+    const deleteOrder = await Order.find({ _id: req.params.oid });
+    const books = deleteOrder[0].bought_products;
+    const amounts = deleteOrder[0].amounts;
+
+    increaseAmount(books, amounts);
+    await Order.findByIdAndDelete(req.params.oid);
     res.status(200).json("Order has been deleted...");
   } catch (err) {
     res.status(500).json(err);
@@ -93,7 +118,6 @@ router.get("/", verifyTokenAndManager, async (req, res) => {
 router.get("/find/:userId", async (req, res) => {
   try {
     const orders = await Order.find({ buyer_email: req.query.buyer_email });
-    console.log(req.query.buyer_email);
     res.status(200).json(orders);
   } catch (err) {
     res.status(500).json(err);
@@ -101,7 +125,7 @@ router.get("/find/:userId", async (req, res) => {
 });
 
 //SEND RECEPIT
-router.post("/sendRecepit", async (req, res) => {
+router.post("/sendRecepit", verifyToken, async (req, res) => {
   try {
     client
       .send({
@@ -115,10 +139,13 @@ router.post("/sendRecepit", async (req, res) => {
         },
         templateId: "d-9eeb7db78dff4ac384f3d2bf511cdf1a",
         dynamicTemplateData: {
+          invoice_id: req.body.invoice_id,
           username: req.body.username,
           email: req.body.email,
           cost: req.body.cost,
           products: req.body.products,
+          tax_id: req.body.tax_id,
+          card_no: req.body.card_no
         },
       })
       .then();

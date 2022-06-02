@@ -8,22 +8,35 @@ import SearchPage from "./pages/search-page/SearchPage";
 import Footer from "./components/Footer/Footer";
 import NavigationBar2 from "./components/Navigation_Bar/NavigationBar2";
 import Profile from "./pages/product-view/Profile";
-import CreateStore from "./pages/product-view/CreateStore";
 import EditProfile from "./pages/product-view/EditProfile";
 import Checkout from "./pages/Checkout";
 import ShoppingCart from "./pages/ShoppingCart";
 import Success from "./pages/success";
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer,} from 'react-toastify'; 
 
 import SignUp from "./pages/signup/Signup";
 import Signin from "./pages/signin/Signin";
+import Synch from "./pages/signin/synch";
 import { useSelector } from "react-redux";
 import MyOrders from "./pages/MyOrders/MyOrders";
 import ProductManagerAPI from "./pages/profilePage/product-managerPage/product-managerProfile";
+import EditSales from "./pages/profilePage/sales-manager/EditSales";
+import InvoicesPage from "./pages/profilePage/sales-manager/InvoicesPage";
+import Wishlist from "./pages/wishlist/Wishlist";
+import ProductManager from "./pages/ProductManager/ProductManager";
+import Invoices from "./pages/ProductManager/Invoices";
+import RemoveProduct from "./pages/ProductManager/RemoveProduct";
+import UpdateStock from "./pages/ProductManager/UpdateProduct";
+import Revenues from "./pages/profilePage/sales-manager/Revenues";
+import RemoveSale from "./pages/profilePage/sales-manager/RemoveSale";
+import SetPrice from "./pages/profilePage/sales-manager/SetPrice";
 
 function App() {
   const user = useSelector((state) => state.user.currentUser);
   return (
     <BrowserRouter>
+    <ToastContainer style={{display: "flex", justifyContent: "center"}}/>
       <div>
         <NavigationBar />
       </div>
@@ -39,17 +52,28 @@ function App() {
             <Route path="/profile" element={<Profile />} />
             <Route path="/productpage/:id" element={<ProductPage />} />
             <Route path="/editprofile" element={<EditProfile />} />
-            <Route path="/createstore" element={<CreateStore />} />
             <Route path="/searchpage/:q" element={<SearchPage />} />
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/shoppingcart" element={<ShoppingCart />} />
             <Route path="/myorders" element={<MyOrders />} />
             <Route path="/success" element={<Success />} />
+            <Route path="/synch" element={<Synch />} />
+            <Route path="/wishlist" element={<Wishlist />} />
+            <Route path="/productmanager" element={<ProductManager />} />
+            <Route path='/Invoices' element={<Invoices/>} />
+            <Route path="/removeproduct" element={<RemoveProduct />} />
+            <Route path="/updateproduct" element={<UpdateStock />} />
+            <Route path="/setprice" element={<SetPrice />} />
+
             <Route
               path="/approvaldisapproval"
               element={<ProductManagerAPI />}
             />
             <Route path="*" element={<HomePage />} />
+            <Route path="/editsales" element={<EditSales />} />
+            <Route path="/removesales" element={<RemoveSale />} />
+            <Route path="/invoicessalesmanager" element={<InvoicesPage />} />
+            <Route path="/revenues" element={<Revenues />} />
           </>
         ) : (
           <>
