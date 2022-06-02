@@ -148,7 +148,6 @@ router.put(
       const deleteOrder = await Order.find({ _id: req.params.oid });
       const books = deleteOrder[0].bought_products;
       const amounts = deleteOrder[0].amounts;
-
       increaseAmount(books, amounts);
       const updatedOrder = await Order.findByIdAndUpdate(req.params.oid, {
         $set: {
@@ -159,7 +158,7 @@ router.put(
       client
         .send({
           to: {
-            email: deleteOrder.buyer_mail,
+            email: deleteOrder[0].buyer_email,
             name: "Customer",
           },
           from: {
@@ -168,9 +167,9 @@ router.put(
           },
           templateId: "d-da7c58c6be04446c95bc84c300e525d1",
           dynamicTemplateData: {
-            order_id: deleteOrder._id,
-            cost: deleteOrder.cost,
-            card_no: deleteOrder.last_four_digit,
+            order_id: deleteOrder[0]._id,
+            cost: deleteOrder[0].cost,
+            card_no: deleteOrder[0].last_four_digit,
           },
         })
         .then();
