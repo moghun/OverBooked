@@ -166,6 +166,7 @@ class _HomePageState extends State<HomePage> {
                                       ),
                                       const SizedBox(width: 8),
                                     ],
+                                Text(snapshot.data![2].sale!.toString() + snapshot.data![1].name),
                                   ])),
                         ),
                       ),

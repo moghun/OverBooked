@@ -26,7 +26,16 @@ class ProductService {
       var resp = await http.get(Uri.parse(apiBaseURL + "/"));
       if (resp.statusCode >= 200 && resp.statusCode < 400) {
         var productsJson = jsonDecode(resp.body) as List;
+        print(productsJson[0]["product_id"]);
+        print(productsJson[1]["product_id"]);
+        print(productsJson[2]["product_id"]);
+        print(productsJson[3]["product_id"]);
+        print(productsJson[4]["product_id"]);
+        print(productsJson[5]["product_id"]);
+        print(productsJson[6]["product_id"]);
+        print(productsJson[7]["product_id"]);
         List<Product> products = productsJson.map((prod) => Product.fromJson(prod)).toList();
+        print(products);
         return products;
       } else {
         print(resp.statusCode);
