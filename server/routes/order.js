@@ -73,7 +73,7 @@ router.post("/", verifyToken, async (req, res) => {
 });
 
 //UPDATE
-router.put("/:id", verifyTokenAndUser, async (req, res) => {
+router.put("/:id", verifyTokenOrManager, async (req, res) => {
   try {
     const updatedOrder = await Order.findByIdAndUpdate(
       req.params.id,
@@ -123,27 +123,21 @@ router.put("/cancel/:id/:oid", verifyTokenOrManager, async (req, res) => {
 });
 
 //RETURN REQUEST
-router.put(
-  "/requestReturn/:id/:oid",
-  verifyTokenAndSalesManager,
-  async (req, res) => {
-    try {
-      const deleteOrder = await Order.find({ _id: req.params.oid });
-      const books = deleteOrder[0].bought_products;
-      const amounts = deleteOrder[0].amounts;
-
-      increaseAmount(books, amounts);
-      const updatedOrder = await Order.findByIdAndUpdate(req.params.oid, {
-        $set: {
-          status: "Return Requested",
-        },
-      });
-      res.status(200).json(updatedOrder);
-    } catch (err) {
-      res.status(500).json(err);
-    }
+router.put("/requestReturn/:id/:oid", verifyToken, async (req, res) => {
+  console.log(req.body.refundDescription);
+  try {
+    console.log(req.body.refundDescription);
+    const updatedOrder = await Order.findByIdAndUpdate(req.params.oid, {
+      $set: {
+        status: "Return Requested",
+        refundDescription: req.body.refundDescription,
+      },
+    });
+    res.status(200).json(updatedOrder);
+  } catch (err) {
+    res.status(500).json(err);
   }
-);
+});
 
 //RETURN APPROVE
 router.put(
@@ -174,11 +168,6 @@ router.put(
   verifyTokenAndSalesManager,
   async (req, res) => {
     try {
-      const deleteOrder = await Order.find({ _id: req.params.oid });
-      const books = deleteOrder[0].bought_products;
-      const amounts = deleteOrder[0].amounts;
-
-      increaseAmount(books, amounts);
       const updatedOrder = await Order.findByIdAndUpdate(req.params.oid, {
         $set: {
           status: "Return Rejected",
