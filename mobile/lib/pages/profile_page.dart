@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobile/models/user.dart';
 import 'package:mobile/pages/user_orders_page.dart';
+import 'package:mobile/pages/wishlist_page.dart';
 import 'package:mobile/services/user_service.dart';
 import 'package:mobile/utils/colors.dart';
 import 'package:mobile/utils/styles.dart';
@@ -42,7 +43,8 @@ class _ProfilePageState extends State<ProfilePage> {
                           Expanded(
                             child: Container(
                               decoration: BoxDecoration(
-                                  color: AppColors.background2, borderRadius: BorderRadius.circular(20)),
+                                  color: AppColors.background2,
+                                  borderRadius: BorderRadius.circular(20)),
                               child: Column(
                                 children: [
                                   const SizedBox(
@@ -95,41 +97,183 @@ class _ProfilePageState extends State<ProfilePage> {
                         ],
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(12.0),
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: OutlinedButton(
-                                onPressed: () {
-                                  Navigator.push(context,
-                                      MaterialPageRoute(builder: (context) => const UserOrdersPage()));
-                                },
-                                child: const Text("My Orders")),
-                          ),
-                        ],
-                      ),
-                    ),
                     const SizedBox(
-                      height: 12,
+                      height: 5,
+                    ),
+                    Divider(
+                      color: AppColors.background,
+                      thickness: 1,
+                      height: 0,
                     ),
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: OutlinedButton(
-                                onPressed: () {
-                                  UserService.removeUser();
-                                  Navigator.pushReplacementNamed(context, "/");
-                                },
-                                child: const Text("Log Out", style: TextStyle(fontSize: 18, color: AppColors.background),)),
-                          ),
-                        ],
+                      padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                      child: SizedBox(
+                        height: 60,
+                        child: TextButton(
+                            style: ButtonStyle(
+                                overlayColor: MaterialStateProperty.all(
+                                    AppColors.background.withOpacity(0.2))),
+                            onPressed: () {},
+                            child: Stack(
+                              children: const [
+                                Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: Icon(
+                                    Icons.local_shipping,
+                                    color: AppColors.background,
+                                    size: 30,
+                                  ),
+                                ),
+                                Align(
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                      "My orders",
+                                      style: TextStyle(fontSize: 20, color: Colors.black),
+                                    )),
+                                Align(
+                                  alignment: Alignment.centerRight,
+                                  child: Icon(
+                                    Icons.keyboard_arrow_right,
+                                    color: AppColors.background,
+                                  ),
+                                )
+                              ],
+                            )),
                       ),
                     ),
-                    const SizedBox(
-                      height: 12,
+                    Divider(
+                      color: AppColors.background,
+                      thickness: 1,
+                      height: 0,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                      child: SizedBox(
+                        height: 60,
+                        child: TextButton(
+                            style: ButtonStyle(
+                                overlayColor: MaterialStateProperty.all(
+                                    AppColors.background.withOpacity(0.2))),
+                            onPressed: () {
+                              Navigator.push(context, MaterialPageRoute(
+                                  builder: (context) => const WishlistPage()));
+                            },
+                            child: Stack(
+                              children: const [
+                                Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: Icon(
+                                    Icons.favorite,
+                                    color: AppColors.background,
+                                    size: 30,
+                                  ),
+                                ),
+                                Align(
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                      "Wishlist",
+                                      style: TextStyle(fontSize: 20, color: Colors.black),
+                                    )),
+                                Align(
+                                  alignment: Alignment.centerRight,
+                                  child: Icon(
+                                    Icons.keyboard_arrow_right,
+                                    color: AppColors.background,
+                                  ),
+                                )
+                              ],
+                            )),
+                      ),
+                    ),
+                    Divider(
+                      color: AppColors.background,
+                      thickness: 1,
+                      height: 0,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                      child: SizedBox(
+                        height: 60,
+                        child: TextButton(
+                            style: ButtonStyle(
+                                overlayColor: MaterialStateProperty.all(
+                                    AppColors.background.withOpacity(0.2))),
+                            onPressed: () {},
+                            child: Stack(
+                              children: const [
+                                Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: Icon(
+                                    Icons.settings,
+                                    color: AppColors.background,
+                                    size: 30,
+                                  ),
+                                ),
+                                Align(
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                      "Edit profile",
+                                      style: TextStyle(fontSize: 20, color: Colors.black),
+                                    )),
+                                Align(
+                                  alignment: Alignment.centerRight,
+                                  child: Icon(
+                                    Icons.keyboard_arrow_right,
+                                    color: AppColors.background,
+                                  ),
+                                )
+                              ],
+                            )),
+                      ),
+                    ),
+                    Divider(
+                      color: AppColors.background,
+                      thickness: 1,
+                      height: 0,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                      child: SizedBox(
+                        height: 60,
+                        child: TextButton(
+                            style: ButtonStyle(
+                                overlayColor: MaterialStateProperty.all(
+                                    AppColors.background.withOpacity(0.2))),
+                            onPressed: () {
+                              UserService.removeUser();
+                              Navigator.pushReplacementNamed(context, "/");
+                            },
+                            child: Stack(
+                              children: const [
+                                Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: Icon(
+                                    Icons.exit_to_app,
+                                    color: AppColors.background,
+                                    size: 30,
+                                  ),
+                                ),
+                                Align(
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                      "Log out",
+                                      style: TextStyle(fontSize: 20, color: Colors.black),
+                                    )),
+                                Align(
+                                  alignment: Alignment.centerRight,
+                                  child: Icon(
+                                    Icons.keyboard_arrow_right,
+                                    color: AppColors.background,
+                                  ),
+                                )
+                              ],
+                            )),
+                      ),
+                    ),
+                    Divider(
+                      color: AppColors.background,
+                      thickness: 1,
+                      height: 0,
                     ),
                   ]),
                 ),
