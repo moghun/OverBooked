@@ -155,6 +155,25 @@ router.put(
           status: "Returned",
         },
       });
+
+      client
+        .send({
+          to: {
+            email: deleteOrder.buyer_mail,
+            name: "Customer",
+          },
+          from: {
+            email: "overbookedstore1@gmail.com",
+            name: "overbooked",
+          },
+          templateId: "d-da7c58c6be04446c95bc84c300e525d1",
+          dynamicTemplateData: {
+            order_id: deleteOrder._id,
+            cost: deleteOrder.cost,
+            card_no: deleteOrder.last_four_digit,
+          },
+        })
+        .then();
       res.status(200).json(updatedOrder);
     } catch (err) {
       res.status(500).json(err);
