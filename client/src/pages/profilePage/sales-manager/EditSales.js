@@ -48,6 +48,16 @@ function EditSales() {
       toast.success("Discount applied successfully!", {
         position: toast.POSITION.TOP_CENTER,
       });
+
+      axios.get(
+        "http://localhost:5001/api/users/saleNotification/" +
+          allproducts[index]._id, //Current products' ID here
+        undefined,
+        {
+          headers: { token: "Bearer " + currUser.accessToken },
+        }
+      );
+
       setTimeout(() => {
         window.location.reload();
       }, 1500);
