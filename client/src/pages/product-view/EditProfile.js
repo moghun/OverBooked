@@ -18,23 +18,26 @@ const EditProfile = () => {
     adress: "",
     password: "",
     username: "",
+    tax_id: "",
   });
 
   const clickSubmit = () => {
-
     const update = {
       name: values.name || undefined,
       adress: values.adress || undefined,
       password: values.password || undefined,
       surname: values.surname || undefined,
       username: values.username || undefined,
+      tax_id: values.tax_id || undefined,
     };
 
     try {
       axios.put("http://localhost:5001/api/users/" + currUser._id, update, {
         headers: { token: "Bearer " + currUser.accessToken },
       });
-      toast.success("Your information has been updated successfully", {position: toast.POSITION.TOP_CENTER});
+      toast.success("Your information has been updated successfully", {
+        position: toast.POSITION.TOP_CENTER,
+      });
     } catch (err) {
       alert(err);
     }
@@ -45,6 +48,7 @@ const EditProfile = () => {
       adress: "",
       password: "",
       username: "",
+      tax_id: "",
     });
   };
 
@@ -91,6 +95,14 @@ const EditProfile = () => {
             />
             <br />
             <TextField
+              id="tax_id"
+              type="tax_id"
+              label="Tax ID"
+              onChange={handleChange("tax_id")}
+              margin="normal"
+            />
+            <br />
+            <TextField
               id="adress"
               type="adress"
               label="Adress"
@@ -100,9 +112,9 @@ const EditProfile = () => {
             <br />
             <br />
           </CardContent>
-          
+
           <CardActions>
-          <Button color="secondary" href="/profile" variant="contained">
+            <Button color="secondary" href="/profile" variant="contained">
               Cancel
             </Button>
             <Button color="primary" variant="contained" onClick={clickSubmit}>
