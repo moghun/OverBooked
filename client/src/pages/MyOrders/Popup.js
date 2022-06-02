@@ -3,6 +3,7 @@ import "./Popup.css";
 import { useState } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
 const Popup = (props) => {
   const [text, setText] = useState(null);
@@ -10,22 +11,29 @@ const Popup = (props) => {
 
   const currUser = useSelector((state) => state.user.currentUser);
 
-  function deleteOrder() {
-    /*
+  function returnOrder() {
+    const OrderStruct = {
+      status: "Return Requested",
+      refundDescription: text,
+    };
     try {
-      axios.delete(
-        "http://localhost:5001/api/orders/" + currUser._id + "/" + id,
+      axios.put(
+        "http://localhost:5001/api/orders/requestReturn/" +
+          currUser._id +
+          "/" +
+          id,
+        OrderStruct,
         { headers: { token: "Bearer " + currUser.accessToken } }
       );
-      alert("Order Canceled");
+      toast.success("Your order has been cancelled.", {
+        position: toast.POSITION.TOP_CENTER,
+      });
+      setTimeout(() => {
+        window.location.reload();
+      }, 1500);
     } catch (err) {
       console.log(err);
     }
-    */
-  }
-
-  function printText() {
-    alert(text + " " + id);
   }
 
   return (
@@ -79,7 +87,7 @@ const Popup = (props) => {
         </div>
 
         <button
-          onClick={deleteOrder}
+          onClick={returnOrder}
           style={{
             fontFamily: "OpenSans",
             border: "solid",

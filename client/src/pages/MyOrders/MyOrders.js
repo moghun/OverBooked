@@ -17,7 +17,6 @@ const MyOrders = () => {
   const [popupOpen, setPopup] = useState(false);
   const [cancelpopup, setCancelPopUp] = useState(false);
 
-
   const togglePopup = (key) => {
     if (key !== index && index !== null && isOpen === true) {
       setIndex(key);
@@ -53,7 +52,7 @@ const MyOrders = () => {
 
   const openCancel = () => {
     setCancelPopUp(!cancelpopup);
-  }
+  };
 
   const getOrders = async () => {
     const userStruct = { buyer_email: currUser.email };
@@ -69,7 +68,7 @@ const MyOrders = () => {
   useEffect(() => {
     getOrders();
   }, [currUser]);
-  
+
   useEffect(() => {
     getProductName();
     setNames(true);
@@ -130,28 +129,42 @@ const MyOrders = () => {
     }
   }
 
-
-  function cancelRefund(item, date){
+  function cancelRefund(item, date) {
     var orderdate = new Date(date);
     var today = new Date();
     var difference = today.getTime() - orderdate.getTime();
     var days = Math.floor(difference / (1000 * 3600 * 24));
 
-    if(item === "Delivered" && (days <= 30)){
-      return(
-      <button onClick={openPopup} style={{ borderRadius: "5px", backgroundColor: "lightgray", marginLeft: "10px", padding: "5px",}}>
-        Refund
-      </button>
-    )}
-    
-    else if(item === "Processing"){ 
-      return(
-      <button onClick={openCancel} style={{ borderRadius: "5px", backgroundColor: "lightgray", marginLeft: "10px", padding: "5px",}}>
-        Cancel
-      </button>
-      )} 
+    if (item === "Delivered" && days <= 30) {
+      return (
+        <button
+          onClick={openPopup}
+          style={{
+            borderRadius: "5px",
+            backgroundColor: "lightgray",
+            marginLeft: "10px",
+            padding: "5px",
+          }}
+        >
+          Refund
+        </button>
+      );
+    } else if (item === "Processing") {
+      return (
+        <button
+          onClick={openCancel}
+          style={{
+            borderRadius: "5px",
+            backgroundColor: "lightgray",
+            marginLeft: "10px",
+            padding: "5px",
+          }}
+        >
+          Cancel
+        </button>
+      );
     }
-  
+  }
 
   return (
     <div className="orders-holder">
@@ -171,13 +184,13 @@ const MyOrders = () => {
                         backgroundColor: "aliceblue",
                         borderRadius: "10px",
                         margin: "20px",
-                        width:'1019px'
+                        width: "1019px",
                       }}
                     >
                       <div
                         key={order._id}
                         className="order-column"
-                        style={{ padding: "5px", margin: "20px"  }}
+                        style={{ padding: "5px", margin: "20px" }}
                       >
                         <input
                           disabled="disabled"
@@ -189,28 +202,34 @@ const MyOrders = () => {
                             backgroundColor: "aliceblue",
                             marginLeft: "10px",
                             width: "350px",
-                            border:'none',
-                            outline:'none'
+                            border: "none",
+                            outline: "none",
                           }}
                           readonly
-                      ></input>
-                      <input
+                        ></input>
+                        <input
                           disabled="disabled"
                           type="text"
-                          value={"Order Date: " + order.updatedAt.substring(0,order.updatedAt.indexOf("T"))}
+                          value={
+                            "Order Date: " +
+                            order.updatedAt.substring(
+                              0,
+                              order.updatedAt.indexOf("T")
+                            )
+                          }
                           style={{
                             color: "black",
-                            borderRadius: "10px",                         
+                            borderRadius: "10px",
                             backgroundColor: "aliceblue",
                             marginLeft: "10px",
                             width: "200px",
-                            border:'none',
-                            outline:'none'
+                            border: "none",
+                            outline: "none",
                           }}
                           readonly
-                      ></input>
-                      {orderStatus(order.status)}
-                      <input
+                        ></input>
+                        {orderStatus(order.status)}
+                        <input
                           disabled="disabled"
                           type="text"
                           value={"Total: " + order.cost + " USD"}
@@ -220,24 +239,24 @@ const MyOrders = () => {
                             backgroundColor: "aliceblue",
                             marginLeft: "10px",
                             width: "150px",
-                            border:'none',
-                            outline:'none'
+                            border: "none",
+                            outline: "none",
                           }}
                           readonly
-                      ></input>
-                      <button
-                        onClick={() => {
-                          togglePopup(i);
-                        }}
-                        style={{
-                          borderRadius: "5px",
-                          backgroundColor: "lightgray",
-                          marginLeft: "10px",
-                          padding: "5px",
-                        }}
-                      >
-                        Details
-                      </button>
+                        ></input>
+                        <button
+                          onClick={() => {
+                            togglePopup(i);
+                          }}
+                          style={{
+                            borderRadius: "5px",
+                            backgroundColor: "lightgray",
+                            marginLeft: "10px",
+                            padding: "5px",
+                          }}
+                        >
+                          Details
+                        </button>
                         {cancelRefund(order.status, order.updatedAt)}
                       </div>
                       <div>
@@ -252,8 +271,7 @@ const MyOrders = () => {
                         ></hr>
                         {order.bought_products.map((bitem, j) => {
                           return (
-                            <div style={{ marginTop: "5px", display:'flex' }}>
-
+                            <div style={{ marginTop: "5px", display: "flex" }}>
                               <input
                                 disabled="disabled"
                                 type="text"
@@ -264,11 +282,11 @@ const MyOrders = () => {
                                   backgroundColor: "aliceblue",
                                   marginLeft: "30px",
                                   width: "500px",
-                                  border:'none',
-                                  outline:'none'
-                                  }}
-                                  readonly
-                                ></input>
+                                  border: "none",
+                                  outline: "none",
+                                }}
+                                readonly
+                              ></input>
                               <input
                                 disabled="disabled"
                                 type="text"
@@ -279,12 +297,11 @@ const MyOrders = () => {
                                   backgroundColor: "aliceblue",
                                   marginLeft: "10px",
                                   width: "500px",
-                                  border:'none',
-                                  outline:'none'
-                                  }}
-                                  readonly
-                                ></input>                              
-
+                                  border: "none",
+                                  outline: "none",
+                                }}
+                                readonly
+                              ></input>
                             </div>
                           );
                         })}
@@ -299,50 +316,56 @@ const MyOrders = () => {
                       style={{ padding: "10px", margin: "20px" }}
                     >
                       <input
-                          disabled="disabled"
-                          type="text"
-                          value={"Order ID: " + order._id}
-                          style={{
-                            color: "black",
-                            borderRadius: "10px",                           
-                            backgroundColor: "aliceblue",
-                            marginLeft: "10px",
-                            width: "350px",
-                            border:'none',
-                            outline:'none'
-                          }}
-                          readonly
+                        disabled="disabled"
+                        type="text"
+                        value={"Order ID: " + order._id}
+                        style={{
+                          color: "black",
+                          borderRadius: "10px",
+                          backgroundColor: "aliceblue",
+                          marginLeft: "10px",
+                          width: "350px",
+                          border: "none",
+                          outline: "none",
+                        }}
+                        readonly
                       ></input>
                       <input
-                          disabled="disabled"
-                          type="text"
-                          value={"Order Date: " + order.updatedAt.substring(0,order.updatedAt.indexOf("T"))}
-                          style={{
-                            color: "black",
-                            borderRadius: "10px",
-                            backgroundColor: "aliceblue",
-                            marginLeft: "10px",
-                            width: "200px",
-                            border:'none',
-                            outline:'none'
-                          }}
-                          readonly
+                        disabled="disabled"
+                        type="text"
+                        value={
+                          "Order Date: " +
+                          order.updatedAt.substring(
+                            0,
+                            order.updatedAt.indexOf("T")
+                          )
+                        }
+                        style={{
+                          color: "black",
+                          borderRadius: "10px",
+                          backgroundColor: "aliceblue",
+                          marginLeft: "10px",
+                          width: "200px",
+                          border: "none",
+                          outline: "none",
+                        }}
+                        readonly
                       ></input>
                       {orderStatus(order.status)}
                       <input
-                          disabled="disabled"
-                          type="text"
-                          value={"Total: " + order.cost + " USD"}
-                          style={{
-                            color: "black",
-                            borderRadius: "10px",
-                            backgroundColor: "aliceblue",
-                            marginLeft: "10px",
-                            width: "150px",
-                            border:'none',
-                            outline:'none'
-                          }}
-                          readonly
+                        disabled="disabled"
+                        type="text"
+                        value={"Total: " + order.cost + " USD"}
+                        style={{
+                          color: "black",
+                          borderRadius: "10px",
+                          backgroundColor: "aliceblue",
+                          marginLeft: "10px",
+                          width: "150px",
+                          border: "none",
+                          outline: "none",
+                        }}
+                        readonly
                       ></input>
                       <button
                         onClick={() => {
@@ -358,11 +381,7 @@ const MyOrders = () => {
                         Details
                       </button>
                       {cancelRefund(order.status, order.updatedAt)}
-                      {popupOpen ? (
-                        <Popup handleClose={openPopup} />
-                      ) : (
-                        ""
-                      )}
+                      {popupOpen ? <Popup handleClose={openPopup} /> : ""}
                       {cancelpopup ? (
                         <CancelPopup handleClose={openCancel} />
                       ) : (
@@ -378,6 +397,6 @@ const MyOrders = () => {
       </div>
     </div>
   );
-}
+};
 
 export default MyOrders;
