@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobile/models/user.dart';
 import 'package:mobile/pages/user_orders_page.dart';
+import 'package:mobile/pages/wishlist_page.dart';
 import 'package:mobile/services/user_service.dart';
 import 'package:mobile/utils/colors.dart';
 import 'package:mobile/utils/styles.dart';
@@ -35,67 +36,244 @@ class _ProfilePageState extends State<ProfilePage> {
               children: [
                 Expanded(
                   child: Column(children: [
-                    const SizedBox(
-                      height: 12,
-                    ),
-                    Text(
-                      user.username!,
-                      style: kHeadingTextStyle,
-                    ),
-                    const SizedBox(
-                      height: 12,
-                    ),
-                    const CircleAvatar(
-                      backgroundColor: Color(0xffE6E6E6),
-                      radius: 30,
-                      child: Icon(
-                        Icons.person,
-                        color: Color(0xffCCCCCC),
+                    Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  color: AppColors.background2,
+                                  borderRadius: BorderRadius.circular(20)),
+                              child: Column(
+                                children: [
+                                  const SizedBox(
+                                    height: 12,
+                                  ),
+                                  const CircleAvatar(
+                                    backgroundColor: Color(0xffE6E6E6),
+                                    radius: 50,
+                                    child: Icon(
+                                      Icons.person,
+                                      color: Color(0xffCCCCCC),
+                                      size: 80,
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: 12,
+                                  ),
+                                  Text(
+                                    user.username!,
+                                    style: kHeadingTextStyle,
+                                  ),
+                                  const SizedBox(
+                                    height: 12,
+                                  ),
+                                  Text(
+                                    user.email,
+                                    style: kButtonLightTextStyle,
+                                  ),
+                                  const SizedBox(
+                                    height: 12,
+                                  ),
+                                  Text(
+                                    "Name: " + (user.name ?? "no name"),
+                                    style: kButtonLightTextStyle,
+                                  ),
+                                  const SizedBox(
+                                    height: 12,
+                                  ),
+                                  Text(
+                                    "Surname: " + (user.surname ?? "no surname"),
+                                    style: kButtonLightTextStyle,
+                                  ),
+                                  const SizedBox(
+                                    height: 12,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                     const SizedBox(
-                      height: 12,
+                      height: 5,
                     ),
-                    Text(
-                      user.email,
-                      style: kButtonLightTextStyle,
+                    Divider(
+                      color: AppColors.background,
+                      thickness: 1,
+                      height: 0,
                     ),
-                    const SizedBox(
-                      height: 12,
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                      child: SizedBox(
+                        height: 60,
+                        child: TextButton(
+                            style: ButtonStyle(
+                                overlayColor: MaterialStateProperty.all(
+                                    AppColors.background.withOpacity(0.2))),
+                            onPressed: () {},
+                            child: Stack(
+                              children: const [
+                                Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: Icon(
+                                    Icons.local_shipping,
+                                    color: AppColors.background,
+                                    size: 30,
+                                  ),
+                                ),
+                                Align(
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                      "My orders",
+                                      style: TextStyle(fontSize: 20, color: Colors.black),
+                                    )),
+                                Align(
+                                  alignment: Alignment.centerRight,
+                                  child: Icon(
+                                    Icons.keyboard_arrow_right,
+                                    color: AppColors.background,
+                                  ),
+                                )
+                              ],
+                            )),
+                      ),
                     ),
-                    Text(
-                      user.name ?? "no name",
-                      style: kButtonLightTextStyle,
+                    Divider(
+                      color: AppColors.background,
+                      thickness: 1,
+                      height: 0,
                     ),
-                    const SizedBox(
-                      height: 12,
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                      child: SizedBox(
+                        height: 60,
+                        child: TextButton(
+                            style: ButtonStyle(
+                                overlayColor: MaterialStateProperty.all(
+                                    AppColors.background.withOpacity(0.2))),
+                            onPressed: () {
+                              Navigator.push(context, MaterialPageRoute(
+                                  builder: (context) => const WishlistPage()));
+                            },
+                            child: Stack(
+                              children: const [
+                                Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: Icon(
+                                    Icons.favorite,
+                                    color: AppColors.background,
+                                    size: 30,
+                                  ),
+                                ),
+                                Align(
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                      "Wishlist",
+                                      style: TextStyle(fontSize: 20, color: Colors.black),
+                                    )),
+                                Align(
+                                  alignment: Alignment.centerRight,
+                                  child: Icon(
+                                    Icons.keyboard_arrow_right,
+                                    color: AppColors.background,
+                                  ),
+                                )
+                              ],
+                            )),
+                      ),
                     ),
-                    Text(
-                      user.surname ?? "no surname",
-                      style: kButtonLightTextStyle,
+                    Divider(
+                      color: AppColors.background,
+                      thickness: 1,
+                      height: 0,
                     ),
-                    const SizedBox(
-                      height: 12,
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                      child: SizedBox(
+                        height: 60,
+                        child: TextButton(
+                            style: ButtonStyle(
+                                overlayColor: MaterialStateProperty.all(
+                                    AppColors.background.withOpacity(0.2))),
+                            onPressed: () {},
+                            child: Stack(
+                              children: const [
+                                Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: Icon(
+                                    Icons.settings,
+                                    color: AppColors.background,
+                                    size: 30,
+                                  ),
+                                ),
+                                Align(
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                      "Edit profile",
+                                      style: TextStyle(fontSize: 20, color: Colors.black),
+                                    )),
+                                Align(
+                                  alignment: Alignment.centerRight,
+                                  child: Icon(
+                                    Icons.keyboard_arrow_right,
+                                    color: AppColors.background,
+                                  ),
+                                )
+                              ],
+                            )),
+                      ),
                     ),
-                    OutlinedButton(
-                        onPressed: () {
-
-                          Navigator.push(context, MaterialPageRoute(
-                              builder: (context) => const UserOrdersPage(
-                              )));
-                        },
-                        child: const Text("My Orders")),
-                    const SizedBox(
-                      height: 12,
+                    Divider(
+                      color: AppColors.background,
+                      thickness: 1,
+                      height: 0,
                     ),
-                    OutlinedButton(
-                        onPressed: () {
-                          UserService.removeUser();
-                          Navigator.pushReplacementNamed(context, "/");
-                        },
-                        child: const Text("Log Out")),
-                    const SizedBox(
-                      height: 12,
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                      child: SizedBox(
+                        height: 60,
+                        child: TextButton(
+                            style: ButtonStyle(
+                                overlayColor: MaterialStateProperty.all(
+                                    AppColors.background.withOpacity(0.2))),
+                            onPressed: () {
+                              UserService.removeUser();
+                              Navigator.pushReplacementNamed(context, "/");
+                            },
+                            child: Stack(
+                              children: const [
+                                Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: Icon(
+                                    Icons.exit_to_app,
+                                    color: AppColors.background,
+                                    size: 30,
+                                  ),
+                                ),
+                                Align(
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                      "Log out",
+                                      style: TextStyle(fontSize: 20, color: Colors.black),
+                                    )),
+                                Align(
+                                  alignment: Alignment.centerRight,
+                                  child: Icon(
+                                    Icons.keyboard_arrow_right,
+                                    color: AppColors.background,
+                                  ),
+                                )
+                              ],
+                            )),
+                      ),
+                    ),
+                    Divider(
+                      color: AppColors.background,
+                      thickness: 1,
+                      height: 0,
                     ),
                   ]),
                 ),

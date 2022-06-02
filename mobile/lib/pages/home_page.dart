@@ -17,7 +17,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final ProductService _productService = ProductService();
-  String _search="";
+  final _searchFormKey = GlobalKey<FormState>();
+  String _search = "";
 
   @override
   void initState() {
@@ -39,17 +40,29 @@ class _HomePageState extends State<HomePage> {
           children: [
             Padding(
               padding: const EdgeInsets.all(12.0),
-              child: Row(children: [
-                Expanded(child: TextFormField(onChanged: (value) { setState(() { _search = value; }); },)),
-                IconButton(onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => SearchPage(
-                            query: _search,
-                          )));
-                }, icon: const Icon(Icons.search))
-              ]),
+              child: Form(
+                key: _searchFormKey,
+                child: Row(children: [
+                  Expanded(child: TextFormField(
+                    onSaved: (value) {
+                      if (value != null) {
+                        _search = value;
+                      }
+                    },
+                  )),
+                  IconButton(
+                      onPressed: () {
+                        _searchFormKey.currentState!.save();
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => SearchPage(
+                                      query: _search,
+                                    )));
+                      },
+                      icon: const Icon(Icons.search))
+                ]),
+              ),
             ),
             const SizedBox(
               height: 8,
@@ -62,7 +75,23 @@ class _HomePageState extends State<HomePage> {
               future: getAllBooks(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const CircularProgressIndicator();
+                  return Column(
+                    children: const [
+                      SizedBox(
+                        height: 121,
+                      ),
+                      SizedBox(
+                        child: CircularProgressIndicator(
+                          strokeWidth: 7,
+                        ),
+                        width: 70,
+                        height: 70,
+                      ),
+                      SizedBox(
+                        height: 121,
+                      ),
+                    ],
+                  );
                 } else if (snapshot.connectionState == ConnectionState.done) {
                   if (snapshot.hasError) {
                     return const Text('Error');
@@ -79,6 +108,64 @@ class _HomePageState extends State<HomePage> {
                                       product: snapshot.data![index],
                                     ),
                                     const SizedBox(width: 8)
+                                  ])),
+                        ),
+                      ),
+                    );
+                  } else {
+                    return const Text('Empty data');
+                  }
+                } else {
+                  return Text('State: ${snapshot.connectionState}');
+                }
+              },
+            ),
+            const SizedBox(
+              height: 12,
+            ),
+            Text(
+              "On Sale",
+              style: kHeadingTextStyle,
+            ),
+            FutureBuilder<List<Product>>(
+              future: getAllBooks(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Column(
+                    children: const [
+                      SizedBox(
+                        height: 30,
+                      ),
+                      SizedBox(
+                        child: CircularProgressIndicator(
+                          strokeWidth: 7,
+                        ),
+                        width: 70,
+                        height: 70,
+                      ),
+                      SizedBox(
+                        height: 30,
+                      ),
+                    ],
+                  );
+                } else if (snapshot.connectionState == ConnectionState.done) {
+                  if (snapshot.hasError) {
+                    return const Text('Error');
+                  } else if (snapshot.hasData) {
+                    return SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Padding(
+                        padding: Dimen.regularPadding,
+                        child: Row(
+                          children: List.generate(
+                              snapshot.data!.length,
+                              (index) => Row(children: [
+                                    if (snapshot.data![index].sale!) ...[
+                                      ProductPreview(
+                                        product: snapshot.data![index],
+                                      ),
+                                      const SizedBox(width: 8),
+                                    ],
                                   ])),
                         ),
                       ),

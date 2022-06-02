@@ -6,6 +6,7 @@ class User {
   String? surname;
   List<dynamic>? cart;
   String? token;
+  List<dynamic>? wishlist;
 
   User({
     required this.email,
@@ -15,5 +16,6 @@ class User {
     this.cart,
     this.token,
     this.uid,
-});
+    this.wishlist,
+  });
 }

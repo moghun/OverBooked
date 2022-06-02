@@ -84,8 +84,7 @@ class _LoginPageState extends State<LoginPage> {
                               borderSide: BorderSide(
                                 color: AppColors.primary,
                               ),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(30)),
+                              borderRadius: BorderRadius.all(Radius.circular(30)),
                             ),
                           ),
                           keyboardType: TextInputType.emailAddress,
@@ -114,8 +113,7 @@ class _LoginPageState extends State<LoginPage> {
                               borderSide: BorderSide(
                                 color: AppColors.primary,
                               ),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(30)),
+                              borderRadius: BorderRadius.all(Radius.circular(30)),
                             ),
                           ),
                           keyboardType: TextInputType.text,
@@ -172,8 +170,7 @@ class _LoginPageState extends State<LoginPage> {
                             padding: Dimen.smallPadding,
                             child: const Text(
                               "Don't have an account?",
-                              style:
-                                  TextStyle(color: Colors.blue, fontSize: 16),
+                              style: TextStyle(color: Colors.blue, fontSize: 16),
                             ),
                           ),
                         ),

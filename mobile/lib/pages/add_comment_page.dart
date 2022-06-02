@@ -23,6 +23,7 @@ class _AddCommentPageState extends State<AddCommentPage> {
     '5',
   ];
   String dropDownValue = '5';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,7 +44,6 @@ class _AddCommentPageState extends State<AddCommentPage> {
                 children: [
                   const Text("Rate product: "),
                   DropdownButton(
-
                     // Initial Value
                     value: dropDownValue,
 

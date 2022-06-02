@@ -30,8 +30,7 @@ class _UserOrdersPageState extends State<UserOrdersPage> {
                 } else if (snapshot.connectionState == ConnectionState.done) {
                   if (snapshot.hasError) {
                     return Text(
-                      snapshot.error.toString() +
-                          snapshot.stackTrace.toString(),
+                      snapshot.error.toString() + snapshot.stackTrace.toString(),
                       style: kButtonLightTextStyle,
                     );
                   } else if (snapshot.hasData) {
@@ -40,8 +39,8 @@ class _UserOrdersPageState extends State<UserOrdersPage> {
                       child: Padding(
                         padding: Dimen.regularPadding,
                         child: Column(
-                          children: List.generate(snapshot.data!.length,
-                              (index) => Text(snapshot.data![index])),
+                          children: List.generate(
+                              snapshot.data!.length, (index) => Text(snapshot.data![index])),
                         ),
                       ),
                     );
