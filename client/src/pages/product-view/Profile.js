@@ -15,7 +15,7 @@ import MailIcon from "@mui/icons-material/Mail";
 import TrendingUpIcon from "@mui/icons-material/TrendingUp";
 import SavingsIcon from "@mui/icons-material/Savings";
 import SellIcon from "@mui/icons-material/Sell";
-
+import RequestQuoteIcon from '@mui/icons-material/RequestQuote';
 import { useSelector } from "react-redux";
 
 const Profile = () => {
@@ -82,6 +82,10 @@ const Profile = () => {
           <a href="/revenues">
             <SavingsIcon />
             Revenues
+          </a>
+          <a href="/refundrequests">
+            <RequestQuoteIcon />
+            Requests
           </a>
         </>
       );

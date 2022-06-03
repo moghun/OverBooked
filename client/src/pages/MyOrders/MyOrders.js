@@ -146,7 +146,7 @@ const MyOrders = () => {
             padding: "5px",
           }}
         >
-          Refund
+          Return
         </button>
       );
     } else if (item === "Processing") {
@@ -172,7 +172,14 @@ const MyOrders = () => {
         <div className="orders-container">
           <div>
             {orders.length === 0 ? (
-              <h1 style={{ padding: "50px", textAlign: "center" }}>
+              <h1
+                style={{
+                  padding: "50px",
+                  textAlign: "center",
+                  fontFamily: "OpenSans",
+                  color: "wheat",
+                }}
+              >
                 You have no order
               </h1>
             ) : (
