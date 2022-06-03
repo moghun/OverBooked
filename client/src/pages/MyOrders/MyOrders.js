@@ -172,7 +172,7 @@ const MyOrders = () => {
         <div className="orders-container">
           <div>
             {orders.length === 0 ? (
-              <h1 style={{ padding: "50px", textAlign: "center" }}>
+              <h1 style={{ padding: "50px", textAlign: "center", fontFamily:"OpenSans", color:"wheat" }}>
                 You have no order
               </h1>
             ) : (
