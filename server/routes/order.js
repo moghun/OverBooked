@@ -124,9 +124,7 @@ router.put("/cancel/:id/:oid", verifyTokenOrManager, async (req, res) => {
 
 //RETURN REQUEST
 router.put("/requestReturn/:id/:oid", verifyToken, async (req, res) => {
-  console.log(req.body.refundDescription);
   try {
-    console.log(req.body.refundDescription);
     const updatedOrder = await Order.findByIdAndUpdate(req.params.oid, {
       $set: {
         status: "Return Requested",
