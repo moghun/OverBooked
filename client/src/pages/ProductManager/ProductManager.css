@@ -1,34 +1,46 @@
 .headstyle {
 
 
-    padding: 12px 20px;
-    background: #ff0051;
-    border: none;
-    color: white;
-    border-radius: 30px;
-    font-size: 12px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: all .3s ease-in;
+  padding: 12px 20px;
+  background: #ff0051;
+  border: none;
+  color: white;
+  border-radius: 30px;
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: all .3s ease-in;
 
 }
 
 .pcontainer{
-    padding: 12px 20px;
-    background: #00ff99;
-    border: none;
-    color: white;
-    border-radius: 30px;
-    font-size: 12px;
-    text-decoration: none;
-    font-weight: bold;
-    width: 50%;
-    text-align: center;
-    margin-left: -3%;
+  padding: 12px 20px;
+  background: #ffd900;
+  border: none;
+  color: white;
+  border-radius: 30px;
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: bold;
+  width: 50%;
+  text-align: center;
+  margin-left: 2%;
 
-  }
+}
 
-  .pcontainer:hover{
-    background: #00ff9996;
+.pcontainer:hover{
+  background: #ffd90096;
 
-  }
+}
+
+
+.containerW1 {
+  max-width: 1500px;
+  width: 100%;
+  margin: 20px auto;
+  box-shadow: 0 0 5px #ccc;
+  padding: 0 15px;
+  background-color: #dbdbdb;
+  border-radius: 30px;
+}
+

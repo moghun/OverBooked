@@ -14,6 +14,7 @@ import ShoppingCart from "./pages/ShoppingCart";
 import Success from "./pages/success";
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer,} from 'react-toastify'; 
+import ScrollToTop from "./components/Scroll/ScrollToTop";
 
 import SignUp from "./pages/signup/Signup";
 import Signin from "./pages/signin/Signin";
@@ -27,7 +28,9 @@ import Wishlist from "./pages/wishlist/Wishlist";
 import ProductManager from "./pages/ProductManager/ProductManager";
 import Invoices from "./pages/ProductManager/Invoices";
 import RemoveProduct from "./pages/ProductManager/RemoveProduct";
-import UpdateStock from "./pages/ProductManager/UpdateProduct";
+import UpdateOrder from "./pages/ProductManager/UpdateOrder";
+import UpdateProduct from "./pages/ProductManager/UpdateProduct";
+import UpdateStock from "./pages/ProductManager/UpdateStock";
 import Revenues from "./pages/profilePage/sales-manager/Revenues";
 import RemoveSale from "./pages/profilePage/sales-manager/RemoveSale";
 import SetPrice from "./pages/profilePage/sales-manager/SetPrice";
@@ -36,10 +39,17 @@ function App() {
   const user = useSelector((state) => state.user.currentUser);
   return (
     <BrowserRouter>
+    <ScrollToTop/>
     <ToastContainer style={{display: "flex", justifyContent: "center"}}/>
-      <div>
+
+
+      <div style = {{position: 'fixed', zIndex: 1000, width: '100%'}}>
         <NavigationBar />
       </div>
+
+      <br/>
+      <br/>
+      <br/>
 
       <div>
         <NavigationBar2 />
@@ -62,7 +72,9 @@ function App() {
             <Route path="/productmanager" element={<ProductManager />} />
             <Route path='/Invoices' element={<Invoices/>} />
             <Route path="/removeproduct" element={<RemoveProduct />} />
-            <Route path="/updateproduct" element={<UpdateStock />} />
+            <Route path="/updatestock" element={<UpdateStock />} />
+            <Route path="/updateorder" element={<UpdateOrder />} />
+            <Route path="/updateproduct" element={<UpdateProduct />} />
             <Route path="/setprice" element={<SetPrice />} />
 
             <Route

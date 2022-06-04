@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import axios from "axios";
 import { clearWishlist } from "../../redux/userRedux";
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 
 const Wishlist = () => {
   const currUser = useSelector((state) => state.user.currentUser);
@@ -70,48 +71,22 @@ const Wishlist = () => {
   }, [allprod.length > 0]);
   return (
     <div>
-      <View style={{ flexDirection: "row", alignItems: "center" }}>
-        <View style={{ flex: 1, height: 4, backgroundColor: "black" }} />
-        <View>
-          <View
-            style={{
-              width: 200,
-              textAlign: "center",
-              color: "green",
-              fontWeight: "bold",
-              fontSize: 40,
-            }}
-          >
-            Wish List
-          </View>
-        </View>
-        <View style={{ flex: 1, height: 4, backgroundColor: "black" }} />
-      </View>
+      <div className = "textinfo">
+        <Button href = "/wishlist" startIcon = {<FavoriteBorderIcon/>} className = "buttons">WISHLIST</Button>
+    </div>
 
       <div style={{ display: "flex", justifyContent: "space-between" }}>
-        <Button href="\profile" className="containerWbtn3">
+        <Button href="\profile" variant="contained" color = 'success' style = {{marginLeft: '20px'}}>
           Back to Profile
         </Button>
-        <Button href="\profile" className="containerWbtn3" onClick={Clear}>
+        <Button href="\profile" variant="contained" color = 'success' onClick={Clear} style = {{marginRight: '20px'}}>
           Clear Wishlist
         </Button>
       </div>
 
-      <div style={{ display: "flex", justifyContent: "space-between" }}>
-        <hr
-          style={{ flex: 1, height: 4, backgroundColor: "green", width: 135 }}
-        />
-        <hr
-          style={{ flex: 1, height: 4, backgroundColor: "white", width: 135 }}
-        />
-        <hr
-          style={{ flex: 1, height: 4, backgroundColor: "blue", width: 135 }}
-        />
-      </div>
-
       <div className="containerW">
         {wishlist.length === 0 ? (
-          <h1 style={{ padding: "50px", textAlign: "center", color: "green" }}>
+          <h1 style={{ padding: "50px", textAlign: "center", color: "green", marginLeft:'220px' }}>
             There is no items in your wishlist
           </h1>
         ) : (

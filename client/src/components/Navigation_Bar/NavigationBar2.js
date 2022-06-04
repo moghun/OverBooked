@@ -1,11 +1,26 @@
 import "./NavigationBar.css"
+import "./NavigationBar2.css"
+import {react, useEffect, useState} from "react"
+import { useSelector } from "react-redux";
+import axios from "axios";
+import { Button } from "@material-ui/core";
+
 const NavigationBar2= () =>{
 
 
 
-  /*
 
+  const currUser = useSelector((state) => state.user.currentUser);
 
+  function userstatus(userrole) {
+    if (userrole === "customer") {
+      return <a href = "/myOrders"> My-Orders </a>;
+    } else if (userrole === "product-manager") {
+      return <a href = "/productmanager"> Product Manager Panel </a>;
+    } else if (userrole === "sales-manager") {
+      return <a href = "/salesmanager"> Sales Manager Panel </a>;
+    }
+  }
 
   const [allprod, settallprod] = useState([]);
 
@@ -22,119 +37,59 @@ const NavigationBar2= () =>{
     getAllProducts();
   }, []);
 
-        <li class="menu-category">
-        <a href="#" class="menu-title">Science</a>
 
-        <ul class="dropdown-list">
+  console.log(allprod);
+    return (
+
+      <div className="navbar1">
+          <a href="/">Home</a>
+          {userstatus(currUser.user_role)}
+
+          <div class="dropdown1">
+          <button class="dropbtn">LIST1 
+            <i class="fa fa-caret-down"></i>
+          </button>
+
+          <li class="dropdown1-content">
 
           {allprod.slice(0,3).map((AllSales) => (
 
-            <li class="dropdown-item">
-              {AllSales.name}
-            </li>
+            <Button>{AllSales.name}</Button>
 
           ))}
+          </li>
+          </div>
 
-        </ul>
-      </li>
+          <div class="dropdown1">
+          <button class="dropbtn">LIST2 
+            <i class="fa fa-caret-down"></i>
+          </button>
 
-  */
-    return (
+          <li class="dropdown1-content">
 
+          {allprod.slice(5,8).map((AllSales) => (
 
-        <nav class="desktop-navigation-menu">
+            <Button>{AllSales.name}</Button>
 
-        <div class="containerw">
-  
-          <ul class="desktop-menu-category-list">
-  
-            <li class="menu-category">
-              <a href="\" class="menu-title">Home</a>
-            </li>
+          ))}
+          </li>
+          </div>
 
-            <li class="menu-category">
-              <a href="\myorders" class="menu-title">my-Orders</a>
-            </li>
+          <div class="dropdown1">
+          <button class="dropbtn">LIST3 
+            <i class="fa fa-caret-down"></i>
+          </button>
 
+          <li class="dropdown1-content">
 
+          {allprod.slice(9,12).map((AllSales) => (
 
-            <li class="menu-category">
-              <a href="#" class="menu-title">Science</a>
-  
-              <ul class="dropdown-list">
-  
-                <li class="dropdown-item">
-                  <a href="#">product 1</a>
-                </li>
-  
-                <li class="dropdown-item">
-                  <a href="#">product 2</a>
-                </li>
-  
-                <li class="dropdown-item">
-                  <a href="#">product 3</a>
-                </li>
-  
-                <li class="dropdown-item">
-                  <a href="#">product 4</a>
-                </li>
-  
-              </ul>
-            </li>
-  
-            <li class="menu-category">
-              <a href="#" class="menu-title">Magazine</a>
-  
-              <ul class="dropdown-list">
-  
-                <li class="dropdown-item">
-                  <a href="#">product 1</a>
-                </li>
-  
-                <li class="dropdown-item">
-                  <a href="#">product 2</a>
-                </li>
-  
-                <li class="dropdown-item">
-                  <a href="#">product 3</a>
-                </li>
-  
-                <li class="dropdown-item">
-                  <a href="#">product 4</a>
-                </li>
-  
-              </ul>
-            </li>
-  
-            <li class="menu-category">
-              <a href="#" class="menu-title">Science</a>
-  
-              <ul class="dropdown-list">
-  
-                <li class="dropdown-item">
-                  <a href="#">product 1</a>
-                </li>
-  
-                <li class="dropdown-item">
-                  <a href="#">product 2</a>
-                </li>
-  
-                <li class="dropdown-item">
-                  <a href="#">product 3</a>
-                </li>
-  
-                <li class="dropdown-item">
-                  <a href="#">product 4</a>
-                </li>
-  
-              </ul>
-            </li>
-  
-          </ul>
-  
-        </div>
-  
-      </nav>
+            <Button href = {"/productpage/" + AllSales._id}>{AllSales.name}</Button>
+
+          ))}
+          </li>
+          </div>
+          </div>
 
 
 

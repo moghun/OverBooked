@@ -1,13 +1,13 @@
 .containerW {
-  background: rgb(255, 255, 255);
-  padding: 50px;
-  border-radius: 10;
-  width: 50;
+  max-width: 1200px;
+  width: 100%;
+  margin: 20px auto;
+  box-shadow: 0 0 5px #ccc;
+  padding-bottom: 5px;
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
   justify-content: space-between;
-  border: 2px solid #0400ff;
 
 }
 
@@ -24,22 +24,53 @@
 }
 
 
+.textinfo {
 
-.containerWbtn3{
-  padding: 12px 20px;
-  background: #66018b;
-  border: none;
-  color: rgb(255, 170, 0);
-  border-radius: 30px;
-  font-size: 12px;
-  text-decoration: none;
-  font-weight: bold;
-  transition: all .3s ease-in;
+  max-width: 1200px;
+  width: 100%;
+  margin: 20px auto;
+  box-shadow: 0 0 5px #ccc;
+  padding-bottom: 5px;
+  background-color: #dbdbdb;
+
 }
-.containerWbtn3:hover{
-  background: transparent;
-  color: #ff0000;
-  border: 2px solid #0400ff;
+
+
+.buttons:hover {
+
+
+
+  background-color: orange;
+
+
+}
+
+.back-blur{
+  content: ' ';
+  position: relative;
+  top: 0;
+  pointer-events: none;
+  left: 0;
+  width: 100%;
+  height: 100.2%;
+  background: linear-gradient(0deg, rgba(255,255,255,1) 0%,rgba(255, 255, 255, 0) 25%);
+}
+
+
+.home-main{
+  background-size: 600% 600%;
+  animation-name: example1;
+  animation-duration: 4s;
+  margin: -70px auto 0 auto;
+  padding: 145px 0 0 0;
+  height: 500px;
+  animation-iteration-count: infinite;
+}
+
+
+@keyframes example1 {
+  0%   {background-color: rgb(231, 172, 25);}
+  100% {background-color: rgb(219, 198, 4);}
 }
 
 

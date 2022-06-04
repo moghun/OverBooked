@@ -30,12 +30,63 @@ const SlickArrowRight = ({ currentSlide, slideCount, ...props }) => (
   <img src={RightArrow} alt="nextArrow" {...props} />
 );
 
+const mainProperties = {
+  prevArrow: <SlickArrowLeft />,
+  nextArrow: <SlickArrowRight />,
+  dots: true,
+  infinite: true,
+  speed: 500,
+  slidesToShow: 1,
+  slidesToScroll: 1,
+  adaptiveHeight: true,
+};
+
+
 const carouselProperties = {
   prevArrow: <SlickArrowLeft />,
   nextArrow: <SlickArrowRight />,
   dots: true,
+  infinite: true,
+  slidesToShow: 4,
+  slidesToScroll: 4,
+  initialSlide: 0,
+  autoplay: true,
+  speed: 3000,
+  autoplaySpeed: 3000,
+  responsive: [
+    {
+      breakpoint: 1024,
+      settings: {
+        slidesToShow: 3,
+        slidesToScroll: 3,
+        infinite: true,
+        dots: true,
+      },
+    },
+    {
+      breakpoint: 600,
+      settings: {
+        slidesToShow: 2,
+        slidesToScroll: 2,
+        initialSlide: 2,
+      },
+    },
+    {
+      breakpoint: 480,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1,
+      },
+    },
+  ],
+};
+
+
+const carouselProperties2 = {
+  prevArrow: <SlickArrowLeft />,
+  nextArrow: <SlickArrowRight />,
+  dots: true,
   infinite: false,
-  speed: 500,
   slidesToShow: 4,
   slidesToScroll: 4,
   initialSlide: 0,
@@ -160,6 +211,7 @@ const HomePage = () => {
 
   return (
     <div>
+
       <div className="some-container">
         <Button onClick={() => scrollToSection(gomoststarts)} className="btn">
           Check Recent Products
@@ -172,33 +224,22 @@ const HomePage = () => {
       <br />
       <br />
 
-      <div className="slider2">
-        <AiFillBackward className="arrow prev" onClick={prevSlide2} />
-        <AiFillForward className="arrow next" onClick={nextSlide2} />
-        {allprod.map((slide, index) => {
-          return (
-            <div
-              className={index === currentSlide2 ? "slide current" : "slide"}
-              key={index}
-            >
-              {index === currentSlide2 && (
-                <div style={{ display: "flex", justifyContent: "center" }}>
-                  <img src={slide.img} alt="slide" />
-                  <div className="content">
-                    <h2>{slide.name}</h2>
-                    <p> {slide.description}</p>
-                    <hr />
-                    <form action={"/productpage/" + slide._id} method="get">
-                      <button className="--btn --btn-primary">
-                        Go To This Product
-                      </button>
-                    </form>
-                  </div>
-                </div>
-              )}
-            </div>
-          );
-        })}
+      <div style={{ margin: "30px" }} className="carousel">
+        <Slider {...carouselProperties}>
+          {allprod.map((AllSales) => (
+            <BookCard
+              onclick={AllSales._id}
+              name={AllSales.name}
+              amount={AllSales.amount}
+              author={AllSales.author}
+              imgurl={AllSales.img}
+              publisher={AllSales.publisher}
+              price={AllSales.cost}
+              score={avgrating(AllSales)}
+              beforeprice={AllSales.before_sale_price}
+            ></BookCard>
+          ))}
+        </Slider>
       </div>
 
       <br />
@@ -219,7 +260,7 @@ const HomePage = () => {
       </div>
 
       <div style={{ margin: "30px" }} className="carousel">
-        <Slider className="procontainer" {...carouselProperties}>
+        <Slider {...carouselProperties2}>
           {topprod.map((AllSales) => (
             AllSales.amount === 0 ? (false) : (   
             <BookCard
@@ -252,7 +293,7 @@ const HomePage = () => {
       </div>
 
       <div style={{ margin: "30px" }} className="carousel">
-        <Slider className="procontainer" {...carouselProperties}>
+        <Slider {...carouselProperties2}>
           {allsale.map((AllSales) => (
             <BookCard
               onclick={AllSales._id}

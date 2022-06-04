@@ -1,93 +1,134 @@
-import React from 'react';
-
-import SideBar from './SideBar';
+import React, {useState, useEffect} from 'react';
 
 import "./ProductManager.css"
+import axios from "axios";
+import { useSelector } from "react-redux";
 
-const Total = () => {
+const Invoices = () => {
 
+
+  const currUser = useSelector((state) => state.user.currentUser);
+
+
+  const [All, setAll] = useState([]);
+
+  
+
+  useEffect(() => {
+    const clickGet = async () => {
+
+      try {
+        const res = await axios.get("http://localhost:5001/api/productmanager/getinvoices",{
+          headers: { token: "Bearer " + currUser.accessToken },
+        });
+        let holder = []
+        res.data.forEach(element => {
+          element.forEach((item)=>{holder.push(item)})
+          
+        });
+        console.log(res.data);
+        setAll(holder);
+      } catch (err) {
+        console.log(err);
+      }
+    }; 
+    clickGet();
+  }, []);
+
+
+
+  console.log(All);
 
     return (
 
-        <div style={{borderRadius: '30px', border: '2px solid #0400ff'}}>
+      <div>
+        <div>
         <div className='px-4 px-lg-0'>
           <div className='container text-black py-5 text-center'>
-            <h1 className='pcontainer' style={{ fontSize: 40, marginLeft: 170 }}>
+            <h1 className='pcontainer' style={{ fontSize: 40, marginLeft: 170, color: 'black' }}>
               Invoices
             </h1>
           </div>
         </div>
-        <div className='pb-5'>
-          <div className='container'>
-            <div className='row'>
-              <div className='col-lg-12 p-5 bg-white rounded shadow-sm mb-5'>
-                <div className='table-responsive'>
-                  <table className='table'>
-                    <thead>
-                      <tr>
-                        <th scope='col' className='border-0 bg-light'>
-                          <div className='p-2 px-3 text-uppercase'>
-                            Customer ID
-                          </div>
-                        </th>
-                        <th scope='col' className='border-0 bg-light'>
-                          <div className='py-2 text-uppercase'>
-                            Product ID
-                          </div>
-                        </th>
-                        <th scope='col' className='border-0 bg-light'>
-                          <div className='py-2 text-uppercase'> Delivery ID</div>
-                        </th>
-                        <th scope='col' className='border-0 bg-light'>
-                          <div className='py-2 text-uppercase'>Delivered?</div>
-                        </th>
-                        <th scope='col' className='border-0 bg-light'>
-                          <div className='py-2 text-uppercase'>Address</div>
-                        </th>
+        </div>
+          <div className="containerW1">
+            <br/>
+          <div class = "table-responsive">
+          <table class="table table-hover table-responsive table-sm">
+            <thead style={{fontSize:"7px"}}>
+              <tr>
+                <th class="col-1">
+                  <div>
+                    Customer NAME
+                  </div>
+                </th>
+                <th class="col-1">
+                  <div>
+                    TAX ID
+                  </div>
+                </th>
+                <th class="col-1">
+                  <div> Delivery ID</div>
+                </th>
 
-                        <th scope='col' className='border-0 bg-light'>
-                          <div className='py-2 text-uppercase'>Quantity</div>
-                        </th>
+                <th class="col-1">
+                  <div>E-MAIL</div>
+                </th>
 
-                        <th scope='col' className='border-0 bg-light'>
-                          <div className='py-2 text-uppercase'>Total Price</div>
-                        </th>
+                <th class="col-1">
+                  <div>Quantity</div>
+                </th>
 
-                      </tr>
-                    </thead>
-                  </table>
-                </div>
-              </div>
-            </div>
+                <th class="col-1">
+                  <div>Total Price</div>
+                </th>
+
+              </tr>
+            </thead>
+            {All.map((item) => {
+              console.log(item);
+              
+              return (
+                <tbody>
+                  <tr>
+                    <td class="col-1">
+                      <strong style={{fontSize:'10px'}}>{item.name} </strong>
+                    </td>
+
+                    <td class="col-1">
+                    <strong style={{fontSize:'10px'}}>{item.tax_id}</strong>
+                    </td>
+
+                    <td class="col-1">
+                      <strong style={{fontSize:'10px'}}>{item.invoice_id} </strong>
+                    </td>
+                    <td class="col-1">
+                      <strong style={{fontSize:'10px'}}>{item.email} </strong>
+                    </td>
+                    <td class="col-1">
+                      {item.products[1].map((prd, i)=>{
+                        return(
+                          <>
+                          <div style={{fontSize:'10px'}}><strong>{prd + " " +item.products[2][i] + " ITEM"}</strong></div>
+                          </>
+                        )
+                      })}
+                    </td>
+
+                    <td class="col-1">
+                      <strong style={{fontSize:'10px'}}>{item.cost + "$"} </strong>
+                    </td>                     
+                  </tr>
+                </tbody>
+              );
+            })}
+          </table>
           </div>
-        </div>
-      </div>
+          <br style={{marginBottom: '2px'}}/>
+          </div>
+          </div>
     )
 
-
-}
-
-
-const Invoices = () => {
-
-    return (
-        <div>
-        <div className='container'>
-            <div className='row'>
-            <div className='col-sm-3 pt-2'>
-                <br />
-                <br />
-
-                <SideBar />
-            </div>
-            <div className='col-sm-9 pt-2'>
-                <Total />
-            </div>
-            </div>
-        </div>
-        </div>
-
-    )
 
 }
 
