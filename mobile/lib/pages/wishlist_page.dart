@@ -23,6 +23,16 @@ class _WishlistPageState extends State<WishlistPage> {
     return products ?? [];
   }
 
+  bool isProductInWishlist(Product product) {
+    bool result = false;
+    for(int i = 0; i < user.wishlist!.length; i++){
+      if(user.wishlist![i]["product_id"].toString() == product.id){
+        result = true;
+      }
+    }
+    return result;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -69,16 +79,21 @@ class _WishlistPageState extends State<WishlistPage> {
                                     padding: const EdgeInsets.symmetric(vertical: 12.0),
                                     child: Wrap(
                                       direction: Axis.horizontal,
-                                      spacing: 12,
+                                      spacing: 0,
                                       runSpacing: 12,
                                       children: List.generate(
                                         snapshot.data!.length,
-                                        (index) => SizedBox(
-                                          width: 170,
-                                          child: ProductPreview(
-                                            product: snapshot.data![index],
-                                          ), // PUT İF ELSE
-                                        ),
+                                        (index) => isProductInWishlist(snapshot.data![index])
+                                            ? Padding(
+                                              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                                              child: SizedBox(
+                                                  width: 170,
+                                                  child: ProductPreview(
+                                                    product: snapshot.data![index],
+                                                  ),
+                                                ),
+                                            )
+                                            : SizedBox(),
                                       ),
                                     ),
                                   ),
