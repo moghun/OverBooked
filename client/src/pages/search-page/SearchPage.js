@@ -185,7 +185,7 @@ function SearchPage() {
             {/* Results of search and outcome of filters (right) */}
             {sortByFilter([...searchResults]).map((book) => (
               <BookCard
-                onclick={book._id}
+                id={book._id}
                 name={book.name}
                 amount={book.amount}
                 author={book.author}
