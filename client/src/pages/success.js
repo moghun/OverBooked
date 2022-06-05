@@ -73,7 +73,7 @@ const Success = () => {
         cost: cart.total,
         products: cart.products,
         amount: cart.amount,
-        status: "Processing",
+        adress: currentUser.adress,
         tax_id: currentUser.tax_id,
         card_no: data.source.last4,
       };
@@ -84,7 +84,7 @@ const Success = () => {
       );
     } catch (err) {}
   };
-  
+
   useEffect(() => {
     function createOrder() {
       const idArray = cart.products.map((book) => book._id);
