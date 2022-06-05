@@ -8,6 +8,7 @@ const orderSchema = new mongoose.Schema(
     payment_method: { type: String, required: true },
     last_four_digit: {type:Number,required:true},
     cost: { type: Number, required: true },
+    user_adress: {type: String,required: true},
     date: { type: Date, required: true },
 
     bought_products: { type: Array, required: true },

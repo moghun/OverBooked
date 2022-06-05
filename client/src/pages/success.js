@@ -41,6 +41,7 @@ const Success = () => {
         invoice_id: i_id,
         email: currentUser.email,
         username: currentUser.username,
+        adress: currentUser.adress,
         name: currentUser.name,
         surname: currentUser.surname,
         cost: cart.total,
@@ -49,6 +50,7 @@ const Success = () => {
           cart.products.map((book) => book.name),
           cart.products.map((book) => book.amount),
         ],
+        status: "Processing",
         tax_id: currentUser.tax_id,
         card_no: data.source.last4,
         date: format(Date.now(), "MM/dd/yyyy"),
@@ -71,6 +73,7 @@ const Success = () => {
         cost: cart.total,
         products: cart.products,
         amount: cart.amount,
+        status: "Processing",
         tax_id: currentUser.tax_id,
         card_no: data.source.last4,
       };
@@ -81,7 +84,7 @@ const Success = () => {
       );
     } catch (err) {}
   };
-
+  
   useEffect(() => {
     function createOrder() {
       const idArray = cart.products.map((book) => book._id);
@@ -92,6 +95,7 @@ const Success = () => {
         payment_method: data.payment_method,
         last_four_digit: data.source.last4,
         cost: cart.total,
+        user_adress: currentUser.adress,
         date: Date.now(),
         bought_products: idArray,
         amounts: amountArray,
