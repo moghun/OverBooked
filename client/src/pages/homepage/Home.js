@@ -215,10 +215,10 @@ const HomePage = () => {
 
       <HomeMain1 />
       <div className="some-container">
-        <Button onClick={() => scrollToSection(gomoststarts)} className="btn">
+        <Button onClick={() => scrollToSection(gomoststarts)} className="btn3" color = 'grey' style = {{marginRight: '10px'}}>
           Check Recent Products
         </Button>
-        <Button onClick={() => scrollToSection(gocampaign)} className="btn3">
+        <Button onClick={() => scrollToSection(gocampaign)} className="btn3" color = 'grey' style = {{marginLeft: '10px'}}>
           Check Products on sale
         </Button>
       </div>
