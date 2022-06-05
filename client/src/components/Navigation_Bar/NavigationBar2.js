@@ -12,16 +12,6 @@ const NavigationBar2= () =>{
 
   const currUser = useSelector((state) => state.user.currentUser);
 
-  function userstatus(userrole) {
-    if (userrole === "customer") {
-      return <a href = "/myOrders"> My-Orders </a>;
-    } else if (userrole === "product-manager") {
-      return <a href = "/productmanager"> Product Manager Panel </a>;
-    } else if (userrole === "sales-manager") {
-      return <a href = "/salesmanager"> Sales Manager Panel </a>;
-    }
-  }
-
   const [allprod, settallprod] = useState([]);
 
   const getAllProducts = async () => {
@@ -43,7 +33,6 @@ const NavigationBar2= () =>{
 
       <div className="navbar1">
           <a href="/">Home</a>
-          {userstatus(currUser.user_role)}
 
           <div class="dropdown1">
           <button class="dropbtn">LIST1 

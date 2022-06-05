@@ -13,14 +13,9 @@ const UpdateStock = () => {
     const currUser = useSelector((state) => state.user.currentUser);
 
 
-    const [id, setID] = useState(null);
     const [stock1, setstock1] = useState(null);
-
-
-    function handleChange1(event) {
-      setID(event.target.value)
-      console.log(id);
-    }
+    const [allproducts, setAll] = useState([]);
+    const [index, setIndex] = useState(null);
 
 
     function handleChange2(event) {
@@ -29,16 +24,35 @@ const UpdateStock = () => {
     }
 
 
+    useEffect(() => {
+      const getAllProducts = async () => {
+        try {
+          const res = await axios.get("http://localhost:5001/api/products");
+          setAll(res.data);
+        } catch (err) {}
+      }; 
+      getAllProducts();
+    }, []);
+
+
     const clickSubmit = async () => {
 
-        const update = {
-          stock:  stock1,
-          _id: id,
-        };
-    
+
+      const update = {
+
+
+        product_id: allproducts[index]._id,
+        stock: stock1,
+
+      };
+
+
         try {
+
             axios.post("http://localhost:5001/api/productmanager/changestock", update,{
             headers: { token: "Bearer " + currUser.accessToken },
+
+
           });
           toast.success("Your information has been updated successfully", {position: toast.POSITION.TOP_CENTER});
         } catch (err) {
@@ -58,48 +72,38 @@ const UpdateStock = () => {
             <form className='form-horizontal'>
             <fieldset>
                 <legend className='pcontainer' style = {{color: 'black', fontSize: '30px'}}>UPDATE STOCK</legend>
+                <div  style={{marginLeft: '50px', display: 'flex', justifyContent: 'space-between'}}>
+                <select onClick={(e) => setIndex(e.target.value)} style={{borderRadius:'5px',width:'315px', borderColor:'lightgray'}}>
+            <option value="none" selected disabled hidden>Select Product ID</option>
+              {allproducts.map((item, i) => {return(<option value = {i}>{item.name}</option>);})}
+            </select>
 
-                <div className='row form-group'  style={{marginLeft: '50px'}}>
-                <label className='col-md-4 control-label' htmlFor='product_id'   style = {{padding: '12px 20px', background: 'orange', border: 'none', borderRadius: '30px', fontWeight: 'bold', boxShadow: "0px 5px 10px lightblue"}}>  
-                    PRODUCT ID
-                </label>
-                <div className='col-md-4'>
-                    <TextField
-                    id="product_id"
-                    placeholder='ID'
-                    type="string"
-                    required
-                    onChange={handleChange1}
+            <TextField
+              
+              id="stock"
+              type="number"
+              InputProps={{ inputProps: { min: 0, max: 100 } }}
+              onKeyDown={(e) => e.preventDefault()}
+              label="STOCK"
+              margin="normal"
+              onChange={handleChange2}
+              style={{width:'100%'}}
+            />
 
-                    />
-                </div>
-                </div>
+            </div>
 
-                <div className='row form-group' style={{marginLeft: '50px'}}>
-                <label className='col-md-4 control-label' htmlFor='product_id' style = {{padding: '12px 20px', background: 'orange', border: 'none', borderRadius: '30px', fontWeight: 'bold', boxShadow: "0px 5px 10px lightblue"}}>
-                    STOCK
-                </label>
-                <div className='col-md-4'>
-                    <TextField
-                    id="stock"
-                    placeholder='STOCK'
-                    type="number"
-                    required
-                    onChange={handleChange2}
-                    />
-                </div>
-                </div>
+            <br/>
 
-                <div className='row form-group' style={{marginLeft: '50px'}}>
-                <label
-                    className='col-md-4 control-label'   
-                    htmlFor='singlebutton'
-                ></label>
-                <div className='col-md-4'>
-                <Button variant="contained" color = 'grey' onClick={()=>{clickSubmit()}}> Update </Button>
-                <Button variant="contained" color = 'grey' href= "/profile"> Cancel </Button>
-                </div>
-                </div>
+            <div className='row form-group'  style={{marginLeft: '50px'}}>
+              <label
+                className='col-md-4 control-label'
+
+              ></label>
+              <div className='col-md-4'>
+              <Button variant="contained" color = 'grey' onClick = {clickSubmit}> Update </Button>
+              <Button variant="contained" color = 'grey' href= "/profile"> Cancel </Button>
+              </div>
+            </div>
             </fieldset>
             </form>
         </Card>

@@ -18,7 +18,7 @@ import Badge from '@material-ui/core/Badge'
 const NavigationBar = () => {
   const currUser = useSelector((state) => state.user.currentUser);
   const cartnumber = useSelector((state) => state.cart.amount);
-  const wishnumber = useSelector((state) => state.user.currentUser.wishlist.length);
+
   const [searchValue, setSearchValue] = useState("");
   const dispatch = useDispatch();
 
@@ -69,14 +69,14 @@ const NavigationBar = () => {
         <div class = "nav-row">
 
           <Button startIcon={<FavoriteIcon/>} href= "/wishlist">
-             <Badge invisible={false} badgeContent= {wishnumber} color="secondary" style={{marginLeft: '10%'}}>
+             <Badge invisible={false} color="secondary" style={{marginLeft: '10%'}}>
             </Badge>
           </Button>
 
           <Button href="/profile" startIcon = {<AccountBoxIcon/>}>
           </Button>
 
-          <Button startIcon={<PowerSettingsNewIcon/>} onClick={handleClick} href = "/signin">
+          <Button startIcon={<PowerSettingsNewIcon/>} onClick={handleClick}>
         </Button>
         </div>
       )}

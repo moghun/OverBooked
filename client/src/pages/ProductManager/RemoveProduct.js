@@ -12,14 +12,16 @@ const RemoveProduct = () => {
 
   const currUser = useSelector((state) => state.user.currentUser);
 
+  const [allproducts, setAll] = useState([]);
 
-  const [ID, setID] = useState(null);
+  const [index, setIndex] = useState(null);
 
   const clickSubmit = () => {
 
     try {
-      axios.delete("http://localhost:5001/api/products/" + ID, {
+      axios.delete("http://localhost:5001/api/products/" + allproducts[index]._id, {
         headers: { token: "Bearer " + currUser.accessToken },
+        
       });
       
     } catch (err) {
@@ -28,10 +30,15 @@ const RemoveProduct = () => {
   };
 
 
-  function handleChange1(event) {
-    setID(event.target.value)
-    console.log(ID);
-  }
+  useEffect(() => {
+    const getAllProducts = async () => {
+      try {
+        const res = await axios.get("http://localhost:5001/api/products");
+        setAll(res.data);
+      } catch (err) {}
+    }; 
+    getAllProducts();
+  }, []);
 
 
     return (
@@ -49,15 +56,10 @@ const RemoveProduct = () => {
               <label className='col-md-4 control-label'      style = {{padding: '12px 20px', background: 'orange', border: 'none', borderRadius: '30px', fontWeight: 'bold', boxShadow: "0px 5px 10px lightblue"}}>
                 PRODUCT ID
             </label>
-              <div className='col-md-4'>
-                <TextField
-                  id="_id"
-                  placeholder='PRODUCT ID'
-                  type = "string"
-                  required
-                  onChange={handleChange1}
-                />
-              </div>
+            <select onClick={(e) => {setIndex(e.target.value);}} style={{borderRadius:'5px',width:'315px', borderColor:'lightgray', fontFamily:'OpenSans'}}>
+            <option style={{fontFamily:'OpenSans'}} value="none" selected disabled hidden>Select an Option</option>
+              {allproducts.map((item, i) => {return(<option style={{fontFamily:'OpenSans'}} value = {i}>{item.name + "-" + item.author + "-" + item._id}</option>);})}
+            </select>
             </div>
 
 

@@ -79,7 +79,7 @@ const Wishlist = () => {
         <Button href="\profile" variant="contained" color = 'success' style = {{marginLeft: '20px'}}>
           Back to Profile
         </Button>
-        <Button href="\profile" variant="contained" color = 'success' onClick={Clear} style = {{marginRight: '20px'}}>
+        <Button variant="contained" color = 'success' onClick={Clear} style = {{marginRight: '20px'}}>
           Clear Wishlist
         </Button>
       </div>

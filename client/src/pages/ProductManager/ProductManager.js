@@ -24,13 +24,20 @@ const ProductManager = () => {
   const clickSubmit = () => {
 
     const add = {
-      name: name,
-      cost: cost,
-      amount: amount,
-      publisher: publisher,
-      description: description,
-      author: author,
-      category: category, 
+      publisher: publisher || undefined,
+      cost: cost || undefined,
+      amount: amount || undefined,
+      publisher: publisher || undefined,
+      //img: img || undefined,
+      description: description || undefined,
+      //warranty: warranty || undefined,
+      author: author || undefined,
+      category: category || undefined, 
+      //subcategories: subcategories || undefined,
+      //sale: sale || undefined,
+      //before_sale_price: before_sale_price || undefined,
+      name: name || undefined,
+
     };
 
     try {
@@ -49,6 +56,12 @@ const ProductManager = () => {
     setCost(event.target.value)
     console.log(cost);
   }
+
+  function handleChange2(event) {
+    setCost(event.target.value)
+    console.log(cost);
+  }
+
 
   function handleChange3(event) {
     setAmount(event.target.value)

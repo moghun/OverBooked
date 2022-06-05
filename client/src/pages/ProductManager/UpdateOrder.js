@@ -18,6 +18,28 @@ const UpdateOrder = () => {
 
   const [id, setID] = useState(null);
 
+  const [orders, setOrder] = useState([]);
+
+  const [index, setIndex] = useState(null);
+
+
+  const getOrders = async () => {
+
+    try {
+      const res = await axios.get(
+        "http://localhost:5001/api/orders",
+        
+          { headers: { token: "Bearer " + currUser.accessToken }},
+      );
+      setOrder(res.data);
+      console.log(orders);
+    } catch (error) {}
+  };
+
+  useEffect(() => {
+    getOrders();
+  }, []);
+
 
   function handleChange1(event) {
     setID(event.target.value)
@@ -29,7 +51,7 @@ const UpdateOrder = () => {
 
     const update = {
       status:  Status,
-      oid: id,
+      oid: orders[index]._id,
     };
 
     try {
@@ -56,33 +78,28 @@ const UpdateOrder = () => {
         <form className='form-horizontal'>
           <fieldset>
             <legend className='pcontainer' style = {{color: 'black', fontSize: '30px'}}>UPDATE ORDER</legend>
-            <div className='row form-group'  style={{marginLeft: '50px'}}>
+            <div  style={{marginLeft: '50px', display: 'flex', justifyContent: 'space-between'}}>
               <label className='col-md-4 control-label'      style = {{padding: '12px 20px', background: 'orange', border: 'none', borderRadius: '30px', fontWeight: 'bold', boxShadow: "0px 5px 10px lightblue"}}>
                 ORDER ID
             </label>
 
-            <div className='col-md-4'>
-
-            <TextField
-                id="_id"
-                placeholder='ORDER ID'
-                type= "string"
-                required
-                onChange={handleChange1}
-
-            />
-
-            </div>
+            <select onClick={(e) => setIndex(e.target.value)} style={{borderRadius:'5px',width:'315px', borderColor:'lightgray'}}>
+            <option value="none" selected disabled hidden>Select Order ID</option>
+              {orders.map((item, i) => {return(<option value = {i}>{item._id}</option>);})}
+            </select>
 
 
-            <div className='col-md-4'>
+            <div>
 
             <select onClick={(e) => setStatus(e.target.value)} style={{borderRadius:'5px',width:'150px', borderColor:'lightgray'}}>
             <option value="In-transit">In-transit</option>
             <option value="Delivered">Delivered</option>
+            <option value="Processing">Processing</option>
             </select>
             </div>
             </div>
+
+            <br/>
 
             <div className='row form-group'  style={{marginLeft: '50px'}}>
               <label

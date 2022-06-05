@@ -62,12 +62,12 @@ const Profile = () => {
       return(
       <>
       <a href="/productmanager"><AddShoppingCartIcon/>Add Product</a>
-      <a href="/productmanager"><CommentIcon/>Approve Comment</a>
+      <a href="/approvaldisapproval"><CommentIcon/>Approve Comment</a>
       <a href="/updateproduct"> <SystemUpdateAltIcon/>Update Product</a>
       <a href="/removeproduct"><RemoveCircleIcon/>Remove Product</a>
       <a href="/Invoices"><LocalAtmIcon/>Invoices</a>
-      <a href="/updateproduct"> <AirportShuttleIcon/>Update Order</a>
-      <a href="/removeproduct"><SystemUpdateAltIcon/>Update Stock</a>
+      <a href="/updateorder"> <AirportShuttleIcon/>Update Order</a>
+      <a href="/updatestock"><SystemUpdateAltIcon/>Update Stock</a>
 
       
       </>

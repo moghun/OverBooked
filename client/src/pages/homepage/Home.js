@@ -19,6 +19,7 @@ import RightArrow from "../homepage/right-arrow.svg"
 import axios from "axios";
 import BookCard from "../../components/BookCard";
 import { Grid } from "@mui/material";
+import HomeMain1 from './HomeMain1';
 
 //in order to have sequence products with slider
 
@@ -212,6 +213,7 @@ const HomePage = () => {
   return (
     <div>
 
+      <HomeMain1 />
       <div className="some-container">
         <Button onClick={() => scrollToSection(gomoststarts)} className="btn">
           Check Recent Products

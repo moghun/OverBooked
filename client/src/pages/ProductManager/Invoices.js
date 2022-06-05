@@ -45,7 +45,7 @@ const Invoices = () => {
         <div>
         <div className='px-4 px-lg-0'>
           <div className='container text-black py-5 text-center'>
-            <h1 className='pcontainer' style={{ fontSize: 40, marginLeft: 170, color: 'black' }}>
+            <h1 className='pcontainer' style={{ fontSize: 40, marginLeft: 270, color: 'black' }}>
               Invoices
             </h1>
           </div>
@@ -64,7 +64,7 @@ const Invoices = () => {
                 </th>
                 <th class="col-1">
                   <div>
-                    TAX ID
+                    DELIVERY ADDRESS
                   </div>
                 </th>
                 <th class="col-1">
@@ -78,6 +78,11 @@ const Invoices = () => {
                 <th class="col-1">
                   <div>Quantity</div>
                 </th>
+
+                <th class="col-1">
+                  <div>DELIVERY STATUS</div>
+                </th>
+
 
                 <th class="col-1">
                   <div>Total Price</div>
@@ -96,7 +101,7 @@ const Invoices = () => {
                     </td>
 
                     <td class="col-1">
-                    <strong style={{fontSize:'10px'}}>{item.tax_id}</strong>
+                    <strong style={{fontSize:'10px'}}>{item.adress}</strong>
                     </td>
 
                     <td class="col-1">
@@ -114,6 +119,10 @@ const Invoices = () => {
                         )
                       })}
                     </td>
+                    <td class="col-1">
+                      <strong style={{fontSize:'10px'}}>{item.status} </strong>
+                    </td>  
+
 
                     <td class="col-1">
                       <strong style={{fontSize:'10px'}}>{item.cost + "$"} </strong>
