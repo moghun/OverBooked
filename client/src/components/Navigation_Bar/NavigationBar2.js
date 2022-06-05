@@ -58,7 +58,7 @@ const NavigationBar2= () =>{
 
           {allprod.slice(5,8).map((AllSales) => (
 
-            <Button>{AllSales.name}</Button>
+            <Button href = {"/productpage/" + AllSales._id}>{AllSales.name}</Button>
 
           ))}
           </li>

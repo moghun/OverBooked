@@ -62,29 +62,56 @@ const NavigationBar = () => {
 
       {currUser === null ? (
 
+        <>
+
           <Button href="/signin" startIcon = {<AccountBoxIcon/>}>
           </Button>
+
+
+<Button href="/shoppingcart" startIcon = {<ShoppingCartIcon/>}>
+<Badge invisible={false} badgeContent={cartnumber} color="secondary" style={{marginLeft: '20%'}}>
+</Badge>
+</Button>
+
+</>
       ) : (
-        
+
+        currUser.user_role === "customer" ? (        
         <div class = "nav-row">
 
+
+<Button href="/profile" startIcon = {<AccountBoxIcon/>} style = {{marginRight: '-10px'}}>
+          </Button>
+
           <Button startIcon={<FavoriteIcon/>} href= "/wishlist">
-             <Badge invisible={false} color="secondary" style={{marginLeft: '10%'}}>
+             <Badge invisible={false}  badgeContent={currUser.wishlist.length} color="secondary" style={{marginLeft: '10%'}}>
             </Badge>
           </Button>
 
-          <Button href="/profile" startIcon = {<AccountBoxIcon/>}>
-          </Button>
 
-          <Button startIcon={<PowerSettingsNewIcon/>} onClick={handleClick}>
-        </Button>
-        </div>
-      )}
-
-      <Button href="/shoppingcart" startIcon = {<ShoppingCartIcon/>}>
+        <Button href="/shoppingcart" startIcon = {<ShoppingCartIcon/>}>
             <Badge invisible={false} badgeContent={cartnumber} color="secondary" style={{marginLeft: '20%'}}>
             </Badge>
       </Button>
+
+
+      <Button startIcon={<PowerSettingsNewIcon/>} onClick={handleClick}>
+        </Button>
+
+
+        </div>
+      ) : (
+
+        <>
+        <Button href="/profile" startIcon = {<AccountBoxIcon/>}>
+        </Button>
+
+        <Button startIcon={<PowerSettingsNewIcon/>} onClick={handleClick}>
+      </Button>
+      </>
+      )
+      
+      )}
     </nav>
   );
 };

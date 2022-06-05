@@ -5,16 +5,7 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { Typography } from "@material-ui/core";
 import "./Profile.css";
-import { View,} from "react-native";
-
-import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
-import EditIcon from '@material-ui/icons/Edit';
-import PersonIcon from '@material-ui/icons/Person';
-import LocalMallIcon from '@material-ui/icons/LocalMall';
-import MailIcon from '@mui/icons-material/Mail';
-import TrendingUpIcon from '@mui/icons-material/TrendingUp';
-import SavingsIcon from '@mui/icons-material/Savings';
-import SellIcon from '@mui/icons-material/Sell';
+import { View } from "react-native";
 
 
 import LocalAtmIcon from '@material-ui/icons/LocalAtm';
@@ -23,6 +14,15 @@ import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import SystemUpdateAltIcon from '@material-ui/icons/SystemUpdateAlt';
 import AirportShuttleIcon from '@material-ui/icons/AirportShuttle';
 
+import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
+import EditIcon from "@material-ui/icons/Edit";
+import PersonIcon from "@material-ui/icons/Person";
+import LocalMallIcon from "@material-ui/icons/LocalMall";
+import MailIcon from "@mui/icons-material/Mail";
+import TrendingUpIcon from "@mui/icons-material/TrendingUp";
+import SavingsIcon from "@mui/icons-material/Savings";
+import SellIcon from "@mui/icons-material/Sell";
+import RequestQuoteIcon from '@mui/icons-material/RequestQuote';
 import { useSelector } from "react-redux";
 
 const Profile = () => {
@@ -56,7 +56,10 @@ const Profile = () => {
   function buttonstatus(userrole) {
     if (userrole === "customer") {
       return (
-        <a href="/myorders"> <LocalMallIcon/> My-Orders</a>
+        <a href="/myorders">
+          {" "}
+          <LocalMallIcon /> My-Orders
+        </a>
       );
     } else if (userrole === "product-manager") {
       return(
@@ -74,14 +77,34 @@ const Profile = () => {
       );
 
     } else if (userrole === "sales-manager") {
-      return(
-      <>
-      <a href="/setprice"><SellIcon/>Set Price</a>
-      <a href="/editsales"> <LocalMallIcon/>Edit Sales</a>
-      <a href="/removesales"><RemoveCircleIcon/>Remove Sales</a>
-      <a href="/invoicessalesmanager"><MailIcon/>Invoices</a>
-      <a href="/revenues"><SavingsIcon/>Revenues</a>
-      </>
+      return (
+        <>
+          <a href="/setprice">
+            <SellIcon />
+            Set Price
+          </a>
+          <a href="/editsales">
+            {" "}
+            <LocalMallIcon />
+            Set Sale
+          </a>
+          <a href="/removesales">
+            <RemoveCircleIcon />
+            Remove Sales
+          </a>
+          <a href="/invoicessalesmanager">
+            <MailIcon />
+            Invoices
+          </a>
+          <a href="/revenues">
+            <SavingsIcon />
+            Revenues
+          </a>
+          <a href="/refundrequests">
+            <RequestQuoteIcon />
+            Requests
+          </a>
+        </>
       );
     }
   }
@@ -147,15 +170,12 @@ const Profile = () => {
                     <p style = {{color: 'black'}}><span>Tax-ID </span>: {currUser.tax_id}</p>
                 </div>
             </div>
+          </div>
         </div>
-      </div>
-  </div>
-</div>
-</div>
+        </div>
 
-
-
-
+    </div>
+    </div>
   );
 };
 

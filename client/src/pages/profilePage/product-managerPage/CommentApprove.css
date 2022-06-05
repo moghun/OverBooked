@@ -2,7 +2,7 @@
     display: table;
     width: 80%; /*Optional*/
     border-spacing: 10px; /*Optional*/
-    outline: solid;
+    outline: none;
     margin-top: 40px;
     margin-left: 10%;
     border-radius: 20px;
@@ -44,9 +44,6 @@
   .product-container{
     outline: none;
     display: table-cell;
-    outline: solid;
-    background-color: burlywood;
-    outline-color: goldenrod;
   }
 
 

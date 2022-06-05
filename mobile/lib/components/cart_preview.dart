@@ -25,12 +25,11 @@ class _CartPreviewState extends State<CartPreview> {
   Widget build(BuildContext context) {
     return OutlinedButton(
       style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.resolveWith(
-              (states) => AppColors.primary.withOpacity(0.1)),
-          shape: MaterialStateProperty.resolveWith((states) =>
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20))),
-          padding:
-              MaterialStateProperty.resolveWith((states) => EdgeInsets.zero)),
+          backgroundColor:
+              MaterialStateProperty.resolveWith((states) => AppColors.primary.withOpacity(0.1)),
+          shape: MaterialStateProperty.resolveWith(
+              (states) => RoundedRectangleBorder(borderRadius: BorderRadius.circular(20))),
+          padding: MaterialStateProperty.resolveWith((states) => EdgeInsets.zero)),
       onPressed: () {
         Navigator.push(
             context,

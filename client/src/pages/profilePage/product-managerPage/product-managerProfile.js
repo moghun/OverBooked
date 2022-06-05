@@ -103,8 +103,8 @@ function ProductManagerAPI() {
         <div className="approval-container">
           <div>
             {unappCommennts.length === 0 ? (
-              <h1 style={{ padding: "50px", textAlign: "center" }}>
-                You have no comment waiting approval.
+              <h1 style={{ padding: "50px", textAlign: "center",  outline:'none', border:'none', color:"#FAFAFA" }}>
+                You have no comment waiting approval
               </h1>
             ) : (
               unappCommennts.map((item) => (
@@ -113,31 +113,57 @@ function ProductManagerAPI() {
                   className="approval-column"
                   style={{ padding: "10px", margin: "20px" }}
                 >
-                  <div className="product-container">
-                    <h
+                    <div style={{width:"425px"}}>
+                    <input
+                          disabled="disabled"
+                          type="text"
+                          value={"ID: " + item.product_id}
+                          style={{
+                            color: "black",
+                            borderRadius: "10px",
+                            backgroundColor: "aliceblue",
+                            marginLeft: "10px",
+                            width: "400px",
+                            border: "none",
+                            outline: "none",
+                          }}
+                          readonly
+                        ></input>
+                                             <input
+                          disabled="disabled"
+                          type="text"
+                          value={"Name: " + item.product_name}
+                          style={{
+                            color: "black",
+                            borderRadius: "10px",
+                            backgroundColor: "aliceblue",
+                            marginLeft: "10px",
+                            width: "400px",
+                            border: "none",
+                            outline: "none",
+                          }}
+                          readonly
+                        ></input>
+                    </div>
+
+                  <textarea
+                      disabled="disabled"
+                      type="text"
+                      value={"Comment: " + item.initCommit}
                       style={{
-                        marginLeft: "25px",
-                        fontWeight: "bold",
-                        marginRight: "20px",
+                        color: "black",
+                        borderRadius: "10px",
+                        backgroundColor: "aliceblue",
+                        marginLeft: "10px",
+                        width: "300px",
+                        height: "50px",
+                        border: "none",
+                        outline: "none",
+                        resize: "none",
+                        fontSize: "14px",
                       }}
-                    >
-                      <div>
-                        ID:{item.product_id}
-                        <br></br>
-                        <br></br>
-                        Name:{item.product_name}
-                      </div>
-                    </h>
-                  </div>
-                  <h
-                    style={{
-                      marginLeft: "50px",
-                      marginRight: -20,
-                      fontWeight: "bold",
-                    }}
-                  >
-                    Comment:{item.initCommit}{" "}
-                  </h>
+                      readonly
+                    ></textarea>
 
                   <input
                     type="submit"
@@ -152,9 +178,11 @@ function ProductManagerAPI() {
                     value="Approve"
                     style={{
                       backgroundColor: "lightgreen",
-                      marginLeft: "300px",
+                      marginLeft: "50px",
                       width: "100px",
                       borderRadius: "5px",
+                      outline:'none',
+                      border:'none'
                     }}
                   />
                   <input
@@ -165,9 +193,11 @@ function ProductManagerAPI() {
                     value="Disapprove"
                     style={{
                       backgroundColor: "red",
-                      marginLeft: "50px",
+                      marginLeft: "25px",
                       width: "100px",
                       borderRadius: "5px",
+                      outline:'none',
+                      border:'none'
                     }}
                   />
                 </div>

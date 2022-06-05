@@ -230,7 +230,7 @@ const HomePage = () => {
         <Slider {...carouselProperties}>
           {allprod.map((AllSales) => (
             <BookCard
-              onclick={AllSales._id}
+              id={AllSales._id}
               name={AllSales.name}
               amount={AllSales.amount}
               author={AllSales.author}
@@ -298,7 +298,7 @@ const HomePage = () => {
         <Slider {...carouselProperties2}>
           {allsale.map((AllSales) => (
             <BookCard
-              onclick={AllSales._id}
+              id={AllSales._id}
               name={AllSales.name}
               amount={AllSales.amount}
               author={AllSales.author}

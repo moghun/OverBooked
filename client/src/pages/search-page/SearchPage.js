@@ -35,7 +35,9 @@ function SearchPage() {
   const location = useLocation();
   const searchQuery = useMemo(() => location.pathname.split("/")[2]);
   const [searchResults, setSearchResults] = useState([]);
+  const [categories, setCategories] = useState([]);
   const [filter, setFilter] = useState(0);
+  const [catFilter, setCatFilter] = useState([]);
   const [includeBook, setIncludeBook] = useState(false);
   const [includeComic, setincludeComic] = useState(false);
   const [includeMagazine, setIncludeMagazine] = useState(false);
@@ -54,18 +56,31 @@ function SearchPage() {
         }
 
         setSearchResults(res.data);
-        console.log(searchResults);
         //return res.data;
       } catch (err) {}
     };
     findProduct(searchQuery);
   }, []);
 
+  useEffect(() => {
+    searchResults.map((product) => {
+      if(!categories.includes(product.category)){
+        var newArr = categories.slice();
+        newArr.push(product.category);
+        setCategories(newArr);
+      }
+    });
+  }, [searchResults, categories]);
+
   const onFilterChange = (event) => {
     setFilter(event.target.value);
   };
 
   const sortByFilter = (arr) => {
+    console.log(categories);
+    if(catFilter.length > 0){
+      arr = arr.filter(function (product) {return catFilter.includes(product.category);});
+    }
     if (filter === 1) {
       return arr.sort((a, b) => (a.cost < b.cost ? 1 : -1));
     } else if (filter === 2) {
@@ -97,53 +112,25 @@ function SearchPage() {
             subheader={<ListSubheader>Categories</ListSubheader>}
             dense={true}
           >
-            <ListItem>
-              <ListItemIcon>
-                <Checkbox edge="start" tabIndex={-1} disableRipple />
-              </ListItemIcon>
-              <ListItemText primary="Book" />
-            </ListItem>
-            <ListItem>
-              <ListItemIcon>
-                <Checkbox edge="start" tabIndex={-1} disableRipple />
-              </ListItemIcon>
-              <ListItemText primary="Comic" />
-            </ListItem>
-            <ListItem>
-              <ListItemIcon>
-                <Checkbox edge="start" tabIndex={-1} disableRipple />
-              </ListItemIcon>
-              <ListItemText primary="Magazine" />
-            </ListItem>
-          </List>
-          <List
-            sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
-            subheader={<ListSubheader>Sub-Categories</ListSubheader>}
-            dense={true}
-          >
-            <ListItem>
-              <ListItemIcon>
-                <Checkbox
-                  edge="start"
-                  checked={true}
-                  tabIndex={-1}
-                  disableRipple
-                />
-              </ListItemIcon>
-              <ListItemText primary="Novel" />
-            </ListItem>
-            <ListItem>
-              <ListItemIcon>
-                <Checkbox edge="start" tabIndex={-1} disableRipple />
-              </ListItemIcon>
-              <ListItemText primary="Poem" />
-            </ListItem>
-            <ListItem>
-              <ListItemIcon>
-                <Checkbox edge="start" tabIndex={-1} disableRipple />
-              </ListItemIcon>
-              <ListItemText primary="Science" />
-            </ListItem>
+            {categories.map((cat) => (
+              <ListItem>
+                <ListItemIcon>
+                  <Checkbox edge="start" id={cat} tabIndex={-1} disableRipple onChange={(event) => {
+                    if(event.target.checked){
+                      setCatFilter(catFilter.concat([event.target.id]));
+                    }else {
+                      var newArr = catFilter.slice();
+                      var index = newArr.indexOf(event.target.id);
+                      if(index > -1){
+                        newArr.splice(index, 1);
+                      }
+                      setCatFilter(newArr)
+                    }
+                  }}></Checkbox>
+                </ListItemIcon>
+                <ListItemText primary={cat} />
+              </ListItem>
+            ))}
           </List>
         </Grid>
         <Grid
@@ -185,7 +172,7 @@ function SearchPage() {
             {/* Results of search and outcome of filters (right) */}
             {sortByFilter([...searchResults]).map((book) => (
               <BookCard
-                onclick={book._id}
+                id={book._id}
                 name={book.name}
                 amount={book.amount}
                 author={book.author}

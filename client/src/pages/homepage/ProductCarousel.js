@@ -5,6 +5,7 @@ import { CarouselItem} from './ProductCarousel1';
 import ArrowForwardIosRoundedIcon from '@material-ui/icons/ArrowForwardIosRounded';
 import ArrowBackIosRoundedIcon from '@material-ui/icons/ArrowBackIosRounded';
 import "../wishlist/Wishlist.css";
+import { Button } from '@material-ui/core';
 
 
 const ProductCarousel = () => {
@@ -62,7 +63,7 @@ const ProductCarousel = () => {
                                 <p>{product.author}</p>
                             </div>
                             <div>
-                                <button>Buy Now <ArrowForwardIosRoundedIcon /> </button>
+                                <Button href = {"/productpage/" + product._id} >Buy Now <ArrowForwardIosRoundedIcon /> </Button>
                             </div>
                         </div>
                     </CarouselItem>

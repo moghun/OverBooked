@@ -54,7 +54,7 @@ export const CarouselItem = styled(Paper)`
             }
         };
         
-        & button{
+        & Button{
             margin-top: -30px;
             font-weight: bold;
             padding: 10px 10px;

@@ -25,7 +25,7 @@ class _SignUpPageState extends State<SignUpPage> {
   String emailConfirmation = "";
   String password = "";
 
-  signUp(){
+  signUp() {
     _authService.registerUser(username, email, password).then((resp) {
       if (resp.statusCode >= 200 && resp.statusCode < 400) {
         var loginInfo = jsonDecode(resp.body);
@@ -79,8 +79,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                   borderSide: BorderSide(
                                     color: AppColors.primary,
                                   ),
-                                  borderRadius:
-                                  BorderRadius.all(Radius.circular(30)),
+                                  borderRadius: BorderRadius.all(Radius.circular(30)),
                                 ),
                               ),
                               validator: (value) {
@@ -119,8 +118,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                   borderSide: BorderSide(
                                     color: AppColors.primary,
                                   ),
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(30)),
+                                  borderRadius: BorderRadius.all(Radius.circular(30)),
                                 ),
                               ),
                               keyboardType: TextInputType.emailAddress,
@@ -163,8 +161,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                   borderSide: BorderSide(
                                     color: AppColors.primary,
                                   ),
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(30)),
+                                  borderRadius: BorderRadius.all(Radius.circular(30)),
                                 ),
                               ),
                               keyboardType: TextInputType.emailAddress,
@@ -200,8 +197,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                 borderSide: BorderSide(
                                   color: AppColors.primary,
                                 ),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(30)),
+                                borderRadius: BorderRadius.all(Radius.circular(30)),
                               ),
                             ),
                             keyboardType: TextInputType.text,
@@ -266,8 +262,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                 },
                                 child: const Center(
                                     child: Text("Already have an account?",
-                                        style: TextStyle(
-                                            color: Colors.blue, fontSize: 16)))))
+                                        style: TextStyle(color: Colors.blue, fontSize: 16)))))
                       ],
                     ),
                     const SizedBox(

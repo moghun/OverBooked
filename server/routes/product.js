@@ -234,7 +234,7 @@ router.get("/find", async (req, res) => {
 //DEFINE FILTER W/ SPECIFIC QUERY TYPE
 router.get("/", async (req, res) => {
   const qTop = req.query.top;
-  const qSale = req.query.sale === "true";
+  const qSale = req.query.sale;
   const qCategory = req.query.category;
   const qSubCategory = req.query.subcategory;
   try {
@@ -242,19 +242,19 @@ router.get("/", async (req, res) => {
 
     if (qTop) {
       products = await Product.find().sort({ createdAt: -1 }).limit(10);
-    } else if (qSale) {
+    } else if (qSale === "true") {
       products = await Product.find({
         sale: {
           $eq: qSale,
         },
       });
-    }else if (!qSale) {
+    } else if (qSale === "false") {
       products = await Product.find({
         sale: {
           $eq: qSale,
         },
       });
-    }else if (qCategory) {
+    } else if (qCategory) {
       products = await Product.find({
         category: {
           $in: [qCategory],

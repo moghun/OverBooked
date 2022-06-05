@@ -45,7 +45,7 @@ const Invoices = () => {
         <div>
         <div className='px-4 px-lg-0'>
           <div className='container text-black py-5 text-center'>
-            <h1 className='pcontainer' style={{ fontSize: 40, marginLeft: 270, color: 'black' }}>
+            <h1 className='pcontainer' style={{ fontSize: 20, marginLeft: 270, color: 'black' }}>
               Invoices
             </h1>
           </div>
@@ -55,16 +55,16 @@ const Invoices = () => {
             <br/>
           <div class = "table-responsive">
           <table class="table table-hover table-responsive table-sm">
-            <thead style={{fontSize:"7px"}}>
+            <thead style={{fontSize:"2px"}}>
               <tr>
                 <th class="col-1">
                   <div>
-                    Customer NAME
+                    Customer Name
                   </div>
                 </th>
                 <th class="col-1">
                   <div>
-                    DELIVERY ADDRESS
+                    DELIVERY Adress
                   </div>
                 </th>
                 <th class="col-1">
@@ -80,7 +80,7 @@ const Invoices = () => {
                 </th>
 
                 <th class="col-1">
-                  <div>DELIVERY STATUS</div>
+                  <div>Delivery Status</div>
                 </th>
 
 

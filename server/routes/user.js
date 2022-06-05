@@ -256,7 +256,7 @@ router.get("/saleNotification/:pid", async (req, res) => {
             name: product.name,
             before_sale_price: product.before_sale_price,
             cost: product.cost,
-            perc: Math.floor(perc * 100),
+            perc: Math.ceil(perc * 100),
           },
         })
         .then();
@@ -269,9 +269,11 @@ router.get("/saleNotification/:pid", async (req, res) => {
 
 router.get("/getInvoices", async (req, res) => {
   try {
-    const users = await User.find({
-      $nor: [{ invoices: { $exists: false } }, { invoices: { $size: 0 } }]},
-      { invoices: 1 },
+    const users = await User.find(
+      {
+        $nor: [{ invoices: { $exists: false } }, { invoices: { $size: 0 } }],
+      },
+      { invoices: 1 }
     );
     let inv = [];
     users.forEach((us) => {

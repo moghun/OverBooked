@@ -2,16 +2,17 @@ import 'package:mobile/models/user.dart';
 
 class UserService {
   static User? _currentUser;
+  static List<dynamic> userCart = [];
 
-  static User? getCurrentUser(){
+  static User? getCurrentUser() {
     return _currentUser;
   }
 
-  static updateUser(User user){
+  static updateUser(User user) {
     _currentUser = user;
   }
 
-  static removeUser(){
+  static removeUser() {
     _currentUser = null;
   }
 }

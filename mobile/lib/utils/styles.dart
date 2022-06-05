@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:mobile/utils/colors.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-
 import 'colors.dart';
 
 final kHeadingTextStyle = GoogleFonts.montserrat(
-  color: AppColors.headingColor,
+  color: AppColors.secondary,
   fontWeight: FontWeight.w900,
   fontSize: 30.0,
   letterSpacing: -0.7,
@@ -33,14 +32,14 @@ final kAppBarTitleTextStyle = GoogleFonts.montserrat(
 
 final kSmallTitle = GoogleFonts.montserrat(
   color: AppColors.secondary,
-  fontSize: 12.0,
+  fontSize: 16.0,
   letterSpacing: -0.7,
 );
 
 final kSmallText = GoogleFonts.montserrat(
   fontStyle: FontStyle.italic,
   color: AppColors.lightTextColor,
-  fontSize: 10.0,
+  fontSize: 14.0,
   letterSpacing: -0.7,
 );
 

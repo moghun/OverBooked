@@ -27,12 +27,11 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     super.initState();
-    if(_selectedBottomTabIndex == 2 && UserService.getCurrentUser() != null){
+    if (_selectedBottomTabIndex == 2 && UserService.getCurrentUser() != null) {
       setState(() {
         _routeIndex = 2;
       });
-    }
-    else if(_selectedBottomTabIndex == 2 && UserService.getCurrentUser() == null){
+    } else if (_selectedBottomTabIndex == 2 && UserService.getCurrentUser() == null) {
       setState(() {
         _routeIndex = 3;
       });
@@ -60,13 +59,9 @@ class _HomeState extends State<Home> {
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: 'Home',
-              backgroundColor: Color(0xFFe6b619)),
+              icon: Icon(Icons.home), label: 'Home', backgroundColor: Color(0xFFe6b619)),
           BottomNavigationBarItem(
-              icon: Icon(Icons.shopping_basket),
-              label: 'Cart',
-              backgroundColor: Color(0xFFe6b619)),
+              icon: Icon(Icons.shopping_basket), label: 'Cart', backgroundColor: Color(0xFFe6b619)),
           BottomNavigationBarItem(
               icon: Icon(Icons.account_circle),
               label: 'Profile',

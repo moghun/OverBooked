@@ -27,7 +27,7 @@ const savePDF = (invoice) => {
       tableRows.push(invoiceData);
     }
   }
-  doc.autoTable(tableColumn, tableRows, { startY: 55 });
+  doc.autoTable(tableColumn, tableRows, { startY: 75 });
 
   // startY is basically margin-top
   // we use a date string to generate our filename.
@@ -45,10 +45,11 @@ const savePDF = (invoice) => {
   ];
 
   userRows.push(userData);
-  doc.autoTable(userColumn, userRows, { startY: 35 });
+  doc.autoTable(userColumn, userRows, { startY: 55 });
 
   doc.text("Overbooked Invoice", 80, 15);
-  doc.text("ID: " + invoice.invoice_id, 14, 30);
+  doc.text("Invoice ID: " + invoice.invoice_id, 14, 30);
+  doc.text("Invoice Adress: " + invoice.adress, 14, 45);
   doc.save(`overbooked-${invoice.invoice_id}-invoice.pdf`);
 };
 
@@ -67,12 +68,12 @@ const viewPDF = (invoice) => {
       const invoiceData = [
         invoice.products[2][i],
         invoice.products[1][i],
-        invoice.products[0][i] + "$",
+        invoice.products[0][i],
       ];
       tableRows.push(invoiceData);
     }
   }
-  doc.autoTable(tableColumn, tableRows, { startY: 55 });
+  doc.autoTable(tableColumn, tableRows, { startY: 75 });
 
   // startY is basically margin-top
   // we use a date string to generate our filename.
@@ -90,11 +91,11 @@ const viewPDF = (invoice) => {
   ];
 
   userRows.push(userData);
-  doc.autoTable(userColumn, userRows, { startY: 35 });
+  doc.autoTable(userColumn, userRows, { startY: 55 });
 
   doc.text("Overbooked Invoice", 80, 15);
-  doc.text("ID: " + invoice.invoice_id, 14, 30);
-  // we define the name of our PDF file.
+  doc.text("Invoice ID: " + invoice.invoice_id, 14, 30);
+  doc.text("Invoice Adress: " + invoice.adress, 14, 45);
   doc.output("dataurlnewwindow");
 };
 

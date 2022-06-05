@@ -23,19 +23,26 @@ class _CommentsPageState extends State<CommentsPage> {
           child: Column(
             children: [
               Column(
-                  children: List.generate(widget.product.comments?.length ?? 0,
+                  children: List.generate(
+                      widget.product.comments?.length ?? 0,
                       (index) => Column(
-                        children: [
-                          Text(widget.product.comments![index]["comment"]),
-                          const SizedBox(height: 8,),
-                        ],
-                      ))),
-              OutlinedButton(onPressed: (){
-                Navigator.push(context, MaterialPageRoute(
-                    builder: (context) => AddCommentPage(
-                      productID: widget.product.id,
-                    )));
-              }, child: const Text("Add comment")),
+                            children: [
+                              Text(widget.product.comments![index]["comment"]),
+                              const SizedBox(
+                                height: 8,
+                              ),
+                            ],
+                          ))),
+              OutlinedButton(
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => AddCommentPage(
+                                  productID: widget.product.id,
+                                )));
+                  },
+                  child: const Text("Add comment")),
             ],
           ),
         ),

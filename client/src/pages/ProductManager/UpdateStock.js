@@ -75,7 +75,7 @@ const UpdateStock = () => {
                 <div  style={{marginLeft: '50px', display: 'flex', justifyContent: 'space-between'}}>
                 <select onClick={(e) => setIndex(e.target.value)} style={{borderRadius:'5px',width:'315px', borderColor:'lightgray'}}>
             <option value="none" selected disabled hidden>Select Product ID</option>
-              {allproducts.map((item, i) => {return(<option value = {i}>{item.name}</option>);})}
+              {allproducts.map((item, i) => {return(<option value = {i}>{item.name + "- Current Stock: " + item.amount}</option>);})}
             </select>
 
             <TextField
