@@ -5,6 +5,30 @@
   box-shadow: 0 0 5px #ccc;
   padding-bottom: 5px;
 }
+
+.navbar {
+
+  position: fixed; 
+  z-index: 1000;
+  width: 100%;
+  background: transparent;
+  background-color:#3761af;
+  background-color: var(--theme-bg-color);
+
+}
+
+
+.navbar-active {
+
+  position: fixed; 
+  z-index: 1000;
+  width: 100%;
+  background: transparent;
+  background-color: blue;
+
+
+}
+
 .details{
   display: flex;
   justify-content: space-around;

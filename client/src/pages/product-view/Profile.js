@@ -7,6 +7,13 @@ import { Typography } from "@material-ui/core";
 import "./Profile.css";
 import { View } from "react-native";
 
+
+import LocalAtmIcon from '@material-ui/icons/LocalAtm';
+import CommentIcon from '@material-ui/icons/Comment';
+import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
+import SystemUpdateAltIcon from '@material-ui/icons/SystemUpdateAlt';
+import AirportShuttleIcon from '@material-ui/icons/AirportShuttle';
+
 import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
 import EditIcon from "@material-ui/icons/Edit";
 import PersonIcon from "@material-ui/icons/Person";
@@ -55,10 +62,20 @@ const Profile = () => {
         </a>
       );
     } else if (userrole === "product-manager") {
-      <a href="#">
-        {" "}
-        <LocalMallIcon /> Product-Manager-Panel
-      </a>;
+      return(
+      <>
+      <a href="/productmanager"><AddShoppingCartIcon/>Add Product</a>
+      <a href="/approvaldisapproval"><CommentIcon/>Approve Comment</a>
+      <a href="/updateproduct"> <SystemUpdateAltIcon/>Update Product</a>
+      <a href="/removeproduct"><RemoveCircleIcon/>Remove Product</a>
+      <a href="/Invoices"><LocalAtmIcon/>Invoices</a>
+      <a href="/updateorder"> <AirportShuttleIcon/>Update Order</a>
+      <a href="/updatestock"><SystemUpdateAltIcon/>Update Stock</a>
+
+      
+      </>
+      );
+
     } else if (userrole === "sales-manager") {
       return (
         <>
@@ -93,117 +110,71 @@ const Profile = () => {
   }
 
   return (
-    <div class="container bootstrap snippets bootdey">
-      <div class="row">
-        <div class="profile-nav col-md-3">
-          <div class="panel">
-            <div class="user-heading round">
-              <a href="#">
-                <Avatar style={{ width: 100, height: 100 }} />
+
+<div class="container bootstrap snippets bootdey">
+<div class="row">
+  <div class="profile-nav col-md-3">
+      <div class="panel">
+          <div class="user-heading round">
+              <a>
+                  <Avatar style={{ width: 100, height: 100 }}/>
               </a>
-              <h1
-                style={{
-                  borderRadius: "var(--border-radius-md)",
-                  backgroundColor: "yellow",
-                  color: "black",
-                }}
-              >
-                {currUser.name}
-              </h1>
-              <h1
-                style={{
-                  borderRadius: "var(--border-radius-md)",
-                  backgroundColor: "green",
-                }}
-              >
-                {currUser.surname}
-              </h1>
-              <p
-                style={{
-                  borderRadius: "var(--border-radius-md)",
-                  backgroundColor: "red",
-                }}
-              >
-                {currUser.email}
-              </p>
-            </div>
+              <h1 style={{color: 'black'}}>{currUser.name}</h1>
+              <h1 style={{color: 'black'}}>{currUser.surname}</h1>
+              <p style={{color: 'black'}}>{currUser.email}</p>
+          </div>
 
-            <ul class="nav nav-pills flex-column">
-              <li class="active">
-                <a href="#">
-                  {" "}
-                  <PersonIcon /> Profile
-                </a>
-              </li>
-              <li>
-                <a href="/editprofile">
-                  {" "}
-                  <EditIcon /> Edit profile
-                </a>
-              </li>
+          <ul class="nav nav-pills flex-column">
+              <li class="active"><a href="#"> <PersonIcon/> Profile</a></li>
+              <li><a href="/editprofile"> <EditIcon/> Edit profile</a></li>
               <li>{buttonstatus(currUser.user_role)}</li>
-            </ul>
-          </div>
-        </div>
-        <div class="profile-info col-md-9">
-          <div class="panel">
-            <div class="bio-graph-heading">
-              <View style={{ flexDirection: "row", alignItems: "center" }}>
-                <View
-                  style={{ flex: 1, height: 4, backgroundColor: "black" }}
-                />
-                <View>
-                  <View
-                    style={{
-                      width: 200,
-                      textAlign: "center",
-                      color: "green",
-                      fontWeight: "bold",
-                      fontSize: 40,
-                    }}
-                  >
-                    PROFILE
-                  </View>
-                </View>
-                <View
-                  style={{ flex: 1, height: 4, backgroundColor: "black" }}
-                />
-              </View>
-            </div>
-
-            <br />
-            <div class="panel-body bio-graph-info">
-              <div class="row">
-                <div class="bio-row">
-                  <p>
-                    <span>First Name </span>: {currUser.name}
-                  </p>
-                </div>
-                <div class="bio-row">
-                  <p>
-                    <span>Last Name </span>: {currUser.surname}
-                  </p>
-                </div>
-                <div class="bio-row">
-                  <p>
-                    <span>Adress </span>: {currUser.adress}
-                  </p>
-                </div>
-                <div class="bio-row">
-                  <p>
-                    <span>Username</span>: {currUser.username}
-                  </p>
-                </div>
-                <div class="bio-row">
-                  <p>
-                    <span>Email </span>: {currUser.email}
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+          </ul>
       </div>
+  </div>
+  <div class="profile-info col-md-9">
+      <div class="panel">
+          <div class="containerW2">
+          <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            <View style={{flex: 1, height: 4, backgroundColor: 'black'}} />
+            <View>
+              <View style={{width: 200, textAlign: 'center', color: 'black', fontWeight: "bold", fontSize: 40}}>PROFILE</View>
+            </View>
+            <View style={{flex: 1, height: 4, backgroundColor: 'black'}} />
+          </View>
+          </div>
+
+          <br/>
+          <div class="panel-body bio-graph-info">
+            <div class = "row">
+                <div class="bio-row">
+                    <p style = {{color:  'black'}}><span>First Name </span>: {currUser.name}</p>
+                </div>
+                <div class="bio-row">
+                    <p style = {{color:  'black'}}><span>Last Name </span>: {currUser.surname}</p>
+                </div>
+                <div class="bio-row">
+                    <p style = {{color:  'black'}}><span>Adress </span>: {currUser.adress}</p>
+                </div>
+                <div class="bio-row">
+                    <p style = {{color:  'black'}}><span>Username</span>: {currUser.username}</p>
+                </div>
+                <div class="bio-row">
+                    <p style = {{color: 'black'}}><span>Email </span>: {currUser.email}</p>
+                </div>
+
+                <div class="bio-row">
+                    <p style = {{color: 'black'}}><span>User-Role </span>: {currUser.user_role}</p>
+                </div>
+
+                <div class="bio-row">
+                    <p style = {{color: 'black'}}><span>Tax-ID </span>: {currUser.tax_id}</p>
+                </div>
+            </div>
+          </div>
+        </div>
+        </div>
+
+    </div>
     </div>
   );
 };

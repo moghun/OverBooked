@@ -1,64 +1,156 @@
-import SideBar from './SideBar';
-import React, { Component } from 'react';
+
+import React, { Component,  useState, useEffect} from 'react';
 import { Container, Card } from 'react-bootstrap';
 import { Button } from '@material-ui/core';
 import './ProductManager.css';
+import TextField from "@material-ui/core/TextField";
+import axios from "axios";
+import { useSelector } from "react-redux";
 
-const AddProduct = () => {
+const ProductManager = () => {
+
+
+  const currUser = useSelector((state) => state.user.currentUser);
+
+  const [cost, setCost] = useState(null);
+  const [amount, setAmount] = useState(null);
+  const [publisher, setPublisher] = useState(null);
+  const [description, setDescription] = useState(null);
+  const [author, setAuthor] = useState(null);
+  const [category, setCategory] = useState(null);
+  const [name, setName] = useState(null);
+
+
+  const clickSubmit = () => {
+
+    const add = {
+      publisher: publisher || undefined,
+      cost: cost || undefined,
+      amount: amount || undefined,
+      publisher: publisher || undefined,
+      //img: img || undefined,
+      description: description || undefined,
+      //warranty: warranty || undefined,
+      author: author || undefined,
+      category: category || undefined, 
+      //subcategories: subcategories || undefined,
+      //sale: sale || undefined,
+      //before_sale_price: before_sale_price || undefined,
+      name: name || undefined,
+
+    };
+
+    try {
+      axios.post("http://localhost:5001/api/products/", add, {
+        headers: { token: "Bearer " + currUser.accessToken },
+      });
+      
+    } catch (err) {
+      alert(err);
+    }
+
+  };
+
+
+  function handleChange2(event) {
+    setCost(event.target.value)
+    console.log(cost);
+  }
+
+  function handleChange2(event) {
+    setCost(event.target.value)
+    console.log(cost);
+  }
+
+
+  function handleChange3(event) {
+    setAmount(event.target.value)
+    console.log(amount);
+  }
+
+
+  function handleChange4(event) {
+    setPublisher(event.target.value)
+    console.log(publisher);
+  }
+
+
+  function handleChange6(event) {
+    setDescription(event.target.value)
+    console.log(description);
+  }
+
+
+  function handleChange8(event) {
+    setAuthor(event.target.value)
+    console.log(author);
+  }
+
+
+  function handleChange9(event) {
+    setCategory(event.target.value)
+    console.log(category);
+  }
+
+  function handleChange13(event) {
+    setName(event.target.value)
+    console.log(name);
+  }
+
     return (
 
-
-        <Card style={{borderRadius: '30px', border: '2px solid #0400ff'}}>
+      <div>
+        <br/>
+        <Card style= {{borderRadius: '30px', boxShadow: '0 0 5px #ccc', padding: '0 15px', width: '70%', marginLeft: '14%'}}>
           <br/>
         <form className='form-horizontal'>
           <fieldset>
             <br/>
-            <legend className='pcontainer'>ADD PRODUCTS</legend>
+            <legend className='pcontainer' style = {{color: 'black', fontSize: '30px'}}>ADD PRODUCTS</legend>
+
             <div className='row form-group' style={{marginLeft: '50px'}}>
-              <label className='col-md-4 control-label' htmlFor='product_id' style = {{padding: '12px 20px', background: 'red', border: 'none', borderRadius: '30px', fontWeight: 'bold', boxShadow: "10px 20px 30px lightblue"}}>
-                PRICE
+              <label className='col-md-4 control-label' htmlFor='product_id' style = {{padding: '12px 20px', background: 'orange', border: 'none', borderRadius: '30px', fontWeight: 'bold', boxShadow: "0px 5px 10px lightblue"}}>
+                AUTHOR
               </label>
               <div className='col-md-4'>
-                <input
-                  id='price'
-                  name='price'
-                  placeholder='PRICE'
-                  className='form-control input-md'
+                <TextField
+                  id="author"
+                  placeholder='AUTHOR'
                   required
-                  type='number'
+                  type="string"
+                  onChange={handleChange8}
                 />
               </div>
             </div>
+
             <div className='row form-group' style={{marginLeft: '50px'}}>
-              <label className='col-md-4 control-label' htmlFor='product_name' style = {{padding: '12px 20px', background: 'red', border: 'none', borderRadius: '30px', fontWeight: 'bold', boxShadow: "10px 20px 30px lightblue"}}>
-                OLD PRICE
+              <label className='col-md-4 control-label' htmlFor='product_id' style = {{padding: '12px 20px', background: 'orange', border: 'none', borderRadius: '30px', fontWeight: 'bold', boxShadow: "0px 5px 10px lightblue"}}>
+                COST
               </label>
               <div className='col-md-4'>
-                <input
-                  id='oldPrice'
-                  name='oldPrice'
-                  placeholder='OLD PRICE'
-                  className='form-control input-md'
+                <TextField
+                  id="cost"
+                  placeholder='COST'
                   required
-                  type='number'
+                  type="number"
+                  onChange={handleChange2}
                 />
               </div>
             </div>
             <div className=' row form-group' style={{marginLeft: '50px'}}>
               <label
                 className='col-md-4 control-label'
-                htmlFor='product_name_fr' style = {{padding: '12px 20px', background: 'red', border: 'none', borderRadius: '30px', fontWeight: 'bold', boxShadow: "10px 20px 30px lightblue"}}
+                htmlFor='product_name_fr' style = {{padding: '12px 20px', background: 'orange', border: 'none', borderRadius: '30px', fontWeight: 'bold', boxShadow: "0px 5px 10px lightblue"}}
               >
                 STOCK
               </label>
               <div className='col-md-4'>
-                <input
-                  id='stock'
-                  name='stock'
+                <TextField
+                  id="AMOUNT"
                   placeholder='STOCK'
-                  className='form-control input-md'
                   required
                   type='number'
+                  onChange={handleChange3}
                 />
               </div>
             </div>
@@ -66,37 +158,17 @@ const AddProduct = () => {
             <div className='row form-group' style={{marginLeft: '50px'}}>
               <label
                 className='col-md-4 control-label'
-                htmlFor='available_quantity' style = {{padding: '12px 20px', background: 'red', border: 'none', borderRadius: '30px', fontWeight: 'bold', boxShadow: "10px 20px 30px lightblue"}}
-              >
-                IMAGE SOURCE
-              </label>
-              <div className='col-md-4'>
-                <input
-                  id='imgSrc'
-                  name='imgSrc'
-                  placeholder='IMAGE SOURCE'
-                  className='form-control input-md'
-                  required
-                  type='text'
-                />
-              </div>
-            </div>
-
-            <div className='row form-group' style={{marginLeft: '50px'}}>
-              <label
-                className='col-md-4 control-label'
-                htmlFor='available_quantity' style = {{padding: '12px 20px', background: 'red', border: 'none', borderRadius: '30px', fontWeight: 'bold', boxShadow: "10px 20px 30px lightblue"}}
+                htmlFor='available_quantity' style = {{padding: '12px 20px', background: 'orange', border: 'none', borderRadius: '30px', fontWeight: 'bold', boxShadow: "0px 5px 10px lightblue"}}
               >
                 NAME
               </label>
               <div className='col-md-4'>
-                <input
-                  id='name'
-                  name='name'
+                <TextField
+                  id="NAME"
                   placeholder='NAME'
-                  className='form-control input-md'
                   required
-                  type='text'
+                  type="text"
+                  onChange={handleChange13}
                 />
               </div>
             </div>
@@ -104,132 +176,75 @@ const AddProduct = () => {
             <div className='row form-group' style={{marginLeft: '50px'}}>
               <label
                 className='col-md-4 control-label'
-                htmlFor='product_weight' style = {{padding: '12px 20px', background: 'red', border: 'none', borderRadius: '30px', fontWeight: 'bold', boxShadow: "10px 20px 30px lightblue"}}
-              >
-                MODEL NUMBER
-              </label>
-              <div className='col-md-4'>
-                <input
-                  id='modelNo'
-                  name='modelNo'
-                  placeholder='MODEL NUMBER'
-                  className='form-control input-md'
-                  required
-                  type='text'
-                />
-              </div>
-            </div>
-
-            <div className='row form-group' style={{marginLeft: '50px'}}>
-              <label
-                className='col-md-4 control-label'
-                htmlFor='product_weight' style = {{padding: '12px 20px', background: 'red', border: 'none', borderRadius: '30px', fontWeight: 'bold', boxShadow: "10px 20px 30px lightblue"}}
-              >
-                COST
-              </label>
-              <div className='col-md-4'>
-                <input
-                  id='cost'
-                  name='cost'
-                  placeholder='COST'
-                  className='form-control input-md'
-                  required
-                  type='number'
-                />
-              </div>
-            </div>
-            <div className='row form-group' style={{marginLeft: '50px'}}>
-              <label
-                className='col-md-4 control-label'
-                htmlFor='percentage_discount'  style = {{padding: '12px 20px', background: 'red', border: 'none', borderRadius: '30px', fontWeight: 'bold', boxShadow: "10px 20px 30px lightblue"}}
+                htmlFor='percentage_discount'  style = {{padding: '12px 20px', background: 'orange', border: 'none', borderRadius: '30px', fontWeight: 'bold', boxShadow: "0px 5px 10px lightblue"}}
               >
                 DESCRIPTION
               </label>
               <div className='col-md-4'>
-                <input
-                  id='description'
-                  name='description'
+                <TextField
+                  id="DESCRIPTION"
                   placeholder='DESCRIPTION'
-                  className='form-control input-md'
                   required
-                  type='text'
-                />
-              </div>
-            </div>
-            <div className='row form-group' style={{marginLeft: '50px'}}>
-              <label className='col-md-4 control-label' htmlFor='stock_alert'  style = {{padding: '12px 20px', background: 'red', border: 'none', borderRadius: '30px', fontWeight: 'bold', boxShadow: "10px 20px 30px lightblue"}}>
-                WARRANTY STATUS
-              </label>
-              <div className='col-md-4'>
-                <input
-                  id='warrantyStatus'
-                  name='warrantyStatus'
-                  placeholder='WARRANTY STATUS'
-                  className='form-control input-md'
-                  required
-                  type='text'
+                  type='string'
+                  onChange={handleChange6}
                 />
               </div>
             </div>
             <div className='row form-group' style={{marginLeft: '50px'}}>
               <label
                 className='col-md-4 control-label'
-                htmlFor='product_categorie'   style = {{padding: '12px 20px', background: 'red', border: 'none', borderRadius: '30px', fontWeight: 'bold', boxShadow: "10px 20px 30px lightblue"}}
+                htmlFor='product_categorie'   style = {{padding: '12px 20px', background: 'orange', border: 'none', borderRadius: '30px', fontWeight: 'bold', boxShadow: "0px 5px 10px lightblue"}}
               >
                 PRODUCT CATEGORY
               </label>
               <div className='col-md-4'>
-                <input
-                  id='categoryName'
-                  name='categoryName'
+                <TextField
+                  id="CATEGORY"
                   placeholder='Category Name'
-                  className='form-control input-md'
                   required
                   type='text'
+                  onChange={handleChange9}
                 />
               </div>
             </div>
+
+
+            <div className='row form-group' style={{marginLeft: '50px'}}>
+              <label
+                className='col-md-4 control-label'
+                htmlFor='product_categorie'   style = {{padding: '12px 20px', background: 'orange', border: 'none', borderRadius: '30px', fontWeight: 'bold', boxShadow: "0px 5px 10px lightblue"}}
+              >
+                PUBLISHER
+              </label>
+              <div className='col-md-4'>
+                <TextField
+                  id="publisher"
+                  placeholder='PUBLISHER'
+                  required
+                  type='text'
+                  onChange={handleChange4}
+                />
+              </div>
+            </div>
+
+            
             <div className='row form-group' style={{marginLeft: '50px'}}>
               <label
                 className='col-md-4 control-label'
                 htmlFor='singlebutton'
               ></label>
-              <div className='col-md-4'>
-                <Button variant="contained" style={{backgroundColor: 'green'}}> Add </Button>
+              <div style={{display: 'flex', justifyContent: 'space-between'}}>
+                <Button variant="contained" color = 'grey' onClick= {clickSubmit}> Add </Button>
+                <Button variant="contained" color = 'grey' href= "/profile"> Cancel </Button>
               </div>
             </div>
           </fieldset>
         </form>
       </Card>
-
-
-    );
-
-
-}
-
-const ProductManager = () => {
-    return (
-
-        <div className="container">
-        <div className="row">
-        <div className="col-sm-3">
-          <SideBar />
-        </div>
-        <div className="col-sm-9">
-          <AddProduct />
-          <br />
-        </div>
-        </div>
       </div>
 
 
-
-
-
     );
-
-
 
 }
 

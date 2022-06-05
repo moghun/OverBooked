@@ -7,6 +7,8 @@ import { logout } from "../../redux/apiCalls";
 import { clearCart } from "../../redux/cartRedux";
 import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
 import { Button } from "@material-ui/core";
+import AccountBoxIcon from '@material-ui/icons/AccountBox';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 
 
 import Badge from '@material-ui/core/Badge'
@@ -15,6 +17,8 @@ import Badge from '@material-ui/core/Badge'
 
 const NavigationBar = () => {
   const currUser = useSelector((state) => state.user.currentUser);
+  const cartnumber = useSelector((state) => state.cart.amount);
+
   const [searchValue, setSearchValue] = useState("");
   const dispatch = useDispatch();
 
@@ -29,7 +33,7 @@ const NavigationBar = () => {
   };
 
   return (
-    <nav class="navbar">
+    <nav className="navbar">
       <i class="material-icons menu-icon">menu</i>
 
       <div class="logo">
@@ -44,13 +48,7 @@ const NavigationBar = () => {
 
       <div class="item search right" tabindex="0">
         <div class="search-group">
-          <select>
-            <option value="all">All</option>
-            <option value="all">Books</option>
-            <option value="all">Comics</option>
-            <option value="all">Magazines</option>
-          </select>
-          <input type="text" onChange={onValueChange} value={searchValue} />
+          <input type="text" onChange={onValueChange} value={searchValue} placeholder= "SEARCH" />
           <form action={"/searchpage/" + searchValue} method="get">
             <button className="--btn --btn-primary">
               <img
@@ -63,75 +61,58 @@ const NavigationBar = () => {
       </div>
 
       {currUser === null ? (
-        <a href="/signin" class="  item">
-          <div class="group">
-            <img
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Google_account_icon.svg/803px-Google_account_icon.svg.png"
-              alt="search"
-            />
 
-            <div class="detail">
-              Account
-              <div class="sub">Sign In</div>
-            </div>
-          </div>
-        </a>
+        <>
+
+          <Button href="/signin" startIcon = {<AccountBoxIcon/>}>
+          </Button>
+
+
+<Button href="/shoppingcart" startIcon = {<ShoppingCartIcon/>}>
+<Badge invisible={false} badgeContent={cartnumber} color="secondary" style={{marginLeft: '20%'}}>
+</Badge>
+</Button>
+
+</>
       ) : (
-        
+
+        currUser.user_role === "customer" ? (        
         <div class = "nav-row">
 
-          <Button variant="contained" style={{ color:"white" ,backgroundColor:"#e6b619", width: '60%'}} startIcon={<FavoriteIcon/>} href= "/wishlist">
-             MyWishlist
-             <Badge invisible={false} badgeContent= {0} color="secondary" style={{marginLeft: '10%'}}>
+
+<Button href="/profile" startIcon = {<AccountBoxIcon/>} style = {{marginRight: '-10px'}}>
+          </Button>
+
+          <Button startIcon={<FavoriteIcon/>} href= "/wishlist">
+             <Badge invisible={false}  badgeContent={currUser.wishlist.length} color="secondary" style={{marginLeft: '10%'}}>
             </Badge>
           </Button>
 
-          <Button href="/profile" class="  item" variant="contained">
-            <div class="group">
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Google_account_icon.svg/803px-Google_account_icon.svg.png"
-                alt="search"
-              />
 
-              <div class="detail">Account</div>
-            </div>
-          </Button>
-
-          <Button variant="contained" style={{ color:"white" ,backgroundColor:"#e6b619"}} startIcon={<PowerSettingsNewIcon/>} onClick={handleClick}>
-           Logout
-        </Button>
-        </div>
-      )}
-
-      <Button href="/shoppingcart" class="item" variant="contained">
-        <div class="group">
-          <img
-            class="cart"
-            src="https://cdn3.iconfinder.com/data/icons/book-shop-category-ouline/512/Book_Shop_Category-10-512.png"
-            alt="search"
-          />
-
-          <div class="detail">
-            Shopping
-            <div class="sub">Cart
-            <Badge invisible={false} badgeContent={0} color="secondary" style={{marginLeft: '20%'}}>
+        <Button href="/shoppingcart" startIcon = {<ShoppingCartIcon/>}>
+            <Badge invisible={false} badgeContent={cartnumber} color="secondary" style={{marginLeft: '20%'}}>
             </Badge>
-            </div>
-          </div>
-        </div>
       </Button>
+
+
+      <Button startIcon={<PowerSettingsNewIcon/>} onClick={handleClick}>
+        </Button>
+
+
+        </div>
+      ) : (
+
+        <>
+        <Button href="/profile" startIcon = {<AccountBoxIcon/>}>
+        </Button>
+
+        <Button startIcon={<PowerSettingsNewIcon/>} onClick={handleClick}>
+      </Button>
+      </>
+      )
+      
+      )}
     </nav>
   );
 };
 export default NavigationBar;
-
-/*
-        <ul>
-            <li><a href="default.asp">Home</a></li>
-            <li><a href="news.asp">News</a></li>
-            <li><a href="contact.asp">Contact</a></li>
-            <li><a href="about.asp">About</a></li>
-            <li><input type = "text" ></input></li>
-        </ul>
-
-*/

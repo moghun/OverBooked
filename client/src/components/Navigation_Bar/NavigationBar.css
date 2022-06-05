@@ -14,19 +14,14 @@
   font-family: 'Open Sans', sans-serif;
   box-sizing: border-box;
 }
-.navbar {
-  display: flex;
-  box-shadow: 0 0 2px 0 grey;
-  align-items: center;
-  font-size: 1em;
-  
-  background-color:#3761af;
-  background-color: var(--theme-bg-color);
-  
-  color: white;
-  color: var(--theme-color);
 
-  top: 0;
+
+.navbar {
+
+  display: flex;
+  justify-content: space-between;
+  align-items: right;
+
 }
 
 .item{
@@ -203,11 +198,11 @@
 .slider2 {
   top: 20px;
   bottom: 10px;
-  width: 50%;
-  height: 80vh;
+  width: 100%;
+  height: 100vh;
   position: relative;
   overflow: hidden;
-  left: 300px;
+  left: 0;
   border-radius: 25px;
   border: 4px solid #99924d;
   padding: 20px;
@@ -2711,23 +2706,6 @@ footer {
     border-radius: var(--border-radius-sm);
   }
 
-  .dropdown-list {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 200px;
-    background: var(--white);
-    padding: 20px 0;
-    border-radius: var(--border-radius-md);
-    border: 1px solid var(--cultured);
-    box-shadow: 0 3px 5px hsla(0, 0%, 0%, 0.1);
-    transform: translateY(50px);
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-    transition: var(--transition-timing);
-    z-index: 5;
-  }
 
   .desktop-menu-category-list .menu-category:hover > .dropdown-list {
     transform: translateY(0);
@@ -2738,10 +2716,11 @@ footer {
 
   .dropdown-list .dropdown-item a {
     color: var(--sonic-silver);
-    font-size: var(--fs-7);
+    font-size: var(--fs-40);
     text-transform: capitalize;
     padding: 4px 20px;
     transition: var(--transition-timing);
+
   }
 
   .dropdown-list .dropdown-item a:hover { color: var(--salmon-pink); }
@@ -3241,12 +3220,6 @@ footer {
     }
   }
 
-  .main-container {
-
-
-    background-image: url('https://miro.medium.com/max/1400/1*qYE6XgnyxXy9HHOeoQGjTw.jpeg');
-    background-size: 300px 300px;
-  }
     .upper-container{
     height: 100px;
     background: #7F00FF;
@@ -3254,7 +3227,7 @@ footer {
 
     .upper-container2{
       padding: 12px 20px;
-      background: #00ff99;
+      background: #ffd000;
       border: none;
       color: white;
       border-radius: 30px;
@@ -3266,7 +3239,7 @@ footer {
     }
 
     .upper-container2:hover{
-      background: #00ff9996;
+      background: #ffd50096;
 
     }
 
@@ -3454,9 +3427,9 @@ footer {
 
 
       border-radius: 25px;
-      border: 4px solid #bababa;
+      border: 4px solid #ecc901;
       padding: 20px;
-      background-color: rgb(189, 189, 189);
+      background-color: rgb(220, 186, 93);
 
     }
 
@@ -3465,7 +3438,7 @@ footer {
 
 
       border-radius: 25px;
-      border: 4px solid #99924d;
+      border: 4px solid #998a4d;
       padding: 20px;
       background-color: rgb(242, 228, 211);
 
