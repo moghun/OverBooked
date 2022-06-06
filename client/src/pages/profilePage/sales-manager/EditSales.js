@@ -72,7 +72,7 @@ function EditSales() {
   };
 
   return (
-    <div className="main-container">
+    <div className="main-container"  style={{marginTop:'25px'}}>
       <div style={{ display: "flex", justifyContent: "center" }}>
         <Card>
           <CardContent>
