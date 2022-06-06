@@ -7,6 +7,37 @@ import { clearCart } from "../redux/cartRedux";
 import { useDispatch } from "react-redux";
 import axios from "axios";
 import { format } from "date-fns";
+import { motion } from "framer-motion";
+
+
+
+
+const containerStyle = {
+  position: "relative",
+  width: "6rem",
+  height: "6rem",
+  boxSizing: "border-box"
+};
+
+const circleStyle = {
+  display: "block",
+  width: "6rem",
+  height: "6rem",
+  border: "0.5rem solid #e9e9e9",
+  borderTop: "0.5rem solid #e6b619",
+  borderRadius: "50%",
+  position: "absolute",
+  boxSizing: "border-box",
+  top: 0,
+  left: 0
+};
+
+const spinTransition = {
+  loop: Infinity,
+  ease: "linear",
+  duration: 1
+};
+
 
 const { v1: uuidv1 } = require("uuid");
 
@@ -119,19 +150,27 @@ const Success = () => {
   return (
     <div
       style={{
-        height: "100vh",
+        height: "50vh",
+        width:"60vh",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
+        boxShadow: "0 0 5px #ccc",
+        marginTop:'5vh',
+        marginLeft:'35%',
+        borderRadius:'10vh'
       }}
     >
-      {orderId
-        ? `Order has been created successfully. Your order number is ${orderId}`
-        : `Successfull. Your order is being prepared...`}
-      <Button href={"/"} style={{ padding: 10, marginTop: 20 }}>
+            
+        {orderId
+        ? <h style={{fontFamily:'OpenSans', fontSize:'20px'}}>Order has been created successfully. Your order number is ${orderId}</h>
+        : <h style={{fontFamily:'OpenSans', fontSize:'20px'}}>Successfull. Your order is being prepared...</h>}
+      <Button href={"/"} style={{ padding: 10, marginTop: 20, fontFamily:'OpenSans'  }}>
         Go to Homepage
       </Button>
+      
+
     </div>
   );
 };
