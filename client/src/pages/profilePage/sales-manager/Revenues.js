@@ -41,11 +41,25 @@ const Revenues = () => {
         res.data.forEach((pr) => {
           carrier = carrier + pr.cost * pr.amount;
         });
-        setCost(carrier);
+        setCost(Math.floor(carrier*(100/115)));
 
       });
     } catch (err) {}
   };
+
+  function sortByProperty(property){  
+    return function(a,b){  
+       if(a[property].split('/')[2] < b[property].split('/')[2])  
+          {return -1; }
+        else if(a[property] > b[property]){
+          return 1;
+        }
+       else if(a[property] < b[property])  
+          {return -1; }
+   
+       return 0;  
+    }  
+ }
 
   const getInvoices = async () => {
     try {
@@ -64,6 +78,7 @@ const Revenues = () => {
             carrier = carrier + inv.cost;
             invoicesArr.push(inv);
           });
+          invoicesArr.sort(sortByProperty("date"))
           setRows(invoicesArr);
           setTotal(carrier);
           console.log(invoicesArr);
@@ -78,6 +93,8 @@ const Revenues = () => {
     getInvoices();
     getAllProducts();
   }, []);
+
+  
 
   const convertToDate = (d) => {
     const [month, day, year] = d.split("/");
