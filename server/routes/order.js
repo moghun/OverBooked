@@ -208,7 +208,7 @@ router.get("/", verifyTokenAndManager, async (req, res) => {
 });
 
 //GET USER ORDERS
-router.get("/find/:userId", verifyTokenOrManager, async (req, res) => {
+router.get("/find/:userId", async (req, res) => {
   try {
     const orders = await Order.find({ buyer_email: req.query.buyer_email });
     res.status(200).json(orders);
