@@ -38,7 +38,10 @@ function InvoicesPage() {
           setFiltered(invoicesArr);
         });
     } catch (err) {
-      alert(err);
+      toast.error(err, {
+        position: toast.POSITION.TOP_CENTER,
+        autoClose: 1500,
+      });
     }
   };
 
@@ -77,15 +80,8 @@ function InvoicesPage() {
     } else {
       setFiltered(rows.filter((item) => checkDate(item.date)));
       console.log(filtered);
-      //alert(ending + starting)
     }
   }
-
-  /*
-      function alertInfo(item){
-        alert("Date: " + item.date + "\nID: " + item.id + "\nFullName: " + item.fullName);
-      }
-      */
 
   const columns = [
     {
