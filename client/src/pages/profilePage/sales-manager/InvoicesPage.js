@@ -21,13 +21,9 @@ function InvoicesPage() {
   const getInvoices = async () => {
     try {
       await axios
-        .get(
-          "http://localhost:5001/api/users/getInvoices/", //Current products' ID here
-          undefined, //Take current products' before_sale_cost here
-          {
-            headers: { token: "Bearer " + currUser.accessToken },
-          }
-        )
+        .get("http://localhost:5001/api/users/getInvoices/", {
+          headers: { token: "Bearer " + currUser.accessToken },
+        })
         .then((res) => {
           let invoicesArr = [];
           res.data.forEach((inv) => {
