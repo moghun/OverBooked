@@ -18,7 +18,12 @@ class WishlistService {
 
   removeFromWishlist(Product product) {
     User user = UserService.getCurrentUser()!;
-    user.wishlist!.remove({"product_id": product.id});
+    for(int i = 0; i < user.wishlist!.length; i++){
+      if(user.wishlist![i]["product_id"].toString() == product.id){
+        user.wishlist!.removeAt(i);
+        break;
+      }
+    }
     var body = jsonEncode({"product_id": product.id});
     http.put(
       Uri.parse(apiBaseURL + "/users/removeFromWishlist/" + user.uid!),

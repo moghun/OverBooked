@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mobile/services/product_service.dart';
+import 'package:mobile/components/order_preview.dart';
+import 'package:mobile/models/order.dart';
+import 'package:mobile/services/order_service.dart';
 import 'package:mobile/utils/dimensions.dart';
 import 'package:mobile/utils/styles.dart';
 import 'package:mobile/components/main_app_bar.dart';
@@ -12,7 +14,7 @@ class UserOrdersPage extends StatefulWidget {
 }
 
 class _UserOrdersPageState extends State<UserOrdersPage> {
-  final ProductService _productService = ProductService();
+  final OrderService _orderService = OrderService();
 
   @override
   Widget build(BuildContext context) {
@@ -22,8 +24,8 @@ class _UserOrdersPageState extends State<UserOrdersPage> {
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
-            FutureBuilder<List<dynamic>>(
-              future: _productService.getMyOrders(),
+            FutureBuilder<List<Order>>(
+              future: _orderService.getUserOrders(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const CircularProgressIndicator();
@@ -35,12 +37,27 @@ class _UserOrdersPageState extends State<UserOrdersPage> {
                     );
                   } else if (snapshot.hasData) {
                     return SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
                       child: Padding(
                         padding: Dimen.regularPadding,
                         child: Column(
-                          children: List.generate(
-                              snapshot.data!.length, (index) => Text(snapshot.data![index])),
+                          children: snapshot.data!.isNotEmpty
+                              ? List.generate(snapshot.data!.length,
+                                  (index) => OrderPreview(order: snapshot.data![index]))
+                              : [
+                                const SizedBox(height: 100,),
+                                  Center(
+                                    child: Icon(
+                                      Icons.local_shipping,
+                                      size: 120,
+                                      color: Colors.black.withOpacity(0.2),
+                                    ),
+                                  ),
+                                  const Center(
+                                      child: Text(
+                                    "You don't have any orders yet.",
+                                    style: TextStyle(fontSize: 20),
+                                  )),
+                                ],
                         ),
                       ),
                     );

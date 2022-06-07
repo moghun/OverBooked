@@ -14,8 +14,8 @@ class MainAppBar extends StatelessWidget with PreferredSizeWidget {
             onPressed: () {},
             icon: const Icon(
               Icons.notifications,
-              color: AppColors.primary,
-              size: 30,
+              color: AppColors.appBarText,
+              size: 27,
             ))
       ],
       title: Text(

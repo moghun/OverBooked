@@ -113,7 +113,10 @@ class _ProfilePageState extends State<ProfilePage> {
                             style: ButtonStyle(
                                 overlayColor: MaterialStateProperty.all(
                                     AppColors.background.withOpacity(0.2))),
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.push(context,
+                                  MaterialPageRoute(builder: (context) => const UserOrdersPage()));
+                            },
                             child: Stack(
                               children: const [
                                 Align(
@@ -155,8 +158,8 @@ class _ProfilePageState extends State<ProfilePage> {
                                 overlayColor: MaterialStateProperty.all(
                                     AppColors.background.withOpacity(0.2))),
                             onPressed: () {
-                              Navigator.push(context, MaterialPageRoute(
-                                  builder: (context) => const WishlistPage()));
+                              Navigator.push(context,
+                                  MaterialPageRoute(builder: (context) => const WishlistPage()));
                             },
                             child: Stack(
                               children: const [
