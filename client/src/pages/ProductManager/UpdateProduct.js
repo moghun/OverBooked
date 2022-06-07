@@ -157,31 +157,34 @@ const UpdateProduct = () => {
 
       <div>
         <br/>
-        <Card style= {{borderRadius: '30px', boxShadow: '0 0 5px #ccc', padding: '0 15px', width: '70%', marginLeft: '14%'}}>
+        <Card style= {{borderRadius: '30px', boxShadow: '0 0 5px #ccc', padding: '0 15px', width: '60%', marginLeft: '20%'}}>
           <br/>
         <form className='form-horizontal'>
           <fieldset>
             <br/>
             <legend className='pcontainer' style = {{color: 'black', fontSize: '30px'}}>UPDATE PRODUCTS</legend>
 
+
+            <div  style={{marginLeft: '30px', display: 'flex', justifyContent: 'space-between'}}>
               <label className='col-md-4 control-label' htmlFor='product_id' style = {{padding: '12px 20px', background: 'orange', border: 'none', borderRadius: '30px', fontWeight: 'bold', boxShadow: "0px 5px 10px lightblue"}}>
-                PRODUCT ID
+                PRODUCT NAME - ID
               </label>
 
               <select onClick={(e) => setIndex(e.target.value)} style={{borderRadius:'5px',width:'315px', borderColor:'lightgray'}}>
             <option value="none" selected disabled hidden>Select an Option</option>
-              {allproducts.map((item, i) => {return(<option value = {i}>{item._id}</option>);})}
+              {allproducts.map((item, i) => {return(<option value = {i}>{item.name + "-" + item._id}</option>);})}
             </select>
+
+            </div>
 
               <br/>
 
-
-              <div  style={{marginLeft: '50px', display: 'flex', justifyContent: 'space-between'}}>
+              <div  style={{marginLeft: '30px', display: 'flex', justifyContent: 'space-between'}}>
               <label className='col-md-4 control-label' htmlFor='product_id' style = {{padding: '12px 20px', background: 'orange', border: 'none', borderRadius: '30px', fontWeight: 'bold', boxShadow: "0px 5px 10px lightblue"}}>
                 IMAGE SOURCE
               </label>
 
-              <div className='col-md-4'>
+              <div className='col-md-4' style = {{marginRight: '100px'}}>
                 <TextField
                   id="IMAGE"
                   placeholder='IMAGE'
@@ -194,7 +197,7 @@ const UpdateProduct = () => {
 
               <br/>
 
-              <div  style={{marginLeft: '50px', display: 'flex', justifyContent: 'space-between'}}>
+              <div  style={{marginLeft: '30px', display: 'flex', justifyContent: 'space-between'}}>
               <label className='col-md-4 control-label' htmlFor='product_id' style = {{padding: '12px 20px', background: 'orange', border: 'none', borderRadius: '30px', fontWeight: 'bold', boxShadow: "0px 5px 10px lightblue"}}>
                 SALE
               </label>
@@ -210,13 +213,13 @@ const UpdateProduct = () => {
 
               <br/>
             
-              <div  style={{marginLeft: '50px', display: 'flex', justifyContent: 'space-between'}}>
+              <div  style={{marginLeft: '30px', display: 'flex', justifyContent: 'space-between'}}>
               <label className='col-md-4 control-label' htmlFor='product_id' style = {{padding: '12px 20px', background: 'orange', border: 'none', borderRadius: '30px', fontWeight: 'bold', boxShadow: "0px 5px 10px lightblue"}}>
                 BEFORE SALE PRICE
               </label>
 
 
-              <div className='col-md-4'>
+              <div className='col-md-4' style = {{marginRight: '100px'}}>
                 <TextField
                   id="before_sale_price"
                   placeholder='BEFORE SALE PRICE'
@@ -229,13 +232,13 @@ const UpdateProduct = () => {
 
               <br/>
 
-              <div  style={{marginLeft: '50px', display: 'flex', justifyContent: 'space-between'}}>
+              <div  style={{marginLeft: '30px', display: 'flex', justifyContent: 'space-between'}}>
               <label className='col-md-4 control-label' htmlFor='product_id' style = {{padding: '12px 20px', background: 'orange', border: 'none', borderRadius: '30px', fontWeight: 'bold', boxShadow: "0px 5px 10px lightblue"}}>
                 WARRANTY
               </label>
 
 
-              <div className='col-md-4'>
+              <div className='col-md-4' style = {{marginRight: '100px'}}>
                 <TextField
                   id="warranty"
                   placeholder='WARRANTY'
@@ -248,13 +251,13 @@ const UpdateProduct = () => {
 
               <br/>
 
-              <div  style={{marginLeft: '50px', display: 'flex', justifyContent: 'space-between'}}>
+              <div  style={{marginLeft: '30px', display: 'flex', justifyContent: 'space-between'}}>
               <label className='col-md-4 control-label' htmlFor='product_id' style = {{padding: '12px 20px', background: 'orange', border: 'none', borderRadius: '30px', fontWeight: 'bold', boxShadow: "0px 5px 10px lightblue"}}>
                 AUTHOR
               </label>
 
 
-              <div className='col-md-4'>
+              <div className='col-md-4' style = {{marginRight: '100px'}}>
                 <TextField
                   id="author"
                   placeholder='AUTHOR'
@@ -267,12 +270,12 @@ const UpdateProduct = () => {
 
               <br/>
 
-              <div  style={{marginLeft: '50px', display: 'flex', justifyContent: 'space-between'}}>
+              <div  style={{marginLeft: '30px', display: 'flex', justifyContent: 'space-between'}}>
               <label className='col-md-4 control-label' htmlFor='product_id' style = {{padding: '12px 20px', background: 'orange', border: 'none', borderRadius: '30px', fontWeight: 'bold', boxShadow: "0px 5px 10px lightblue"}}>
                 COST
               </label>
 
-              <div className='col-md-4'>
+              <div className='col-md-4' style = {{marginRight: '100px'}}>
                 <TextField
                   id="cost"
                   placeholder='COST'
@@ -286,7 +289,7 @@ const UpdateProduct = () => {
               <br/>
 
 
-              <div  style={{marginLeft: '50px', display: 'flex', justifyContent: 'space-between'}}>
+              <div  style={{marginLeft: '30px', display: 'flex', justifyContent: 'space-between'}}>
               <label
                 className='col-md-4 control-label'
                 htmlFor='available_quantity' style = {{padding: '12px 20px', background: 'orange', border: 'none', borderRadius: '30px', fontWeight: 'bold', boxShadow: "0px 5px 10px lightblue"}}
@@ -295,7 +298,7 @@ const UpdateProduct = () => {
               </label>
 
 
-              <div className='col-md-4'>
+              <div className='col-md-4' style = {{marginRight: '100px'}}>
                 <TextField
                   id="NAME"
                   placeholder='NAME'
@@ -310,7 +313,7 @@ const UpdateProduct = () => {
               <br/>
 
 
-              <div  style={{marginLeft: '50px', display: 'flex', justifyContent: 'space-between'}}>
+              <div  style={{marginLeft: '30px', display: 'flex', justifyContent: 'space-between'}}>
               <label
                 className='col-md-4 control-label'
                 htmlFor='percentage_discount'  style = {{padding: '12px 20px', background: 'orange', border: 'none', borderRadius: '30px', fontWeight: 'bold', boxShadow: "0px 5px 10px lightblue"}}
@@ -319,7 +322,7 @@ const UpdateProduct = () => {
               </label>
 
 
-              <div className='col-md-4'>
+              <div className='col-md-4' style = {{marginRight: '100px'}}>
                 <TextField
                   id="DESCRIPTION"
                   placeholder='DESCRIPTION'
@@ -333,7 +336,7 @@ const UpdateProduct = () => {
               <br/>
 
 
-              <div  style={{marginLeft: '50px', display: 'flex', justifyContent: 'space-between'}}>
+              <div  style={{marginLeft: '30px', display: 'flex', justifyContent: 'space-between'}}>
               <label
                 className='col-md-4 control-label'
                 htmlFor='product_categorie'   style = {{padding: '12px 20px', background: 'orange', border: 'none', borderRadius: '30px', fontWeight: 'bold', boxShadow: "0px 5px 10px lightblue"}}
@@ -341,7 +344,7 @@ const UpdateProduct = () => {
                 PRODUCT CATEGORY
               </label>
 
-              <div className='col-md-4'>
+              <div className='col-md-4' style = {{marginRight: '100px'}}>
                 <TextField
                   id="CATEGORY"
                   placeholder='Category Name'
@@ -355,7 +358,7 @@ const UpdateProduct = () => {
               <br/>
 
 
-              <div  style={{marginLeft: '50px', display: 'flex', justifyContent: 'space-between'}}>
+              <div  style={{marginLeft: '30px', display: 'flex', justifyContent: 'space-between'}}>
               <label
                 className='col-md-4 control-label'
                 htmlFor='product_categorie'   style = {{padding: '12px 20px', background: 'orange', border: 'none', borderRadius: '30px', fontWeight: 'bold', boxShadow: "0px 5px 10px lightblue"}}
@@ -363,7 +366,7 @@ const UpdateProduct = () => {
                 PRODUCT SUB-CATEGORY
               </label>
 
-              <div className='col-md-4'>
+              <div className='col-md-4' style = {{marginRight: '100px'}}>
                 <TextField
                   id="CATEGORY"
                   placeholder='Sub Category Name'
@@ -377,7 +380,7 @@ const UpdateProduct = () => {
               <br/>
 
 
-              <div  style={{marginLeft: '50px', display: 'flex', justifyContent: 'space-between'}}>
+              <div  style={{marginLeft: '30px', display: 'flex', justifyContent: 'space-between'}}>
               <label
                 className='col-md-4 control-label'
                 htmlFor='product_categorie'   style = {{padding: '12px 20px', background: 'orange', border: 'none', borderRadius: '30px', fontWeight: 'bold', boxShadow: "0px 5px 10px lightblue"}}
@@ -385,7 +388,7 @@ const UpdateProduct = () => {
                 PUBLISHER
               </label>
 
-              <div className='col-md-4'>
+              <div className='col-md-4' style = {{marginRight: '100px'}}>
                 <TextField
                   id="publisher"
                   placeholder='PUBLISHER'

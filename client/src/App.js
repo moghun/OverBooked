@@ -41,7 +41,7 @@ function App() {
   return (
     <BrowserRouter>
     <ScrollToTop/>
-    <ToastContainer style={{display: "flex", justifyContent: "center"}}/>
+    <ToastContainer style={{justifyContent: "center"}}/>
 
 
       <div style = {{position: 'fixed', zIndex: 1000, width: '100%'}}>

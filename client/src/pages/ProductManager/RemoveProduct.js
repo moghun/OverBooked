@@ -54,7 +54,7 @@ const RemoveProduct = () => {
             <legend className='pcontainer' style = {{color: 'black', fontSize: '30px'}}>REMOVE PRODUCTS</legend>
             <div className='row form-group'  style={{marginLeft: '50px'}}>
               <label className='col-md-4 control-label'      style = {{padding: '12px 20px', background: 'orange', border: 'none', borderRadius: '30px', fontWeight: 'bold', boxShadow: "0px 5px 10px lightblue"}}>
-                PRODUCT ID
+                PRODUCTS
             </label>
             <select onClick={(e) => {setIndex(e.target.value);}} style={{borderRadius:'5px',width:'315px', borderColor:'lightgray', fontFamily:'OpenSans'}}>
             <option style={{fontFamily:'OpenSans'}} value="none" selected disabled hidden>Select an Option</option>

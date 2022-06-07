@@ -45,7 +45,7 @@ const Invoices = () => {
         <div>
         <div className='px-4 px-lg-0'>
           <div className='container text-black py-5 text-center'>
-            <h1 className='pcontainer' style={{ fontSize: 20, marginLeft: 270, color: 'black' }}>
+            <h1 className='pcontainer' style={{ fontSize: 50, marginLeft: 270, color: 'black' }}>
               Invoices
             </h1>
           </div>
@@ -53,39 +53,39 @@ const Invoices = () => {
         </div>
           <div className="containerW1">
             <br/>
-          <div class = "table-responsive">
-          <table class="table table-hover table-responsive table-sm">
-            <thead style={{fontSize:"2px"}}>
+          <div>
+          <table class="table col-1" style = {{marginLeft: '50px'}}>
+            <thead>
               <tr>
-                <th class="col-1">
-                  <div>
+                <th class="col-1"  scope='col' className='border-0 bg-light'>
+                  <div style={{fontSize: '20px'}}>
                     Customer Name
                   </div>
                 </th>
-                <th class="col-1">
-                  <div>
-                    DELIVERY Adress
+                <th class="col-1" scope='col' className='border-0 bg-light'>
+                <div style={{fontSize: '20px'}}>
+                    Delivery Adress
                   </div>
                 </th>
-                <th class="col-1">
-                  <div> Delivery ID</div>
+                <th class="col-1"  scope='col' className='border-0 bg-light'>
+                <div style={{fontSize: '20px'}}> Delivery ID</div>
                 </th>
 
-                <th class="col-1">
-                  <div>E-MAIL</div>
+                <th class="col-1"  scope='col' className='border-0 bg-light'>
+                <div style={{fontSize: '20px'}}>E-MAIL</div>
                 </th>
 
-                <th class="col-1">
-                  <div>Quantity</div>
+                <th class="col-1"  scope='col' className='border-0 bg-light'>
+                <div style={{fontSize: '20px'}}>Quantity</div>
                 </th>
 
-                <th class="col-1">
-                  <div>Delivery Status</div>
+                <th class="col-1"  scope='col' className='border-0 bg-light'>
+                <div style={{fontSize: '20px'}}>Delivery Status</div>
                 </th>
 
 
-                <th class="col-1">
-                  <div>Total Price</div>
+                <th class="col-1"  scope='col' className='border-0 bg-light'>
+                <div style={{fontSize: '20px'}}>Total Price</div>
                 </th>
 
               </tr>
@@ -96,21 +96,21 @@ const Invoices = () => {
               return (
                 <tbody>
                   <tr>
-                    <td class="col-1">
+                    <td class="col-1" style = {{background: 'white'}}>
                       <strong style={{fontSize:'10px'}}>{item.name} </strong>
                     </td>
 
-                    <td class="col-1">
+                    <td class="col-1" style = {{background: 'white'}}>
                     <strong style={{fontSize:'10px'}}>{item.adress}</strong>
                     </td>
 
-                    <td class="col-1">
+                    <td class="col-1" style = {{background: 'white'}}>
                       <strong style={{fontSize:'10px'}}>{item.invoice_id} </strong>
                     </td>
-                    <td class="col-1">
+                    <td class="col-1" style = {{background: 'white'}}>
                       <strong style={{fontSize:'10px'}}>{item.email} </strong>
                     </td>
-                    <td class="col-1">
+                    <td class="col-1" style = {{background: 'white'}}>
                       {item.products[1].map((prd, i)=>{
                         return(
                           <>
@@ -119,12 +119,12 @@ const Invoices = () => {
                         )
                       })}
                     </td>
-                    <td class="col-1">
+                    <td class="col-1" style = {{background: 'white'}}>
                       <strong style={{fontSize:'10px'}}>{item.status} </strong>
                     </td>  
 
 
-                    <td class="col-1">
+                    <td class="col-1" style = {{background: 'white'}}>
                       <strong style={{fontSize:'10px'}}>{item.cost + "$"} </strong>
                     </td>                     
                   </tr>
