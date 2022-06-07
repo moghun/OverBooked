@@ -34,7 +34,6 @@ function InvoicesPage() {
             invoicesArr.push(inv);
           });
           setRows(invoicesArr);
-          console.log(invoicesArr);
           setFiltered(invoicesArr);
         });
     } catch (err) {
@@ -79,7 +78,6 @@ function InvoicesPage() {
       });
     } else {
       setFiltered(rows.filter((item) => checkDate(item.date)));
-      console.log(filtered);
     }
   }
 

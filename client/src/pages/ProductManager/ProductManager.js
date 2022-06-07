@@ -49,42 +49,34 @@ const ProductManager = () => {
 
   function handleChange2(event) {
     setCost(event.target.value);
-    console.log(cost);
   }
 
   function handleChange2(event) {
     setCost(event.target.value);
-    console.log(cost);
   }
 
   function handleChange3(event) {
     setAmount(event.target.value);
-    console.log(amount);
   }
 
   function handleChange4(event) {
     setPublisher(event.target.value);
-    console.log(publisher);
   }
 
   function handleChange6(event) {
     setDescription(event.target.value);
-    console.log(description);
   }
 
   function handleChange8(event) {
     setAuthor(event.target.value);
-    console.log(author);
   }
 
   function handleChange9(event) {
     setCategory(event.target.value);
-    console.log(category);
   }
 
   function handleChange13(event) {
     setName(event.target.value);
-    console.log(name);
   }
 
   return (

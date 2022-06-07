@@ -16,7 +16,6 @@ const UpdateStock = () => {
 
   function handleChange2(event) {
     setstock1(event.target.value);
-    console.log(stock1);
   }
 
   useEffect(() => {

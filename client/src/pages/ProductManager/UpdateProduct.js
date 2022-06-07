@@ -72,70 +72,60 @@ const UpdateProduct = () => {
     if (event.target.value != null) {
       setCost(event.target.value);
     }
-    console.log(cost);
   }
 
   function handleChange4(event) {
     if (event.target.value != null) {
       setPublisher(event.target.value);
     }
-    console.log(publisher);
   }
 
   function handleChange5(event) {
     if (event.target.value != null) {
       setimg(event.target.value);
     }
-    console.log(img);
   }
 
   function handleChange6(event) {
     if (event.target.value != null) {
       setDescription(event.target.value);
     }
-    console.log(description);
   }
 
   function handleChange7(event) {
     if (event.target.value != null) {
       setWarranty(event.target.value);
     }
-    console.log(warranty);
   }
 
   function handleChange8(event) {
     if (event.target.value != null) {
       setAuthor(event.target.value);
     }
-    console.log(author);
   }
 
   function handleChange9(event) {
     if (event.target.value != null) {
       setCategory(event.target.value);
     }
-    console.log(category);
   }
 
   function handleChange10(event) {
     if (event.target.value != null) {
       setSubCategories(event.target.value);
     }
-    console.log(subcategories);
   }
 
   function handleChange12(event) {
     if (event.target.value != null) {
       setBSaleP(event.target.value);
     }
-    console.log(before_sale_price);
   }
 
   function handleChange13(event) {
     if (event.target.value != null) {
       setName(event.target.value);
     }
-    console.log(name);
   }
 
   return (

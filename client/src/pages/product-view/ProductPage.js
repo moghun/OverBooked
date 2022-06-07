@@ -8,9 +8,8 @@ import { useDispatch } from "react-redux";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import "../../App.css"
+import "../../App.css";
 const { v1: uuidv1 } = require("uuid");
-
 
 const DetailsThumb = () => {
   const currUser = useSelector((state) => state.user.currentUser);
@@ -24,7 +23,6 @@ const DetailsThumb = () => {
   const [usernames, setUsernames] = useState([]);
   const [approvedComments, setapprovedComments] = useState([]);
   const dispatch = useDispatch();
-  console.log(approvedComments);
   const getUserInfo = async () => {
     var names = [];
 
@@ -58,8 +56,7 @@ const DetailsThumb = () => {
   function getComment(val) {
     setComment(val.target.value);
   }
-  console.log(usernames);
-  console.log(product);
+
   const addCartAPI = async (product_id, amount) => {
     let userCart = await getUserCart();
     let oldAmount = 0;
@@ -86,7 +83,10 @@ const DetailsThumb = () => {
 
   function postCommentOrRating() {
     if (comment === null && rating === null) {
-      console.log("Rating and Comment cannot be left empty!");
+      toast.error("Rating and Comment cannot be left empty!", {
+        position: toast.POSITION.TOP_CENTER,
+        autoClose: 1500,
+      });
     } else {
       if (comment !== "") {
         const sendComment = {
@@ -103,7 +103,9 @@ const DetailsThumb = () => {
             sendComment,
             { headers: { token: "Bearer " + currUser.accessToken } }
           );
-          toast.success("Your comment has sent for approve", {position: toast.POSITION.TOP_CENTER});
+          toast.success("Your comment has sent for approve", {
+            position: toast.POSITION.TOP_CENTER,
+          });
           window.location.reload();
         } catch (err) {}
       }
@@ -130,7 +132,6 @@ const DetailsThumb = () => {
     const getProduct = async () => {
       try {
         const res = await publicRequest.get("/products/find/" + id);
-        console.log("hasdfhhasdfh",res.data.comments);
         setProduct(res.data);
         setapprovedComments(
           res.data.comments.filter((c) => c.isApproved === true)
@@ -147,46 +148,62 @@ const DetailsThumb = () => {
       setAmount(q);
       setMaxAmount(product.amount);
     } else if (product.amount < val.target.value || val.target.value < 0) {
-      console.log("Out of boundry");
+      toast.error("Out of boundry", {
+        position: toast.POSITION.TOP_CENTER,
+        autoClose: 1500,
+      });
     }
   }
 
   const addCart = () => {
     dispatch(addProduct({ ...product, amount, maxAmount }));
     addCartAPI(product._id, amount);
-    toast.success("Your product has been added to your card", {position: toast.POSITION.TOP_CENTER});
-    
-    
+    toast.success("Your product has been added to your card", {
+      position: toast.POSITION.TOP_CENTER,
+    });
   };
 
   return (
-    <div className="app" >
-
-      <div className="details" key={product.id} >
-
-        <div className="big-img" >
+    <div className="app">
+      <div className="details" key={product.id}>
+        <div className="big-img">
           <img src={product.img} alt={product.name} />
         </div>
 
-        <div className="box" >
-
+        <div className="box">
           <div className="row">
             <h2>{product.name}</h2>
           </div>
 
-          <h5><strong>Author:</strong> {product.author}</h5>
-          <h5><strong>Publisher:</strong> {product.publisher}</h5>
-          <p><strong>Amount:</strong> {product.amount}</p>
+          <h5>
+            <strong>Author:</strong> {product.author}
+          </h5>
+          <h5>
+            <strong>Publisher:</strong> {product.publisher}
+          </h5>
+          <p>
+            <strong>Amount:</strong> {product.amount}
+          </p>
           {product.sale ? (
             <div>
-              <p><strong>Before Sale Cost:</strong> {product.before_sale_price} $</p>
-              <p><strong>Cost:</strong> {product.cost} $</p>
+              <p>
+                <strong>Before Sale Cost:</strong> {product.before_sale_price} $
+              </p>
+              <p>
+                <strong>Cost:</strong> {product.cost} $
+              </p>
             </div>
           ) : (
-            <p><strong>Cost:</strong> {product.cost} $</p>
+            <p>
+              <strong>Cost:</strong> {product.cost} $
+            </p>
           )}
-          <p><strong>Description:</strong> {product.description}</p>
-          <p><strong>Category:</strong> {product.category}</p>
+          <p>
+            <strong>Description:</strong> {product.description}
+          </p>
+          <p>
+            <strong>Category:</strong> {product.category}
+          </p>
 
           {product.amount !== 0 ? (
             <>
@@ -197,7 +214,11 @@ const DetailsThumb = () => {
                 min="1"
                 max={product.amount}
                 onKeyDown={(e) => e.preventDefault()}
-                style={{ borderRadius: "5px", borderWidth: "1px",outline:'none' }}
+                style={{
+                  borderRadius: "5px",
+                  borderWidth: "1px",
+                  outline: "none",
+                }}
               ></input>{" "}
               <button
                 className="cart"
@@ -243,7 +264,7 @@ const DetailsThumb = () => {
                 resize: "none",
                 borderWidth: "bold",
                 borderRadius: "10px",
-                outline:'none'
+                outline: "none",
               }}
             ></textarea>
             <div>
@@ -262,7 +283,6 @@ const DetailsThumb = () => {
             </div>
           </div>
         </div>
-
       </div>
 
       <hr style={{ width: "95%", marginLeft: "2.5%", borderWidth: "2px" }}></hr>

@@ -63,7 +63,6 @@ const Revenues = () => {
           });
           setRows(invoicesArr);
           setTotal(carrier);
-          console.log(invoicesArr);
           setFiltered(invoicesArr);
         });
     } catch (err) {
@@ -104,12 +103,9 @@ const Revenues = () => {
       });
     } else {
       setFiltered(rows.filter((item) => checkDate(item.date)));
-      console.log(filtered);
     }
   }
   //      <h3 className="chartTitle" style={{fontFamily:'OpenSans'}}>Monthly Revenue</h3>
-
-  console.log(rows);
 
   return (
     <div
