@@ -76,7 +76,7 @@ const RemoveProduct = () => {
                 PRODUCT ID
               </label>
               <select
-                onClick={(e) => {
+                onChange={(e) => {
                   setIndex(e.target.value);
                 }}
                 style={{

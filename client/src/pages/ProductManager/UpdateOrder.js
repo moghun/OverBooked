@@ -100,7 +100,7 @@ const UpdateOrder = () => {
               </label>
 
               <select
-                onClick={(e) => setIndex(e.target.value)}
+                onChange={(e) => setIndex(e.target.value)}
                 style={{
                   borderRadius: "5px",
                   width: "315px",
@@ -117,7 +117,7 @@ const UpdateOrder = () => {
 
               <div>
                 <select
-                  onClick={(e) => setStatus(e.target.value)}
+                  onChange={(e) => setStatus(e.target.value)}
                   style={{
                     borderRadius: "5px",
                     width: "150px",
