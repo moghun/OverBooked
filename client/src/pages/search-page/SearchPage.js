@@ -43,7 +43,6 @@ function SearchPage() {
   const [includeMagazine, setIncludeMagazine] = useState(false);
 
   useEffect(() => {
-    console.log(searchQuery);
     const findProduct = async (query) => {
       try {
         var res;
@@ -64,7 +63,7 @@ function SearchPage() {
 
   useEffect(() => {
     searchResults.map((product) => {
-      if(!categories.includes(product.category)){
+      if (!categories.includes(product.category)) {
         var newArr = categories.slice();
         newArr.push(product.category);
         setCategories(newArr);
@@ -77,17 +76,18 @@ function SearchPage() {
   };
 
   const sortByFilter = (arr) => {
-    console.log(categories);
-    if(catFilter.length > 0){
-      arr = arr.filter(function (product) {return catFilter.includes(product.category);});
+    if (catFilter.length > 0) {
+      arr = arr.filter(function (product) {
+        return catFilter.includes(product.category);
+      });
     }
     if (filter === 1) {
       return arr.sort((a, b) => (a.cost < b.cost ? 1 : -1));
     } else if (filter === 2) {
       return arr.sort((a, b) => (a.cost > b.cost ? 1 : -1));
-    } else if (filter === 3){
+    } else if (filter === 3) {
       return arr.sort((a, b) => (a.name > b.name ? 1 : -1));
-    } else if (filter === 4){
+    } else if (filter === 4) {
       return arr.sort((a, b) => (a.name < b.name ? 1 : -1));
     } else {
       return arr;
@@ -115,18 +115,24 @@ function SearchPage() {
             {categories.map((cat) => (
               <ListItem>
                 <ListItemIcon>
-                  <Checkbox edge="start" id={cat} tabIndex={-1} disableRipple onChange={(event) => {
-                    if(event.target.checked){
-                      setCatFilter(catFilter.concat([event.target.id]));
-                    }else {
-                      var newArr = catFilter.slice();
-                      var index = newArr.indexOf(event.target.id);
-                      if(index > -1){
-                        newArr.splice(index, 1);
+                  <Checkbox
+                    edge="start"
+                    id={cat}
+                    tabIndex={-1}
+                    disableRipple
+                    onChange={(event) => {
+                      if (event.target.checked) {
+                        setCatFilter(catFilter.concat([event.target.id]));
+                      } else {
+                        var newArr = catFilter.slice();
+                        var index = newArr.indexOf(event.target.id);
+                        if (index > -1) {
+                          newArr.splice(index, 1);
+                        }
+                        setCatFilter(newArr);
                       }
-                      setCatFilter(newArr)
-                    }
-                  }}></Checkbox>
+                    }}
+                  ></Checkbox>
                 </ListItemIcon>
                 <ListItemText primary={cat} />
               </ListItem>

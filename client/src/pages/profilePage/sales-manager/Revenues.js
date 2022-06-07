@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, { useEffect, useState } from "react";
 import {
   LineChart,
   Line,
@@ -7,16 +7,14 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
-import { TextField, Button } from '@material-ui/core';
+import { TextField, Button } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import axios from "axios";
-import ArrowCircleUpTwoToneIcon from '@mui/icons-material/ArrowCircleUpTwoTone';
-import ArrowCircleDownTwoToneIcon from '@mui/icons-material/ArrowCircleDownTwoTone';
+import ArrowCircleUpTwoToneIcon from "@mui/icons-material/ArrowCircleUpTwoTone";
+import ArrowCircleDownTwoToneIcon from "@mui/icons-material/ArrowCircleDownTwoTone";
 
 const Revenues = () => {
-
-
   const [starting, setStarting] = useState(null);
   const [ending, setEnding] = useState(null);
   const [rows, setRows] = useState();
@@ -34,16 +32,15 @@ const Revenues = () => {
 
   const getAllProducts = async () => {
     try {
-      const res = await axios.get(
-        "http://localhost:5001/api/products?sale=false"
-      ).then((res) => {
-        let carrier = 0;
-        res.data.forEach((pr) => {
-          carrier = carrier + pr.cost * pr.amount;
+      const res = await axios
+        .get("http://localhost:5001/api/products?sale=false")
+        .then((res) => {
+          let carrier = 0;
+          res.data.forEach((pr) => {
+            carrier = carrier + pr.cost * pr.amount;
+          });
+          setCost(carrier);
         });
-        setCost(carrier);
-
-      });
     } catch (err) {}
   };
 
@@ -66,11 +63,13 @@ const Revenues = () => {
           });
           setRows(invoicesArr);
           setTotal(carrier);
-          console.log(invoicesArr);
           setFiltered(invoicesArr);
         });
     } catch (err) {
-      alert(err);
+      toast.error(err, {
+        position: toast.POSITION.TOP_CENTER,
+        autoClose: 1500,
+      });
     }
   };
 
@@ -103,67 +102,165 @@ const Revenues = () => {
         autoClose: 1500,
       });
     } else {
-      
       setFiltered(rows.filter((item) => checkDate(item.date)));
-      console.log(filtered);
-      //alert(ending + starting)
     }
   }
-//      <h3 className="chartTitle" style={{fontFamily:'OpenSans'}}>Monthly Revenue</h3>
-
-  console.log(rows)
-
-
-  
+  //      <h3 className="chartTitle" style={{fontFamily:'OpenSans'}}>Monthly Revenue</h3>
 
   return (
-    <div className='revenue-container' style={{border:'none', borderRadius:'20px'}}>
-      <div className='revenue-container-inner' style={{boxShadow:'0 0 5px #ccc',borderRadius:'20px',  marginTop:'25px',  marginBottom:'25px', marginLeft:'25px', marginRight:'25px', padding:'10px'}}>
-        
-        <div style={{ marginBottom:'5px', marginTop:'-15px'}}>
-          <div className='revenue-container-inner' style={{ textAlign:'center',boxShadow:'0 0 5px #ccc',borderRadius:'20px', width:"375px", marginTop:'25px', marginLeft:'450px', marginRight:'25px', padding:'10px'}}>
-            <h5 style={{margin:'0px', fontFamily:'OpenSans', }}>REVENUES</h5>
+    <div
+      className="revenue-container"
+      style={{ border: "none", borderRadius: "20px" }}
+    >
+      <div
+        className="revenue-container-inner"
+        style={{
+          boxShadow: "0 0 5px #ccc",
+          borderRadius: "20px",
+          marginTop: "25px",
+          marginBottom: "25px",
+          marginLeft: "25px",
+          marginRight: "25px",
+          padding: "10px",
+        }}
+      >
+        <div style={{ marginBottom: "5px", marginTop: "-15px" }}>
+          <div
+            className="revenue-container-inner"
+            style={{
+              textAlign: "center",
+              boxShadow: "0 0 5px #ccc",
+              borderRadius: "20px",
+              width: "375px",
+              marginTop: "25px",
+              marginLeft: "450px",
+              marginRight: "25px",
+              padding: "10px",
+            }}
+          >
+            <h5 style={{ margin: "0px", fontFamily: "OpenSans" }}>REVENUES</h5>
           </div>
         </div>
 
-        <div style={{display:'flex', marginBottom:'10px', marginTop:'-10px'}}>
-
-          <div className='revenue-container-inner' style={{ textAlign:'center',boxShadow:'0 0 5px #ccc',borderRadius:'20px', width:"400px",height:'100px', marginTop:'25px', marginLeft:'25px', marginRight:'25px', padding:'10px'}}>
-            <h2  style={{margin:'0px', fontFamily:'OpenSans', marginBottom:'5px'}}>Total Revenue</h2>
-            <h5  style={{margin:'0px', fontFamily:'OpenSans', }}>{totalRevenue} USD</h5>
+        <div
+          style={{ display: "flex", marginBottom: "10px", marginTop: "-10px" }}
+        >
+          <div
+            className="revenue-container-inner"
+            style={{
+              textAlign: "center",
+              boxShadow: "0 0 5px #ccc",
+              borderRadius: "20px",
+              width: "400px",
+              height: "100px",
+              marginTop: "25px",
+              marginLeft: "25px",
+              marginRight: "25px",
+              padding: "10px",
+            }}
+          >
+            <h2
+              style={{
+                margin: "0px",
+                fontFamily: "OpenSans",
+                marginBottom: "5px",
+              }}
+            >
+              Total Revenue
+            </h2>
+            <h5 style={{ margin: "0px", fontFamily: "OpenSans" }}>
+              {totalRevenue} USD
+            </h5>
           </div>
 
-          <div className='revenue-container-inner' style={{ textAlign:'center',boxShadow:'0 0 5px #ccc',borderRadius:'20px', width:"400px",height:'100px', marginTop:'25px', marginLeft:'25px', marginRight:'25px', padding:'10px'}}>
-            {totalRevenue < totalCost
-            ?
-            <>
-            <h2  style={{margin:'0px', fontFamily:'OpenSans', marginBottom:'5px'}}>Financial Position</h2>
-            <h5  style={{margin:'0px', fontFamily:'OpenSans', }}>
-              {totalCost - totalRevenue} USD
-              {"   "}<ArrowCircleDownTwoToneIcon style={{color:'red', fontSize:'36px'}}/>
-            </h5> 
-            </>
-            :
-            <>
-            <h2  style={{margin:'0px', fontFamily:'OpenSans', marginBottom:'5px'}}>Financial Position</h2>
-            <h5  style={{margin:'0px', fontFamily:'OpenSans', }}>
-              {totalRevenue - totalCost} USD
-              {"   "}<ArrowCircleUpTwoToneIcon style={{color:'green', fontSize:'36px'}}/>
-            </h5> 
-            </>
-            }
+          <div
+            className="revenue-container-inner"
+            style={{
+              textAlign: "center",
+              boxShadow: "0 0 5px #ccc",
+              borderRadius: "20px",
+              width: "400px",
+              height: "100px",
+              marginTop: "25px",
+              marginLeft: "25px",
+              marginRight: "25px",
+              padding: "10px",
+            }}
+          >
+            {totalRevenue < totalCost ? (
+              <>
+                <h2
+                  style={{
+                    margin: "0px",
+                    fontFamily: "OpenSans",
+                    marginBottom: "5px",
+                  }}
+                >
+                  Financial Position
+                </h2>
+                <h5 style={{ margin: "0px", fontFamily: "OpenSans" }}>
+                  {totalCost - totalRevenue} USD
+                  {"   "}
+                  <ArrowCircleDownTwoToneIcon
+                    style={{ color: "red", fontSize: "36px" }}
+                  />
+                </h5>
+              </>
+            ) : (
+              <>
+                <h2
+                  style={{
+                    margin: "0px",
+                    fontFamily: "OpenSans",
+                    marginBottom: "5px",
+                  }}
+                >
+                  Financial Position
+                </h2>
+                <h5 style={{ margin: "0px", fontFamily: "OpenSans" }}>
+                  {totalRevenue - totalCost} USD
+                  {"   "}
+                  <ArrowCircleUpTwoToneIcon
+                    style={{ color: "green", fontSize: "36px" }}
+                  />
+                </h5>
+              </>
+            )}
           </div>
-          
-          <div className='revenue-container-inner' style={{ textAlign:'center',boxShadow:'0 0 5px #ccc',borderRadius:'20px', width:"400px",height:'100px', marginTop:'25px', marginLeft:'25px', marginRight:'25px', padding:'10px'}}>
-            <h2  style={{margin:'0px', fontFamily:'OpenSans', marginBottom:'5px'}}>Total Cost</h2>
-            <h5  style={{margin:'0px', fontFamily:'OpenSans', }}>{totalCost} USD</h5>          
+
+          <div
+            className="revenue-container-inner"
+            style={{
+              textAlign: "center",
+              boxShadow: "0 0 5px #ccc",
+              borderRadius: "20px",
+              width: "400px",
+              height: "100px",
+              marginTop: "25px",
+              marginLeft: "25px",
+              marginRight: "25px",
+              padding: "10px",
+            }}
+          >
+            <h2
+              style={{
+                margin: "0px",
+                fontFamily: "OpenSans",
+                marginBottom: "5px",
+              }}
+            >
+              Total Cost
+            </h2>
+            <h5 style={{ margin: "0px", fontFamily: "OpenSans" }}>
+              {totalCost} USD
+            </h5>
           </div>
         </div>
 
         <div className="chart">
           <ResponsiveContainer width="100%" aspect={4 / 1}>
             <LineChart data={filtered}>
-              <XAxis dataKey="date" stroke="#5550bd"/>
+              <XAxis dataKey="date" stroke="#5550bd" />
               <Line type="monotone" dataKey="cost" stroke="#5550bd" />
               <Tooltip />
               {<CartesianGrid stroke="#e0dfdf" strokeDasharray="5 5" />}
@@ -171,8 +268,8 @@ const Revenues = () => {
           </ResponsiveContainer>
         </div>
 
-        <div className='filterings'>
-          <form >
+        <div className="filterings">
+          <form>
             <TextField
               id="startdate"
               InputProps={{ inputProps: { min: 0, max: 100 } }}
@@ -220,10 +317,9 @@ const Revenues = () => {
             </Button>
           </form>
         </div>
-
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Revenues
+export default Revenues;

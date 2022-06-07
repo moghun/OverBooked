@@ -79,14 +79,17 @@ const ShoppingCart = () => {
   const removeItem = (item) => {
     dispatch(removeProduct(item));
     removeFromCartAPI(item._id);
-    toast.success("Selected product has been deleted", {position: toast.POSITION.TOP_CENTER});
-    console.log("calısıyo keriz");
+    toast.success("Selected product has been deleted", {
+      position: toast.POSITION.TOP_CENTER,
+    });
   };
 
   const clear = () => {
     dispatch(clearCart());
     clearCartAPI();
-    toast.success("All shopping cart has been deleted", {position: toast.POSITION.TOP_CENTER});
+    toast.success("All shopping cart has been deleted", {
+      position: toast.POSITION.TOP_CENTER,
+    });
   };
 
   const [stripeToken, setStripeToken] = useState(null);
@@ -129,7 +132,9 @@ const ShoppingCart = () => {
     var amount = 1;
     var maxAmount = item.maxAmount;
     if (item.amount === item.maxAmount) {
-      toast.error("You reached maximum amount possible!", {position: toast.POSITION.TOP_CENTER})
+      toast.error("You reached maximum amount possible!", {
+        position: toast.POSITION.TOP_CENTER,
+      });
     } else {
       addCartAPI(item._id, amount);
       dispatch(addProduct({ ...item, amount, maxAmount }));

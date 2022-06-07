@@ -20,7 +20,6 @@ const CancellationRequest = () => {
 
   const getRequests = () => {
     setRequest(allRequests.filter((c) => c.status === "Return Requested"));
-    console.log(requests);
   };
 
   const Accept = (id) => {
