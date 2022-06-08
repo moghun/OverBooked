@@ -220,54 +220,58 @@ router.get("/getUsername/:id", async (req, res) => {
 });
 
 //NOTIFY USERS FOR SALE
-router.get("/saleNotification/:pid", async (req, res) => {
-  let inUsers = [];
-  let product = {};
-  try {
-    inUsers = await User.find({
-      wishlist: { $elemMatch: { product_id: req.params.pid } },
-    });
-  } catch (err) {
-    res.status(500).json(err);
-  }
+router.get(
+  "/saleNotification/:pid",
+  verifyTokenAndSalesManager,
+  async (req, res) => {
+    let inUsers = [];
+    let product = {};
+    try {
+      inUsers = await User.find({
+        wishlist: { $elemMatch: { product_id: req.params.pid } },
+      });
+    } catch (err) {
+      res.status(500).json(err);
+    }
 
-  try {
-    product = await Product.findById(req.params.pid);
-  } catch (err) {
-    res.status(500).json(err);
-  }
+    try {
+      product = await Product.findById(req.params.pid);
+    } catch (err) {
+      res.status(500).json(err);
+    }
 
-  try {
-    let p = product.cost / product.before_sale_price;
-    let perc = 1 - p;
-    inUsers.forEach((user) => {
-      client
-        .send({
-          to: {
-            email: user.email,
-            name: user.username,
-          },
-          from: {
-            email: "overbookedstore1@gmail.com",
-            name: "overbooked",
-          },
-          templateId: "d-03c38b528bdf40aab21e49e59cc04eb8",
-          dynamicTemplateData: {
-            name: product.name,
-            before_sale_price: product.before_sale_price,
-            cost: product.cost,
-            perc: Math.ceil(perc * 100),
-          },
-        })
-        .then();
-    });
-    res.status(200).json(product);
-  } catch (err) {
-    res.status(500).json(err);
+    try {
+      let p = product.cost / product.before_sale_price;
+      let perc = 1 - p;
+      inUsers.forEach((user) => {
+        client
+          .send({
+            to: {
+              email: user.email,
+              name: user.username,
+            },
+            from: {
+              email: "overbookedstore1@gmail.com",
+              name: "overbooked",
+            },
+            templateId: "d-03c38b528bdf40aab21e49e59cc04eb8",
+            dynamicTemplateData: {
+              name: product.name,
+              before_sale_price: product.before_sale_price,
+              cost: product.cost,
+              perc: Math.ceil(perc * 100),
+            },
+          })
+          .then();
+      });
+      res.status(200).json(product);
+    } catch (err) {
+      res.status(500).json(err);
+    }
   }
-});
+);
 
-router.get("/getInvoices", async (req, res) => {
+router.get("/getInvoices", verifyTokenAndSalesManager, async (req, res) => {
   try {
     const users = await User.find(
       {
@@ -290,7 +294,7 @@ router.get("/getInvoices", async (req, res) => {
   }
 });
 
-router.get("/getInvoice/:iid", async (req, res) => {
+router.get("/getInvoice/:iid", verifyTokenAndSalesManager, async (req, res) => {
   try {
     const users = await User.find({
       invoices: { $elemMatch: { invoice_id: req.params.iid } },

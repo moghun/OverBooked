@@ -52,7 +52,6 @@ function EditSales() {
       axios.get(
         "http://localhost:5001/api/users/saleNotification/" +
           allproducts[index]._id, //Current products' ID here
-        undefined,
         {
           headers: { token: "Bearer " + currUser.accessToken },
         }
@@ -72,7 +71,7 @@ function EditSales() {
   };
 
   return (
-    <div className="main-container"  style={{marginTop:'25px'}}>
+    <div className="main-container" style={{ marginTop: "25px" }}>
       <div style={{ display: "flex", justifyContent: "center" }}>
         <Card>
           <CardContent>

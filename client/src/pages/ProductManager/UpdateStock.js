@@ -82,7 +82,7 @@ const UpdateStock = () => {
               }}
             >
               <select
-                onClick={(e) => setIndex(e.target.value)}
+                onChange={(e) => setIndex(e.target.value)}
                 style={{
                   borderRadius: "5px",
                   width: "315px",
