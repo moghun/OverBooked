@@ -3,7 +3,7 @@ var should = require("should");
 
 var server = supertest.agent("http://localhost:5001/api/products");
 
-describe("Products", function () {
+describe("Products 3 Test", function () {
   it("get products", function (done) {
     server
       .get("/")

@@ -3,7 +3,7 @@ var should = require("should");
 
 var server = supertest.agent("http://localhost:5001/api/salesmanager/");
 
-describe("SalesManager", function () {
+describe("Betweendates", function () {
   it("get username", function (done) {
     server
       .get("betweendates")
