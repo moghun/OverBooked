@@ -6,18 +6,15 @@ import { useSelector } from "react-redux";
 import {toast} from "react-toastify";
 
 const UpdateOrder = () => {
-
-
   const currUser = useSelector((state) => state.user.currentUser);
   const [orders, setOrder] = useState([]);
 
   const getOrders = async () => {
-
     try {
       const res = await axios.get(
         "http://localhost:5001/api/orders",
-        
-          { headers: { token: "Bearer " + currUser.accessToken }},
+
+        { headers: { token: "Bearer " + currUser.accessToken } }
       );
       let carrier = [];
       res.data.forEach(element => {
