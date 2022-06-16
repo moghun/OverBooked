@@ -24,7 +24,6 @@ const UpdateProduct = () => {
   const [author, setAuthor] = useState(null);
   const [category, setCategory] = useState(null);
   const [subcategories, setSubCategories] = useState(null);
-  const [sale, setSale] = useState(null);
   const [before_sale_price, setBSaleP] = useState(null);
   const [name, setName] = useState(null);
 
@@ -54,7 +53,6 @@ const UpdateProduct = () => {
     author: author || undefined,
     category: category || undefined, 
     subcategories: subcategories || undefined,
-    sale: sale || undefined,
     before_sale_price: before_sale_price || undefined,
     name: name || undefined,
 
@@ -198,22 +196,6 @@ const UpdateProduct = () => {
                   onChange={handleChange5}
                 />
               </div>
-              </div>
-
-              <br/>
-
-              <div  style={{marginLeft: '30px', display: 'flex', justifyContent: 'space-between'}}>
-              <label className='col-md-4 control-label' htmlFor='product_id' style = {{padding: '12px 20px', background: 'orange', border: 'none', borderRadius: '30px', fontWeight: 'bold', boxShadow: "0px 5px 10px lightblue"}}>
-                SALE
-              </label>
-
-              <select onClick={(e) => setSale(e.target.value)} style={{borderRadius:'5px',width:'315px', borderColor:'lightgray'}}>
-            <option value="none" selected disabled hidden>Select an Option</option>
-            <option value = {true}>True</option>
-            <option value = {false}>False</option>
-            </select>
-
-
               </div>
 
               <br/>
