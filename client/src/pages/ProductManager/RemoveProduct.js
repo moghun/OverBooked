@@ -23,6 +23,10 @@ const RemoveProduct = () => {
         headers: { token: "Bearer " + currUser.accessToken },
         
       });
+
+      toast.success("Your have removed a product", {
+        position: toast.POSITION.TOP_CENTER,
+      });
       
     } catch (err) {
       alert(err);

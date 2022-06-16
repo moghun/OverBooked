@@ -66,6 +66,11 @@ const UpdateProduct = () => {
 
         
       });
+
+
+      toast.success("Your have updated a product", {
+        position: toast.POSITION.TOP_CENTER,
+      });
       
     } catch (err) {
       alert(err);

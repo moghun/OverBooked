@@ -100,6 +100,10 @@ const ProductManager = () => {
         axios.post("http://localhost:5001/api/products/", add, {
           headers: { token: "Bearer " + currUser.accessToken },
         });
+
+        toast.success("Your have added a product", {
+          position: toast.POSITION.TOP_CENTER,
+        });
         
       } catch (err) {
         alert(err);
@@ -179,7 +183,7 @@ const ProductManager = () => {
 
       <div>
         <br/>
-        <Card style= {{borderRadius: '30px', boxShadow: '0 0 5px #ccc', padding: '0 15px', width: '70%', marginLeft: '14%'}}>
+        <Card style= {{borderRadius: '30px', boxShadow: '0 0 5px #ccc', padding: '0 15px', width: '60%', marginLeft: '20%'}}>
           <br/>
         <form className='form-horizontal'>
           <fieldset>
