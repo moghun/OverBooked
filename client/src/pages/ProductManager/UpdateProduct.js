@@ -133,14 +133,14 @@ const UpdateProduct = () => {
   }
 
   return (
-    <div>
+    <div style = {{marginLeft: "100px"}}>
       <br />
       <Card
         style={{
           borderRadius: "30px",
           boxShadow: "0 0 5px #ccc",
           padding: "0 15px",
-          width: "70%",
+          width: "60%",
           marginLeft: "14%",
         }}
       >
@@ -419,14 +419,12 @@ const UpdateProduct = () => {
 
             <div className="row form-group" style={{ marginLeft: "50px" }}>
               <label className="col-md-4 control-label"></label>
-              <div className="col-md-4">
+              <div>
                 <Button variant="contained" color="grey" onClick={clickSubmit}>
-                  {" "}
-                  Update{" "}
+                  Update
                 </Button>
                 <Button variant="contained" color="grey" href="/profile">
-                  {" "}
-                  Cancel{" "}
+                  Cancel
                 </Button>
               </div>
             </div>

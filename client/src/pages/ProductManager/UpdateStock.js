@@ -53,38 +53,6 @@ const UpdateStock = () => {
     }
   };
 
-<<<<<<< HEAD
-      };
-
-
-    return (
-
-
-      <div>
-      <br/>
-        <Card style={{borderRadius: '30px', boxShadow: '0 0 5px #ccc', padding: '0 15px', width: '70%', marginLeft: '14%'}}>
-        <br/>
-            <form className='form-horizontal'>
-            <fieldset>
-                <legend className='pcontainer' style = {{color: 'black', fontSize: '30px'}}>UPDATE STOCK</legend>
-                <div  style={{marginLeft: '50px', display: 'flex', justifyContent: 'space-between'}}>
-                <select onClick={(e) => setIndex(e.target.value)} style={{borderRadius:'5px',width:'315px', borderColor:'lightgray'}}>
-            <option value="none" selected disabled hidden>Select Product </option>
-              {allproducts.map((item, i) => {return(<option value = {i}>{item.name + "- Current Stock: " + item.amount}</option>);})}
-            </select>
-
-            <TextField
-              
-              id="stock"
-              type="number"
-              InputProps={{ inputProps: { min: 0, max: 100 } }}
-              onKeyDown={(e) => e.preventDefault()}
-              label="STOCK"
-              margin="normal"
-              onChange={handleChange2}
-              style={{width:'30%', marginRight: '100px'}}
-            />
-=======
   return (
     <div>
       <br />
@@ -132,7 +100,6 @@ const UpdateStock = () => {
                   );
                 })}
               </select>
->>>>>>> 8b9f66de9c8926ca25049684ded39997bd660fd3
 
               <TextField
                 id="stock"

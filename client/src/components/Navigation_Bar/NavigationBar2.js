@@ -47,9 +47,11 @@ const NavigationBar2 = () => {
 
         <li class="dropdown1-content">
           {allprod.slice(5, 8).map((AllSales) => (
-            <Button href={"/productpage/" + AllSales._id}>
+            <div>
+            <Button href={"/productpage/" + AllSales._id} style={{color:'black'}}>
               {AllSales.name}
             </Button>
+            </div>
           ))}
         </li>
       </div>
@@ -62,9 +64,11 @@ const NavigationBar2 = () => {
 
         <li class="dropdown1-content">
           {allprod.slice(9, 12).map((AllSales) => (
-            <Button href={"/productpage/" + AllSales._id}>
+            <div >
+            <Button href={"/productpage/" + AllSales._id} style={{color:'black'}}>
               {AllSales.name}
             </Button>
+            </div>
           ))}
         </li>
       </div>
