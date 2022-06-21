@@ -21,24 +21,22 @@ function InvoicesPage() {
   const getInvoices = async () => {
     try {
       await axios
-        .get(
-          "http://localhost:5001/api/users/getInvoices/", //Current products' ID here
-          undefined, //Take current products' before_sale_cost here
-          {
-            headers: { token: "Bearer " + currUser.accessToken },
-          }
-        )
+        .get("http://localhost:5001/api/users/getInvoices/", {
+          headers: { token: "Bearer " + currUser.accessToken },
+        })
         .then((res) => {
           let invoicesArr = [];
           res.data.forEach((inv) => {
             invoicesArr.push(inv);
           });
           setRows(invoicesArr);
-          console.log(invoicesArr);
           setFiltered(invoicesArr);
         });
     } catch (err) {
-      alert(err);
+      toast.error(err, {
+        position: toast.POSITION.TOP_CENTER,
+        autoClose: 1500,
+      });
     }
   };
 
@@ -76,16 +74,8 @@ function InvoicesPage() {
       });
     } else {
       setFiltered(rows.filter((item) => checkDate(item.date)));
-      console.log(filtered);
-      //alert(ending + starting)
     }
   }
-
-  /*
-      function alertInfo(item){
-        alert("Date: " + item.date + "\nID: " + item.id + "\nFullName: " + item.fullName);
-      }
-      */
 
   const columns = [
     {

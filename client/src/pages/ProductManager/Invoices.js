@@ -1,46 +1,39 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from "react";
 
-import "./ProductManager.css"
+import "./ProductManager.css";
 import axios from "axios";
 import { useSelector } from "react-redux";
 
 const Invoices = () => {
-
-
   const currUser = useSelector((state) => state.user.currentUser);
-
 
   const [All, setAll] = useState([]);
 
-  
-
   useEffect(() => {
     const clickGet = async () => {
-
       try {
-        const res = await axios.get("http://localhost:5001/api/productmanager/getinvoices",{
-          headers: { token: "Bearer " + currUser.accessToken },
+        const res = await axios.get(
+          "http://localhost:5001/api/productmanager/getinvoices",
+          {
+            headers: { token: "Bearer " + currUser.accessToken },
+          }
+        );
+        let holder = [];
+        res.data.forEach((element) => {
+          element.forEach((item) => {
+            holder.push(item);
+          });
         });
-        let holder = []
-        res.data.forEach(element => {
-          element.forEach((item)=>{holder.push(item)})
-          
-        });
-        console.log(res.data);
         setAll(holder);
       } catch (err) {
         console.log(err);
       }
-    }; 
+    };
     clickGet();
   }, []);
 
-
-
-  console.log(All);
-
-    return (
-
+  return (
+    
       <div>
         <div>
         <div className='px-4 px-lg-0'>
@@ -87,12 +80,9 @@ const Invoices = () => {
                 <th class="col-1"  scope='col' className='border-0 bg-light'>
                 <div style={{fontSize: '20px'}}>Total Price</div>
                 </th>
-
               </tr>
             </thead>
             {All.map((item) => {
-              console.log(item);
-              
               return (
                 <tbody>
                   <tr>
@@ -114,9 +104,13 @@ const Invoices = () => {
                       {item.products[1].map((prd, i)=>{
                         return(
                           <>
-                          <div style={{fontSize:'10px'}}><strong>{prd + " " +item.products[2][i] + " ITEM"}</strong></div>
+                            <div style={{ fontSize: "10px" }}>
+                              <strong>
+                                {prd + " " + item.products[2][i] + " ITEM"}
+                              </strong>
+                            </div>
                           </>
-                        )
+                        );
                       })}
                     </td>
                     <td class="col-1" style = {{background: 'white'}}>
@@ -132,14 +126,11 @@ const Invoices = () => {
               );
             })}
           </table>
-          </div>
-          <br style={{marginBottom: '2px'}}/>
-          </div>
-          </div>
-    )
-
-
-}
-
+        </div>
+        <br style={{ marginBottom: "2px" }} />
+      </div>
+    </div>
+  );
+};
 
 export default Invoices;

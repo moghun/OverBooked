@@ -1,10 +1,10 @@
 .Row {
     display: table;
-    width: 80%; /*Optional*/
+    width: 90%; /*Optional*/
     border-spacing: 10px; /*Optional*/
     outline: none;
     margin-top: 40px;
-    margin-left: 10%;
+    margin-left: 5%;
     border-radius: 20px;
     background-color: #e6b619;
     

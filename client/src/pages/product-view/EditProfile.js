@@ -39,7 +39,10 @@ const EditProfile = () => {
         position: toast.POSITION.TOP_CENTER,
       });
     } catch (err) {
-      alert(err);
+      toast.error(err, {
+        position: toast.POSITION.TOP_CENTER,
+        autoClose: 1500,
+      });
     }
 
     this.setState({
@@ -57,7 +60,7 @@ const EditProfile = () => {
   };
 
   return (
-    <div className="main-container">
+    <div className="main-container" style={{ marginTop: "25px" }}>
       <div style={{ display: "flex", justifyContent: "center" }}>
         <Card>
           <CardContent>
