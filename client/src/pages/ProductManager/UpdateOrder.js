@@ -55,6 +55,8 @@ const UpdateOrder = () => {
 
   const changeDelivered = (id) => {
 
+
+    
     const update = {
       status:  "Delivered",
       oid: id,
@@ -62,6 +64,7 @@ const UpdateOrder = () => {
 
     try {
 
+      
       axios.post("http://localhost:5001/api/productmanager/changestatus", update,{
         headers: { token: "Bearer " + currUser.accessToken },
       });

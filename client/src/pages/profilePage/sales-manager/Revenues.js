@@ -32,10 +32,11 @@ const Revenues = () => {
 
   const getAllProducts = async () => {
     try {
+      let carrier = 0;
       const res = await axios
         .get("http://localhost:5001/api/products?sale=false")
         .then((res) => {
-          let carrier = 0;
+          
           res.data.forEach((pr) => {
             carrier = carrier + pr.cost * pr.amount;
           });
@@ -43,8 +44,8 @@ const Revenues = () => {
         });
         setCost(Math.floor(carrier*(100/115)));
 
-      });
-    } catch (err) {}
+      }
+     catch (err) {}
   };
 
   function sortByProperty(property){  
