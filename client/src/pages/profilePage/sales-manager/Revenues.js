@@ -32,17 +32,35 @@ const Revenues = () => {
 
   const getAllProducts = async () => {
     try {
+      let carrier = 0;
       const res = await axios
         .get("http://localhost:5001/api/products?sale=false")
         .then((res) => {
-          let carrier = 0;
+          
           res.data.forEach((pr) => {
             carrier = carrier + pr.cost * pr.amount;
           });
           setCost(carrier);
         });
-    } catch (err) {}
+        setCost(Math.floor(carrier*(100/115)));
+
+      }
+     catch (err) {}
   };
+
+  function sortByProperty(property){  
+    return function(a,b){  
+       if(a[property].split('/')[2] < b[property].split('/')[2])  
+          {return -1; }
+        else if(a[property] > b[property]){
+          return 1;
+        }
+       else if(a[property] < b[property])  
+          {return -1; }
+   
+       return 0;  
+    }  
+ }
 
   const getInvoices = async () => {
     try {
@@ -57,6 +75,7 @@ const Revenues = () => {
             carrier = carrier + inv.cost;
             invoicesArr.push(inv);
           });
+          invoicesArr.sort(sortByProperty("date"))
           setRows(invoicesArr);
           setTotal(carrier);
           setFiltered(invoicesArr);
@@ -73,6 +92,8 @@ const Revenues = () => {
     getInvoices();
     getAllProducts();
   }, []);
+
+  
 
   const convertToDate = (d) => {
     const [month, day, year] = d.split("/");
