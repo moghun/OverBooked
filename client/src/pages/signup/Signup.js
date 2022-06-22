@@ -3,6 +3,7 @@ import 'bootstrap'
 import '../signup/Signup.css'
 import axios from 'axios'
 import { toast } from "react-toastify";
+import { Button } from '@material-ui/core';
 class SignUp extends Component{
     
     constructor(){
@@ -114,7 +115,7 @@ class SignUp extends Component{
             <div className='privacypolicy'>
                 <input type="checkbox" name="box1"/>
                 <label for="box1">I have read and accepted</label><br/>
-                <a href='/' style={{color:"blue", marginLeft:60}}>Privacy Policy</a>
+                <Button href='/privacypolicy' style={{color:"blue", marginLeft:60}}>Privacy Policy</Button>
             </div>
     
             <div className='signupbutton'>

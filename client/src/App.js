@@ -35,6 +35,7 @@ import Revenues from "./pages/profilePage/sales-manager/Revenues";
 import RemoveSale from "./pages/profilePage/sales-manager/RemoveSale";
 import SetPrice from "./pages/profilePage/sales-manager/SetPrice";
 import CancellationRequest from "./pages/profilePage/sales-manager/CancellationRequest";
+import PrivacyPolicy from "./pages/signup/PrivacyPolicy";
 
 function App() {
   const user = useSelector((state) => state.user.currentUser);
@@ -94,6 +95,7 @@ function App() {
             <Route path="/searchpage/:q" element={<SearchPage />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/signin" element={<Signin />} />
+            <Route path="/privacypolicy" element={<PrivacyPolicy />} />
             <Route path="*" element={<HomePage />} />
           </>
         )}

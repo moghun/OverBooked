@@ -18,7 +18,6 @@ export const login = async (dispatch, user) => {
       position: toast.POSITION.TOP_CENTER,
       autoClose: 1500,
     });
-    window.location.reload();
   }
 };
 
