@@ -52,9 +52,6 @@ function App() {
       <br/>
       <br/>
 
-      <div>
-        <NavigationBar2 />
-      </div>
 
       <Routes>
         {user ? (
