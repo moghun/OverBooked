@@ -138,6 +138,69 @@ class SignUp extends Component {
             </a>
           </div>
 
+          <h1
+            style={{
+              fontFamily: "Open Sans",
+              fontSize: 20,
+              marginTop: 0,
+              marginLeft: 70,
+            }}
+          >
+            SIGN UP
+          </h1>
+
+          <div className="username">
+            <h>Username</h>
+            <form onSubmit={this.onSubmit}>
+              <input
+                className="text"
+                placeholder="Type your username"
+                onChange={this.changeUserName}
+                value={this.state.username}
+              ></input>
+            </form>
+            <hr style={{ width: 200 }}></hr>
+          </div>
+
+          <div className="useremail">
+            <h>Email</h>
+            <form onSubmit={this.onSubmit}>
+              <input
+                className="text"
+                placeholder="Type your email"
+                onChange={this.changeEmail}
+                value={this.state.email}
+              />
+            </form>
+            <hr style={{ width: 200 }}></hr>
+          </div>
+
+          <div className="userpassword">
+            <h>Password</h>
+            <form onSubmit={this.onSubmit}>
+              <input
+                type="password"
+                className="password"
+                placeholder="Type your password"
+                onChange={this.changePassword}
+                value={this.state.password}
+              />
+            </form>
+            <hr style={{ width: 200 }}></hr>
+          </div>
+
+          <div className="privacypolicy">
+            <input type="checkbox" name="box1" />
+            <label for="box1">I have read and accepted</label>
+            <br />
+            <Button
+              href="/privacypolicy"
+              style={{ color: "blue", marginLeft: 60 }}
+            >
+              Privacy Policy
+            </Button>
+          </div>
+
           <div className="signupbutton">
             <form onSubmit={this.onSubmit}>
               <input
