@@ -3,6 +3,7 @@ import "bootstrap";
 import "../signup/Signup.css";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { Button } from "@material-ui/core";
 class SignUp extends Component {
   constructor() {
     super();
@@ -44,7 +45,9 @@ class SignUp extends Component {
 
   myFunction(data) {
     if (data === 201) {
-      toast.success("User Created", { position: toast.POSITION.TOP_CENTER });
+      toast.success("Confirmed", { position: toast.POSITION.TOP_CENTER });
+    } else {
+      toast.error("Error", { position: toast.POSITION.TOP_CENTER });
     }
   }
 
@@ -78,66 +81,6 @@ class SignUp extends Component {
     return (
       <div className="signupcontainerholder">
         <div className="signupcontainer">
-          <h1
-            style={{
-              fontFamily: "Open Sans",
-              fontSize: 20,
-              marginTop: 0,
-              marginLeft: 70,
-            }}
-          >
-            SIGN UP
-          </h1>
-
-          <div className="username">
-            <h>Username</h>
-            <form onSubmit={this.onSubmit}>
-              <input
-                className="text"
-                placeholder="Type your username"
-                onChange={this.changeUserName}
-                value={this.state.username}
-              ></input>
-            </form>
-            <hr style={{ width: 200 }}></hr>
-          </div>
-
-          <div className="useremail">
-            <h>Email</h>
-            <form onSubmit={this.onSubmit}>
-              <input
-                className="text"
-                placeholder="Type your email"
-                onChange={this.changeEmail}
-                value={this.state.email}
-              />
-            </form>
-            <hr style={{ width: 200 }}></hr>
-          </div>
-
-          <div className="userpassword">
-            <h>Password</h>
-            <form onSubmit={this.onSubmit}>
-              <input
-                type="password"
-                className="password"
-                placeholder="Type your password"
-                onChange={this.changePassword}
-                value={this.state.password}
-              />
-            </form>
-            <hr style={{ width: 200 }}></hr>
-          </div>
-
-          <div className="privacypolicy">
-            <input type="checkbox" name="box1" />
-            <label for="box1">I have read and accepted</label>
-            <br />
-            <a href="/" style={{ color: "blue", marginLeft: 60 }}>
-              Privacy Policy
-            </a>
-          </div>
-
           <h1
             style={{
               fontFamily: "Open Sans",
