@@ -5,9 +5,7 @@
   box-shadow: 0 0 5px #ccc;
   padding-bottom: 5px;
   display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  justify-content: space-between;
+  justify-content: space-around;
 
 }
 

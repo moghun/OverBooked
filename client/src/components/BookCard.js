@@ -52,7 +52,7 @@ export default function BookCard(props) {
   };
 
   useEffect(() => {
-    if(currUser){
+    if(currUser != null && currUser.user_role === "customer"){
       const wishlist = getWishlist();
       for (let index = 0; index < wishlist.length; index++) {
         const product = wishlist[index];
@@ -75,7 +75,7 @@ export default function BookCard(props) {
         ":hover": { boxShadow: 20 },
       }}
     >
-      {currUser && (
+      {currUser && currUser.user_role === "customer" && (
         <Container sx={{ padding: "0px", marginBottom: "-30px", marginLeft: "158px" }}>
         {fav && (
           <IconButton
