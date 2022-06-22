@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:favorite_button/favorite_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -125,10 +123,10 @@ class _ProductPreviewState extends State<ProductPreview> {
                             height: 7,
                           ),
                           RatingBarIndicator(
-                            rating: widget.product.rating!
+                            rating: widget.product.rating!.isNotEmpty ? widget.product.rating!
                                     .map((e) => e["rating"])
                                     .reduce((a, b) => a + b) /
-                                widget.product.rating!.length,
+                                widget.product.rating!.length : 3,
                             //it will be debugged
                             itemBuilder: (context, index) => const Icon(
                               Icons.star,

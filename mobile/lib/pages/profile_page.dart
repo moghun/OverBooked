@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:mobile/components/main_app_bar.dart';
 import 'package:mobile/models/user.dart';
+import 'package:mobile/pages/edit_profile_page.dart';
 import 'package:mobile/pages/user_orders_page.dart';
 import 'package:mobile/pages/wishlist_page.dart';
 import 'package:mobile/services/user_service.dart';
@@ -24,10 +26,8 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          centerTitle: true,
-          title: const Text("Profile"),
-          backgroundColor: AppColors.background,
+        appBar: MainAppBar(
+          title: "Profile",
         ),
         body: SingleChildScrollView(
           child: Row(
@@ -201,7 +201,14 @@ class _ProfilePageState extends State<ProfilePage> {
                             style: ButtonStyle(
                                 overlayColor: MaterialStateProperty.all(
                                     AppColors.background.withOpacity(0.2))),
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => const EditProfilePage())).then((_) {
+                                setState(() {});
+                              });
+                            },
                             child: Stack(
                               children: const [
                                 Align(

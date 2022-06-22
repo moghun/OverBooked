@@ -12,6 +12,7 @@ class ProductService {
     var resp = await http.get(Uri.parse(apiBaseURL + "/find/" + productID));
     if (resp.statusCode >= 200 && resp.statusCode < 400) {
       var productJson = jsonDecode(resp.body);
+      print(resp.body);
       return Product.fromJson(productJson);
     } else {
       print(resp.statusCode);

@@ -19,25 +19,25 @@ class _UserOrdersPageState extends State<UserOrdersPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MainAppBar(),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: [
-            FutureBuilder<List<Order>>(
-              future: _orderService.getUserOrders(),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const CircularProgressIndicator();
-                } else if (snapshot.connectionState == ConnectionState.done) {
-                  if (snapshot.hasError) {
-                    return Text(
-                      snapshot.error.toString() + snapshot.stackTrace.toString(),
-                      style: kButtonLightTextStyle,
-                    );
-                  } else if (snapshot.hasData) {
-                    return SingleChildScrollView(
-                      child: Padding(
+      appBar: MainAppBar(title: "My orders"),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: [
+              FutureBuilder<List<Order>>(
+                future: _orderService.getUserOrders(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const CircularProgressIndicator();
+                  } else if (snapshot.connectionState == ConnectionState.done) {
+                    if (snapshot.hasError) {
+                      return Text(
+                        snapshot.error.toString() + snapshot.stackTrace.toString(),
+                        style: kButtonLightTextStyle,
+                      );
+                    } else if (snapshot.hasData) {
+                      return Padding(
                         padding: Dimen.regularPadding,
                         child: Column(
                           children: snapshot.data!.isNotEmpty
@@ -59,17 +59,17 @@ class _UserOrdersPageState extends State<UserOrdersPage> {
                                   )),
                                 ],
                         ),
-                      ),
-                    );
+                      );
+                    } else {
+                      return const Text('Empty data');
+                    }
                   } else {
-                    return const Text('Empty data');
+                    return Text('State: ${snapshot.connectionState}');
                   }
-                } else {
-                  return Text('State: ${snapshot.connectionState}');
-                }
-              },
-            ),
-          ],
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );

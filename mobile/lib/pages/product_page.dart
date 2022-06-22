@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:mobile/components/comment_preview.dart';
 import 'package:mobile/models/comment.dart';
 import 'package:mobile/models/product.dart';
-import 'package:mobile/models/user.dart';
+import 'package:mobile/services/cart_service.dart';
 import 'package:mobile/services/product_service.dart';
-import 'package:mobile/services/user_service.dart';
 import 'package:mobile/utils/colors.dart';
 import 'package:mobile/utils/styles.dart';
 
@@ -105,18 +105,12 @@ class _ProductPageState extends State<ProductPage> {
                             ),
                             OutlinedButton(
                               onPressed: () {
-                                User? user = UserService.getCurrentUser();
-                                bool exists = false;
-                                for (int i = 0; i < user!.cart!.length; i++) {
-                                  if (user.cart![i]["product_id"] == snapshot.data!.id) {
-                                    exists = true;
-                                    user.cart![i]["amount"] = (user.cart![i]["amount"] + 1);
-                                  }
-                                }
-                                if (!exists) {
-                                  user.cart!.add({"product_id": snapshot.data!.id, "amount": 1});
-                                }
-                                UserService.updateUser(user);
+                                CartService cartService = CartService();
+                                cartService.addToCart(snapshot.data!, 1);
+                                Fluttertoast.showToast(
+                                    msg: "Added to cart!",
+                                    gravity: ToastGravity.BOTTOM,
+                                    backgroundColor: Colors.green);
                               },
                               child: Text(
                                 "Add to cart",
