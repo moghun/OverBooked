@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:mobile/components/comment_preview.dart';
 import 'package:mobile/models/comment.dart';
 import 'package:mobile/models/product.dart';
-import 'package:mobile/models/user.dart';
+import 'package:mobile/services/cart_service.dart';
 import 'package:mobile/services/product_service.dart';
-import 'package:mobile/services/user_service.dart';
 import 'package:mobile/utils/colors.dart';
 import 'package:mobile/utils/styles.dart';
 
@@ -105,18 +105,12 @@ class _ProductPageState extends State<ProductPage> {
                             ),
                             OutlinedButton(
                               onPressed: () {
-                                User? user = UserService.getCurrentUser();
-                                bool exists = false;
-                                for (int i = 0; i < user!.cart!.length; i++) {
-                                  if (user.cart![i]["product_id"] == snapshot.data!.id) {
-                                    exists = true;
-                                    user.cart![i]["amount"] = (user.cart![i]["amount"] + 1);
-                                  }
-                                }
-                                if (!exists) {
-                                  user.cart!.add({"product_id": snapshot.data!.id, "amount": 1});
-                                }
-                                UserService.updateUser(user);
+                                CartService cartService = CartService();
+                                cartService.addToCart(snapshot.data!, 1);
+                                Fluttertoast.showToast(
+                                    msg: "Added to cart!",
+                                    gravity: ToastGravity.BOTTOM,
+                                    backgroundColor: Colors.green);
                               },
                               child: Text(
                                 "Add to cart",
@@ -146,32 +140,34 @@ class _ProductPageState extends State<ProductPage> {
                                 thickness: 1,
                               ),
                             ),
-                            FutureBuilder<List<User>>(
+                            FutureBuilder<List<String>>(
                               future:
                                   _productService.getUsersByCommentList(snapshot.data!.comments!),
-                              builder: (context, comment_snapshot) {
-                                if (comment_snapshot.connectionState == ConnectionState.waiting) {
+                              builder: (context, commentSnapshot) {
+                                if (commentSnapshot.connectionState == ConnectionState.waiting) {
                                   return const CircularProgressIndicator();
-                                } else if (comment_snapshot.connectionState ==
+                                } else if (commentSnapshot.connectionState ==
                                     ConnectionState.done) {
-                                  if (comment_snapshot.hasError) {
+                                  if (commentSnapshot.hasError) {
                                     return const Text('Error');
-                                  } else if (comment_snapshot.hasData) {
+                                  } else if (commentSnapshot.hasData) {
                                     return Padding(
-                                      padding: EdgeInsets.all(10),
+                                      padding: const EdgeInsets.all(10),
                                       child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.center,
                                         children: [
+                                          commentSnapshot.data!.isNotEmpty ?
                                           Expanded(
-                                              child: Column(
-                                            children: List.generate(
-                                                snapshot.data!.comments!.length,
-                                                (index) => CommentPreview(
-                                                    comment: Comment(
-                                                        username:
-                                                            comment_snapshot.data![index].username!,
-                                                        commentContent: snapshot
-                                                            .data!.comments![index]["comment"]))),
-                                          ))
+                                            child: Column(
+                                              children: List.generate(
+                                                  snapshot.data!.comments!.length,
+                                                  (index) => CommentPreview(
+                                                      comment: Comment(
+                                                          username: commentSnapshot.data![index],
+                                                          commentContent: snapshot
+                                                              .data!.comments![index]["comment"]))),
+                                            ),
+                                          ) : const Text("There are no comments yet."),
                                         ],
                                       ),
                                     );
@@ -179,11 +175,10 @@ class _ProductPageState extends State<ProductPage> {
                                     return const Text('Empty data');
                                   }
                                 } else {
-                                  return Text('State: ${comment_snapshot.connectionState}');
+                                  return Text('State: ${commentSnapshot.connectionState}');
                                 }
                               },
                             ),
-                            // COMMENTS WILL COME HERE ---
                           ],
                         ),
                       ),

@@ -217,6 +217,17 @@ router.get("/find/:userId", async (req, res) => {
   }
 });
 
+
+//GET USER ORDERS MOBILE
+router.get("/findM/:email", async (req, res) => {
+  try {
+    const orders = await Order.find({ buyer_email: req.params.email });
+    res.status(200).json(orders);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 //SEND RECEPIT
 router.post("/sendRecepit", verifyToken, async (req, res) => {
   try {

@@ -12,6 +12,7 @@ class ProductService {
     var resp = await http.get(Uri.parse(apiBaseURL + "/find/" + productID));
     if (resp.statusCode >= 200 && resp.statusCode < 400) {
       var productJson = jsonDecode(resp.body);
+      print(resp.body);
       return Product.fromJson(productJson);
     } else {
       print(resp.statusCode);
@@ -88,27 +89,19 @@ class ProductService {
     return productsJson;
   }
 
-  Future<User> getUserByID(String userID) async {
-    var resp = await http.get(Uri.parse("http://10.0.2.2:5001/api/users/find/" + userID),
+  Future<String> getUsernameByID(String userID) async {
+    var resp = await http.get(Uri.parse("http://10.0.2.2:5001/api/users/getUsername/" + userID),
         headers: {"Content-Type": "application/json"});
     print(resp.body);
     var userInfo = jsonDecode(resp.body);
-    User user = User(
-      email: userInfo["email"],
-      username: userInfo["username"],
-      name: userInfo["name"] == "" ? "no-name" : userInfo["name"],
-      surname: userInfo["surname"] == "" ? "no-surname" : userInfo["surname"],
-      cart: userInfo["cart"],
-      uid: userInfo["_id"],
-    );
-    return user;
+    return userInfo;
   }
 
-  Future<List<User>> getUsersByCommentList(List<dynamic> commentList) async {
-    List<User> users = [];
+  Future<List<String>> getUsersByCommentList(List<dynamic> commentList) async {
+    List<String> users = [];
     for (int i = 0; i < commentList.length; i++) {
-      User tempUser = await getUserByID(commentList[i]["user_id"]);
-      users.add(tempUser);
+      String tempUsername = await getUsernameByID(commentList[i]["user_id"]);
+      users.add(tempUsername);
     }
     return users;
   }
