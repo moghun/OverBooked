@@ -229,7 +229,7 @@ const DetailsThumb = () => {
               </button>
             </>
           ) : (
-            <p style={{ fontWeight: "bold" }}>SOLD OUT</p>
+            <p style={{ fontWeight: "bold", color: "red" }}>SOLD OUT</p>
           )}
 
           <div style={{ marginTop: 10 }}>
