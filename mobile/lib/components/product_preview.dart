@@ -1,6 +1,9 @@
 import 'package:favorite_button/favorite_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:mobile/models/user.dart';
+import 'package:mobile/services/user_service.dart';
+import 'package:mobile/services/wishlist_service.dart';
 import 'package:mobile/utils/colors.dart';
 import 'package:mobile/utils/styles.dart';
 import '../models/product.dart';
@@ -19,6 +22,33 @@ class ProductPreview extends StatefulWidget {
 }
 
 class _ProductPreviewState extends State<ProductPreview> {
+  final WishlistService _wishlistService = WishlistService();
+  bool isFav = false;
+
+  handleFavChange(newIsFav) {
+    setState(() {
+      isFav = newIsFav;
+    });
+    newIsFav
+        ? _wishlistService.addToWishlist(widget.product)
+        : _wishlistService.removeFromWishlist(widget.product);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    User? user = UserService.getCurrentUser();
+    if (user != null) {
+      for (int i = 0; i < user.wishlist!.length; i++) {
+        if (user.wishlist![i]["product_id"].toString() == widget.product.id) {
+          setState(() {
+            isFav = true;
+          });
+        }
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return OutlinedButton(
@@ -39,14 +69,17 @@ class _ProductPreviewState extends State<ProductPreview> {
       child: Stack(
         alignment: Alignment.center,
         children: [
-          Positioned(
-            child: FavoriteButton(
-              valueChanged: () {},
-              iconSize: 40,
-            ),
-            top: 3,
-            right: 3,
-          ),
+          UserService.getCurrentUser() != null
+              ? Positioned(
+                  child: FavoriteButton(
+                    valueChanged: handleFavChange,
+                    isFavorite: isFav,
+                    iconSize: 40,
+                  ),
+                  top: 6,
+                  right: 3,
+                )
+              : Container(),
           Stack(alignment: Alignment.center, children: <Widget>[
             Row(
               children: [
@@ -90,10 +123,10 @@ class _ProductPreviewState extends State<ProductPreview> {
                             height: 7,
                           ),
                           RatingBarIndicator(
-                            rating: widget.product.rating!
+                            rating: widget.product.rating!.isNotEmpty ? widget.product.rating!
                                     .map((e) => e["rating"])
                                     .reduce((a, b) => a + b) /
-                                widget.product.rating!.length,
+                                widget.product.rating!.length : 3,
                             //it will be debugged
                             itemBuilder: (context, index) => const Icon(
                               Icons.star,
@@ -111,17 +144,17 @@ class _ProductPreviewState extends State<ProductPreview> {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text(
-                                (widget.product.sale!
-                                    ? "\$ " + widget.product.costBeforeSale!.toString()
-                                    : ""),
-                                style: const TextStyle(
-                                  color: Colors.red,
-                                  fontSize: 16,
-                                  decoration: TextDecoration.lineThrough,
-                                  decorationThickness: 3,
-                                ),
-                              ),
+                              widget.product.sale!
+                                  ? Text(
+                                      "\$ " + widget.product.costBeforeSale!.toString(),
+                                      style: const TextStyle(
+                                        color: Colors.red,
+                                        fontSize: 16,
+                                        decoration: TextDecoration.lineThrough,
+                                        decorationThickness: 3,
+                                      ),
+                                    )
+                                  : Container(),
                               const SizedBox(
                                 width: 12,
                               ),

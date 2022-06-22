@@ -77,39 +77,37 @@ class CartService {
     if (user == null) {
       UserService.userCart.clear();
     } else {
-      http.put(Uri.parse(apiBaseURL + "/users/clearCart/" + user.uid!),
-          headers: {"Content-Type": "application/json", "token": "Bearer " + user.token!});
+      User user = UserService.getCurrentUser()!;
+      user.cart!.clear();
+      UserService.updateUser(user);
+      http.put(Uri.parse(apiBaseURL + "/users/clearCart/" + user.uid!), headers: {
+        "Content-Type": "application/json",
+        "token": "Bearer " + user.token!
+      }).then((value) => print(value.body));
     }
   }
 
   purchaseCart(List<dynamic> products) {
     User user = UserService.getCurrentUser()!;
-    var totalCost = 0;
+    double totalCost = 0;
     for (int i = 0; i < user.cart!.length; i++) {
-      totalCost += (products[i].cost as int) * user.cart![i]["amount"] as int;
+      totalCost += (products[i].cost) * user.cart![i]["amount"];
     }
     List<String> boughtProducts = user.cart!.map((e) => e["product_id"].toString()).toList();
     final body = jsonEncode({
       "buyer_email": user.email,
-      "status": "shipped",
+      "status": "Processing",
       "cost": totalCost,
       "date": DateTime.now().toIso8601String(),
       "bought_products": boughtProducts,
       "amounts": user.cart!.map((e) => e["amount"]).toList(),
+      "last_four_digit": 4242,
+      "payment_method": "CreditCard",
     });
     http
         .post(Uri.parse(apiBaseURL + "/orders/"),
             headers: {"Content-Type": "application/json", "token": "Bearer " + user.token!},
             body: body)
         .then((resp) => print(resp.body + resp.statusCode.toString()));
-    UserService.updateUser(User(
-      username: user.username,
-      cart: [],
-      email: user.email,
-      uid: user.uid,
-      name: user.name,
-      surname: user.surname,
-      token: user.token,
-    ));
   }
 }
