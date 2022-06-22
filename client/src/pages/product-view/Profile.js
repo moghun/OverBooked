@@ -152,9 +152,11 @@ const Profile = () => {
                 <div class="bio-row">
                     <p style = {{color:  'black'}}><span>Last Name </span>: {currUser.surname}</p>
                 </div>
+
                 <div class="bio-row">
-                    <p style = {{color:  'black'}}><span>Adress </span>: {currUser.adress}</p>
+                    <p style = {{color: 'black'}}><span>User-Role </span>: {currUser.user_role}</p>
                 </div>
+
                 <div class="bio-row">
                     <p style = {{color:  'black'}}><span>Username</span>: {currUser.username}</p>
                 </div>
@@ -162,13 +164,27 @@ const Profile = () => {
                     <p style = {{color: 'black'}}><span>Email </span>: {currUser.email}</p>
                 </div>
 
-                <div class="bio-row">
-                    <p style = {{color: 'black'}}><span>User-Role </span>: {currUser.user_role}</p>
-                </div>
+                {currUser.user_role === "customer" ? (
 
-                <div class="bio-row">
-                    <p style = {{color: 'black'}}><span>Tax-ID </span>: {currUser.tax_id}</p>
-                </div>
+                  <>
+
+                  <div class="bio-row">
+                  <p style = {{color:  'black'}}><span>Adress </span>: {currUser.adress}</p>
+                  </div>
+
+                  <div class="bio-row">
+                  <p style = {{color: 'black'}}><span>Tax-ID </span>: {currUser.tax_id}</p>
+                  </div>
+
+                  </>
+
+
+                ) : (
+
+                  <></>
+
+
+                )}
             </div>
           </div>
         </div>

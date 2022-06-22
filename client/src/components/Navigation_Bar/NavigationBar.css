@@ -3267,7 +3267,7 @@ footer {
 
     .some-container .btn{
       padding: 12px 20px;
-      background: #d9ff00;
+      background: #979796;
       border: none;
       color: white;
       border-radius: 30px;
@@ -3292,7 +3292,7 @@ footer {
   
       .some-container .btn3{
         padding: 12px 20px;
-        background: #0400ff;
+        background: #838387;
         border: none;
         color: white;
         border-radius: 30px;
@@ -3303,8 +3303,8 @@ footer {
       }
       .some-container .btn3:hover{
         background: transparent;
-        color: #0400ff;
-        border: 2px solid #0400ff;
+        color: #90909a;
+        border: 2px solid #8c8c8c;
       }
   
   
@@ -3509,17 +3509,16 @@ footer {
   height: 40px;
   width: 40px;
   border-radius: 50%;
-  border: 2px solid #333;
-  background-color: rgb(255, 0, 0);
-  color: #333;
+  background-color: lightgray;
+  color: #e6b619;
   cursor: pointer;
   z-index: 3;
 }
 
 .top-btn-style:hover {
   animation: none;
-  background-color: #333;
-  color: rgb(0, 255, 217);
+  background-color: #e6b619;
+  color: lightgray;
   border: 2px solid #fff;
   z-index: 3;
 }
