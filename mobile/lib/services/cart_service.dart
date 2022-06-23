@@ -32,7 +32,6 @@ class CartService {
         UserService.userCart.add({"product_id": product.id, "amount": amount});
       }
     } else {
-      var toBeAdded = {"product_id": product.id, "amount": amount};
       bool exists = false;
       for (int i = 0; i < user.cart!.length; i++) {
         if (product.id == user.cart![i]["product_id"]) {
@@ -40,6 +39,7 @@ class CartService {
           user.cart![i]["amount"] += amount;
         }
       }
+      var toBeAdded = {"product_id": product.id, "amount": amount};
       if (!exists) {
         user.cart!.add(toBeAdded);
       }
@@ -59,7 +59,7 @@ class CartService {
         }
       }
     } else {
-      var toBeRemoved = {"product": product.id};
+      var toBeRemoved = {"product_id": product.id};
       for (int i = 0; i < user.cart!.length; i++) {
         if (user.cart![i]["product_id"] == product.id) {
           user.cart!.removeAt(i);
@@ -68,7 +68,7 @@ class CartService {
       var body = jsonEncode(toBeRemoved);
       http.put(Uri.parse(apiBaseURL + "/users/removeFromCart/" + user.uid!),
           headers: {"Content-Type": "application/json", "token": "Bearer " + user.token!},
-          body: body);
+          body: body).then((value) => print(value.body));
     }
   }
 

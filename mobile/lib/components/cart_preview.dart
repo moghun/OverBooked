@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:mobile/services/cart_service.dart';
 import 'package:mobile/utils/colors.dart';
 import 'package:mobile/utils/dimensions.dart';
 import 'package:mobile/utils/styles.dart';
@@ -21,6 +22,8 @@ class CartPreview extends StatefulWidget {
 }
 
 class _CartPreviewState extends State<CartPreview> {
+  CartService _cartService = CartService();
+
   @override
   Widget build(BuildContext context) {
     return OutlinedButton(
@@ -41,6 +44,18 @@ class _CartPreviewState extends State<CartPreview> {
       child: Stack(
         alignment: Alignment.center,
         children: [
+          Positioned(
+            child: IconButton(
+              icon: Icon(Icons.remove_circle, color: Colors.red,),
+              onPressed: () {
+                setState(() {
+                  _cartService.removeFromCart(widget.product);
+                });
+              },
+            ),
+            top: -1,
+            right: -3,
+          ),
           Stack(alignment: Alignment.center, children: <Widget>[
             Row(
               children: [
@@ -83,10 +98,12 @@ class _CartPreviewState extends State<CartPreview> {
                             overflow: TextOverflow.ellipsis,
                           ),
                           RatingBarIndicator(
-                            rating: widget.product.rating!
-                                    .map((e) => e["rating"])
-                                    .reduce((a, b) => a + b) /
-                                widget.product.rating!.length,
+                            rating: widget.product.rating!.isEmpty
+                                ? 0
+                                : widget.product.rating!
+                                        .map((e) => e["rating"])
+                                        .reduce((a, b) => a + b) /
+                                    widget.product.rating!.length,
                             //it will be debugged
                             itemBuilder: (context, index) => const Icon(
                               Icons.star,
