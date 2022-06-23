@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 import axios from "axios";
 import { format } from "date-fns";
 import { motion } from "framer-motion";
+import { View } from "react-native";
 
 
 
@@ -148,31 +149,36 @@ const Success = () => {
   }, [cart, data, currentUser]);
 
   return (
-    <div
-      style={{
-        height: "50vh",
-        width:"60vh",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        boxShadow: "0 0 5px #ccc",
-        marginTop:'5vh',
-        marginLeft:'35%',
-        borderRadius:'10vh'
-      }}
-    >
-            
-        {orderId
+
+
+    <div>
+
+    <div style = {{ height : '450px', maxWidth: '300px', width: '100%', margin: '5px auto', boxShadow:  "0px 5px 10px lightblue", padding: '0 5px', background: 'orange', borderRadius: '20px', marginTop: '50px', marginLeft: '470px'}}>
+
+
+    <View style={{marginLeft: '30px', width: 200, textAlign: 'center', color: 'black', fontWeight: "bold", fontSize: 40,}}>INVOICE SUMMARY</View>
+
+    <p style = {{borderRadius: '30px', padding: '0 5px', backgroundColor: 'white', fontWeight: 'bold'}}> E-Mail: {currentUser.email} </p>
+    <p style = {{borderRadius: '30px', padding: '0 5px', backgroundColor: 'white', fontWeight: 'bold'}}> Username: {currentUser.username} </p>
+    <p style = {{borderRadius: '30px', padding: '0 5px', backgroundColor: 'white', fontWeight: 'bold'}}> Adress: {currentUser.adress} </p>
+    <p style = {{borderRadius: '30px', padding: '0 5px', backgroundColor: 'white', fontWeight: 'bold'}}> Amount: {cart.amount} </p>
+    <p style = {{borderRadius: '30px', padding: '0 5px', backgroundColor: 'white', fontWeight: 'bold'}}> Cost: {cart.total} $ </p>
+
+
+    {orderId
         ? <h style={{fontFamily:'OpenSans', fontSize:'20px'}}>Order has been created successfully. Your order number is ${orderId}</h>
         : <h style={{fontFamily:'OpenSans', fontSize:'20px'}}>Successfull. Your order is being prepared...</h>}
-      <Button href={"/"} style={{ padding: 10, marginTop: 20, fontFamily:'OpenSans'  }}>
+      <Button href={"/"} style={{ padding: 10, marginTop: 20, fontFamily:'OpenSans' , marginLeft: '10px' }} variant= 'contained'>
         Go to Homepage
       </Button>
-      
+    
+
+
 
     </div>
+    </div>
   );
+
 };
 
 export default Success;
