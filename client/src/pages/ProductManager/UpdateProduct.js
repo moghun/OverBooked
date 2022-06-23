@@ -37,38 +37,33 @@ const UpdateProduct = () => {
 
   const clickSubmit = () => {
     const update = {
-
-    cost: cost || undefined,
-    amount: amount || undefined,
-    publisher: publisher || undefined,
-    img: img || undefined,
-    description: description || undefined,
-    warranty: warranty || undefined,
-    author: author || undefined,
-    category: category || undefined, 
-    subcategories: subcategories || undefined,
-    before_sale_price: before_sale_price || undefined,
-    name: name || undefined,
-
+      cost: cost || undefined,
+      amount: amount || undefined,
+      publisher: publisher || undefined,
+      img: img || undefined,
+      description: description || undefined,
+      warranty: warranty || undefined,
+      author: author || undefined,
+      category: category || undefined,
+      subcategories: subcategories || undefined,
+      before_sale_price: before_sale_price || undefined,
+      name: name || undefined,
     };
 
     try {
-      axios.put("http://localhost:5001/api/products/" + allproducts[index]._id, update, {
-        headers: { token: "Bearer " + currUser.accessToken },
-
-        
-      });
-
+      axios.put(
+        "http://localhost:5001/api/products/" + allproducts[index]._id,
+        update,
+        {
+          headers: { token: "Bearer " + currUser.accessToken },
+        }
+      );
 
       toast.success("Your have updated a product", {
         position: toast.POSITION.TOP_CENTER,
       });
-      
     } catch (err) {
-      toast.error(err, {
-        position: toast.POSITION.TOP_CENTER,
-        autoClose: 1500,
-      });
+      alert(err);
     }
   };
 
@@ -76,64 +71,74 @@ const UpdateProduct = () => {
     if (event.target.value != null) {
       setCost(event.target.value);
     }
+    console.log(cost);
   }
 
   function handleChange4(event) {
     if (event.target.value != null) {
       setPublisher(event.target.value);
     }
+    console.log(publisher);
   }
 
   function handleChange5(event) {
     if (event.target.value != null) {
       setimg(event.target.value);
     }
+    console.log(img);
   }
 
   function handleChange6(event) {
     if (event.target.value != null) {
       setDescription(event.target.value);
     }
+    console.log(description);
   }
 
   function handleChange7(event) {
     if (event.target.value != null) {
       setWarranty(event.target.value);
     }
+    console.log(warranty);
   }
 
   function handleChange8(event) {
     if (event.target.value != null) {
       setAuthor(event.target.value);
     }
+    console.log(author);
   }
 
   function handleChange9(event) {
     if (event.target.value != null) {
       setCategory(event.target.value);
     }
+    console.log(category);
   }
 
   function handleChange10(event) {
     if (event.target.value != null) {
       setSubCategories(event.target.value);
     }
+    console.log(subcategories);
   }
 
   function handleChange12(event) {
     if (event.target.value != null) {
       setBSaleP(event.target.value);
     }
+    console.log(before_sale_price);
   }
 
   function handleChange13(event) {
     if (event.target.value != null) {
       setName(event.target.value);
     }
+    console.log(name);
   }
 
   return (
-    <div style = {{marginLeft: "100px"}}>
+    <div>
       <br />
       <Card
         style={{
@@ -141,7 +146,7 @@ const UpdateProduct = () => {
           boxShadow: "0 0 5px #ccc",
           padding: "0 15px",
           width: "60%",
-          marginLeft: "14%",
+          marginLeft: "20%",
         }}
       >
         <br />
@@ -155,27 +160,72 @@ const UpdateProduct = () => {
               UPDATE PRODUCTS
             </legend>
 
-
-            <div  style={{marginLeft: '30px', display: 'flex', justifyContent: 'space-between'}}>
-              <label className='col-md-4 control-label' htmlFor='product_id' style = {{padding: '12px 20px', background: 'orange', border: 'none', borderRadius: '30px', fontWeight: 'bold', boxShadow: "0px 5px 10px lightblue"}}>
+            <div
+              style={{
+                marginLeft: "30px",
+                display: "flex",
+                justifyContent: "space-between",
+              }}
+            >
+              <label
+                className="col-md-4 control-label"
+                htmlFor="product_id"
+                style={{
+                  padding: "12px 20px",
+                  background: "orange",
+                  border: "none",
+                  borderRadius: "30px",
+                  fontWeight: "bold",
+                  boxShadow: "0px 5px 10px lightblue",
+                }}
+              >
                 PRODUCT NAME - ID
               </label>
 
-              <select onClick={(e) => setIndex(e.target.value)} style={{borderRadius:'5px',width:'315px', borderColor:'lightgray'}}>
-            <option value="none" selected disabled hidden>Select an Option</option>
-              {allproducts.map((item, i) => {return(<option value = {i}>{item.name + "-" + item._id}</option>);})}
-            </select>
-
+              <select
+                onChange={(e) => setIndex(e.target.value)}
+                style={{
+                  borderRadius: "5px",
+                  width: "315px",
+                  borderColor: "lightgray",
+                }}
+              >
+                <option value="none" selected disabled hidden>
+                  Select an Option
+                </option>
+                {allproducts.map((item, i) => {
+                  return (
+                    <option value={i}>{item.name + "-" + item._id}</option>
+                  );
+                })}
+              </select>
             </div>
 
-              <br/>
+            <br />
 
-              <div  style={{marginLeft: '30px', display: 'flex', justifyContent: 'space-between'}}>
-              <label className='col-md-4 control-label' htmlFor='product_id' style = {{padding: '12px 20px', background: 'orange', border: 'none', borderRadius: '30px', fontWeight: 'bold', boxShadow: "0px 5px 10px lightblue"}}>
+            <div
+              style={{
+                marginLeft: "30px",
+                display: "flex",
+                justifyContent: "space-between",
+              }}
+            >
+              <label
+                className="col-md-4 control-label"
+                htmlFor="product_id"
+                style={{
+                  padding: "12px 20px",
+                  background: "orange",
+                  border: "none",
+                  borderRadius: "30px",
+                  fontWeight: "bold",
+                  boxShadow: "0px 5px 10px lightblue",
+                }}
+              >
                 IMAGE SOURCE
               </label>
 
-              <div className='col-md-4' style = {{marginRight: '100px'}}>
+              <div className="col-md-4" style={{ marginRight: "100px" }}>
                 <TextField
                   id="IMAGE"
                   placeholder="IMAGE"
@@ -186,15 +236,31 @@ const UpdateProduct = () => {
               </div>
             </div>
 
-              <br/>
-            
-              <div  style={{marginLeft: '30px', display: 'flex', justifyContent: 'space-between'}}>
-              <label className='col-md-4 control-label' htmlFor='product_id' style = {{padding: '12px 20px', background: 'orange', border: 'none', borderRadius: '30px', fontWeight: 'bold', boxShadow: "0px 5px 10px lightblue"}}>
+            <br />
+
+            <div
+              style={{
+                marginLeft: "30px",
+                display: "flex",
+                justifyContent: "space-between",
+              }}
+            >
+              <label
+                className="col-md-4 control-label"
+                htmlFor="product_id"
+                style={{
+                  padding: "12px 20px",
+                  background: "orange",
+                  border: "none",
+                  borderRadius: "30px",
+                  fontWeight: "bold",
+                  boxShadow: "0px 5px 10px lightblue",
+                }}
+              >
                 BEFORE SALE PRICE
               </label>
 
-
-              <div className='col-md-4' style = {{marginRight: '100px'}}>
+              <div className="col-md-4" style={{ marginRight: "100px" }}>
                 <TextField
                   id="before_sale_price"
                   placeholder="BEFORE SALE PRICE"
@@ -207,13 +273,29 @@ const UpdateProduct = () => {
 
             <br />
 
-              <div  style={{marginLeft: '30px', display: 'flex', justifyContent: 'space-between'}}>
-              <label className='col-md-4 control-label' htmlFor='product_id' style = {{padding: '12px 20px', background: 'orange', border: 'none', borderRadius: '30px', fontWeight: 'bold', boxShadow: "0px 5px 10px lightblue"}}>
+            <div
+              style={{
+                marginLeft: "30px",
+                display: "flex",
+                justifyContent: "space-between",
+              }}
+            >
+              <label
+                className="col-md-4 control-label"
+                htmlFor="product_id"
+                style={{
+                  padding: "12px 20px",
+                  background: "orange",
+                  border: "none",
+                  borderRadius: "30px",
+                  fontWeight: "bold",
+                  boxShadow: "0px 5px 10px lightblue",
+                }}
+              >
                 WARRANTY
               </label>
 
-
-              <div className='col-md-4' style = {{marginRight: '100px'}}>
+              <div className="col-md-4" style={{ marginRight: "100px" }}>
                 <TextField
                   id="warranty"
                   placeholder="WARRANTY"
@@ -226,13 +308,29 @@ const UpdateProduct = () => {
 
             <br />
 
-              <div  style={{marginLeft: '30px', display: 'flex', justifyContent: 'space-between'}}>
-              <label className='col-md-4 control-label' htmlFor='product_id' style = {{padding: '12px 20px', background: 'orange', border: 'none', borderRadius: '30px', fontWeight: 'bold', boxShadow: "0px 5px 10px lightblue"}}>
+            <div
+              style={{
+                marginLeft: "30px",
+                display: "flex",
+                justifyContent: "space-between",
+              }}
+            >
+              <label
+                className="col-md-4 control-label"
+                htmlFor="product_id"
+                style={{
+                  padding: "12px 20px",
+                  background: "orange",
+                  border: "none",
+                  borderRadius: "30px",
+                  fontWeight: "bold",
+                  boxShadow: "0px 5px 10px lightblue",
+                }}
+              >
                 AUTHOR
               </label>
 
-
-              <div className='col-md-4' style = {{marginRight: '100px'}}>
+              <div className="col-md-4" style={{ marginRight: "100px" }}>
                 <TextField
                   id="author"
                   placeholder="AUTHOR"
@@ -245,12 +343,29 @@ const UpdateProduct = () => {
 
             <br />
 
-              <div  style={{marginLeft: '30px', display: 'flex', justifyContent: 'space-between'}}>
-              <label className='col-md-4 control-label' htmlFor='product_id' style = {{padding: '12px 20px', background: 'orange', border: 'none', borderRadius: '30px', fontWeight: 'bold', boxShadow: "0px 5px 10px lightblue"}}>
+            <div
+              style={{
+                marginLeft: "30px",
+                display: "flex",
+                justifyContent: "space-between",
+              }}
+            >
+              <label
+                className="col-md-4 control-label"
+                htmlFor="product_id"
+                style={{
+                  padding: "12px 20px",
+                  background: "orange",
+                  border: "none",
+                  borderRadius: "30px",
+                  fontWeight: "bold",
+                  boxShadow: "0px 5px 10px lightblue",
+                }}
+              >
                 COST
               </label>
 
-              <div className='col-md-4' style = {{marginRight: '100px'}}>
+              <div className="col-md-4" style={{ marginRight: "100px" }}>
                 <TextField
                   id="cost"
                   placeholder="COST"
@@ -263,8 +378,13 @@ const UpdateProduct = () => {
 
             <br />
 
-
-              <div  style={{marginLeft: '30px', display: 'flex', justifyContent: 'space-between'}}>
+            <div
+              style={{
+                marginLeft: "30px",
+                display: "flex",
+                justifyContent: "space-between",
+              }}
+            >
               <label
                 className="col-md-4 control-label"
                 htmlFor="available_quantity"
@@ -280,8 +400,7 @@ const UpdateProduct = () => {
                 NAME
               </label>
 
-
-              <div className='col-md-4' style = {{marginRight: '100px'}}>
+              <div className="col-md-4" style={{ marginRight: "100px" }}>
                 <TextField
                   id="NAME"
                   placeholder="NAME"
@@ -294,10 +413,13 @@ const UpdateProduct = () => {
 
             <br />
 
-              <br/>
-
-
-              <div  style={{marginLeft: '30px', display: 'flex', justifyContent: 'space-between'}}>
+            <div
+              style={{
+                marginLeft: "30px",
+                display: "flex",
+                justifyContent: "space-between",
+              }}
+            >
               <label
                 className="col-md-4 control-label"
                 htmlFor="percentage_discount"
@@ -313,8 +435,7 @@ const UpdateProduct = () => {
                 DESCRIPTION
               </label>
 
-
-              <div className='col-md-4' style = {{marginRight: '100px'}}>
+              <div className="col-md-4" style={{ marginRight: "100px" }}>
                 <TextField
                   id="DESCRIPTION"
                   placeholder="DESCRIPTION"
@@ -327,8 +448,13 @@ const UpdateProduct = () => {
 
             <br />
 
-
-              <div  style={{marginLeft: '30px', display: 'flex', justifyContent: 'space-between'}}>
+            <div
+              style={{
+                marginLeft: "30px",
+                display: "flex",
+                justifyContent: "space-between",
+              }}
+            >
               <label
                 className="col-md-4 control-label"
                 htmlFor="product_categorie"
@@ -344,7 +470,7 @@ const UpdateProduct = () => {
                 PRODUCT CATEGORY
               </label>
 
-              <div className='col-md-4' style = {{marginRight: '100px'}}>
+              <div className="col-md-4" style={{ marginRight: "100px" }}>
                 <TextField
                   id="CATEGORY"
                   placeholder="Category Name"
@@ -357,8 +483,13 @@ const UpdateProduct = () => {
 
             <br />
 
-
-              <div  style={{marginLeft: '30px', display: 'flex', justifyContent: 'space-between'}}>
+            <div
+              style={{
+                marginLeft: "30px",
+                display: "flex",
+                justifyContent: "space-between",
+              }}
+            >
               <label
                 className="col-md-4 control-label"
                 htmlFor="product_categorie"
@@ -374,7 +505,7 @@ const UpdateProduct = () => {
                 PRODUCT SUB-CATEGORY
               </label>
 
-              <div className='col-md-4' style = {{marginRight: '100px'}}>
+              <div className="col-md-4" style={{ marginRight: "100px" }}>
                 <TextField
                   id="CATEGORY"
                   placeholder="Sub Category Name"
@@ -387,8 +518,13 @@ const UpdateProduct = () => {
 
             <br />
 
-
-              <div  style={{marginLeft: '30px', display: 'flex', justifyContent: 'space-between'}}>
+            <div
+              style={{
+                marginLeft: "30px",
+                display: "flex",
+                justifyContent: "space-between",
+              }}
+            >
               <label
                 className="col-md-4 control-label"
                 htmlFor="product_categorie"
@@ -404,7 +540,7 @@ const UpdateProduct = () => {
                 PUBLISHER
               </label>
 
-              <div className='col-md-4' style = {{marginRight: '100px'}}>
+              <div className="col-md-4" style={{ marginRight: "100px" }}>
                 <TextField
                   id="publisher"
                   placeholder="PUBLISHER"
@@ -419,12 +555,14 @@ const UpdateProduct = () => {
 
             <div className="row form-group" style={{ marginLeft: "50px" }}>
               <label className="col-md-4 control-label"></label>
-              <div>
+              <div className="col-md-4">
                 <Button variant="contained" color="grey" onClick={clickSubmit}>
-                  Update
+                  {" "}
+                  Update{" "}
                 </Button>
                 <Button variant="contained" color="grey" href="/profile">
-                  Cancel
+                  {" "}
+                  Cancel{" "}
                 </Button>
               </div>
             </div>
