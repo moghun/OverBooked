@@ -13,13 +13,13 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-import LeftArrow from "../homepage/left-arrow.svg"
-import RightArrow from "../homepage/right-arrow.svg"
+import LeftArrow from "../homepage/left-arrow.svg";
+import RightArrow from "../homepage/right-arrow.svg";
 
 import axios from "axios";
 import BookCard from "../../components/BookCard";
 import { Grid } from "@mui/material";
-import HomeMain1 from './HomeMain1';
+import HomeMain1 from "./HomeMain1";
 
 //in order to have sequence products with slider
 
@@ -41,7 +41,6 @@ const mainProperties = {
   slidesToScroll: 1,
   adaptiveHeight: true,
 };
-
 
 const carouselProperties = {
   prevArrow: <SlickArrowLeft />,
@@ -81,7 +80,6 @@ const carouselProperties = {
     },
   ],
 };
-
 
 const carouselProperties2 = {
   prevArrow: <SlickArrowLeft />,
@@ -212,13 +210,22 @@ const HomePage = () => {
 
   return (
     <div>
-
       <HomeMain1 />
       <div className="some-container">
-        <Button onClick={() => scrollToSection(gomoststarts)} className="btn3" color = 'grey' style = {{marginRight: '10px'}}>
+        <Button
+          onClick={() => scrollToSection(gomoststarts)}
+          className="btn3"
+          color="grey"
+          style={{ marginRight: "10px" }}
+        >
           Check Recent Products
         </Button>
-        <Button onClick={() => scrollToSection(gocampaign)} className="btn3" color = 'grey' style = {{marginLeft: '10px'}}>
+        <Button
+          onClick={() => scrollToSection(gocampaign)}
+          className="btn3"
+          color="grey"
+          style={{ marginLeft: "10px" }}
+        >
           Check Products on sale
         </Button>
       </div>
@@ -228,19 +235,23 @@ const HomePage = () => {
 
       <div style={{ margin: "30px" }} className="carousel">
         <Slider {...carouselProperties}>
-          {allprod.map((AllSales) => (
-            <BookCard
-              id={AllSales._id}
-              name={AllSales.name}
-              amount={AllSales.amount}
-              author={AllSales.author}
-              imgurl={AllSales.img}
-              publisher={AllSales.publisher}
-              price={AllSales.cost}
-              score={avgrating(AllSales)}
-              beforeprice={AllSales.before_sale_price}
-            ></BookCard>
-          ))}
+          {allprod.map((AllSales) =>
+            AllSales.amount === 0 || AllSales.img === "" ? (
+              false
+            ) : (
+              <BookCard
+                id={AllSales._id}
+                name={AllSales.name}
+                amount={AllSales.amount}
+                author={AllSales.author}
+                imgurl={AllSales.img}
+                publisher={AllSales.publisher}
+                price={AllSales.cost}
+                score={avgrating(AllSales)}
+                beforeprice={AllSales.before_sale_price}
+              ></BookCard>
+            )
+          )}
         </Slider>
       </div>
 
@@ -263,9 +274,11 @@ const HomePage = () => {
 
       <div style={{ margin: "30px" }} className="carousel">
         <Slider {...carouselProperties2}>
-          {topprod.map((AllSales) => (
-            AllSales.amount === 0 ? (false) : (   
-            <BookCard
+          {topprod.map((AllSales) =>
+            AllSales.amount === 0 || AllSales.img === "" ? (
+              false
+            ) : (
+              <BookCard
                 id={AllSales._id}
                 name={AllSales.name}
                 amount={AllSales.amount}
@@ -275,8 +288,9 @@ const HomePage = () => {
                 price={AllSales.cost}
                 score={avgrating(AllSales)}
                 beforeprice={AllSales.before_sale_price}
-              ></BookCard>)
-          ))}
+              ></BookCard>
+            )
+          )}
         </Slider>
       </div>
 

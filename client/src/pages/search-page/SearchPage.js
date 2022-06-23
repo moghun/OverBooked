@@ -176,19 +176,23 @@ function SearchPage() {
           </Grid>
           <Grid item container justifyContent="space-around" display="flex">
             {/* Results of search and outcome of filters (right) */}
-            {sortByFilter([...searchResults]).map((book) => (
-              <BookCard
-                id={book._id}
-                name={book.name}
-                amount={book.amount}
-                author={book.author}
-                imgurl={book.img}
-                publisher={book.publisher}
-                price={book.cost}
-                score={avgrating(book)}
-                beforeprice={book.before_sale_price}
-              ></BookCard>
-            ))}
+            {sortByFilter([...searchResults]).map((book) =>
+              book.img === "" ? (
+                false
+              ) : (
+                <BookCard
+                  id={book._id}
+                  name={book.name}
+                  amount={book.amount}
+                  author={book.author}
+                  imgurl={book.img}
+                  publisher={book.publisher}
+                  price={book.cost}
+                  score={avgrating(book)}
+                  beforeprice={book.before_sale_price}
+                ></BookCard>
+              )
+            )}
           </Grid>
           {/* TODO: Create a map function to Grid items */}
         </Grid>

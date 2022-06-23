@@ -91,13 +91,15 @@ function EditSales() {
               <option value="none" selected disabled hidden>
                 Select an Option
               </option>
-              {allproducts.map((item, i) => {
-                return (
+              {allproducts.map((item, i) =>
+                item.img === "" ? (
+                  false
+                ) : (
                   <option key={item._id} value={i}>
                     {item.name} - {item.category} - {item._id}
                   </option>
-                );
-              })}
+                )
+              )}
             </select>
 
             <br />
