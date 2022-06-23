@@ -65,6 +65,8 @@ class _ProfilePageState extends State<ProfilePage> {
                                   Text(
                                     user.username!,
                                     style: kHeadingTextStyle,
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
                                   ),
                                   const SizedBox(
                                     height: 12,

@@ -3,6 +3,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:mobile/components/comment_preview.dart';
 import 'package:mobile/models/comment.dart';
 import 'package:mobile/models/product.dart';
+import 'package:mobile/pages/add_comment_page.dart';
 import 'package:mobile/services/cart_service.dart';
 import 'package:mobile/services/product_service.dart';
 import 'package:mobile/utils/colors.dart';
@@ -105,6 +106,14 @@ class _ProductPageState extends State<ProductPage> {
                             ),
                             OutlinedButton(
                               onPressed: () {
+                                if (snapshot.data!.amount <= 0) {
+                                  Fluttertoast.showToast(
+                                    msg: "This product is out of stock!",
+                                    gravity: ToastGravity.BOTTOM,
+                                    backgroundColor: Colors.red,
+                                  );
+                                  return;
+                                }
                                 CartService cartService = CartService();
                                 cartService.addToCart(snapshot.data!, 1);
                                 Fluttertoast.showToast(
@@ -153,21 +162,39 @@ class _ProductPageState extends State<ProductPage> {
                                   } else if (commentSnapshot.hasData) {
                                     return Padding(
                                       padding: const EdgeInsets.all(10),
-                                      child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.center,
+                                      child: Column(
                                         children: [
-                                          commentSnapshot.data!.isNotEmpty ?
-                                          Expanded(
-                                            child: Column(
-                                              children: List.generate(
-                                                  snapshot.data!.comments!.length,
-                                                  (index) => CommentPreview(
-                                                      comment: Comment(
-                                                          username: commentSnapshot.data![index],
-                                                          commentContent: snapshot
-                                                              .data!.comments![index]["comment"]))),
-                                            ),
-                                          ) : const Text("There are no comments yet."),
+                                          Row(
+                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            children: [
+                                              commentSnapshot.data!.isNotEmpty
+                                                  ? Expanded(
+                                                      child: Column(
+                                                        children: List.generate(
+                                                            snapshot.data!.comments!.length,
+                                                            (index) => CommentPreview(
+                                                                comment: Comment(
+                                                                    username:
+                                                                        commentSnapshot.data![index],
+                                                                    commentContent: snapshot.data!
+                                                                        .comments![index]["comment"]))),
+                                                      ),
+                                                    )
+                                                  : const Text("There are no comments yet."),
+                                            ],
+                                          ),
+                                          SizedBox(height: 8,),
+                                          OutlinedButton(
+                                              onPressed: () {
+                                                Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (context) => AddCommentPage(
+                                                          productID: widget.productID,
+                                                        )));
+                                              },
+                                              child: const Text("Add comment")),
+                                          SizedBox(height: 22,),
                                         ],
                                       ),
                                     );

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:mobile/models/order.dart';
 import 'package:mobile/models/product.dart';
 import 'package:mobile/services/order_service.dart';
@@ -28,7 +29,7 @@ class _OrderPreviewState extends State<OrderPreview> {
       child: Row(
         children: [
           Expanded(
-            flex: 1,
+            flex: 2,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -41,7 +42,10 @@ class _OrderPreviewState extends State<OrderPreview> {
                 ),
                 Text(
                   widget.order.status!,
-                  style: const TextStyle(color: Colors.green),
+                  style: TextStyle(
+                      color: widget.order.status! != "Cancelled" ? Colors.green : Colors.red),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                 ),
                 const SizedBox(
                   height: 24,
@@ -52,12 +56,49 @@ class _OrderPreviewState extends State<OrderPreview> {
                 ),
                 Text(widget.order.date!.substring(
                     widget.order.date!.indexOf("T") + 1, widget.order.date!.indexOf("."))),
+                const SizedBox(
+                  height: 8,
+                ),
+                Visibility(
+                  child: OutlinedButton(
+                    onPressed: () {
+                      _orderService.cancelOrder(widget.order.id);
+                      Fluttertoast.showToast(
+                          msg: "Order cancelled!",
+                          gravity: ToastGravity.BOTTOM,
+                          backgroundColor: Colors.green);
+                    },
+                    style: OutlinedButton.styleFrom(backgroundColor: Colors.red),
+                    child: const Text(
+                      "Cancel",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                  visible: widget.order.status == "Processing",
+                ),
+                Visibility(
+                  child: OutlinedButton(
+                    onPressed: () {
+                      _orderService.returnOrder(widget.order.id);
+                      Fluttertoast.showToast(
+                          msg: "Return request is sent!",
+                          gravity: ToastGravity.BOTTOM,
+                          backgroundColor: Colors.green);
+                    },
+                    style: OutlinedButton.styleFrom(backgroundColor: Colors.red),
+                    child: const Text(
+                      "Return",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                  visible: widget.order.status == "Delivered",
+                )
               ],
             ),
           ),
           const VerticalDivider(),
           Expanded(
-            flex: 2,
+            flex: 3,
             child: SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
