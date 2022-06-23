@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 import axios from "axios";
 import { format } from "date-fns";
 import { motion } from "framer-motion";
+import { View } from "react-native";
 
 
 
@@ -148,6 +149,26 @@ const Success = () => {
   }, [cart, data, currentUser]);
 
   return (
+
+
+    <div>
+
+    <div style = {{ height : '350px', maxWidth: '300px', width: '100%', margin: '5px auto', boxShadow:  "0px 5px 10px lightblue", padding: '0 5px', background: 'orange', borderRadius: '20px', marginTop: '50px'}}>
+
+
+    <View style={{marginLeft: '30px', width: 200, textAlign: 'center', color: 'black', fontWeight: "bold", fontSize: 40,}}>INVOICE SUMMARY</View>
+
+    <p style = {{borderRadius: '30px', padding: '0 5px', backgroundColor: 'white', fontWeight: 'bold'}}> E-Mail: {currentUser.email} </p>
+    <p style = {{borderRadius: '30px', padding: '0 5px', backgroundColor: 'white', fontWeight: 'bold'}}> Username: {currentUser.username} </p>
+    <p style = {{borderRadius: '30px', padding: '0 5px', backgroundColor: 'white', fontWeight: 'bold'}}> Adress: {currentUser.adress} </p>
+    <p style = {{borderRadius: '30px', padding: '0 5px', backgroundColor: 'white', fontWeight: 'bold'}}> Amount: {cart.amount} </p>
+    <p style = {{borderRadius: '30px', padding: '0 5px', backgroundColor: 'white', fontWeight: 'bold'}}> Cost: {cart.total} $ </p>
+    
+
+
+
+    </div>
+    
     <div
       style={{
         height: "50vh",
@@ -172,7 +193,9 @@ const Success = () => {
       
 
     </div>
+    </div>
   );
+
 };
 
 export default Success;
