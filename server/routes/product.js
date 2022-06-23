@@ -338,4 +338,16 @@ router.put("/setCost/:id", verifyTokenAndSalesManager, async (req, res) => {
   }
 });
 
+// ADD CATEGORY
+router.post("/addCategory", async (req, res) => {
+  const newProduct = new Product(req.body);
+
+  try {
+    const savedProduct = await newProduct.save();
+    res.status(200).json(savedProduct);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 module.exports = router;

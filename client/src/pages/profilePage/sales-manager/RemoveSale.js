@@ -91,8 +91,10 @@ function RemoveSale() {
               >
                 Select an Option
               </option>
-              {allproducts.map((item, i) => {
-                return (
+              {allproducts.map((item, i) => 
+              item.img === "" ? (
+                    false
+                  ) : (
                   <option
                     key={item._id}
                     style={{ fontFamily: "OpenSans" }}
@@ -100,8 +102,7 @@ function RemoveSale() {
                   >
                     {item.name} - {item.category} - {item._id}
                   </option>
-                );
-              })}
+              ))}
             </select>
 
             <br />

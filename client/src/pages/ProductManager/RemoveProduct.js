@@ -95,13 +95,15 @@ const RemoveProduct = () => {
                 >
                   Select an Option
                 </option>
-                {allproducts.map((item, i) => {
-                  return (
+                {allproducts.map((item, i) =>
+                  item.img === "" ? (
+                    false
+                  ) : (
                     <option style={{ fontFamily: "OpenSans" }} value={i}>
                       {item.name + "-" + item.author + "-" + item._id}
                     </option>
-                  );
-                })}
+                  )
+                )}
               </select>
             </div>
 

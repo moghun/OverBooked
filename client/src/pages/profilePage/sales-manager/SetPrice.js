@@ -59,7 +59,7 @@ function SetPrice() {
   };
 
   return (
-    <div className="main-container" style={{marginTop:'25px'}}>
+    <div className="main-container" style={{ marginTop: "25px" }}>
       <div style={{ display: "flex", justifyContent: "center" }}>
         <Card>
           <CardContent>
@@ -81,13 +81,15 @@ function SetPrice() {
               <option value="none" selected disabled hidden>
                 Select an Option
               </option>
-              {allproducts.map((item, i) => {
-                return (
+              {allproducts.map((item, i) =>
+                item.img === "" ? (
+                  false
+                ) : (
                   <option key={item._id} value={i}>
                     {item.name} - {item.category} - {item._id}
                   </option>
-                );
-              })}
+                )
+              )}
             </select>
 
             <br />

@@ -92,13 +92,15 @@ const UpdateStock = () => {
                 <option value="none" selected disabled hidden>
                   Select Product ID
                 </option>
-                {allproducts.map((item, i) => {
-                  return (
+                {allproducts.map((item, i) =>
+                  item.img === "" ? (
+                    false
+                  ) : (
                     <option value={i}>
                       {item.name + "- Current Stock: " + item.amount}
                     </option>
-                  );
-                })}
+                  )
+                )}
               </select>
 
               <TextField
