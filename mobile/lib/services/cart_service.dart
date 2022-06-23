@@ -89,6 +89,7 @@ class CartService {
 
   purchaseCart(List<dynamic> products) {
     User user = UserService.getCurrentUser()!;
+    // CREATE ORDER
     double totalCost = 0;
     for (int i = 0; i < user.cart!.length; i++) {
       totalCost += (products[i].cost) * user.cart![i]["amount"];
@@ -103,6 +104,7 @@ class CartService {
       "amounts": user.cart!.map((e) => e["amount"]).toList(),
       "last_four_digit": 4242,
       "payment_method": "CreditCard",
+      "user_adress": "Sabanci, Tuzla",
     });
     http
         .post(Uri.parse(apiBaseURL + "/orders/"),

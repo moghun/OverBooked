@@ -12,7 +12,6 @@ class ProductService {
     var resp = await http.get(Uri.parse(apiBaseURL + "/find/" + productID));
     if (resp.statusCode >= 200 && resp.statusCode < 400) {
       var productJson = jsonDecode(resp.body);
-      print(resp.body);
       return Product.fromJson(productJson);
     } else {
       print(resp.statusCode);
@@ -83,16 +82,13 @@ class ProductService {
         await http.get(Uri.parse("http://10.0.2.2:5001/api/orders/find/" + user.uid!), headers: {
       "Content-Type": "application/json",
     });
-    print(resp.body);
     var productsJson = jsonDecode(resp.body) as List;
-    print(productsJson);
     return productsJson;
   }
 
   Future<String> getUsernameByID(String userID) async {
     var resp = await http.get(Uri.parse("http://10.0.2.2:5001/api/users/getUsername/" + userID),
         headers: {"Content-Type": "application/json"});
-    print(resp.body);
     var userInfo = jsonDecode(resp.body);
     return userInfo;
   }

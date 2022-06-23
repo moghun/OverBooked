@@ -23,7 +23,11 @@
     "buffer": "^6.0.3",
     "data-fns": "^0.1.8",
     "date-fns": "^2.28.0",
+<<<<<<< HEAD
     "framer-motion": "^4.1.17",
+=======
+    "framer-motion": "^6.3.13",
+>>>>>>> 1e29598106c3417b9fff7b500eee5e01973e51be
     "jspdf": "^2.5.1",
     "jspdf-autotable": "^3.5.24",
     "mongoose": "^6.3.0",
