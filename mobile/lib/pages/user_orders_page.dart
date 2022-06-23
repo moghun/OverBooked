@@ -42,7 +42,12 @@ class _UserOrdersPageState extends State<UserOrdersPage> {
                         child: Column(
                           children: snapshot.data!.isNotEmpty
                               ? List.generate(snapshot.data!.length,
-                                  (index) => OrderPreview(order: snapshot.data![index]))
+                                  (index) => Column(
+                                    children: [
+                                      OrderPreview(order: snapshot.data![index]),
+                                      SizedBox(height: 10,)
+                                    ],
+                                  ))
                               : [
                                 const SizedBox(height: 100,),
                                   Center(
