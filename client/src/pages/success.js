@@ -153,24 +153,25 @@ const Success = () => {
 
     <div>
 
-    <div style = {{ height : '450px', maxWidth: '300px', width: '100%', margin: '5px auto', boxShadow:  "0px 5px 10px lightblue", padding: '0 5px', background: 'orange', borderRadius: '20px', marginTop: '50px', marginLeft: '470px'}}>
+    <div style = {{  textAlign:'center',height : '450px', maxWidth: '300px', width: '100%', margin: '5px auto', boxShadow:  "0px 5px 10px lightblue", padding: '0 5px', background: '#e6b619', borderRadius: '20px', marginTop: '50px', marginLeft: '37.5%'}}>
 
 
-    <View style={{marginLeft: '30px', width: 200, textAlign: 'center', color: 'black', fontWeight: "bold", fontSize: 40,}}>INVOICE SUMMARY</View>
+    <View style={{textAlign:'center',marginLeft: '45px', width: 200, textAlign: 'center', color: 'black',  fontSize: 40,}}>INVOICE SUMMARY</View>
 
-    <p style = {{borderRadius: '30px', padding: '0 5px', backgroundColor: 'white', fontWeight: 'bold'}}> E-Mail: {currentUser.email} </p>
-    <p style = {{borderRadius: '30px', padding: '0 5px', backgroundColor: 'white', fontWeight: 'bold'}}> Username: {currentUser.username} </p>
-    <p style = {{borderRadius: '30px', padding: '0 5px', backgroundColor: 'white', fontWeight: 'bold'}}> Adress: {currentUser.adress} </p>
-    <p style = {{borderRadius: '30px', padding: '0 5px', backgroundColor: 'white', fontWeight: 'bold'}}> Cost: {cart.total} $ </p>
+    <p style = {{borderRadius: '30px', padding: '0 5px', backgroundColor: 'white', fontWeight: 'normal'}}> E-Mail: {currentUser.email} </p>
+    <p style = {{borderRadius: '30px', padding: '0 5px', backgroundColor: 'white', fontWeight: 'normal'}}> Username: {currentUser.username} </p>
+    <p style = {{borderRadius: '30px', padding: '0 5px', backgroundColor: 'white', fontWeight: 'normal'}}> Adress: {currentUser.adress} </p>
+    <p style = {{borderRadius: '30px', padding: '0 5px', backgroundColor: 'white', fontWeight: 'normal'}}> Cost: {cart.total} $ </p>
 
 
     {orderId
-        ? <h style={{fontFamily:'OpenSans', fontSize:'20px'}}>Order has been created successfully. Your order number is ${orderId}</h>
-        : <h style={{fontFamily:'OpenSans', fontSize:'20px'}}>Successfull. Your order is being prepared...</h>}
-      <Button href={"/"} style={{ padding: 10, marginTop: 20, fontFamily:'OpenSans' , marginLeft: '10px' }} variant= 'contained'>
-        Go to Homepage
-      </Button>
-    
+        ? <div style={{textAlign:'center'}}><h style={{fontFamily:'OpenSans', fontSize:'20px', textAlign:'center',fontWeight:'normal'}}>Order has been created successfully. Your order number is ${orderId}</h></div>
+        : <div style={{textAlign:'center'}}><h style={{fontFamily:'OpenSans', fontSize:'20px',fontWeight:'normal'}}>Successfull. Your order is being prepared...</h></div>}
+      <div>
+        <Button href={"/"} style={{ padding: 10, marginTop: 20, fontFamily:'OpenSans' , marginLeft: '10px' }} variant= 'contained'>
+          Go to Homepage
+        </Button>
+      </div>
 
 
 
