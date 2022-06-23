@@ -70,11 +70,23 @@ const Revenues = () => {
         })
         .then((res) => {
           let invoicesArr = [];
+          var carrierdict = {}
           let carrier = 0;
           res.data.forEach((inv) => {
             carrier = carrier + inv.cost;
-            invoicesArr.push(inv);
+            //invoicesArr.push(inv);
+            if(!(inv.date in carrierdict)){
+               carrierdict[inv.date] = inv.cost;
+            }
+            else{
+              carrierdict[inv.date] = carrierdict[inv.date]+inv.cost;
+            }
+
           });
+          for (let k in carrierdict) {
+            invoicesArr.push({'date':k , 'cost':carrierdict[k]});
+          }
+          console.log(invoicesArr);
           invoicesArr.sort(sortByProperty("date"))
           setRows(invoicesArr);
           setTotal(carrier);
