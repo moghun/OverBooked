@@ -450,7 +450,7 @@ const ProductManager = () => {
               </label>
               <div className="col-md-4">
                 <select
-                  onChange={(e) => setSale(e.target.value)}
+                  onChangewwww={(e) => setSale(e.target.value)}
                   style={{
                     borderRadius: "5px",
                     width: "315px",

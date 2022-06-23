@@ -161,7 +161,6 @@ const Success = () => {
     <p style = {{borderRadius: '30px', padding: '0 5px', backgroundColor: 'white', fontWeight: 'bold'}}> E-Mail: {currentUser.email} </p>
     <p style = {{borderRadius: '30px', padding: '0 5px', backgroundColor: 'white', fontWeight: 'bold'}}> Username: {currentUser.username} </p>
     <p style = {{borderRadius: '30px', padding: '0 5px', backgroundColor: 'white', fontWeight: 'bold'}}> Adress: {currentUser.adress} </p>
-    <p style = {{borderRadius: '30px', padding: '0 5px', backgroundColor: 'white', fontWeight: 'bold'}}> Amount: {cart.amount} </p>
     <p style = {{borderRadius: '30px', padding: '0 5px', backgroundColor: 'white', fontWeight: 'bold'}}> Cost: {cart.total} $ </p>
 
 
@@ -182,3 +181,15 @@ const Success = () => {
 };
 
 export default Success;
+/*   <p
+      style={{
+        borderRadius: "30px",
+        padding: "0 5px",
+        backgroundColor: "white",
+        fontWeight: "bold",
+      }}
+    >
+      {" "}
+      Amount: {cart.amount}{" "}
+    </p>;
+*/
