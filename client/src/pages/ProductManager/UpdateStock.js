@@ -107,9 +107,9 @@ const UpdateStock = () => {
                 InputProps={{ inputProps: { min: 0, max: 100 } }}
                 onKeyDown={(e) => e.preventDefault()}
                 label="STOCK"
-                margin="normal"
+                margin="left"
                 onChange={handleChange2}
-                style={{ width: "100%" }}
+                style={{ width: "100%", marginLeft: "25px" }}
               />
             </div>
 
