@@ -71,7 +71,7 @@ const Profile = () => {
       <a href="/Invoices"><LocalAtmIcon/>Invoices</a>
       <a href="/updateorder"> <AirportShuttleIcon/>Update Order</a>
       <a href="/updatestock"><SystemUpdateAltIcon/>Update Stock</a>
-
+      <a href="/addcategory"><SystemUpdateAltIcon/>Add Category</a>
       
       </>
       );
