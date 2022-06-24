@@ -10,30 +10,28 @@ import { toast } from "react-toastify";
 const AddCategory = () => {
   const currUser = useSelector((state) => state.user.currentUser);
 
-
   const [category, setCategory] = useState(null);
-
 
   function handleChange(event) {
     setCategory(event.target.value);
     console.log(category);
   }
 
-
   const clickSubmit = async () => {
     const update = {
-      product_id: allproducts[index]._id,
-      stock: stock1,
+      publisher: "*",
+      cost: 0,
+      amount: 0,
+      description: "*",
+      author: "*",
+      category: category,
+      name: "*",
     };
 
     try {
-      axios.post(
-        "http://localhost:5001/api/productmanager/changestock",
-        update,
-        {
-          headers: { token: "Bearer " + currUser.accessToken },
-        }
-      );
+      axios.post("http://localhost:5001/api/products/addCategory", update, {
+        headers: { token: "Bearer " + currUser.accessToken },
+      });
       toast.success("You have added a category", {
         position: toast.POSITION.TOP_CENTER,
       });
@@ -67,10 +65,8 @@ const AddCategory = () => {
               ADD CATEGORY
             </legend>
 
-
-
-            <div style = {{marginLeft: '300px'}}>
-            <TextField
+            <div style={{ marginLeft: "300px" }}>
+              <TextField
                 id="category"
                 placeholder="CATEGORY"
                 required
@@ -78,8 +74,7 @@ const AddCategory = () => {
                 style={{ width: "50%" }}
                 onChange={handleChange}
               />
-
-              </div>
+            </div>
 
             <br />
 
