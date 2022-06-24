@@ -273,7 +273,11 @@ router.get("/", async (req, res) => {
         },
       });
     } else {
-      products = await Product.find();
+      products = await Product.find({
+        img: {
+          $ne: "",
+        },
+      });
     }
 
     res.status(200).json(products);
