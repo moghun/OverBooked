@@ -36,6 +36,7 @@ import RemoveSale from "./pages/profilePage/sales-manager/RemoveSale";
 import SetPrice from "./pages/profilePage/sales-manager/SetPrice";
 import CancellationRequest from "./pages/profilePage/sales-manager/CancellationRequest";
 import PrivacyPolicy from "./pages/signup/PrivacyPolicy";
+import AddCategory from "./pages/ProductManager/AddCategory";
 
 function App() {
   const user = useSelector((state) => state.user.currentUser);
@@ -74,6 +75,7 @@ function App() {
             <Route path="/updatestock" element={<UpdateStock />} />
             <Route path="/updateorder" element={<UpdateOrder />} />
             <Route path="/updateproduct" element={<UpdateProduct />} />
+            <Route path="/addcategory" element={<AddCategory />} />
             <Route path="/setprice" element={<SetPrice />} />
 
             <Route
