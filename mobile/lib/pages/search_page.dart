@@ -112,12 +112,15 @@ class _SearchPageState extends State<SearchPage> {
                       child: Row(
                         children: List.generate(
                             productList.length,
-                            (index) => Row(children: [
-                                  ProductPreview(
-                                    product: productList[index],
-                                  ),
-                                  const SizedBox(width: 8),
-                                ])),
+                            (index) => Visibility(
+                              visible: productList[index].img != "",
+                              child: Row(children: [
+                                    ProductPreview(
+                                      product: productList[index],
+                                    ),
+                                    const SizedBox(width: 8),
+                                  ]),
+                            )),
                       ),
                     ),
                   );
