@@ -241,7 +241,13 @@ router.get("/", async (req, res) => {
     let products;
 
     if (qTop) {
-      products = await Product.find().sort({ createdAt: -1 }).limit(10);
+      products = await Product.find({
+        img: {
+          $ne: "",
+        },
+      })
+        .sort({ createdAt: -1 })
+        .limit(10);
     } else if (qSale === "true") {
       products = await Product.find({
         sale: {
