@@ -251,10 +251,10 @@ router.get(
               name: user.username,
             },
             from: {
-              email: "overbookedstore1@gmail.com",
+              email: "overbookedstore00@gmail.com",
               name: "overbooked",
             },
-            templateId: "d-03c38b528bdf40aab21e49e59cc04eb8",
+            templateId: "d-e2a7e2a4fe23416f8f478302a944e4fe",
             dynamicTemplateData: {
               name: product.name,
               before_sale_price: product.before_sale_price,

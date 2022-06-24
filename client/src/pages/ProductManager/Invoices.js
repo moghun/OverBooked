@@ -111,9 +111,10 @@ const Invoices = () => {
                           <>
                             <div style={{ fontSize: "10px" }}>
                               <strong>
-                                {prd + " " + item.products[2][i] + " ITEM"}
+                                {prd + " x" + item.products[2][i]}
                               </strong>
                             </div>
+                            <br></br>
                           </>
                         );
                       })}

@@ -160,10 +160,10 @@ router.put(
             name: "Customer",
           },
           from: {
-            email: "overbookedstore1@gmail.com",
+            email: "overbookedstore00@gmail.com",
             name: "overbooked",
           },
-          templateId: "d-da7c58c6be04446c95bc84c300e525d1",
+          templateId: "d-bbc41b8a0b8546b89262224c1e55cc4f",
           dynamicTemplateData: {
             order_id: deleteOrder[0]._id,
             cost: deleteOrder[0].cost,
@@ -217,7 +217,6 @@ router.get("/find/:userId", async (req, res) => {
   }
 });
 
-
 //GET USER ORDERS MOBILE
 router.get("/findM/:email", async (req, res) => {
   try {
@@ -238,10 +237,10 @@ router.post("/sendRecepit", verifyToken, async (req, res) => {
           name: req.body.username,
         },
         from: {
-          email: "overbookedstore1@gmail.com",
+          email: "overbookedstore00@gmail.com",
           name: "overbooked",
         },
-        templateId: "d-9eeb7db78dff4ac384f3d2bf511cdf1a",
+        templateId: "d-17e49c96ede848c79d9372746ec7f22f",
         dynamicTemplateData: {
           invoice_id: req.body.invoice_id,
           username: req.body.username,
