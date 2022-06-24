@@ -20,6 +20,7 @@ class ProductPage extends StatefulWidget {
 class _ProductPageState extends State<ProductPage> {
   final ProductService _productService = ProductService();
   Future<Product>? _product;
+  TextEditingController amountController = TextEditingController();
 
   @override
   void initState() {
@@ -104,29 +105,57 @@ class _ProductPageState extends State<ProductPage> {
                             const SizedBox(
                               height: 12,
                             ),
-                            OutlinedButton(
-                              onPressed: () {
-                                if (snapshot.data!.amount <= 0) {
-                                  Fluttertoast.showToast(
-                                    msg: "This product is out of stock!",
-                                    gravity: ToastGravity.BOTTOM,
-                                    backgroundColor: Colors.red,
-                                  );
-                                  return;
-                                }
-                                CartService cartService = CartService();
-                                cartService.addToCart(snapshot.data!, 1);
-                                Fluttertoast.showToast(
-                                    msg: "Added to cart!",
-                                    gravity: ToastGravity.BOTTOM,
-                                    backgroundColor: Colors.green);
-                              },
-                              child: Text(
-                                "Add to cart",
-                                style: kButtonLightTextStyle,
-                              ),
-                              style:
-                                  OutlinedButton.styleFrom(backgroundColor: AppColors.background),
+                            Row(
+                              children: [
+                                SizedBox(
+                                  width: 40,
+                                ),
+                                Expanded(
+                                  child: TextField(
+                                    controller: amountController,
+                                    decoration: const InputDecoration(hintText: "amount"),
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 40,
+                                ),
+                                Expanded(
+                                  child: OutlinedButton(
+                                    onPressed: () {
+                                      int amount;
+                                      if(amountController.text.isEmpty){
+                                        amount = 1;
+                                      } else {
+                                        amount = int.parse(amountController.text);
+                                      }
+                                      if (snapshot.data!.amount <= amount) {
+                                        Fluttertoast.showToast(
+                                          msg: "This product is out of stock!",
+                                          gravity: ToastGravity.BOTTOM,
+                                          backgroundColor: Colors.red,
+                                        );
+                                        return;
+                                      }
+                                      CartService cartService = CartService();
+                                      cartService.addToCart(
+                                          snapshot.data!, amount);
+                                      Fluttertoast.showToast(
+                                          msg: "Added to cart!",
+                                          gravity: ToastGravity.BOTTOM,
+                                          backgroundColor: Colors.green);
+                                    },
+                                    child: Text(
+                                      "Add to cart",
+                                      style: kButtonLightTextStyle,
+                                    ),
+                                    style: OutlinedButton.styleFrom(
+                                        backgroundColor: AppColors.background),
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 40,
+                                ),
+                              ],
                             ),
                             const SizedBox(
                               height: 12,
@@ -174,27 +203,32 @@ class _ProductPageState extends State<ProductPage> {
                                                             snapshot.data!.comments!.length,
                                                             (index) => CommentPreview(
                                                                 comment: Comment(
-                                                                    username:
-                                                                        commentSnapshot.data![index],
-                                                                    commentContent: snapshot.data!
-                                                                        .comments![index]["comment"]))),
+                                                                    username: commentSnapshot
+                                                                        .data![index],
+                                                                    commentContent: snapshot
+                                                                            .data!.comments![index]
+                                                                        ["comment"]))),
                                                       ),
                                                     )
                                                   : const Text("There are no comments yet."),
                                             ],
                                           ),
-                                          SizedBox(height: 8,),
+                                          SizedBox(
+                                            height: 8,
+                                          ),
                                           OutlinedButton(
                                               onPressed: () {
                                                 Navigator.push(
                                                     context,
                                                     MaterialPageRoute(
                                                         builder: (context) => AddCommentPage(
-                                                          productID: widget.productID,
-                                                        )));
+                                                              productID: widget.productID,
+                                                            )));
                                               },
                                               child: const Text("Add comment")),
-                                          SizedBox(height: 22,),
+                                          SizedBox(
+                                            height: 22,
+                                          ),
                                         ],
                                       ),
                                     );

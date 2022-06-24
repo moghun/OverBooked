@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:mobile/services/cart_service.dart';
 import 'package:mobile/utils/colors.dart';
 import 'package:mobile/utils/dimensions.dart';
 import 'package:mobile/utils/styles.dart';
@@ -21,6 +22,8 @@ class CartPreview extends StatefulWidget {
 }
 
 class _CartPreviewState extends State<CartPreview> {
+  CartService _cartService = CartService();
+
   @override
   Widget build(BuildContext context) {
     return OutlinedButton(
@@ -41,6 +44,27 @@ class _CartPreviewState extends State<CartPreview> {
       child: Stack(
         alignment: Alignment.center,
         children: [
+          Positioned(
+            child: IconButton(
+              icon: Icon(Icons.remove_circle, color: Colors.red,),
+              onPressed: () {
+                setState(() {
+                  _cartService.removeFromCart(widget.product);
+                });
+              },
+            ),
+            top: 1,
+            left: -3,
+          ),
+          Positioned(
+            child: IconButton(
+              icon: Icon(Icons.add_circle, color: Colors.green,),
+              onPressed: () {
+              },
+            ),
+            top: 1,
+            right: -3,
+          ),
           Stack(alignment: Alignment.center, children: <Widget>[
             Row(
               children: [
@@ -50,7 +74,7 @@ class _CartPreviewState extends State<CartPreview> {
                       width: 150,
                       alignment: Alignment.topCenter,
                       margin: const EdgeInsets.all(0),
-                      padding: Dimen.smallPadding,
+                      padding: EdgeInsets.only(bottom: 12),
                       child: Column(
                         children: [
                           Image.network(
@@ -76,17 +100,20 @@ class _CartPreviewState extends State<CartPreview> {
                             height: 10,
                           ),
                           Text(
-                            "Amount in cart: " + widget.amount.toString(),
+                            "Amount: " + widget.amount.toString(),
                             style: kSmallTitle,
                             textAlign: TextAlign.center,
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                           ),
+                          SizedBox(height: 8,),
                           RatingBarIndicator(
-                            rating: widget.product.rating!
-                                    .map((e) => e["rating"])
-                                    .reduce((a, b) => a + b) /
-                                widget.product.rating!.length,
+                            rating: widget.product.rating!.isEmpty
+                                ? 0
+                                : widget.product.rating!
+                                        .map((e) => e["rating"])
+                                        .reduce((a, b) => a + b) /
+                                    widget.product.rating!.length,
                             //it will be debugged
                             itemBuilder: (context, index) => const Icon(
                               Icons.star,

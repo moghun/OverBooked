@@ -126,7 +126,7 @@ class _ProductPreviewState extends State<ProductPreview> {
                             rating: widget.product.rating!.isNotEmpty ? widget.product.rating!
                                     .map((e) => e["rating"])
                                     .reduce((a, b) => a + b) /
-                                widget.product.rating!.length : 3,
+                                widget.product.rating!.length : 0,
                             //it will be debugged
                             itemBuilder: (context, index) => const Icon(
                               Icons.star,

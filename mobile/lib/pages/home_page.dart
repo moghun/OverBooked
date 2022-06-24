@@ -103,12 +103,15 @@ class _HomePageState extends State<HomePage> {
                         child: Row(
                           children: List.generate(
                               snapshot.data!.length,
-                              (index) => Row(children: [
-                                    ProductPreview(
-                                      product: snapshot.data![index],
-                                    ),
-                                    const SizedBox(width: 8)
-                                  ])),
+                              (index) => Visibility(
+                                child: Row(children: [
+                                      ProductPreview(
+                                        product: snapshot.data![index],
+                                      ),
+                                      const SizedBox(width: 8)
+                                    ]),
+                                visible: snapshot.data![index].img != "",
+                              )),
                         ),
                       ),
                     );
@@ -159,14 +162,17 @@ class _HomePageState extends State<HomePage> {
                         child: Row(
                           children: List.generate(
                               snapshot.data!.length,
-                              (index) => Row(children: [
-                                    if (snapshot.data![index].sale!) ...[
-                                      ProductPreview(
-                                        product: snapshot.data![index],
-                                      ),
-                                      const SizedBox(width: 8),
-                                    ],
-                                  ])),
+                              (index) => Visibility(
+                                child: Row(children: [
+                                      if (snapshot.data![index].sale!) ...[
+                                        ProductPreview(
+                                          product: snapshot.data![index],
+                                        ),
+                                        const SizedBox(width: 8),
+                                      ],
+                                    ]),
+                                visible: snapshot.data![index].img != "",
+                              )),
                         ),
                       ),
                     );

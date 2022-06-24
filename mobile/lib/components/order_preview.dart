@@ -125,7 +125,12 @@ class _OrderPreviewState extends State<OrderPreview> {
                         } else if (snapshot.hasData) {
                           return Column(
                             children: List.generate(
-                                snapshot.data!.length, (index) => Text(snapshot.data![index].name)),
+                                snapshot.data!.length,
+                                (index) => Text(
+                                      snapshot.data![index].name,
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                    )),
                           );
                         } else {
                           return const Text('Empty data');
