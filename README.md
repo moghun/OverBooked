@@ -28,7 +28,8 @@ OverBooked is a highly optimized e-commerce website with an integrated mobile ap
 
 
 ### Product Manager
-<img width="1439" alt="Screen Shot 2022-06-25 at 19 50 21" src="https://user-images.githubusercontent.com/89805772/175786078-86d91bd9-5a40-4fd6-82cb-026459f6480c.png">
+<img width="1440" alt="Screen Shot 2022-06-25 at 21 49 23" src="https://user-images.githubusercontent.com/89805772/175786745-40477818-94a9-4632-ad1c-3111bb3b1c90.png">
+
 
 ### Sales Manager
 <img width="1439" alt="Screen Shot 2022-06-25 at 19 52 33" src="https://user-images.githubusercontent.com/89805772/175786105-f13bc9c0-a979-49d5-9940-1f9ecef51c81.png">
