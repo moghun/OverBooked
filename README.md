@@ -14,8 +14,7 @@ OverBooked is a highly optimized e-commerce website with an integrated mobile ap
 * OverBooked uses JWT to manage API call permissions as well as stores critical user informations securely by using various tools. Also, it uses SendGrid to send invoices and notify users about sales and refund requests.
 
 ## Screenshots
-
-<img width="1439" alt="Screen Shot 2022-06-25 at 19 48 04" src="https://user-images.githubusercontent.com/89805772/175785836-f5a8bafe-ea98-4944-a15f-6f910155eab8.png">
+<img width="1440" alt="Screen Shot 2022-06-25 at 23 25 42" src="https://user-images.githubusercontent.com/89805772/175789562-2d99ae6c-8d20-4440-985f-a0a54c50a8cf.png">
 <img width="1439" alt="Screen Shot 2022-06-25 at 19 48 55" src="https://user-images.githubusercontent.com/89805772/175785850-07dd81da-8844-4ae1-afcb-6888e35fc5fb.png">
 <img width="1400" alt="Screen Shot 2022-06-25 at 20 30 00" src="https://user-images.githubusercontent.com/89805772/175785902-a2c290ea-c09f-4038-a0f6-b1febbc1dcbe.png">
 
