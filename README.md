@@ -11,7 +11,7 @@ OverBooked is a highly optimized e-commerce website with an integrated mobile ap
   * Product Managers can create categories, add and manage items, approve/disapprove comments, check meta information of orders and manage order status.
   * Sales Managers can set sales, notify users, check and create user invoices, visualize financial summary and manage refund requests.
 
-* OverBooked uses JWT to manage API call permissions as well as stores critical user informations securely by using various tools. Also, it uses SendGrid to send invoices and notify users about sales and refund requests.
+* OverBooked uses JWT to manage API call permissions and stores critical user information securely by using various tools. Also, it uses SendGrid to send invoices and notify users about sales and refund requests.
 
 ## Screenshots
 <img width="1440" alt="Screen Shot 2022-06-25 at 23 25 42" src="https://user-images.githubusercontent.com/89805772/175789562-2d99ae6c-8d20-4440-985f-a0a54c50a8cf.png">
