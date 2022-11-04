@@ -1,6 +1,6 @@
 # OverBooked
 
-OverBooked is a highly optimized e-commerce website with an integrated mobile app that lets everyone to find the books they wish.
+OverBooked is an e-commerce website with an integrated mobile app that lets everyone to find the books they wish.
 
 ## About
 
